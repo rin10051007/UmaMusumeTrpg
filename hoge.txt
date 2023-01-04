@@ -1,0 +1,18 @@
+ng g module system --routing
+ng g component system
+
+ng g module system/list --routing
+ng g component system/list
+
+ng g module system/detail --routing
+ng g component system/detail
+
+ng g module system/entry --routing
+ng g component system/entry
+
+ng g module system/edit --routing
+ng g component system/edit
+
+ng g module system/delete --routing
+ng g component system/delete
+

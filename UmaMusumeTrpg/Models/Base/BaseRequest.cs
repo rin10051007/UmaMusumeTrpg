@@ -2,6 +2,11 @@
 {
     public class BaseRequest
     {
-        public BaseSearch? BaseSearch { get; set; }
+        public BaseRequest(BaseSearch search)
+        {
+            Search = search;
+        }
+
+        public BaseSearch Search { get; set; }
     }
 }

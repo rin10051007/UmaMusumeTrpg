@@ -4,6 +4,11 @@ namespace UmaMusumeTrpg.Models.System.List
 {
     public class Request : BaseRequest
     {
-        public Search? Search { get; set; }
+        public Request(Search search) : base(search)
+        {
+            Search = search;
+        }
+
+        public new Search Search { get; set; }
     }
 }

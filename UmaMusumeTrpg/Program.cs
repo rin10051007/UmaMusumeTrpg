@@ -1,8 +1,30 @@
+using Microsoft.EntityFrameworkCore;
+using UmaMusumeTrpg;
+using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddRazorPages();
+
+IConfiguration config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .AddEnvironmentVariables()
+.Build();
+
+
+builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt => opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
+
+
+
+#region Servics‚ÌDI
+builder.Services.AddScoped<ISystemService, SystemService>();
+#endregion
 
 var app = builder.Build();
 

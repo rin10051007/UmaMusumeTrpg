@@ -1,5 +1,5 @@
 export const apiUrls = {
   sysUrls: {
-    getList: 'api/System/GetList',
+    getList: 'Api/System/GetList',
   }
 };

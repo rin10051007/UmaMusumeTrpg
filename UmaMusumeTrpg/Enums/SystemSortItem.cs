@@ -5,7 +5,7 @@
         None,
         Id,
         Name,
-        DysPermissions,
+        SysPermissions,
         UmaMusumeTrpgPermissions
     }
 }

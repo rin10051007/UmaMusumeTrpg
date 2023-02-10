@@ -2,8 +2,9 @@
 {
     public enum UmaMusumeTrpgPermission
     {
-        NoQualification = 0,
-        Player = 1,
-        GmPlayer = 2
+        None = 0,
+        NoQualification = 1,
+        Player = 2,
+        GmPlayer = 3
     }
 }

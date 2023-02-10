@@ -10,7 +10,7 @@ namespace UmaMusumeTrpg.Models.System.List
             Name = name;
             SortDirection = sortDirection;
             UmaMusumeTrpgPermission = umaMusumeTrpgPermission;
-            SortItem = SortItem;
+            SortItem = sortItem;
 
         }
 

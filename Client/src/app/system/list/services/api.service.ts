@@ -18,7 +18,7 @@ export class ApiService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    search.Name = '田';
+    search.Name = '';
     search.SysPermissions = SysPermission.NoQualification;
     search.UmaMusumeTrpgPermissions = UmaMusumeTrpgPermission.NoQualification;
     search.SortItem = SystemSortItem.id;

@@ -2,7 +2,8 @@
 {
     public enum SysPermission
     {
-        NoQualification = 0,
-        SysAdmin = 1
+        None = 0,
+        NoQualification = 1,
+        SysAdmin = 2
     }
 }

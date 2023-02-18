@@ -17,7 +17,6 @@ export class EntryComponent implements OnInit {
   }
 
   entry() {
-    console.log('登録');
     var entryItem: ItemModel = {
       name: 'hoge',
       email: 'hoge@mail.com',
@@ -26,7 +25,6 @@ export class EntryComponent implements OnInit {
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.Player
     };
     this._apiService.entry(entryItem).subscribe(r => {
-      console.log(r);
     })
   }
 }

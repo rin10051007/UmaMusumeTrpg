@@ -1,10 +1,10 @@
 ﻿using UmaMusumeTrpg.Enum;
 
-namespace UmaMusumeTrpg.Models.Base
+namespace UmaMusumeTrpg.Models.Base.List
 {
-    public class BaseSearch
+    public class BaseListSearch
     {
-        public BaseSearch(SotrDirection sortDirection, int displayPage, int displayCount)
+        public BaseListSearch(SotrDirection sortDirection, int displayPage, int displayCount)
         {
             SortDirection = sortDirection;
             DisplayPage = displayPage;

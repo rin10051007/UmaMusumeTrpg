@@ -25,6 +25,7 @@ namespace UmaMusumeTrpg
                 entity.Property(e => e.UmaMusumeTrpgPermission);
                 entity.Property(e => e.Email);
                 entity.Property(e => e.Password);
+                entity.Property(e => e.Token);
                 entity.Property(e => e.CreateTime);
                 entity.Property(e => e.UpdateTime);
                 entity.Property(e => e.DeleteTime);

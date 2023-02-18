@@ -1,19 +1,19 @@
 ﻿using UmaMusumeTrpg.Entitys;
 using UmaMusumeTrpg.Enum;
-using UmaMusumeTrpg.Models.Base;
+using UmaMusumeTrpg.Models.Base.List;
 
 namespace UmaMusumeTrpg.Models.System.List
 {
 
-    public class Item : BaseItem
+    public class ListItem : BaseListItem
     {
-        public Item(int id, string name, SysPermission sysPermission, UmaMusumeTrpgPermission umaMusumeTrpgPermission) : base(id)
+        public ListItem(int id, string name, SysPermission sysPermission, UmaMusumeTrpgPermission umaMusumeTrpgPermission) : base(id)
         {
             Name = name;
             SysPermission = sysPermission;
             UmaMusumeTrpgPermission = umaMusumeTrpgPermission;
         }
-        public Item(User user) : base(user.ID)
+        public ListItem(User user) : base(user.ID)
         {
             Name = user.Name;
             SysPermission = user.SysPermission;

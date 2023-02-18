@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Const\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

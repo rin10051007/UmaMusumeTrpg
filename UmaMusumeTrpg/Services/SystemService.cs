@@ -1,6 +1,7 @@
 ﻿using UmaMusumeTrpg.Entitys;
 using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.Services
@@ -8,12 +9,19 @@ namespace UmaMusumeTrpg.Services
     public class SystemService : ISystemService
     {
         private readonly UmaMusumeTrpgDbContext _dbContext;
-        public SystemService(UmaMusumeTrpgDbContext dbContext)
+        private readonly IGuidService _guidService;
+        private readonly ITimeService _timeService;
+        public SystemService(
+            UmaMusumeTrpgDbContext dbContext,
+            IGuidService guidService,
+            ITimeService timeService)
         {
             _dbContext = dbContext;
+            _guidService = guidService;
+            _timeService = timeService;
         }
 
-        public List<Item> GetList(Search search)
+        public List<ListItem> GetList(ListSearch search)
         {
 
             IOrderedQueryable<User> list = null;
@@ -47,16 +55,34 @@ namespace UmaMusumeTrpg.Services
                 list : list.Reverse());
 
             var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
-            if (maxPage > search.DisplayPage)
-                list = (IOrderedQueryable<User>)list.Skip((search.DisplayPage - 1) * search.DisplayCount);
-            else
-                list = (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
-
+            if (maxPage > 1)
+            {
+                if (maxPage > search.DisplayPage)
+                    list = (IOrderedQueryable<User>)list.Skip((search.DisplayPage - 1) * search.DisplayCount);
+                else
+                    list = (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
+            }
             list = (IOrderedQueryable<User>)list.Take(search.DisplayCount);
 
-            return list
-                .Where(x => x.SysPermission == search.SysPermission)
-                .Select(x => new Item(x)).ToList();
+            return list.Select(x => new ListItem(x)).ToList();
+        }
+
+        public (int, string) Entry(EntryItem item)
+        {
+            var user = new User()
+            {
+                Name = item.Name,
+                SysPermission = item.SysPermission,
+                UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission,
+                Email = item.Email,
+                Password = item.Password,
+                Token = _guidService.NewGuid(),
+                CreateTime = _timeService.NowTime(),
+                UpdateTime = _timeService.NowTime(),
+            };
+            _dbContext.Add(user);
+            _dbContext.SaveChanges();
+            return (user.ID, user.Token);
         }
     }
 }

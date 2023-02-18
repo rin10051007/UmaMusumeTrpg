@@ -23,10 +23,16 @@ builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt => opt.UseNpgsql(confi
 
 
 #region Servics‚ÌDI
+builder.Services.AddScoped<IGuidService, GuidService>();
+builder.Services.AddScoped<ITimeService, TimeService>();
+builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<ISystemService, SystemService>();
 #endregion
 
 var app = builder.Build();
+
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

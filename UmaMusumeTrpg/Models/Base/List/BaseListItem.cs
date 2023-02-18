@@ -1,8 +1,8 @@
-﻿namespace UmaMusumeTrpg.Models.Base
+﻿namespace UmaMusumeTrpg.Models.Base.List
 {
-    public class BaseItem
+    public class BaseListItem
     {
-        public BaseItem(int id)
+        public BaseListItem(int id)
         {
             Id = id;
         }

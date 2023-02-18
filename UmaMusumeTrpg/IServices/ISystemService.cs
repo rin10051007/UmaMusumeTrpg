@@ -1,9 +1,11 @@
-﻿using UmaMusumeTrpg.Models.System.List;
+﻿using UmaMusumeTrpg.Models.System.Entry;
+using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.IServices
 {
     public interface ISystemService
     {
-        public List<Item> GetList(Search search);
+        public List<ListItem> GetList(ListSearch search);
+        public (int, string) Entry(EntryItem item);
     }
 }

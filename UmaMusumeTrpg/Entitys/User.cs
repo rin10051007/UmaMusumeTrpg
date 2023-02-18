@@ -38,6 +38,10 @@ namespace UmaMusumeTrpg.Entitys
         /// </summary>
         public string Password { get; set; }
         /// <summary>
+        /// トークン
+        /// </summary>
+        public string Token { get; set; }
+        /// <summary>
         /// 作成日時
         /// </summary>
         public DateTime CreateTime { get; set; }

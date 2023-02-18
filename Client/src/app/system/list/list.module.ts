@@ -1,4 +1,4 @@
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ListRoutingModule } from './list-routing.module';
 import { ListComponent } from './list.component';
@@ -14,8 +14,7 @@ import { ApiService } from './services/api.service';
     ListRoutingModule
   ],
   providers: [
-    ApiService,
-    JsonPipe
+    ApiService
   ]
 })
 export class ListModule { }

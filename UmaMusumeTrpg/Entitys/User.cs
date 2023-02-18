@@ -56,6 +56,6 @@ namespace UmaMusumeTrpg.Entitys
         /// <summary>
         /// 削除フラグ
         /// </summary>
-        public bool IsDelete { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

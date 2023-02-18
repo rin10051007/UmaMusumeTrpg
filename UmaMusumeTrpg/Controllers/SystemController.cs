@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Models.Base.Detail;
+using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
 using UmaMusumeTrpg.Services;
@@ -26,45 +28,27 @@ namespace UmaMusumeTrpg.Controllers
 
 
         [HttpPost, Route("GetList")]
-        public ActionResult<IEnumerable<ListResponse>> GetList([FromBody] ListRequest Request)
+        public ActionResult<IEnumerable<ListResponse>> GetList([FromBody] ListRequest request)
         {
-            ListSearch search = Request is null ? new ListSearch(
+            ListSearch search = request is null ? new ListSearch(
                 "", SotrDirection.None, UmaMusumeTrpgPermission.None,
                 SystemSortItem.None, 1, _displayCount.Get(1)
-                ) : Request.Search;
+                ) : request.Search;
             var items = _systemService.GetList(search);
             return Ok(new ListResponse(items, items.Count, search));
         }
 
         [HttpPost, Route("Entry")]
-        public ActionResult<IEnumerable<EntryResponse>> Entry([FromBody] EntryRequest Request)
+        public ActionResult<IEnumerable<EntryResponse>> Entry([FromBody] EntryRequest request)
         {
-            (int id, string token) = Request is null ? (-1, "") : _systemService.Entry(Request.Entry);
+            (int id, string token) = request is null ? (-1, "") : _systemService.Entry(request.Entry);
             return Ok(new EntryResponse(id, token));
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost, Route("Detail")]
+        public ActionResult<IEnumerable<DetailResponse>> Detail([FromBody] BaseDetailRequest request)
         {
-            return "value";
-        }
-
-        // POST api/<SystemController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<SystemController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<SystemController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok(new DetailResponse(_systemService.Detil(request.Seach)));
         }
     }
 }

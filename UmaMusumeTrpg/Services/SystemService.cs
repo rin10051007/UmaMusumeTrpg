@@ -1,6 +1,8 @@
 ﻿using UmaMusumeTrpg.Entitys;
 using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Models.Base.Detail;
+using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
 
@@ -25,7 +27,7 @@ namespace UmaMusumeTrpg.Services
         {
 
             IOrderedQueryable<User> list = null;
-            list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => !x.IsDelete);
+            list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => !x.IsDeleted);
 
             if (!string.IsNullOrWhiteSpace(search.Name))
                 list = (IOrderedQueryable<User>)list.Where(x => x.Name.Contains(search.Name));
@@ -83,6 +85,12 @@ namespace UmaMusumeTrpg.Services
             _dbContext.Add(user);
             _dbContext.SaveChanges();
             return (user.ID, user.Token);
+        }
+
+        public DetailItem Detil(BaseDetailSerch serch)
+        {
+            return new DetailItem(_dbContext.Users
+                .FirstOrDefault(x => x.ID == serch.Id && x.Token.Equals(serch.Token)));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace UmaMusumeTrpg
                 entity.Property(e => e.CreateTime);
                 entity.Property(e => e.UpdateTime);
                 entity.Property(e => e.DeleteTime);
-                entity.Property(e => e.IsDelete);
+                entity.Property(e => e.IsDeleted);
             });
         }
     }

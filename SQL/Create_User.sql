@@ -18,7 +18,7 @@ create table public."Users" (
   , "CreateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
   , "UpdateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
   , "DeleteTime" timestamp with time zone default null
-  , "IsDelete" boolean default false not null
+  , "IsDeleted" boolean default false not null
 )
 /
 
@@ -69,7 +69,7 @@ comment on column public."Users"."UpdateTime" is '更新日時'
 comment on column public."Users"."DeleteTime" is '削除日時'
 /
 
-comment on column public."Users"."IsDelete" is '削除フラグ'
+comment on column public."Users"."IsDeleted" is '削除フラグ'
 /
 
 --管理者追加

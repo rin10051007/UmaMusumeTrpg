@@ -2,10 +2,10 @@
 {
     public class BaseDetailRequest
     {
-        public BaseDetailRequest(BaseDetailSerch serch)
+        public BaseDetailRequest(BaseDetailSearch serch)
         {
-            Seach = serch;
+            Search = serch;
         }
-        public BaseDetailSerch Seach { get; set; }
+        public BaseDetailSearch Search { get; set; }
     }
 }

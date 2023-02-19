@@ -1,8 +1,9 @@
-﻿using UmaMusumeTrpg.Enum;
+﻿using Microsoft.AspNetCore.Identity;
+using UmaMusumeTrpg.Enum;
 
 namespace UmaMusumeTrpg.Entitys
 {
-    public class User
+    public class User : PasswordHasher<User>
     {
         /// <summary>
         /// 管理者、利用者DB

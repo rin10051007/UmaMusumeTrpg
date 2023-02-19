@@ -8,7 +8,7 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-  constructor(private _apiServise: ApiService,
+  constructor(private _apiService: ApiService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -17,7 +17,7 @@ export class DetailComponent implements OnInit {
 
   detail() {
     this.route.params.subscribe((params) => {
-      this._apiServise.detail({ id: (Number(params['id']) || 0), token: '' })
+      this._apiService.detail({ id: (Number(params['id']) || 0), token: '' })
         .subscribe(r => console.log(r));
     });
   }

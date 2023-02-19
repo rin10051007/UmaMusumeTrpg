@@ -98,8 +98,7 @@ namespace UmaMusumeTrpg.Services
         public (int, DateTime?) Delete(DeleteItem item)
         {
             var user = _dbContext.Users
-                .FirstOrDefault(x => x.ID == item.Id && item.Token.IsNullOrEmpty());
-            user.UpdateTime = _timeService.NowTime();
+                .FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
             user.DeleteTime = _timeService.NowTime();
             user.IsDeleted = true;
             _dbContext.SaveChanges();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
@@ -44,6 +45,13 @@ namespace UmaMusumeTrpg.Controllers
         public ActionResult<IEnumerable<DetailResponse>> Detail([FromBody] DetailRequest request)
         {
             return Ok(new DetailResponse(_systemService.Detil(request.Search)));
+        }
+
+        [HttpPost, Route("Delete")]
+        public ActionResult<IEnumerable<DeleteResponse>> Delete([FromBody] DeleteRequest request)
+        {
+            (int id, DateTime? deleteTime) = request is null ? (-1, null) : _systemService.Delete(request.Delete);
+            return Ok(new DeleteResponse(id, deleteTime));
         }
     }
 }

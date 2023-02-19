@@ -2,6 +2,7 @@
 using UmaMusumeTrpg.Entitys;
 using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
@@ -92,6 +93,17 @@ namespace UmaMusumeTrpg.Services
             return new DetailItem(_dbContext.Users
                 .FirstOrDefault(x => (x.ID == serch.Id && serch.Token.IsNullOrEmpty()) ||
                 (x.ID == serch.Id && !serch.Token.IsNullOrEmpty() && serch.Token.Equals(x.Token))));
+        }
+
+        public (int, DateTime?) Delete(DeleteItem item)
+        {
+            var user = _dbContext.Users
+                .FirstOrDefault(x => x.ID == item.Id && item.Token.IsNullOrEmpty());
+            user.UpdateTime = _timeService.NowTime();
+            user.DeleteTime = _timeService.NowTime();
+            user.IsDeleted = true;
+            _dbContext.SaveChanges();
+            return (user.ID, user.DeleteTime);
         }
     }
 }

@@ -1,14 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
-using UmaMusumeTrpg.Models.Base.Detail;
 using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
-using UmaMusumeTrpg.Services;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace UmaMusumeTrpg.Controllers
 {
@@ -46,9 +41,9 @@ namespace UmaMusumeTrpg.Controllers
         }
 
         [HttpPost, Route("Detail")]
-        public ActionResult<IEnumerable<DetailResponse>> Detail([FromBody] BaseDetailRequest request)
+        public ActionResult<IEnumerable<DetailResponse>> Detail([FromBody] DetailRequest request)
         {
-            return Ok(new DetailResponse(_systemService.Detil(request.Seach)));
+            return Ok(new DetailResponse(_systemService.Detil(request.Search)));
         }
     }
 }

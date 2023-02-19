@@ -1,7 +1,7 @@
-﻿using UmaMusumeTrpg.Entitys;
+﻿using Microsoft.IdentityModel.Tokens;
+using UmaMusumeTrpg.Entitys;
 using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
-using UmaMusumeTrpg.Models.Base.Detail;
 using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
@@ -87,10 +87,11 @@ namespace UmaMusumeTrpg.Services
             return (user.ID, user.Token);
         }
 
-        public DetailItem Detil(BaseDetailSerch serch)
+        public DetailItem Detil(DetailSearch serch)
         {
             return new DetailItem(_dbContext.Users
-                .FirstOrDefault(x => x.ID == serch.Id && x.Token.Equals(serch.Token)));
+                .FirstOrDefault(x => (x.ID == serch.Id && serch.Token.IsNullOrEmpty()) ||
+                (x.ID == serch.Id && !serch.Token.IsNullOrEmpty() && serch.Token.Equals(x.Token))));
         }
     }
 }

@@ -9,6 +9,6 @@ namespace UmaMusumeTrpg.IServices
     {
         public List<ListItem> GetList(ListSearch search);
         public (int, string) Entry(EntryItem item);
-        public DetailItem Detil(BaseDetailSerch serch);
+        public DetailItem Detil(DetailSearch serch);
     }
 }

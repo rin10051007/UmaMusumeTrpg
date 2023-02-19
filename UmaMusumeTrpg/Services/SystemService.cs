@@ -4,6 +4,7 @@ using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
+using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
 
@@ -96,6 +97,23 @@ namespace UmaMusumeTrpg.Services
                 (x.ID == serch.Id && !serch.Token.IsNullOrEmpty() && serch.Token.Equals(x.Token))));
         }
 
+        public (int, string, string) Edit(EditItem item)
+        {
+            var user = _dbContext.Users.FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
+            user.Name = item.Name;
+            user.SysPermission = item.SysPermission;
+            user.UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission;
+            user.Email = item.Email;
+            user.Token = _guidService.NewGuid();
+            user.UpdateTime = _timeService.NowTime();
+            if (!item.Password.IsNullOrEmpty())
+            {
+                user.Password = PasswordHash(user, item.Password);
+            }
+            _dbContext.SaveChanges();
+            return (user.ID, user.Name, user.Token);
+        }
+
         public (int, DateTime?) Delete(DeleteItem item)
         {
             var user = _dbContext.Users
@@ -106,9 +124,13 @@ namespace UmaMusumeTrpg.Services
             return (user.ID, user.DeleteTime);
         }
 
-        public string PasswordHash(User user)
+        private string PasswordHash(User user)
         {
             return user.HashPassword(user, user.Password);
+        }
+        private string PasswordHash(User user, string password)
+        {
+            return user.HashPassword(user, password);
         }
     }
 }

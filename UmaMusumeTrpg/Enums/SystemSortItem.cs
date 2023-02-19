@@ -2,10 +2,10 @@
 {
     public enum SystemSortItem
     {
-        None,
-        Id,
-        Name,
-        SysPermissions,
-        UmaMusumeTrpgPermissions
+        None = 0,
+        Id = 1,
+        Name = 2,
+        SysPermissions = 3,
+        UmaMusumeTrpgPermissions = 4
     }
 }

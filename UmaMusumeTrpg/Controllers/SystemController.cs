@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
 using UmaMusumeTrpg.Enum;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
+using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
 
@@ -45,6 +47,13 @@ namespace UmaMusumeTrpg.Controllers
         public ActionResult<IEnumerable<DetailResponse>> Detail([FromBody] DetailRequest request)
         {
             return Ok(new DetailResponse(_systemService.Detil(request.Search)));
+        }
+
+        [HttpPost, Route("Edit")]
+        public ActionResult<IEnumerable<EditResponse>> Edit([FromBody] EditRequest request)
+        {
+            (int id, string name, string token) = _systemService.Edit(request.Edit);
+            return Ok(new EditResponse(id, name, token));
         }
 
         [HttpPost, Route("Delete")]

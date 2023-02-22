@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using UmaMusumeTrpg.Enum;
+using UmaMusumeTrpg.Enums;
 
 namespace UmaMusumeTrpg.Entitys
 {

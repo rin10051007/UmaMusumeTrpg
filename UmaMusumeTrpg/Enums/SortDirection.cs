@@ -1,4 +1,4 @@
-﻿namespace UmaMusumeTrpg.Enum
+﻿namespace UmaMusumeTrpg.Enums
 {
     public enum SotrDirection
     {

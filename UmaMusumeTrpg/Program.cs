@@ -3,7 +3,7 @@ using UmaMusumeTrpg;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -29,7 +29,7 @@ builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<ISystemService, SystemService>();
 #endregion
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -38,7 +38,7 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 if (!app.Environment.IsDevelopment())
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    _ = app.UseHsts();
 }
 
 app.UseHttpsRedirection();

@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using UmaMusumeTrpg.Entitys;
-using UmaMusumeTrpg.Enum;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
@@ -32,13 +32,19 @@ namespace UmaMusumeTrpg.Services
             list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => !x.IsDeleted);
 
             if (!string.IsNullOrWhiteSpace(search.Name))
+            {
                 list = (IOrderedQueryable<User>)list.Where(x => x.Name.Contains(search.Name));
+            }
 
             if (search.SysPermission != SysPermission.None)
+            {
                 list = (IOrderedQueryable<User>)list.Where(x => x.SysPermission == search.SysPermission);
+            }
 
             if (search.UmaMusumeTrpgPermission != UmaMusumeTrpgPermission.None)
+            {
                 list = (IOrderedQueryable<User>)list.Where(x => x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
+            }
 
             switch (search.SortItem)
             {
@@ -58,13 +64,12 @@ namespace UmaMusumeTrpg.Services
             list = (IOrderedQueryable<User>)(search.SortDirection != SotrDirection.DescendingOrder ?
                 list : list.Reverse());
 
-            var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
+            int maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
             if (maxPage > 1)
             {
-                if (maxPage > search.DisplayPage)
-                    list = (IOrderedQueryable<User>)list.Skip((search.DisplayPage - 1) * search.DisplayCount);
-                else
-                    list = (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
+                list = maxPage > search.DisplayPage
+                    ? (IOrderedQueryable<User>)list.Skip((search.DisplayPage - 1) * search.DisplayCount)
+                    : (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
             }
             list = (IOrderedQueryable<User>)list.Take(search.DisplayCount);
 
@@ -73,7 +78,7 @@ namespace UmaMusumeTrpg.Services
 
         public (int, string) Entry(EntryItem item)
         {
-            var user = new User()
+            User user = new()
             {
                 Name = item.Name,
                 SysPermission = item.SysPermission,
@@ -85,8 +90,8 @@ namespace UmaMusumeTrpg.Services
                 UpdateTime = _timeService.NowTime(),
             };
             user.Password = PasswordHash(user);
-            _dbContext.Add(user);
-            _dbContext.SaveChanges();
+            _ = _dbContext.Add(user);
+            _ = _dbContext.SaveChanges();
             return (user.ID, user.Token);
         }
 
@@ -99,7 +104,7 @@ namespace UmaMusumeTrpg.Services
 
         public (int, string, string) Edit(EditItem item)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
+            User user = _dbContext.Users.FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
             user.Name = item.Name;
             user.SysPermission = item.SysPermission;
             user.UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission;
@@ -110,17 +115,17 @@ namespace UmaMusumeTrpg.Services
             {
                 user.Password = PasswordHash(user, item.Password);
             }
-            _dbContext.SaveChanges();
+            _ = _dbContext.SaveChanges();
             return (user.ID, user.Name, user.Token);
         }
 
         public (int, DateTime?) Delete(DeleteItem item)
         {
-            var user = _dbContext.Users
+            User user = _dbContext.Users
                 .FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
             user.DeleteTime = _timeService.NowTime();
             user.IsDeleted = true;
-            _dbContext.SaveChanges();
+            _ = _dbContext.SaveChanges();
             return (user.ID, user.DeleteTime);
         }
 

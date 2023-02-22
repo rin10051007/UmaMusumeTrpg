@@ -1,5 +1,4 @@
-﻿using UmaMusumeTrpg.Enum;
-using UmaMusumeTrpg.Models.Base.Entry;
+﻿using UmaMusumeTrpg.Models.Base.Entry;
 
 namespace UmaMusumeTrpg.Models.System.Entry
 {

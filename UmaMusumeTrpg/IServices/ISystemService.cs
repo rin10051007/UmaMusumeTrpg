@@ -1,5 +1,4 @@
-﻿using UmaMusumeTrpg.Entitys;
-using UmaMusumeTrpg.Models.System.Delete;
+﻿using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;

@@ -1,6 +1,5 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using UmaMusumeTrpg.Enum;
+﻿using Microsoft.AspNetCore.Mvc;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
@@ -32,7 +31,7 @@ namespace UmaMusumeTrpg.Controllers
                 "", SotrDirection.None, UmaMusumeTrpgPermission.None,
                 SystemSortItem.None, 1, _displayCount.Get(1)
                 ) : request.Search;
-            var items = _systemService.GetList(search);
+            List<ListItem> items = _systemService.GetList(search);
             return Ok(new ListResponse(items, items.Count, search));
         }
 

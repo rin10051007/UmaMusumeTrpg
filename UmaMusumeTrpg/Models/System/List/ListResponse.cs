@@ -4,8 +4,8 @@ namespace UmaMusumeTrpg.Models.System.List
 {
     public class ListResponse : BaseListResponse
     {
-        private ListRequest? request;
-        private int v;
+        private readonly ListRequest? request;
+        private readonly int v;
 
         public ListResponse(List<ListItem> items, int totalCount, ListSearch? search) : base(items: new List<BaseListItem>
         {

@@ -1,6 +1,4 @@
-﻿using UmaMusumeTrpg.Enum;
-
-namespace UmaMusumeTrpg.Models.Base.Detail
+﻿namespace UmaMusumeTrpg.Models.Base.Detail
 {
     public class BaseDetailItem
     {

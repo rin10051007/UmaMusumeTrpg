@@ -1,5 +1,5 @@
 ﻿using UmaMusumeTrpg.Entitys;
-using UmaMusumeTrpg.Enum;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.Models.Base.Detail;
 
 namespace UmaMusumeTrpg.Models.System.Detail

@@ -1,4 +1,4 @@
-﻿using UmaMusumeTrpg.Enum;
+﻿using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.Models.Base.List;
 
 namespace UmaMusumeTrpg.Models.System.List

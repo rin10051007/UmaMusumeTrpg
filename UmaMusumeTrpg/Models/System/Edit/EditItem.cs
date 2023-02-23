@@ -5,6 +5,7 @@ namespace UmaMusumeTrpg.Models.System.Edit
 {
     public class EditItem : BaseEditItem
     {
+        public string LoginId { get; set; }
         public SysPermission SysPermission { get; set; }
         public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }
         public string Email { get; set; }

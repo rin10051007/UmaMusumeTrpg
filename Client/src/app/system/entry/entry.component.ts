@@ -18,6 +18,7 @@ export class EntryComponent implements OnInit {
 
   entry() {
     var entryItem: ItemModel = {
+      loginId: 'hoge1',
       name: 'hoge',
       email: 'hoge@mail.com',
       password: 'hogePassowrd',

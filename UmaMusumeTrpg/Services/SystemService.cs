@@ -80,6 +80,7 @@ namespace UmaMusumeTrpg.Services
         {
             User user = new()
             {
+                LoginId = item.LoginId,
                 Name = item.Name,
                 SysPermission = item.SysPermission,
                 UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission,
@@ -105,6 +106,7 @@ namespace UmaMusumeTrpg.Services
         public (int, string, string) Edit(EditItem item)
         {
             User user = _dbContext.Users.FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
+            user.LoginId = item.LoginId;
             user.Name = item.Name;
             user.SysPermission = item.SysPermission;
             user.UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission;

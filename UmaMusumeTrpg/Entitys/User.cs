@@ -19,6 +19,10 @@ namespace UmaMusumeTrpg.Entitys
         /// </summary>
         public int ID { get; set; }
         /// <summary>
+        /// ログインID
+        /// </summary>
+        public string LoginId { get; set; }
+        /// <summary>
         /// 名前
         /// </summary>
         public string Name { get; set; }

@@ -3,6 +3,7 @@ import { UmaMusumeTrpgPermission } from "../../../../lib/enum/uma-musume-trpg-pe
 import { BaseEntryItemModel } from "../../../../lib/models/entry/base-entry-item";
 
 export interface ItemModel extends BaseEntryItemModel {
+  loginId: string;
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   email: string;

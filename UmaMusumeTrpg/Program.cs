@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using UmaMusumeTrpg;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Services;
@@ -29,6 +32,21 @@ builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<ISystemService, SystemService>();
 #endregion
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters =
+    new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "hoge",
+        ValidAudience = "hoge",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("12345678901234567890"))
+    };
+});
+
 WebApplication app = builder.Build();
 
 
@@ -44,6 +62,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
 
 // API‚ðŒÄ‚ñ‚¾‚Æ‚«
 app.MapControllerRoute(

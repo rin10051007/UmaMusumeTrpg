@@ -20,6 +20,7 @@ namespace UmaMusumeTrpg
 
                 _ = entity.HasKey(e => e.ID);
                 _ = entity.Property(e => e.ID);
+                _ = entity.Property(e => e.LoginId);
                 _ = entity.Property(e => e.Name);
                 _ = entity.Property(e => e.SysPermission);
                 _ = entity.Property(e => e.UmaMusumeTrpgPermission);

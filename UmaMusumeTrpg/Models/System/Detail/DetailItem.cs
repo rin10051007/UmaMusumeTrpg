@@ -8,6 +8,7 @@ namespace UmaMusumeTrpg.Models.System.Detail
     {
         public DetailItem(User user) : base(user.ID, user.Name, user.Token, user.UpdateTime)
         {
+            LoginId = user.LoginId;
             SysPermission = user.SysPermission;
             UmaMusumeTrpgPermission = user.UmaMusumeTrpgPermission;
             Email = user.Email;
@@ -15,6 +16,7 @@ namespace UmaMusumeTrpg.Models.System.Detail
             DeleteTime = user.DeleteTime;
             IsDeleted = user.IsDeleted;
         }
+        public string LoginId { get; set; }
         public SysPermission SysPermission { get; set; }
         public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }
         public string Email { get; set; }

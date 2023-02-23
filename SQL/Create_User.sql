@@ -9,6 +9,7 @@ DROP TABLE public."Users"
 -- 新テーブルの作成
 create table public."Users" (
   "ID" serial not null
+  , "LoginId" varchar(64) UNIQUE not null
   , "Name" varchar(64) not null
   , "SysPermission" smallint default 0 not null
   , "UmaMusumeTrpgPermission" smallint default 0 not null
@@ -33,6 +34,9 @@ comment on table public."Users" is '管理者、利用者DB'
 /
 
 comment on column public."Users"."ID" is 'ID'
+/
+
+comment on column public."Users"."LoginId" is 'LoginId'
 /
 
 comment on column public."Users"."Name" is '名前'
@@ -74,14 +78,14 @@ comment on column public."Users"."IsDeleted" is '削除フラグ'
 
 --管理者追加
 INSERT 
-INTO public."Users" ("Name","SysPermission","UmaMusumeTrpgPermission","Email","Password","Token") 
-VALUES ('管理者',2,3,'admin@hoge.com','adminPassword','adminToken')
+INTO public."Users" ("LoginId","Name","SysPermission","UmaMusumeTrpgPermission","Email","Password","Token") 
+VALUES ('admin','管理者',2,3,'admin@hoge.com','adminPassword','adminToken')
 /
 INSERT 
-INTO public."Users" ("Name","UmaMusumeTrpgPermission","Email","Password","Token") 
-VALUES ('プレイヤー1',1,'Player1@hoge.com','Player1password','Player1Token')
+INTO public."Users" ("LoginId","Name","UmaMusumeTrpgPermission","Email","Password","Token") 
+VALUES ('Player1','プレイヤー1',1,'Player1@hoge.com','Player1password','Player1Token')
 /
 INSERT 
-INTO public."Users" ("Name","UmaMusumeTrpgPermission","Email","Password","Token") 
-VALUES ('プレイヤー2',1,'Player2@hoge.com','Player2password','Player2Token')
+INTO public."Users" ("LoginId","Name","UmaMusumeTrpgPermission","Email","Password","Token") 
+VALUES ('Player2','プレイヤー2',1,'Player2@hoge.com','Player2password','Player2Token')
 /

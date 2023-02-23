@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Microsoft.Extensions.Options;
+using System.Configuration;
 using UmaMusumeTrpg;
+using UmaMusumeTrpg.Configurations;
 using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Models.Settings;
 using UmaMusumeTrpg.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -16,13 +18,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 IConfiguration config = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json")
-    .AddEnvironmentVariables()
+.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+.AddEnvironmentVariables()
 .Build();
 
+builder.Services.AddOptions().Configure<JwtSettings>(config.GetSection("JwtSettings"));
+
+builder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerConfigureOptions>();
 
 builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt => opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
-
 
 
 #region Servics‚ÌDI
@@ -32,20 +36,6 @@ builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<ISystemService, SystemService>();
 #endregion
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters =
-    new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = "hoge",
-        ValidAudience = "hoge",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("12345678901234567890"))
-    };
-});
 
 WebApplication app = builder.Build();
 
@@ -62,7 +52,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseAuthentication();
 
 // API‚ðŒÄ‚ñ‚¾‚Æ‚«
 app.MapControllerRoute(

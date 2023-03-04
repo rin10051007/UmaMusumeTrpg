@@ -23,6 +23,7 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe(
       params => {
+        this._apiSetvise.hoge().subscribe(r => console.log(r));
         this._apiSetvise.getList({
           Name: (params as SearchModel).Name,
           SysPermission: Number((params as SearchModel).SysPermission || 0),

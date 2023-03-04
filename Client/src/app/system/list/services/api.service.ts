@@ -12,6 +12,12 @@ import { SearchModel } from '../models/search';
 export class ApiService {
   constructor(private http: HttpClient) {
   }
+  hoge() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<ResponseModel>(apiUrls.authUrls.login, {}, { headers: headers });
+  }
   getList(search: SearchModel): Observable<ResponseModel> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

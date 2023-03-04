@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
@@ -10,6 +10,7 @@ using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.Controllers
 {
+    [Authorize()]
     [Route("Api/System")]
     [ApiController]
     public class SystemController : ControllerBase
@@ -20,6 +21,12 @@ namespace UmaMusumeTrpg.Controllers
         {
             _logger = logger;
             _systemService = systemService;
+        }
+
+        private bool Role()
+        {
+            string name = HttpContext.User.Identity.Name;
+            return true;
         }
 
 

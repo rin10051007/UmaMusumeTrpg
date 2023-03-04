@@ -62,5 +62,22 @@ namespace UmaMusumeTrpg.Entitys
         /// 削除フラグ
         /// </summary>
         public bool IsDeleted { get; set; }
+
+
+
+
+        public void PasswordHash()
+        {
+            Password = HashPassword(this, Password);
+        }
+        public void PasswordHash(string password)
+        {
+            Password = HashPassword(this, password);
+        }
+        public bool VerifyHashedPassword(string password)
+        {
+            return PasswordVerificationResult.Failed !=
+                VerifyHashedPassword(this, Password, password);
+        }
     }
 }

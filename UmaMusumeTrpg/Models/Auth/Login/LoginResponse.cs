@@ -2,5 +2,6 @@
 {
     public class LoginResponse
     {
+        public LoginItem LoginItem { get; set; }
     }
 }

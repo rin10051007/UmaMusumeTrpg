@@ -90,7 +90,7 @@ namespace UmaMusumeTrpg.Services
                 CreateTime = _timeService.NowTime(),
                 UpdateTime = _timeService.NowTime(),
             };
-            user.Password = PasswordHash(user);
+            user.PasswordHash();
             _ = _dbContext.Add(user);
             _ = _dbContext.SaveChanges();
             return (user.ID, user.Token);
@@ -115,7 +115,7 @@ namespace UmaMusumeTrpg.Services
             user.UpdateTime = _timeService.NowTime();
             if (!item.Password.IsNullOrEmpty())
             {
-                user.Password = PasswordHash(user, item.Password);
+                user.PasswordHash(item.Password);
             }
             _ = _dbContext.SaveChanges();
             return (user.ID, user.Name, user.Token);
@@ -129,15 +129,6 @@ namespace UmaMusumeTrpg.Services
             user.IsDeleted = true;
             _ = _dbContext.SaveChanges();
             return (user.ID, user.DeleteTime);
-        }
-
-        private string PasswordHash(User user)
-        {
-            return user.HashPassword(user, user.Password);
-        }
-        private string PasswordHash(User user, string password)
-        {
-            return user.HashPassword(user, password);
         }
     }
 }

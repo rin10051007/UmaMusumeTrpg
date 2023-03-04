@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System.Configuration;
 using UmaMusumeTrpg;
 using UmaMusumeTrpg.Configurations;
 using UmaMusumeTrpg.IServices;
@@ -33,6 +32,7 @@ builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt => opt.UseNpgsql(confi
 builder.Services.AddScoped<IGuidService, GuidService>();
 builder.Services.AddScoped<ITimeService, TimeService>();
 builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISystemService, SystemService>();
 #endregion
 
@@ -49,6 +49,7 @@ if (!app.Environment.IsDevelopment())
     _ = app.UseHsts();
 }
 
+app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

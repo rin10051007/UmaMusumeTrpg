@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using UmaMusumeTrpg.Enums;
+using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Auth.Login;
 using UmaMusumeTrpg.Models.Settings;
 
@@ -16,12 +17,12 @@ namespace UmaMusumeTrpg.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ILogger<AuthController> _logger;
-        private readonly JwtSettings _jwtSettings;
+        private readonly IAuthService _authService;
 
-        public AuthController(ILogger<AuthController> logger, IOptions<JwtSettings> jwtSettings)
+        public AuthController(ILogger<AuthController> logger, IAuthService authService)
         {
             _logger = logger;
-            _jwtSettings = jwtSettings.Value;
+            _authService = authService;
         }
 
 
@@ -31,30 +32,13 @@ namespace UmaMusumeTrpg.Controllers
         {
             var loginUser = new LoginUser()
             {
-                LoginId = "LoginId",
-                Passwird = "adminPassword",
+                LoginId = "admin",
+                Password = "adminPassword",
             };
-            var handler = new JwtSecurityTokenHandler();
-            var claims = new[] {
-                new Claim(ClaimTypes.Name, loginUser.LoginId),
-                new Claim(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString()),
-                new Claim(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.GmPlayer.ToString())
-            };
-            var credentials = new SigningCredentials(
-                _jwtSettings.SecurityKey(),
-                SecurityAlgorithms.HmacSha512);
-            var token = handler.CreateJwtSecurityToken(
-                audience: loginUser.LoginId,
-                issuer: _jwtSettings.Issuer,
-                expires: DateTime.Now.AddSeconds(_jwtSettings.ExpireTime),
-                subject: new ClaimsIdentity(claims),
-                signingCredentials: credentials);
-            var tokenText = handler.WriteToken(token);
-            var result = new
+            return Ok(new LoginResponse
             {
-                token = tokenText
-            };
-            return Ok(result);
+                LoginItem = _authService.Login(loginUser)
+            });
         }
     }
 }

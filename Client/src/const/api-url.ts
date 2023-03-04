@@ -1,4 +1,7 @@
 export const apiUrls = {
+  authUrls: {
+    login: 'Api/Auth/Login',
+  },
   sysUrls: {
     getList: 'Api/System/GetList',
     entry: 'Api/System/Entry',

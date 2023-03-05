@@ -3,30 +3,62 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Client": {
+    "Common": {
+      "projectType": "library",
+      "root": "projects/common",
+      "sourceRoot": "projects/common/src",
+      "prefix": "Common",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/common/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/common/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/common/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/common/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "SystemControl": {
       "projectType": "application",
       "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+      "root": "projects/system-control",
+      "sourceRoot": "projects/system-control/src",
+      "prefix": "SystemControl",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../UmaMusumeTrpg/wwwroot",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "outputPath": "../UmaMusumeTrpg/wwwroot/SystemControl",
+            "index": "projects/system-control/src/index.html",
+            "main": "projects/system-control/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "projects/system-control/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/system-control/src/favicon.ico",
+              "projects/system-control/src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "projects/system-control/src/styles.css"
             ],
             "scripts": []
           },
@@ -47,12 +79,6 @@
               "outputHashing": "all"
             },
             "development": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
-                }
-              ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -67,10 +93,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Client:build:production"
+              "browserTarget": "SystemControl:build:production"
             },
             "development": {
-              "browserTarget": "Client:build:development"
+              "browserTarget": "SystemControl:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +104,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Client:build"
+            "browserTarget": "SystemControl:build"
           }
         },
         "test": {
@@ -88,14 +114,195 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "tsconfig.spec.json",
+            "tsConfig": "projects/system-control/tsconfig.spec.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/system-control/src/favicon.ico",
+              "projects/system-control/src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "projects/system-control/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "UmaMusumeControl": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/uma-musume-control",
+      "sourceRoot": "projects/uma-musume-control/src",
+      "prefix": "UmaMusumeControl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "../UmaMusumeTrpg/wwwroot/UmaMusumeControl",
+            "index": "projects/uma-musume-control/src/index.html",
+            "main": "projects/uma-musume-control/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/uma-musume-control/tsconfig.app.json",
+            "assets": [
+              "projects/uma-musume-control/src/favicon.ico",
+              "projects/uma-musume-control/src/assets"
+            ],
+            "styles": [
+              "projects/uma-musume-control/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "UmaMusumeControl:build:production"
+            },
+            "development": {
+              "browserTarget": "UmaMusumeControl:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "UmaMusumeControl:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/uma-musume-control/tsconfig.spec.json",
+            "assets": [
+              "projects/uma-musume-control/src/favicon.ico",
+              "projects/uma-musume-control/src/assets"
+            ],
+            "styles": [
+              "projects/uma-musume-control/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "AuthControl": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/auth-control",
+      "sourceRoot": "projects/auth-control/src",
+      "prefix": "AuthControl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "../UmaMusumeTrpg/wwwroot/AuthControl",
+            "index": "projects/auth-control/src/index.html",
+            "main": "projects/auth-control/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/auth-control/tsconfig.app.json",
+            "assets": [
+              "projects/auth-control/src/favicon.ico",
+              "projects/auth-control/src/assets"
+            ],
+            "styles": [
+              "projects/auth-control/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "AuthControl:build:production"
+            },
+            "development": {
+              "browserTarget": "AuthControl:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "AuthControl:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/auth-control/tsconfig.spec.json",
+            "assets": [
+              "projects/auth-control/src/favicon.ico",
+              "projects/auth-control/src/assets"
+            ],
+            "styles": [
+              "projects/auth-control/src/styles.css"
             ],
             "scripts": []
           }

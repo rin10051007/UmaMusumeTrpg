@@ -10,7 +10,7 @@ using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.Controllers
 {
-    [Authorize()]
+    //[Authorize()]
     [Route("Api/System")]
     [ApiController]
     public class SystemController : ControllerBase

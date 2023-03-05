@@ -37,6 +37,7 @@ builder.Services.AddScoped<ISystemService, SystemService>();
 #endregion
 
 
+
 WebApplication app = builder.Build();
 
 
@@ -49,7 +50,9 @@ if (!app.Environment.IsDevelopment())
     _ = app.UseHsts();
 }
 
-app.UseAuthentication();
+
+//認証
+//app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -59,7 +62,12 @@ app.MapControllerRoute(
     name: "default",
     pattern: "api/{controller}/{action}");
 
-// クライアントを呼んだとき
-app.MapFallbackToFile("index.html");
+
+// クライアントを呼んだときProgram
+
+app.MapFallbackToFile("/AuthControl", "AuthControl/index.html");
+app.MapFallbackToFile("/SystemControl", "SystemControl/index.html");
+app.MapFallbackToFile("/UmaMusumeControl", "UmaMusumeControl/index.html");
 
 app.Run();
+

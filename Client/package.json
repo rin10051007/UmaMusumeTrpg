@@ -4,8 +4,16 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build:Common": "ng build Common  --configuration development",
+    "build:SystemControl": "ng build SystemControl  --configuration development --base-href=/SystemControl/",
+    "build:UmaMusumeControl": "ng build UmaMusumeControl  --configuration development",
+    "build:AuthControl": "ng build AuthControl  --configuration development",
+    "build": "run-p build:*",
+    "watch:Common": "ng build Common   --watch --configuration development",
+    "watch:SystemControl": "ng build SystemControl   --watch --configuration development",
+    "watch:UmaMusumeControl": "ng build UmaMusumeControl   --watch --configuration development",
+    "watch:AuthControl": "ng build AuthControl   --watch --configuration development",
+    "watch": "run-p watch:*",
     "test": "ng test"
   },
   "private": true,
@@ -36,6 +44,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "ng-packagr": "^15.2.2",
+    "npm-run-all": "^4.1.5",
     "typescript": "~4.9.5"
   }
 }

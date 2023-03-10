@@ -1,0 +1,14 @@
+ng g module list --project SystemControl --routing
+ng g component list --project SystemControl
+
+ng g module list --project SystemControl --routing
+ng g component list --project SystemControl
+
+ng g module list --project SystemControl --routing
+ng g component list --project SystemControl
+
+ng g module list --project SystemControl --routing
+ng g component list --project SystemControl
+
+ng g module list --project SystemControl --routing
+ng g component list --project SystemControl

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommonComponent } from './common.component';
+import { DetailComponent } from './detail.component';
 
-describe('CommonComponent', () => {
-  let component: CommonComponent;
-  let fixture: ComponentFixture<CommonComponent>;
+describe('DetailComponent', () => {
+  let component: DetailComponent;
+  let fixture: ComponentFixture<DetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommonComponent ]
+      declarations: [ DetailComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CommonComponent);
+    fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

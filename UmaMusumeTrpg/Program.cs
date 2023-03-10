@@ -64,10 +64,10 @@ app.MapControllerRoute(
 
 
 // クライアントを呼んだときProgram
-
 app.MapFallbackToFile("/AuthControl", "AuthControl/index.html");
 app.MapFallbackToFile("/SystemControl", "SystemControl/index.html");
 app.MapFallbackToFile("/UmaMusumeControl", "UmaMusumeControl/index.html");
+app.MapFallbackToFile("AuthControl/index.html");
 
 app.Run();
 

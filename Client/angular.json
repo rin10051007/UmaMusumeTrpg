@@ -84,7 +84,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/system-control/src/environments/environment.ts",
+                  "with": "projects/system-control/src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -175,7 +181,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/uma-musume-control/src/environments/environment.ts",
+                  "with": "projects/uma-musume-control/src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -266,7 +278,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/auth-control/src/environments/environment.ts",
+                  "with": "projects/auth-control/src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

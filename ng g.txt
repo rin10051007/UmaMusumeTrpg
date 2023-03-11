@@ -1,14 +1,8 @@
-ng g module list --project SystemControl --routing
-ng g component list --project SystemControl
+ng g module login --project AuthControl --routing
+ng g component login --project AuthControl
 
-ng g module list --project SystemControl --routing
-ng g component list --project SystemControl
-
-ng g module list --project SystemControl --routing
-ng g component list --project SystemControl
-
-ng g module list --project SystemControl --routing
-ng g component list --project SystemControl
-
-ng g module list --project SystemControl --routing
-ng g component list --project SystemControl
+ng g interface login/models/item --type=model --project AuthControl
+ng g interface login/models/request --type=model --project AuthControl
+ng g interface login/models/response --type=model --project AuthControl
+ng g interface login/models/user --type=model --project AuthControl
+ng g servise login/servises/api --project AuthControl

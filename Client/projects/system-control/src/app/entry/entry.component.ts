@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SysPermission, UmaMusumeTrpgPermission } from '../../../../../dist/common';
 import { Item } from './models/item.model';
-import { ApiService } from './servises/api.service';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'SystemControl-entry',

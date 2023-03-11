@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BaseApiService } from '../../../../../../dist/common';
+import { Item } from '../models/item.model';
+import { Request } from '../models/request.model';
+import { Response } from '../models/response.model';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ApiService {
+@Injectable()
+export class ApiService extends BaseApiService {
 
-  constructor() { }
+  delete(item: Item): Observable<Response> {
+    const request: Request = {
+      delete: item
+    }
+    return this.getHttp().post<Response>(this.getApiUrl().sysUrls.delete, request, { headers: this.getHeader() });
+  }
 }

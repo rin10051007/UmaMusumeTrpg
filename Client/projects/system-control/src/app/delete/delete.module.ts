@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { DeleteRoutingModule } from './delete-routing.module';
 import { DeleteComponent } from './delete.component';
+import { ApiService } from './servises/api.service';
+import { ApiService as DetailApiService } from '../detail/servises/api.service';
 
 
 @NgModule({
@@ -12,6 +14,10 @@ import { DeleteComponent } from './delete.component';
   imports: [
     CommonModule,
     DeleteRoutingModule
+  ],
+  providers: [
+    ApiService,
+    DetailApiService
   ]
 })
 export class DeleteModule { }

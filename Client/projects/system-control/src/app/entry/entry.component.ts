@@ -9,7 +9,7 @@ import { ApiService } from './servises/api.service';
   styleUrls: ['./entry.component.css']
 })
 export class EntryComponent implements OnInit {
-  constructor(private _apiService: ApiService) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() { }
   entry() {
@@ -21,7 +21,7 @@ export class EntryComponent implements OnInit {
       sysPermission: SysPermission.SysAdmin,
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.Player
     };
-    this._apiService.entry(entryItem).subscribe(r => {
+    this.apiService.entry(entryItem).subscribe(r => {
     })
   }
 }

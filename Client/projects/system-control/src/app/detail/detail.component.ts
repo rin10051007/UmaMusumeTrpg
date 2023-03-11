@@ -8,10 +8,8 @@ import { ApiService } from './servises/api.service';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-
   constructor(private apiService: ApiService,
-    private route: ActivatedRoute) {
-  }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.detail();

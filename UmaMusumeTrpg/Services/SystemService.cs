@@ -127,6 +127,7 @@ namespace UmaMusumeTrpg.Services
                 .FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
             user.DeleteTime = _timeService.NowTime();
             user.IsDeleted = true;
+            user.Token = _guidService.NewGuid();
             _ = _dbContext.SaveChanges();
             return (user.ID, user.DeleteTime);
         }

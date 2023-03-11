@@ -1,6 +1,4 @@
-﻿using UmaMusumeTrpg.Models.System.List;
-
-namespace UmaMusumeTrpg.Models.Base.List
+﻿namespace UmaMusumeTrpg.Models.Base.List
 {
     public class BaseListResponse
     {

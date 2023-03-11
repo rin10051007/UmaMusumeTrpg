@@ -1,8 +1,9 @@
-﻿using UmaMusumeTrpg.Enum;
+﻿using Microsoft.AspNetCore.Identity;
+using UmaMusumeTrpg.Enums;
 
 namespace UmaMusumeTrpg.Entitys
 {
-    public class User
+    public class User : PasswordHasher<User>
     {
         /// <summary>
         /// 管理者、利用者DB
@@ -17,6 +18,10 @@ namespace UmaMusumeTrpg.Entitys
         /// ID
         /// </summary>
         public int ID { get; set; }
+        /// <summary>
+        /// ログインID
+        /// </summary>
+        public string LoginId { get; set; }
         /// <summary>
         /// 名前
         /// </summary>
@@ -57,5 +62,22 @@ namespace UmaMusumeTrpg.Entitys
         /// 削除フラグ
         /// </summary>
         public bool IsDeleted { get; set; }
+
+
+
+
+        public void PasswordHash()
+        {
+            Password = HashPassword(this, Password);
+        }
+        public void PasswordHash(string password)
+        {
+            Password = HashPassword(this, password);
+        }
+        public bool VerifyHashedPassword(string password)
+        {
+            return PasswordVerificationResult.Failed !=
+                VerifyHashedPassword(this, Password, password);
+        }
     }
 }

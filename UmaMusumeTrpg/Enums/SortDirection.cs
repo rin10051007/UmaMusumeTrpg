@@ -1,9 +1,9 @@
-﻿namespace UmaMusumeTrpg.Enum
+﻿namespace UmaMusumeTrpg.Enums
 {
     public enum SotrDirection
     {
-        None,
-        AscendingOrder,
-        DescendingOrder
+        None = 0,
+        AscendingOrder = 1,
+        DescendingOrder = 2
     }
 }

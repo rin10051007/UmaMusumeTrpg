@@ -8,6 +8,6 @@ namespace UmaMusumeTrpg.Models.System.Detail
         {
             Search = search;
         }
-        public DetailSearch Search { get; set; }
+        public new DetailSearch Search { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace UmaMusumeTrpg.IServices
+﻿namespace UmaMusumeTrpg.IServices
 {
     public interface IGuidService
     {

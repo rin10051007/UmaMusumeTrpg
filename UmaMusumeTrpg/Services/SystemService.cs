@@ -1,8 +1,10 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using UmaMusumeTrpg.Entitys;
-using UmaMusumeTrpg.Enum;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
+using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
 
@@ -30,13 +32,19 @@ namespace UmaMusumeTrpg.Services
             list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => !x.IsDeleted);
 
             if (!string.IsNullOrWhiteSpace(search.Name))
+            {
                 list = (IOrderedQueryable<User>)list.Where(x => x.Name.Contains(search.Name));
+            }
 
             if (search.SysPermission != SysPermission.None)
+            {
                 list = (IOrderedQueryable<User>)list.Where(x => x.SysPermission == search.SysPermission);
+            }
 
             if (search.UmaMusumeTrpgPermission != UmaMusumeTrpgPermission.None)
+            {
                 list = (IOrderedQueryable<User>)list.Where(x => x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
+            }
 
             switch (search.SortItem)
             {
@@ -56,13 +64,12 @@ namespace UmaMusumeTrpg.Services
             list = (IOrderedQueryable<User>)(search.SortDirection != SotrDirection.DescendingOrder ?
                 list : list.Reverse());
 
-            var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
+            int maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
             if (maxPage > 1)
             {
-                if (maxPage > search.DisplayPage)
-                    list = (IOrderedQueryable<User>)list.Skip((search.DisplayPage - 1) * search.DisplayCount);
-                else
-                    list = (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
+                list = maxPage > search.DisplayPage
+                    ? (IOrderedQueryable<User>)list.Skip((search.DisplayPage - 1) * search.DisplayCount)
+                    : (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
             }
             list = (IOrderedQueryable<User>)list.Take(search.DisplayCount);
 
@@ -71,8 +78,9 @@ namespace UmaMusumeTrpg.Services
 
         public (int, string) Entry(EntryItem item)
         {
-            var user = new User()
+            User user = new()
             {
+                LoginId = item.LoginId,
                 Name = item.Name,
                 SysPermission = item.SysPermission,
                 UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission,
@@ -82,8 +90,9 @@ namespace UmaMusumeTrpg.Services
                 CreateTime = _timeService.NowTime(),
                 UpdateTime = _timeService.NowTime(),
             };
-            _dbContext.Add(user);
-            _dbContext.SaveChanges();
+            user.PasswordHash();
+            _ = _dbContext.Add(user);
+            _ = _dbContext.SaveChanges();
             return (user.ID, user.Token);
         }
 
@@ -92,6 +101,35 @@ namespace UmaMusumeTrpg.Services
             return new DetailItem(_dbContext.Users
                 .FirstOrDefault(x => (x.ID == serch.Id && serch.Token.IsNullOrEmpty()) ||
                 (x.ID == serch.Id && !serch.Token.IsNullOrEmpty() && serch.Token.Equals(x.Token))));
+        }
+
+        public (int, string, string) Edit(EditItem item)
+        {
+            User user = _dbContext.Users.FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
+            user.LoginId = item.LoginId;
+            user.Name = item.Name;
+            user.SysPermission = item.SysPermission;
+            user.UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission;
+            user.Email = item.Email;
+            user.Token = _guidService.NewGuid();
+            user.UpdateTime = _timeService.NowTime();
+            if (!item.Password.IsNullOrEmpty())
+            {
+                user.PasswordHash(item.Password);
+            }
+            _ = _dbContext.SaveChanges();
+            return (user.ID, user.Name, user.Token);
+        }
+
+        public (int, DateTime?) Delete(DeleteItem item)
+        {
+            User user = _dbContext.Users
+                .FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
+            user.DeleteTime = _timeService.NowTime();
+            user.IsDeleted = true;
+            user.Token = _guidService.NewGuid();
+            _ = _dbContext.SaveChanges();
+            return (user.ID, user.DeleteTime);
         }
     }
 }

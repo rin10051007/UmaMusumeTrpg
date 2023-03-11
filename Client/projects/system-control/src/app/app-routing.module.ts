@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'entry', loadChildren: () => import('./entry/entry.module').then(m => m.EntryModule) },
   { path: 'edit', loadChildren: () => import('./edit/edit.module').then(m => m.EditModule) },
   { path: 'delete', loadChildren: () => import('./delete/delete.module').then(m => m.DeleteModule) },
+  { path: '**', redirectTo: 'list', pathMatch: 'full' }
 ];
 
 @NgModule({

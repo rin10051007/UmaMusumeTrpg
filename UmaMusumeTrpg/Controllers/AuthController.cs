@@ -6,7 +6,7 @@ using UmaMusumeTrpg.Models.Auth.Login;
 namespace UmaMusumeTrpg.Controllers
 {
     [AllowAnonymous]
-    [Route("Api/Auth")]
+    [Route("AuthControl/Api/Auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {

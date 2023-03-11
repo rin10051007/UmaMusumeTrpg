@@ -1,9 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { apiUrls } from "../../const/public-const";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { apiUrls } from '../../../const/api-url.const';
 
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BaseApiService {
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'

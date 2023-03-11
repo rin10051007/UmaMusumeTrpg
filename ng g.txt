@@ -1,8 +1,16 @@
 ng g module login --project AuthControl --routing
 ng g component login --project AuthControl
 
-ng g interface login/models/item --type=model --project AuthControl
+ng g interface login/models/item --type=model --project Common
 ng g interface login/models/request --type=model --project AuthControl
 ng g interface login/models/response --type=model --project AuthControl
 ng g interface login/models/user --type=model --project AuthControl
-ng g servise login/servises/api --project AuthControl
+ng g servise login/servises/api --project Common
+
+
+
+
+ng g s services/base/api/baseApi  --project Common
+ng g s services/local-storage/local-storage  --project Common
+
+ng g interface models/local-storage/item --type=model --project Common

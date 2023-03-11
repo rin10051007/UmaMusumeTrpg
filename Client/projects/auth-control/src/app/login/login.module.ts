@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
+import { LocalStorageService } from '../../../../../dist/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
+import { ApiService } from './services/api.service';
 
 
 @NgModule({
@@ -12,6 +14,10 @@ import { LoginComponent } from './login.component';
   imports: [
     CommonModule,
     LoginRoutingModule
+  ],
+  providers: [
+    ApiService,
+    LocalStorageService
   ]
 })
 export class LoginModule { }

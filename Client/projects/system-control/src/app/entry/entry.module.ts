@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EntryRoutingModule } from './entry-routing.module';
 import { EntryComponent } from './entry.component';
+import { ApiService } from './servises/api.service';
 
 
 @NgModule({
@@ -12,6 +13,9 @@ import { EntryComponent } from './entry.component';
   imports: [
     CommonModule,
     EntryRoutingModule
+  ],
+  providers: [
+    ApiService
   ]
 })
 export class EntryModule { }

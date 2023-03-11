@@ -60,13 +60,14 @@ app.UseRouting();
 // APIを呼んだとき
 app.MapControllerRoute(
     name: "default",
-    pattern: "api/{controller}/{action}");
+    pattern: "{control}/api/{controller}/{action}",
+     constraints: new { control = @"^(AuthControl|SystemControl|UmaMusumeControl)$" });
 
 
 // クライアントを呼んだときProgram
-app.MapFallbackToFile("/AuthControl", "AuthControl/index.html");
-app.MapFallbackToFile("/SystemControl", "SystemControl/index.html");
-app.MapFallbackToFile("/UmaMusumeControl", "UmaMusumeControl/index.html");
+app.MapFallbackToFile("/AuthControl/{*path:nonfile}", "AuthControl/index.html");
+app.MapFallbackToFile("/SystemControl/{*path:nonfile}", "SystemControl/index.html");
+app.MapFallbackToFile("/UmaMusumeControl/{*path:nonfile}", "UmaMusumeControl/index.html");
 app.MapFallbackToFile("AuthControl/index.html");
 
 app.Run();

@@ -1,4 +1,4 @@
-export enum SortItem {
+export enum SystemSortItem {
   none,
   id,
   name,

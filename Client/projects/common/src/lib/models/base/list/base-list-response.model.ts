@@ -1,7 +1,7 @@
-import { BaseListItem, BaseListSerch } from "../../public-model";
+import { BaseListItem, BaseListSearch } from "../../public-model";
 
 export interface BaseListResponse {
-  search: BaseListSerch;
+  search: BaseListSearch;
   items: BaseListItem[];
   totalCount: number;
 }

@@ -1,5 +1,5 @@
-import { BaseListSerch } from "../../public-model";
+import { BaseListSearch } from "../../public-model";
 
 export interface BaseListRequest {
-  Search: BaseListSerch;
+  Search: BaseListSearch;
 }

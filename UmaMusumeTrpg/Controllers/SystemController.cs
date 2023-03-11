@@ -11,7 +11,7 @@ using UmaMusumeTrpg.Models.System.List;
 namespace UmaMusumeTrpg.Controllers
 {
     //[Authorize()]
-    [Route("Api/System")]
+    [Route("SystemControl/Api/System")]
     [ApiController]
     public class SystemController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace UmaMusumeTrpg.Controllers
 
         private bool Role()
         {
-            string name = HttpContext.User.Identity.Name;
+            string name = HttpContext?.User?.Identity?.Name;
             return true;
         }
 

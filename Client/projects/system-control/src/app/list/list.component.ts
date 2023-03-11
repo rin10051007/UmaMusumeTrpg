@@ -12,15 +12,15 @@ import { ApiService } from './servises/api.service';
 })
 export class ListComponent implements OnInit {
   lists: Item[] = [];
-  constructor(private _apiSetvise: ApiService,
-    private _activatedRoute: ActivatedRoute,
-    private _router: Router) { }
+  constructor(private apiSetvise: ApiService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
 
   ngOnInit(): void {
-    this._activatedRoute.queryParams.subscribe(
+    this.activatedRoute.queryParams.subscribe(
       params => {
-        this._apiSetvise.getList({
+        this.apiSetvise.getList({
           Name: (params as Search).Name,
           SysPermission: Number((params as Search).SysPermission || 0),
           UmaMusumeTrpgPermission: Number((params as Search).UmaMusumeTrpgPermission || 0),
@@ -36,8 +36,7 @@ export class ListComponent implements OnInit {
   }
 
   searchClick() {
-
-    this._router.navigate([], {
+    this.router.navigate([], {
       queryParams: {
         Name: '',
         SysPermission: [SysPermission.None],

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SysPermission, UmaMusumeTrpgPermission } from '../../../../../dist/common';
 import { Item } from './models/item.model';
 import { ApiService } from './servises/api.service';
@@ -8,8 +8,10 @@ import { ApiService } from './servises/api.service';
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.css']
 })
-export class EntryComponent {
+export class EntryComponent implements OnInit {
   constructor(private _apiService: ApiService) { }
+
+  ngOnInit() { }
   entry() {
     var entryItem: Item = {
       loginId: 'hoge1',

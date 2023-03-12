@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using UmaMusumeTrpg;
 using UmaMusumeTrpg.Configurations;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Settings;
 using UmaMusumeTrpg.Services;
@@ -25,7 +27,32 @@ builder.Services.AddOptions().Configure<JwtSettings>(config.GetSection("JwtSetti
 
 builder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerConfigureOptions>();
 
+
 builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt => opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+
+            var jwtSettings = new JwtSettings();
+            config.Bind("JwtSettings", jwtSettings);
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Audience,
+                IssuerSigningKey = jwtSettings.SecurityKey()
+            };
+        });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("SysAdminPolicy", policy =>
+        policy.RequireClaim(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString()));
+});
 
 
 #region ServicsのDI
@@ -35,7 +62,6 @@ builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISystemService, SystemService>();
 #endregion
-
 
 
 WebApplication app = builder.Build();
@@ -51,11 +77,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-//認証
-//app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 // APIを呼んだとき
 app.MapControllerRoute(
@@ -64,7 +91,7 @@ app.MapControllerRoute(
      constraints: new { control = @"^(AuthControl|SystemControl|UmaMusumeControl)$" });
 
 
-// クライアントを呼んだときProgram
+// クライアントを呼んだとき
 app.MapFallbackToFile("/AuthControl/{*path:nonfile}", "AuthControl/index.html");
 app.MapFallbackToFile("/SystemControl/{*path:nonfile}", "SystemControl/index.html");
 app.MapFallbackToFile("/UmaMusumeControl/{*path:nonfile}", "UmaMusumeControl/index.html");

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DisplayCount, SortDirection, SysPermission, SystemSortItem, UmaMusumeTrpgPermission } from '../../../../../dist/common';
 import { Item } from './models/item.model';
 import { Search } from './models/search.model';
-import { ApiService } from './servises/api.service';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'SystemControl-list',

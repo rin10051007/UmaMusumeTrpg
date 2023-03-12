@@ -6,7 +6,7 @@ using UmaMusumeTrpg.Models.Auth.Login;
 namespace UmaMusumeTrpg.Controllers
 {
     [AllowAnonymous]
-    [Route("Api/Auth")]
+    [Route("AuthControl/Api/Auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace UmaMusumeTrpg.Controllers
         //public ActionResult<LoginResponse> Login([Required][FromBody] LoginUser loginUser)
         public ActionResult<LoginResponse> Login()
         {
-            var loginUser = new LoginUser()
+            LoginUser loginUser = new()
             {
                 LoginId = "admin",
                 Password = "adminPassword",

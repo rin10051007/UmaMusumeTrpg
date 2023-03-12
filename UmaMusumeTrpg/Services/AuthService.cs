@@ -24,16 +24,16 @@ namespace UmaMusumeTrpg.Services
 
         public LoginItem Login(LoginUser loginUser)
         {
-            var handler = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler handler = new();
 
-            var user = _dbContext.Users.SingleOrDefault(x => x.LoginId.Equals(loginUser.LoginId));
+            Entitys.User user = _dbContext.Users.SingleOrDefault(x => x.LoginId.Equals(loginUser.LoginId));
 
             if (!user.VerifyHashedPassword(loginUser.Password))
             {
                 return new LoginItem("");
             }
 
-            var claims = new[] {
+            Claim[] claims = new[] {
                 new Claim(MyClaimTypes.LoginId, user.LoginId),
                 new Claim(MyClaimTypes.Id, user.ID.ToString()),
                 new Claim(MyClaimTypes.Name, user.Name),
@@ -41,11 +41,11 @@ namespace UmaMusumeTrpg.Services
                 new Claim(MyClaimTypes.UmaMusumeTrpgPermission, user.UmaMusumeTrpgPermission.ToString())
             };
 
-            var credentials = new SigningCredentials(
+            SigningCredentials credentials = new(
                 _jwtSettings.SecurityKey(),
-                SecurityAlgorithms.HmacSha512);
-            var token = handler.CreateJwtSecurityToken(
-                audience: loginUser.LoginId,
+                SecurityAlgorithms.HmacSha256);
+            JwtSecurityToken token = handler.CreateJwtSecurityToken(
+                audience: _jwtSettings.Audience,
                 issuer: _jwtSettings.Issuer,
                 expires: DateTime.Now.AddSeconds(_jwtSettings.ExpireTime),
                 subject: new ClaimsIdentity(claims),

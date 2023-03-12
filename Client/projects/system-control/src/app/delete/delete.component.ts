@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from './models/item.model';
-import { ApiService } from './servises/api.service';
-import { ApiService as DetailApiService } from '../detail/servises/api.service';
+import { ApiService } from './services/api.service';
+import { ApiService as DetailApiService } from '../detail/services/api.service';
 
 @Component({
   selector: 'SystemControl-delete',

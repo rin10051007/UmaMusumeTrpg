@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ListRoutingModule } from './list-routing.module';
 import { ListComponent } from './list.component';
-import { ApiService } from './servises/api.service';
+import { ApiService } from './services/api.service';
 
 
 @NgModule({

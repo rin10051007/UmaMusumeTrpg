@@ -76,10 +76,10 @@ comment on column public."Users"."DeleteTime" is '削除日時'
 comment on column public."Users"."IsDeleted" is '削除フラグ'
 /
 
---管理者追加
+--管理者追加PW:AdminPassword
 INSERT 
 INTO public."Users" ("LoginId","Name","SysPermission","UmaMusumeTrpgPermission","Email","Password","Token") 
-VALUES ('admin','管理者',2,3,'admin@hoge.com','adminPassword','adminToken')
+VALUES ('admin','管理者',2,3,'admin@hoge.com','AQAAAAIAAYagAAAAELzOnl9hNdGGgtnWvbtLcIktzNK8D9L25rASjMe5ZW75mC7iinughSc+bKRalEn8XA==','adminToken')
 /
 INSERT 
 INTO public."Users" ("LoginId","Name","UmaMusumeTrpgPermission","Email","Password","Token") 

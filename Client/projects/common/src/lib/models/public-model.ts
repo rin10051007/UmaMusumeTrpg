@@ -19,3 +19,5 @@ export * from './base/list/base-list-item.model';
 export * from './base/list/base-list-request.model';
 export * from './base/list/base-list-response.model';
 export * from './base/list/base-list-search.model';
+export * from './local-storage/item.model';
+

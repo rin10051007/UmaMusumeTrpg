@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { DeleteRoutingModule } from './delete-routing.module';
 import { DeleteComponent } from './delete.component';
-import { ApiService } from './servises/api.service';
-import { ApiService as DetailApiService } from '../detail/servises/api.service';
+import { ApiService } from './services/api.service';
+import { ApiService as DetailApiService } from '../detail/services/api.service';
 
 
 @NgModule({

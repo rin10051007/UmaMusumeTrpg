@@ -11,6 +11,9 @@ namespace UmaMusumeTrpg.Models.Settings
         public int ExpireTime { get; set; }
 
 
-        public SymmetricSecurityKey SecurityKey() => new(Encoding.UTF8.GetBytes(SecretKey));
+        public SymmetricSecurityKey SecurityKey()
+        {
+            return new(Encoding.UTF8.GetBytes(SecretKey));
+        }
     }
 }

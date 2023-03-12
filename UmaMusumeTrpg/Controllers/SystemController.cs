@@ -23,7 +23,7 @@ namespace UmaMusumeTrpg.Controllers
 
         private bool Role()
         {
-            string name = HttpContext?.User?.Identity?.Name;
+            _ = HttpContext?.User?.Identity?.Name;
             return true;
         }
 

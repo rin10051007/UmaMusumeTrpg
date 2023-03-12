@@ -23,7 +23,7 @@ namespace UmaMusumeTrpg.Configurations
 
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                AudienceValidator = this.AudienceValidatorDelegate,
+                AudienceValidator = AudienceValidatorDelegate,
                 ValidIssuer = _jwtSettings.Issuer,
                 IssuerSigningKey = _jwtSettings.SecurityKey(),
                 ValidateAudience = true,

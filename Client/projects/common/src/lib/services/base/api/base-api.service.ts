@@ -10,9 +10,7 @@ export class BaseApiService {
     'Authorization': `Bearer ${this.lsSErvice.getInfo()?.token || ''}`
   });
 
-  constructor(private http: HttpClient, private lsSErvice: LocalStorageService) {
-    console.log(this.lsSErvice.getInfo());
-  }
+  constructor(private http: HttpClient, private lsSErvice: LocalStorageService) { }
 
   getHttp() { return this.http; }
   getHeader() { return this.headers; }

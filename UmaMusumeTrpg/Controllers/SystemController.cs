@@ -11,7 +11,7 @@ using UmaMusumeTrpg.Models.System.List;
 namespace UmaMusumeTrpg.Controllers
 {
 
-    [Authorize]
+    [Authorize(Policy = "SysAdminPolicy")]
     [Route("SystemControl/Api/System")]
     [ApiController]
     public class SystemController : ControllerBase

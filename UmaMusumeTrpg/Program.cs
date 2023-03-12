@@ -2,10 +2,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.Configuration;
-using System.Text;
 using UmaMusumeTrpg;
 using UmaMusumeTrpg.Configurations;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Settings;
 using UmaMusumeTrpg.Services;
@@ -49,6 +48,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 IssuerSigningKey = jwtSettings.SecurityKey()
             };
         });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("SysAdminPolicy", policy =>
+        policy.RequireClaim(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString()));
+});
+
 
 #region Servics‚ÌDI
 builder.Services.AddScoped<IGuidService, GuidService>();

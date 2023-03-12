@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using UmaMusumeTrpg;
 using UmaMusumeTrpg.Configurations;
 using UmaMusumeTrpg.Enums;
@@ -52,6 +53,10 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("SysAdminPolicy", policy =>
         policy.RequireClaim(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString()));
+    options.AddPolicy("UmaMusumeGmPlayerPolicy", policy =>
+        policy.RequireClaim(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.GmPlayer.ToString()));
+    options.AddPolicy("UmaMusumePlayerPolicy", policy =>
+        policy.RequireClaim(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.Player.ToString()));
 });
 
 

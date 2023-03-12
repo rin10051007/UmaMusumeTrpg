@@ -7,10 +7,12 @@ import { LocalStorageService } from '../../public-service';
 export class BaseApiService {
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + this.lsSErvice.getInfo().token
+    'Authorization': `Bearer ${this.lsSErvice.getInfo()?.token || ''}`
   });
 
-  constructor(private http: HttpClient, private lsSErvice: LocalStorageService) { }
+  constructor(private http: HttpClient, private lsSErvice: LocalStorageService) {
+    console.log(this.lsSErvice.getInfo());
+  }
 
   getHttp() { return this.http; }
   getHeader() { return this.headers; }

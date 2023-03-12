@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.Delete;
@@ -9,6 +10,8 @@ using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.Controllers
 {
+
+    [Authorize]
     [Route("SystemControl/Api/System")]
     [ApiController]
     public class SystemController : ControllerBase

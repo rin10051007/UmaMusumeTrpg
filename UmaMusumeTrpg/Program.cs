@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Configuration;
+using System.Text;
 using UmaMusumeTrpg;
 using UmaMusumeTrpg.Configurations;
 using UmaMusumeTrpg.IServices;
@@ -28,6 +31,24 @@ builder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerConf
 
 builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt => opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
 
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+
+            var jwtSettings = new JwtSettings();
+            config.Bind("JwtSettings", jwtSettings);
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Audience,
+                IssuerSigningKey = jwtSettings.SecurityKey()
+            };
+        });
 
 #region Servics‚ÌDI
 builder.Services.AddScoped<IGuidService, GuidService>();

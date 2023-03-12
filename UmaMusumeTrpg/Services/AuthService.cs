@@ -43,9 +43,9 @@ namespace UmaMusumeTrpg.Services
 
             SigningCredentials credentials = new(
                 _jwtSettings.SecurityKey(),
-                SecurityAlgorithms.HmacSha512);
+                SecurityAlgorithms.HmacSha256);
             JwtSecurityToken token = handler.CreateJwtSecurityToken(
-                audience: loginUser.LoginId,
+                audience: _jwtSettings.Audience,
                 issuer: _jwtSettings.Issuer,
                 expires: DateTime.Now.AddSeconds(_jwtSettings.ExpireTime),
                 subject: new ClaimsIdentity(claims),

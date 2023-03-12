@@ -25,6 +25,7 @@ builder.Services.AddOptions().Configure<JwtSettings>(config.GetSection("JwtSetti
 
 builder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerConfigureOptions>();
 
+
 builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt => opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
 
 
@@ -35,7 +36,6 @@ builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISystemService, SystemService>();
 #endregion
-
 
 
 WebApplication app = builder.Build();
@@ -51,11 +51,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-//認証
-//app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 // APIを呼んだとき
 app.MapControllerRoute(
@@ -64,7 +65,7 @@ app.MapControllerRoute(
      constraints: new { control = @"^(AuthControl|SystemControl|UmaMusumeControl)$" });
 
 
-// クライアントを呼んだときProgram
+// クライアントを呼んだとき
 app.MapFallbackToFile("/AuthControl/{*path:nonfile}", "AuthControl/index.html");
 app.MapFallbackToFile("/SystemControl/{*path:nonfile}", "SystemControl/index.html");
 app.MapFallbackToFile("/UmaMusumeControl/{*path:nonfile}", "UmaMusumeControl/index.html");

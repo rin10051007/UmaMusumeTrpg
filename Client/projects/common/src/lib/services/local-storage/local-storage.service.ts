@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../../models/public-model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LocalStorageService {
 
   setInfo(info: Item) {

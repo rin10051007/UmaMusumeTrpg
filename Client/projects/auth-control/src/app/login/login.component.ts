@@ -9,14 +9,10 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  user: User = { loginId: 'admin', password: 'AdminPassword' }
   constructor(private apiService: ApiService, private lsService: LocalStorageService) { }
   login() {
-    const user: User = {
-      loginId: 'admin',
-      password: 'AdminPassword'
-    }
-
-    this.apiService.login(user).subscribe(r => {
+    this.apiService.login(this.user).subscribe(r => {
       this.lsService.setInfo(r.loginItem as unknown as Item);
     })
   }

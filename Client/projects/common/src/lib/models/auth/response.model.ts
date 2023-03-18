@@ -1,4 +1,4 @@
-import { Item } from "./item.model";
+import { Item } from "../public-model";
 
 export interface Response {
   loginItem: Item;

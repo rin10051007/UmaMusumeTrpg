@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { LocalStorageService } from '../../../../../dist/common';
+import { AuthApiService, BaseApiService, LocalStorageService } from '../../../../../dist/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-import { ApiService } from './services/api.service';
 
 
 @NgModule({
@@ -16,7 +15,8 @@ import { ApiService } from './services/api.service';
     LoginRoutingModule
   ],
   providers: [
-    ApiService,
+    BaseApiService,
+    AuthApiService,
     LocalStorageService
   ]
 })

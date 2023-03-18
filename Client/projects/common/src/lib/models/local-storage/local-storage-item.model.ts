@@ -1,4 +1,4 @@
-export interface Item {
+export interface LocalStorageItem {
   token: string;
   //rememberMe: boolean;
 }

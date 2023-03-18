@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Item, LocalStorageService } from '../../../../../dist/common';
-import { User } from './models/user.model';
-import { ApiService } from './services/api.service';
+import { AuthApiService, Item, LocalStorageService, User } from '../../../../../dist/common';
 
 @Component({
   selector: 'AuthControl-login',
@@ -10,7 +8,7 @@ import { ApiService } from './services/api.service';
 })
 export class LoginComponent {
   user: User = { loginId: 'admin', password: 'AdminPassword' }
-  constructor(private apiService: ApiService, private lsService: LocalStorageService) { }
+  constructor(private apiService: AuthApiService, private lsService: LocalStorageService) { }
   login() {
     this.apiService.login(this.user).subscribe(r => {
       this.lsService.setInfo(r.loginItem as unknown as Item);

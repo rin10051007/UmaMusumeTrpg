@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using UmaMusumeTrpg.Entitys;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Auth.Login;
@@ -26,7 +27,7 @@ namespace UmaMusumeTrpg.Services
         {
             JwtSecurityTokenHandler handler = new();
 
-            Entitys.User user = _dbContext.Users.SingleOrDefault(x => x.LoginId.Equals(loginUser.LoginId));
+            User user = _dbContext.Users.SingleOrDefault(x => x.LoginId.Equals(loginUser.LoginId) && !x.IsDeleted);
 
             if (!user.VerifyHashedPassword(loginUser.Password))
             {
@@ -43,7 +44,33 @@ namespace UmaMusumeTrpg.Services
 
             SigningCredentials credentials = new(
                 _jwtSettings.SecurityKey(),
-                SecurityAlgorithms.HmacSha256);
+                SecurityAlgorithms.HmacSha512);
+            JwtSecurityToken token = handler.CreateJwtSecurityToken(
+                audience: _jwtSettings.Audience,
+                issuer: _jwtSettings.Issuer,
+                expires: DateTime.Now.AddSeconds(_jwtSettings.ExpireTime),
+                subject: new ClaimsIdentity(claims),
+                signingCredentials: credentials);
+
+            return new LoginItem(handler.WriteToken(token));
+        }
+
+        public LoginItem TokenUpdate(int Id)
+        {
+
+            JwtSecurityTokenHandler handler = new();
+            User user = _dbContext.Users.SingleOrDefault(x => x.ID == Id && !x.IsDeleted);
+            Claim[] claims = new[] {
+                new Claim(MyClaimTypes.LoginId, user.LoginId),
+                new Claim(MyClaimTypes.Id, user.ID.ToString()),
+                new Claim(MyClaimTypes.Name, user.Name),
+                new Claim(MyClaimTypes.SysPermission, user.SysPermission.ToString()),
+                new Claim(MyClaimTypes.UmaMusumeTrpgPermission, user.UmaMusumeTrpgPermission.ToString())
+            };
+
+            SigningCredentials credentials = new(
+                _jwtSettings.SecurityKey(),
+                SecurityAlgorithms.HmacSha512);
             JwtSecurityToken token = handler.CreateJwtSecurityToken(
                 audience: _jwtSettings.Audience,
                 issuer: _jwtSettings.Issuer,

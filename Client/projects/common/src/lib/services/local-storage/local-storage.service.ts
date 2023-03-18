@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../../models/public-model';
+import { LocalStorageItem } from '../../models/public-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
 
-  setInfo(info: Item) {
+  setInfo(info: LocalStorageItem) {
     this.setItem('info', info);
   }
 
-  getInfo(): Item {
+  getInfo(): LocalStorageItem {
     return this.getItem('info');
   }
 

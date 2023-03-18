@@ -13,13 +13,16 @@
     "watch:SystemControl": "ng build SystemControl --watch --configuration development",
     "watch:UmaMusumeControl": "ng build UmaMusumeControl --watch --configuration development",
     "watch:AuthControl": "ng build AuthControl --watch --configuration development",
-    "watch": "run-p watch:*",
+    "watch:App": "run-p watch:SystemControl watch:UmaMusumeControl watch:AuthControl",
+    "watch": "run-p watch:Common timeout:*",
     "prod:Common": "ng build Common --watch --configuration production",
     "prod:SystemControl": "ng build SystemControl --watch --configuration production",
     "prod:UmaMusumeControl": "ng build UmaMusumeControl --watch --configuration production",
     "prod:AuthControl": "ng build AuthControl --watch --configuration production",
     "prod": "run-p prod:*",
-    "test": "ng test"
+    "test": "ng test",
+    "timeout": "timeout /t 10",
+    "timeout:App": "run-s timeout watch:App"
   },
   "private": true,
   "dependencies": {

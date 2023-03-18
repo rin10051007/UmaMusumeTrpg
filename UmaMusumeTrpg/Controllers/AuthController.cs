@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Auth.Login;
 
 namespace UmaMusumeTrpg.Controllers
 {
     [AllowAnonymous]
-    [Route("AuthControl/Api/Auth")]
+    [Route("Api/Auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -32,6 +34,19 @@ namespace UmaMusumeTrpg.Controllers
             return Ok(new LoginResponse
             {
                 LoginItem = _authService.Login(loginUser)
+            });
+        }
+
+
+        [Authorize]
+
+        [HttpPost, Route("TokenUpdate")]
+        public ActionResult<LoginResponse> TokenUpdate()
+        {
+            return Ok(new LoginResponse
+            {
+                LoginItem = _authService.TokenUpdate(
+                    int.Parse(HttpContext.User.Claims.First(x => x.Type.Equals(MyClaimTypes.Id)).Value))
             });
         }
     }

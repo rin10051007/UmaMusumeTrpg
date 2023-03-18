@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 using UmaMusumeTrpg;
 using UmaMusumeTrpg.Configurations;
 using UmaMusumeTrpg.Enums;
@@ -92,8 +91,7 @@ app.UseAuthorization();
 // APIを呼んだとき
 app.MapControllerRoute(
     name: "default",
-    pattern: "{control}/api/{controller}/{action}",
-     constraints: new { control = @"^(AuthControl|SystemControl|UmaMusumeControl)$" });
+    pattern: "/Api/{controller}/{action}");
 
 
 // クライアントを呼んだとき

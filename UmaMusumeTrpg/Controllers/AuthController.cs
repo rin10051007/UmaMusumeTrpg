@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
+using System.ComponentModel.DataAnnotations;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Auth.Login;
@@ -23,17 +25,11 @@ namespace UmaMusumeTrpg.Controllers
 
 
         [HttpPost, Route("Login")]
-        //public ActionResult<LoginResponse> Login([Required][FromBody] LoginUser loginUser)
-        public ActionResult<LoginResponse> Login()
+        public ActionResult<LoginResponse> Login([Required][FromBody] LoginRequest loginRequest)
         {
-            LoginUser loginUser = new()
-            {
-                LoginId = "admin",
-                Password = "adminPassword",
-            };
             return Ok(new LoginResponse
             {
-                LoginItem = _authService.Login(loginUser)
+                LoginItem = _authService.Login(loginRequest.LoginUser)
             });
         }
 

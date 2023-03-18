@@ -35,7 +35,6 @@ namespace UmaMusumeTrpg.Controllers
 
 
         [Authorize]
-
         [HttpPost, Route("TokenUpdate")]
         public ActionResult<LoginResponse> TokenUpdate()
         {

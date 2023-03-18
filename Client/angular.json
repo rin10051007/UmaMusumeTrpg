@@ -252,6 +252,7 @@
               "projects/auth-control/src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/auth-control/src/styles.css"
             ],
             "scripts": []
@@ -320,6 +321,7 @@
               "projects/auth-control/src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/auth-control/src/styles.css"
             ],
             "scripts": []

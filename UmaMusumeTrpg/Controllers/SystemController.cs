@@ -7,6 +7,7 @@ using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
+using UmaMusumeTrpg.Models.System.LoginIdConf;
 
 namespace UmaMusumeTrpg.Controllers
 {
@@ -57,6 +58,12 @@ namespace UmaMusumeTrpg.Controllers
         {
             (int id, DateTime? deleteTime) = _systemService.Delete(request.Delete);
             return Ok(new DeleteResponse(id, deleteTime));
+        }
+
+        [AllowAnonymous, HttpPost, Route("LoginIdConf")]
+        public bool LoginIdConf([Required][FromBody] LoginIdConfRequest request)
+        {
+            return _systemService.IsLoginIdDuplicate(request.LoginIdItem);
         }
     }
 }

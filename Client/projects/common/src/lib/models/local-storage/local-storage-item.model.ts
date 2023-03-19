@@ -1,4 +1,4 @@
 export interface LocalStorageItem {
-  token: string;
-  //rememberMe: boolean;
+  token?: string;
+  viewProject?: string;
 }

@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthApiService } from '../../../../dist/common';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthApiService, BaseApiService, LocalStorageService } from '../../../../dist/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -15,7 +15,12 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [AuthApiService],
+  providers: [
+    BaseApiService,
+    AuthApiService,
+    LocalStorageService,
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

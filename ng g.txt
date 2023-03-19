@@ -10,17 +10,15 @@ ng g service login/servises/api --project Common
 
 
 
-ng g s services/base/api/baseApi  --project Common
+ng g s services/conveniences/conveniences  --project Common
 ng g s services/local-storage/local-storage  --project Common
 
-ng g interface models/local-storage/item --type=model --project Common
+ng g interface models/jwt/ClaimItem --type=model --project Common
 
 ng generate servise services/token-up-api/token-up-api --project=Common
 
-ng g interface models/auth/item --type=model --project=Common
-ng g interface models/auth/request --type=model --project=Common
-ng g interface models/auth/response --type=model --project=Common
-ng g interface models/auth/user --type=model --project=Common
+ng g interface models/local-storage/LocalStorageItem --type=model --project=Common
+ng g interface models/local-storage/view-project --type=model --project=Common
 
 
 ng g service services/auth-api/auth-api --project=Common

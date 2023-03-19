@@ -1,15 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiUrls } from '../../../const/api-url.const';
-import { LocalStorageService } from '../../public-service';
 
 @Injectable()
 export class BaseApiService {
   header = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.lsSErvice.getInfo()?.token || ''}`
+    'Content-Type': 'application/json'
   });
-  constructor(private http: HttpClient, private lsSErvice: LocalStorageService) { }
+  constructor(private http: HttpClient) { }
 
   getHttp() { return this.http; }
   getHeader() {

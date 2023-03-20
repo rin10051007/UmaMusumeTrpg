@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { AuthApiService, environment, LocalStorageItem, LocalStorageService, ClaimItem } from '../../../../dist/common';
+import { AuthApiService, environment, JwtManagementService, LocalStorageItem, LocalStorageService, SysPermission } from '../../../../dist/common';
 
 @Component({
   selector: 'SystemControl-root',
@@ -12,17 +11,14 @@ export class AppComponent {
   authUrl!: string;
   systemUrl!: string;
   umaMusumeUrl!: string;
-  constructor(private authApiService: AuthApiService, private lsService: LocalStorageService) {
+  constructor(private authApiService: AuthApiService, private lsService: LocalStorageService, private jwtManagementService: JwtManagementService) {
     this.baseUrl = environment.baseUrl;
     this.authUrl = environment.authUrl;
     this.systemUrl = environment.systemUrl;
     this.umaMusumeUrl = environment.umaMusumeUrl;
     this.lsService.setInfo({ viewProject: this.systemUrl });
     this.authApiService.tokenUp().subscribe(s =>
-      this.lsService.setInfo(s.loginItem as unknown as LocalStorageItem)
-      , () =>
-        console.log('U')//window.location.href = `${this.baseUrl}AuthControl`
-    );
+      this.lsService.setInfo(s.loginItem as unknown as LocalStorageItem));
   }
 
   title = 'SystemControl';

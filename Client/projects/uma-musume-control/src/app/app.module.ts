@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthApiService, BaseApiService, LocalStorageService, TokenInterceptorProvider } from '../../../../dist/common';
+import { AuthApiService, BaseApiService, ErrorInterceptorProvider, LocalStorageService, TokenInterceptorProvider } from '../../../../dist/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -18,7 +18,8 @@ import { AppComponent } from './app.component';
     BaseApiService,
     AuthApiService,
     LocalStorageService,
-    TokenInterceptorProvider
+    TokenInterceptorProvider,
+    ErrorInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })

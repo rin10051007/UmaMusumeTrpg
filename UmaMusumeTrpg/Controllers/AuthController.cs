@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.ComponentModel.DataAnnotations;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
@@ -43,6 +41,27 @@ namespace UmaMusumeTrpg.Controllers
                 LoginItem = _authService.TokenUpdate(
                     int.Parse(HttpContext.User.Claims.First(x => x.Type.Equals(MyClaimTypes.Id)).Value))
             });
+        }
+
+        [Authorize(Policy = "SysAdminPolicy")]
+        [HttpPost, Route("isSysPermissionToAdmin")]
+        public ActionResult IsSysPermissionToAdmin()
+        {
+            return Ok(true);
+        }
+
+        [Authorize(Policy = "UmaMusumeGmPlayerPolicy")]
+        [HttpPost, Route("isUmaMusumeGmPlayer")]
+        public ActionResult IsUmaMusumeGmPlayer()
+        {
+            return Ok(true);
+        }
+
+        [Authorize(Policy = "UmaMusumePlayerPolicy")]
+        [HttpPost, Route("isUmaMusumePlayer")]
+        public ActionResult IsUmaMusumePlayer()
+        {
+            return Ok(true);
         }
     }
 }

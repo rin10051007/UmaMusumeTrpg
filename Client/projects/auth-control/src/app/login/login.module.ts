@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthApiService, BaseApiService, ConveniencesService, LocalStorageService } from '../../../../../dist/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
@@ -22,7 +23,7 @@ import { LoginComponent } from './login.component';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    FormsModule,
+    FormsModule
   ],
   exports: [
     MatButtonModule,

@@ -5,10 +5,10 @@ export interface ClaimItem {
   LoginId: string;
   Name: string;
   aud: string;
-  exp: Date;
-  iat: Date;
+  exp: number;
+  iat: number;
   iss: string;
-  nbf: Date;
+  nbf: number;
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
 }

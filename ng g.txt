@@ -15,7 +15,7 @@ ng g s services/local-storage/local-storage  --project Common
 
 ng g interface models/jwt/ClaimItem --type=model --project Common
 
-ng generate servise services/token-up-api/token-up-api --project=Common
+ng g s services/jwt/JwtManagement --project=Common
 
 ng g interface models/local-storage/LocalStorageItem --type=model --project=Common
 ng g interface models/local-storage/view-project --type=model --project=Common

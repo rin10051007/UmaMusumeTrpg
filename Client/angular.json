@@ -87,8 +87,8 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/system-control/src/environments/environment.ts",
-                  "with": "projects/system-control/src/environments/environment.development.ts"
+                  "replace": "projects/common/src/lib/environments/environment.ts",
+                  "with": "projects/common/src/lib/environments/environment.development.ts"
                 }
               ]
             }
@@ -184,8 +184,8 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/uma-musume-control/src/environments/environment.ts",
-                  "with": "projects/uma-musume-control/src/environments/environment.development.ts"
+                  "replace": "projects/common/src/lib/environments/environment.ts",
+                  "with": "projects/common/src/lib/environments/environment.development.ts"
                 }
               ]
             }
@@ -252,6 +252,7 @@
               "projects/auth-control/src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/auth-control/src/styles.css"
             ],
             "scripts": []
@@ -281,8 +282,8 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/auth-control/src/environments/environment.ts",
-                  "with": "projects/auth-control/src/environments/environment.development.ts"
+                  "replace": "projects/common/src/lib/environments/environment.ts",
+                  "with": "projects/common/src/lib/environments/environment.development.ts"
                 }
               ]
             }
@@ -320,6 +321,7 @@
               "projects/auth-control/src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/auth-control/src/styles.css"
             ],
             "scripts": []

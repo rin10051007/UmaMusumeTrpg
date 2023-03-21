@@ -5,12 +5,20 @@ ng g interface login/models/item --type=model --project Common
 ng g interface login/models/request --type=model --project AuthControl
 ng g interface login/models/response --type=model --project AuthControl
 ng g interface login/models/user --type=model --project AuthControl
-ng g servise login/servises/api --project Common
+ng g service login/servises/api --project Common
 
 
 
 
-ng g s services/base/api/baseApi  --project Common
+ng g s services/authority-conf-api/AuthorityConfApi  --project Common
 ng g s services/local-storage/local-storage  --project Common
 
-ng g interface models/local-storage/item --type=model --project Common
+ng g interface models/jwt/ClaimItem --type=model --project Common
+
+ng g s services/jwt/JwtManagement --project=Common
+
+ng g interface models/auth/permission/PermissionResponse --type=model --project=Common
+ng g interface models/local-storage/view-project --type=model --project=Common
+
+
+ng g service services/auth-api/auth-api --project=Common

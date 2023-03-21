@@ -7,6 +7,7 @@ using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
+using UmaMusumeTrpg.Models.System.LoginIdConf;
 
 namespace UmaMusumeTrpg.Services
 {
@@ -130,6 +131,11 @@ namespace UmaMusumeTrpg.Services
             user.Token = _guidService.NewGuid();
             _ = _dbContext.SaveChanges();
             return (user.ID, user.DeleteTime);
+        }
+
+        public bool IsLoginIdDuplicate(LoginIdConfItem item)
+        {
+            return !_dbContext.Users.Any(x => x.LoginId.Equals(item.LoginId) && !x.ID.Equals(item.Id) && !x.IsDeleted);
         }
     }
 }

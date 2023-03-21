@@ -50,8 +50,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         });
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("SysAdminPolicy", policy =>
+    options.AddPolicy(MyPolicyName.SysAdminPolicy, policy =>
         policy.RequireClaim(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString()));
+    options.AddPolicy(MyPolicyName.UmaMusumeGmPlayerPolicy, policy =>
+        policy.RequireClaim(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.GmPlayer.ToString()));
+    options.AddPolicy(MyPolicyName.UmaMusumePlayerPolicy, policy =>
+        policy.RequireClaim(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.Player.ToString()));
 });
 
 
@@ -87,8 +91,7 @@ app.UseAuthorization();
 // APIを呼んだとき
 app.MapControllerRoute(
     name: "default",
-    pattern: "{control}/api/{controller}/{action}",
-     constraints: new { control = @"^(AuthControl|SystemControl|UmaMusumeControl)$" });
+    pattern: "/Api/{controller}/{action}");
 
 
 // クライアントを呼んだとき

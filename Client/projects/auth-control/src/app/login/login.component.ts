@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Item, LocalStorageService } from '../../../../../dist/common';
-import { User } from './models/user.model';
-import { ApiService } from './services/api.service';
+import { concat, first } from 'rxjs';
+import { AuthApiService, AuthorityConfApiService, ConveniencesService, environment, LocalStorageToken, LocalStorageService, LoginUser, myPolicyName } from '../../../../../dist/common';
 
 @Component({
   selector: 'AuthControl-login',
@@ -9,11 +8,33 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  user: User = { loginId: 'admin', password: 'AdminPassword' }
-  constructor(private apiService: ApiService, private lsService: LocalStorageService) { }
+  user: LoginUser = { loginId: '', password: '' }
+  constructor(private apiService: AuthApiService, private lsService: LocalStorageService, private conveniencesService: ConveniencesService,
+    private authorityConfApiService: AuthorityConfApiService) { }
   login() {
     this.apiService.login(this.user).subscribe(r => {
-      this.lsService.setInfo(r.loginItem as unknown as Item);
+      this.lsService.setToken(r.loginItem as unknown as LocalStorageToken);
+      var viewProject = this.lsService.getViewProject();
+      if (!this.conveniencesService.isEmpty(viewProject)) {
+        window.location.href = environment.baseUrl + viewProject;
+      }
+      concat(
+        this.authorityConfApiService.isSysPermissionToAdmin(),
+        this.authorityConfApiService.isUmaMusumeGmPlayer(),
+        this.authorityConfApiService.isUmaMusumePlayer(),
+      ).pipe(first(r => r.isAllows)).subscribe(r => {
+        if (r.isAllows) {
+          switch (r.playerName) {
+            case myPolicyName.sysAdminPolicy:
+              window.location.href = environment.baseUrl + environment.systemUrl;
+              break;
+            case myPolicyName.umaMusumeGmPlayerPolicy:
+            case myPolicyName.umaMusumePlayerPolicy:
+              window.location.href = environment.baseUrl + environment.umaMusumeUrl;
+              break;
+          }
+        }
+      });
     })
   }
 }

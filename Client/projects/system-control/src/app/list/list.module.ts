@@ -15,7 +15,7 @@ import { ApiService } from './services/api.service';
     ListRoutingModule
   ],
   providers: [
-    ApiService
+    ApiService,
   ]
 })
 export class ListModule { }

@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap-icons/font/bootstrap-icons';
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.login-card {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-title {
+  font-weight: bold;
+  font-size: 22px;
+  color: #3f51b5;
+}

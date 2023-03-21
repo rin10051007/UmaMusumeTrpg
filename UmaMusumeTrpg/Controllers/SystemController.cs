@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;
 using UmaMusumeTrpg.Models.System.List;
+using UmaMusumeTrpg.Models.System.LoginIdConf;
 
 namespace UmaMusumeTrpg.Controllers
 {
 
-    [Authorize(Policy = "SysAdminPolicy")]
-    [Route("SystemControl/Api/System")]
+    [Route("Api/System")]
+    [Authorize(Policy = MyPolicyName.SysAdminPolicy)]
     [ApiController]
     public class SystemController : ControllerBase
     {
@@ -22,12 +24,6 @@ namespace UmaMusumeTrpg.Controllers
         {
             _logger = logger;
             _systemService = systemService;
-        }
-
-        private bool Role()
-        {
-            _ = HttpContext?.User?.Identity?.Name;
-            return true;
         }
 
 
@@ -63,6 +59,12 @@ namespace UmaMusumeTrpg.Controllers
         {
             (int id, DateTime? deleteTime) = _systemService.Delete(request.Delete);
             return Ok(new DeleteResponse(id, deleteTime));
+        }
+
+        [AllowAnonymous, HttpPost, Route("LoginIdConf")]
+        public bool LoginIdConf([Required][FromBody] LoginIdConfRequest request)
+        {
+            return _systemService.IsLoginIdDuplicate(request.LoginIdItem);
         }
     }
 }

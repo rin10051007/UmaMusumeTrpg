@@ -87,8 +87,7 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/common/src/lib/environments/environment.ts",
-                  "with": "projects/common/src/lib/environments/environment.development.ts"
+                  "replace": "projects/common/src/lib/environments/environment.ts"
                 }
               ]
             }
@@ -184,8 +183,7 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/common/src/lib/environments/environment.ts",
-                  "with": "projects/common/src/lib/environments/environment.development.ts"
+                  "replace": "projects/common/src/lib/environments/environment.ts"
                 }
               ]
             }
@@ -282,8 +280,7 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/common/src/lib/environments/environment.ts",
-                  "with": "projects/common/src/lib/environments/environment.development.ts"
+                  "replace": "projects/common/src/lib/environments/environment.ts"
                 }
               ]
             }

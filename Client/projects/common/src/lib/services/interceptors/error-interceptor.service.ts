@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, retry, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../public-lib';
 
@@ -13,6 +13,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
+      retry(2),
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           window.location.href = `${environment.baseUrl}${environment.authUrl}`

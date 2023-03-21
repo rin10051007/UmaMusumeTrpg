@@ -2,10 +2,10 @@
 {
     public static class MyClaimTypes
     {
-        public static string Id = "Id";
-        public static string LoginId = "LoginId";
-        public static string Name = "Name";
-        public static string SysPermission = "sysPermission";
-        public static string UmaMusumeTrpgPermission = "umaMusumeTrpgPermission";
+        public const string Id = "Id";
+        public const string LoginId = "LoginId";
+        public const string Name = "Name";
+        public const string SysPermission = "sysPermission";
+        public const string UmaMusumeTrpgPermission = "umaMusumeTrpgPermission";
     }
 }

@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build:Common": "ng build Common --configuration development",
-    "build:SystemControl": "ng build SystemControl --configuration development --base-href=/SystemControl/",
+    "build:SystemControl": "ng build SystemControl --configuration development",
     "build:UmaMusumeControl": "ng build UmaMusumeControl --configuration development",
     "build:AuthControl": "ng build AuthControl --configuration development",
     "build": "run-p build:*",

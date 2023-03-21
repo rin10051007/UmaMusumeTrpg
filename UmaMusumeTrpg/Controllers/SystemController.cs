@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
@@ -13,7 +14,7 @@ namespace UmaMusumeTrpg.Controllers
 {
 
     [Route("Api/System")]
-    [Authorize(Policy = "SysAdminPolicy")]
+    [Authorize(Policy = MyPolicyName.SysAdminPolicy)]
     [ApiController]
     public class SystemController : ControllerBase
     {

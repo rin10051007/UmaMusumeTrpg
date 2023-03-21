@@ -10,3 +10,4 @@ export * from './interceptors/error-interceptor.service';
 export * from './interceptors/token-interceptor.service';
 export * from './jwt/jwt-management.service';
 export * from './local-storage/local-storage.service';
+export * from './authority-conf-api/authority-conf-api.service';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthApiService, environment, LocalStorageItem, LocalStorageService } from '../../../../dist/common';
+import { AuthApiService, environment, LocalStorageToken, LocalStorageService } from '../../../../dist/common';
 
 @Component({
   selector: 'UmaMusumeControl-root',
@@ -16,11 +16,10 @@ export class AppComponent {
     this.authUrl = environment.authUrl;
     this.systemUrl = environment.systemUrl;
     this.umaMusumeUrl = environment.umaMusumeUrl;
-    this.lsService.setInfo({ viewProject: this.umaMusumeUrl });
+    this.lsService.setViewProject({ viewProject: this.umaMusumeUrl });
     this.authApiService.tokenUp().subscribe(s =>
-      this.lsService.setInfo(s.loginItem as unknown as LocalStorageItem)
-      , () =>
-        window.location.href = `${this.baseUrl}AuthControl`
+      this.lsService.setToken(s.loginItem as unknown as LocalStorageToken), () =>
+      window.location.href = `${this.baseUrl}${this.authUrl}`
     );
   }
   title = 'UmaMusumeControl';

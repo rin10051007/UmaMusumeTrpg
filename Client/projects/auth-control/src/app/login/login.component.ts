@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthApiService, ConveniencesService, environment, LocalStorageItem, LocalStorageService, User } from '../../../../../dist/common';
+import { concat, first } from 'rxjs';
+import { AuthApiService, AuthorityConfApiService, ConveniencesService, environment, LocalStorageToken, LocalStorageService, LoginUser, myPolicyName } from '../../../../../dist/common';
 
 @Component({
   selector: 'AuthControl-login',
@@ -7,16 +8,33 @@ import { AuthApiService, ConveniencesService, environment, LocalStorageItem, Loc
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  user: User = { loginId: '', password: '' }
-  constructor(private apiService: AuthApiService, private lsService: LocalStorageService, private conveniencesService: ConveniencesService) { }
+  user: LoginUser = { loginId: '', password: '' }
+  constructor(private apiService: AuthApiService, private lsService: LocalStorageService, private conveniencesService: ConveniencesService,
+    private authorityConfApiService: AuthorityConfApiService) { }
   login() {
     this.apiService.login(this.user).subscribe(r => {
-      this.lsService.setInfo(r.loginItem as unknown as LocalStorageItem);
-      var viewProject = this.lsService.getInfo()?.viewProject;
+      this.lsService.setToken(r.loginItem as unknown as LocalStorageToken);
+      var viewProject = this.lsService.getViewProject();
       if (!this.conveniencesService.isEmpty(viewProject)) {
         window.location.href = environment.baseUrl + viewProject;
       }
-      //上位権限から確認して遷移する
+      concat(
+        this.authorityConfApiService.isSysPermissionToAdmin(),
+        this.authorityConfApiService.isUmaMusumeGmPlayer(),
+        this.authorityConfApiService.isUmaMusumePlayer(),
+      ).pipe(first(r => r.isAllows)).subscribe(r => {
+        if (r.isAllows) {
+          switch (r.playerName) {
+            case myPolicyName.sysAdminPolicy:
+              window.location.href = environment.baseUrl + environment.systemUrl;
+              break;
+            case myPolicyName.umaMusumeGmPlayerPolicy:
+            case myPolicyName.umaMusumePlayerPolicy:
+              window.location.href = environment.baseUrl + environment.umaMusumeUrl;
+              break;
+          }
+        }
+      });
     })
   }
 }

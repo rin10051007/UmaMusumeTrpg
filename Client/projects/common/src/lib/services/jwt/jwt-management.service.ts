@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SysPermission, UmaMusumeTrpgPermission } from '../../enums/public-enum';
 import { ClaimItem } from '../../models/public-model';
 import jwt_decode from "jwt-decode";
-import { LocalStorageService } from '../public-service';
+import { ConveniencesService, LocalStorageService } from '../public-service';
 
 @Injectable()
 export class JwtManagementService {
@@ -20,20 +20,23 @@ export class JwtManagementService {
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None
   };
 
-  constructor(private localStorageService: LocalStorageService) {
-    var tmp = jwt_decode(this.localStorageService.getInfo().token || '') as ClaimItem;
-    this.item = {
-      Id: Number(tmp.Id),
-      LoginId: tmp.LoginId,
-      Name: tmp.Name,
-      aud: tmp.aud,
-      exp: tmp.exp,
-      iat: tmp.iat,
-      iss: tmp.iss,
-      nbf: tmp.nbf,
-      sysPermission: SysPermission[tmp.sysPermission],
-      umaMusumeTrpgPermission: UmaMusumeTrpgPermission[tmp.umaMusumeTrpgPermission],
-    } as unknown as ClaimItem;
+  constructor(private localStorageService: LocalStorageService, private conveniencesService: ConveniencesService) {
+    var token = this.localStorageService.getToken();
+    if (!this.conveniencesService.isEmpty(token)) {
+      var tmp = jwt_decode(token || '') as ClaimItem;
+      this.item = {
+        Id: Number(tmp.Id),
+        LoginId: tmp.LoginId,
+        Name: tmp.Name,
+        aud: tmp.aud,
+        exp: tmp.exp,
+        iat: tmp.iat,
+        iss: tmp.iss,
+        nbf: tmp.nbf,
+        sysPermission: SysPermission[tmp.sysPermission],
+        umaMusumeTrpgPermission: UmaMusumeTrpgPermission[tmp.umaMusumeTrpgPermission],
+      } as unknown as ClaimItem;
+    }
   }
 
   getItem(): ClaimItem {

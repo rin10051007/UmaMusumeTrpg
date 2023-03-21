@@ -1,4 +1,6 @@
-export interface LocalStorageItem {
-  token?: string;
+export interface LocalStorageToken {
+  token: string;
+}
+export interface LocalStorageViewProject {
   viewProject?: string;
 }

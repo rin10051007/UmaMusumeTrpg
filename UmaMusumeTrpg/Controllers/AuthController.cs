@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Auth.Login;
+using UmaMusumeTrpg.Models.Auth.Permission;
 
 namespace UmaMusumeTrpg.Controllers
 {
@@ -43,25 +44,42 @@ namespace UmaMusumeTrpg.Controllers
             });
         }
 
-        [Authorize(Policy = "SysAdminPolicy")]
-        [HttpPost, Route("isSysPermissionToAdmin")]
-        public ActionResult IsSysPermissionToAdmin()
+        [Authorize()]
+        [HttpGet, Route("isSysPermissionToAdmin")]
+        public ActionResult<PermissionResponse> IsSysPermissionToAdmin()
         {
-            return Ok(true);
+            return Ok(new PermissionResponse
+            {
+                PlayerName = MyPolicyName.SysAdminPolicy,
+                IsAllows = IsPermission(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString())
+            }); ;
         }
 
-        [Authorize(Policy = "UmaMusumeGmPlayerPolicy")]
-        [HttpPost, Route("isUmaMusumeGmPlayer")]
-        public ActionResult IsUmaMusumeGmPlayer()
+        [Authorize()]
+        [HttpGet, Route("isUmaMusumeGmPlayer")]
+        public ActionResult<PermissionResponse> IsUmaMusumeGmPlayer()
         {
-            return Ok(true);
+            return Ok(new PermissionResponse
+            {
+                PlayerName = MyPolicyName.UmaMusumeGmPlayerPolicy,
+                IsAllows = IsPermission(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.GmPlayer.ToString())
+            });
         }
 
-        [Authorize(Policy = "UmaMusumePlayerPolicy")]
-        [HttpPost, Route("isUmaMusumePlayer")]
-        public ActionResult IsUmaMusumePlayer()
+        [Authorize()]
+        [HttpGet, Route("isUmaMusumePlayer")]
+        public ActionResult<PermissionResponse> IsUmaMusumePlayer()
         {
-            return Ok(true);
+            return Ok(new PermissionResponse
+            {
+                PlayerName = MyPolicyName.UmaMusumePlayerPolicy,
+                IsAllows = IsPermission(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.Player.ToString())
+            });
+        }
+
+        private bool IsPermission(string myClaimType, string permissionStr)
+        {
+            return HttpContext.User.Claims.First(x => x.Type.Equals(myClaimType)).Value.Equals(permissionStr);
         }
     }
 }

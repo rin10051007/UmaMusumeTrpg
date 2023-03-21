@@ -2,6 +2,9 @@ export const apiUrls = {
   authUrls: {
     login: '/Api/Auth/Login',
     tokenUp: '/Api/Auth/TokenUpdate',
+    isSysPermissionToAdmin: '/Api/Auth/isSysPermissionToAdmin',
+    isUmaMusumeGmPlayer: '/Api/Auth/isUmaMusumeGmPlayer',
+    isUmaMusumePlayer: '/Api/Auth/isUmaMusumePlayer',
   },
   sysUrls: {
     getList: '/Api/System/GetList',

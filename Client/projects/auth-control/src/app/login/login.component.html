@@ -1,20 +1,22 @@
-<mat-card class="login-card">
-  <mat-card-header>
-    <mat-card-title class="login-title">ログイン</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form (ngSubmit)="login()" class="login-form" #loginForm="ngForm">
-      <mat-form-field>
-        <input matInput placeholder="Login ID" id="loginId" [(ngModel)]="user.loginId" name="loginId" #loginId="ngModel" required>
-        <mat-error *ngIf="loginId.errors?.['required']"><i class="bi bi-exclamation-triangle"></i>必須です。</mat-error>
-      </mat-form-field>
+<div class="main-div">
+  <mat-card class="login-card center">
+    <mat-card-header>
+      <mat-card-title class="login-title">ログイン</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="login()" class="login-form" #loginForm="ngForm">
+        <mat-form-field>
+          <input matInput placeholder="Login ID" id="loginId" [(ngModel)]="user.loginId" name="loginId" #loginId="ngModel" required>
+          <mat-error *ngIf="loginId.errors?.['required']"><i class="bi bi-exclamation-triangle"></i>必須です。</mat-error>
+        </mat-form-field>
 
-      <mat-form-field>
-        <input type="password" matInput placeholder="Password" id="password" [(ngModel)]="user.password" name="password"
-               #password="ngModel" required>
-        <mat-error *ngIf="password.errors?.['required']"><i class="bi bi-exclamation-triangle"></i>必須です。</mat-error>
-      </mat-form-field>
-      <button type="submit" mat-raised-button color="primary" [disabled]="loginForm?.invalid">Login</button>
-    </form>
-  </mat-card-content>
-</mat-card>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" id="password" [(ngModel)]="user.password" name="password"
+                 #password="ngModel" required>
+          <mat-error *ngIf="password.errors?.['required']"><i class="bi bi-exclamation-triangle"></i>必須です。</mat-error>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="loginForm?.invalid">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

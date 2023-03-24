@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { concat, first } from 'rxjs';
-import { AuthApiService, AuthorityConfApiService, ConveniencesService, environment, LocalStorageToken, LocalStorageService, LoginUser, myPolicyName } from '../../../../../dist/common';
+import { AuthApiService, AuthorityConfApiService, ConveniencesService, environment, LocalStorageToken, LocalStorageService, LoginUser, myPolicyName } from 'common';
 
 @Component({
   selector: 'AuthControl-login',

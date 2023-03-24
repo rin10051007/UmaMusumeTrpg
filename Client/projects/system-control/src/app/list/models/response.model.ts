@@ -1,4 +1,4 @@
-import { BaseListResponse } from "../../../../../../dist/common";
+import { BaseListResponse } from "common";
 import { Item } from "./item.model";
 import { Search } from "./search.model";
 

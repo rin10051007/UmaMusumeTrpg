@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LeftMenuComponent } from './left-menu.component';
 
 
@@ -9,7 +8,7 @@ import { LeftMenuComponent } from './left-menu.component';
     LeftMenuComponent
   ],
   imports: [
-    CommonModule
-  ]
+  ],
+  exports: [LeftMenuComponent]
 })
 export class LeftMenuModule { }

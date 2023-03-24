@@ -1,4 +1,4 @@
-import { BaseListItem, SysPermission, UmaMusumeTrpgPermission } from "../../../../../../dist/common";
+import { BaseListItem, SysPermission, UmaMusumeTrpgPermission } from "common";
 
 export interface Item extends BaseListItem {
   name: string;

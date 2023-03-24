@@ -1,5 +1,5 @@
 import { Data } from "@angular/router";
-import { BaseDetailItem, SysPermission, UmaMusumeTrpgPermission } from "../../../../../../dist/common";
+import { BaseDetailItem, SysPermission, UmaMusumeTrpgPermission } from "common";
 
 export interface Item extends BaseDetailItem {
   loginId: string;

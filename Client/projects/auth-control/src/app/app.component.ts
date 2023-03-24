@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { environment } from '../../../../dist/common';
+import { environment } from 'common';
 
 @Component({
   selector: 'AuthControl-root',

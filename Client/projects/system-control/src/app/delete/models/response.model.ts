@@ -1,4 +1,4 @@
-import { BaseDeleteResponse } from "../../../../../../dist/common";
+import { BaseDeleteResponse } from "common";
 
 export interface Response extends BaseDeleteResponse {
 }

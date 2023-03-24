@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SysPermission, UmaMusumeTrpgPermission } from '../../../../../dist/common';
+import { SysPermission, UmaMusumeTrpgPermission } from 'common';
 import { Item } from './models/item.model';
 import { ApiService } from './services/api.service';
 

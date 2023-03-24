@@ -1,4 +1,4 @@
-import { BaseDetailSearch } from "../../../../../../dist/common";
+import { BaseDetailSearch } from "common";
 
 export interface Search extends BaseDetailSearch {
 }

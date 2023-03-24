@@ -1,4 +1,4 @@
-import { BaseDeleteRequest } from "../../../../../../dist/common";
+import { BaseDeleteRequest } from "common";
 
 export interface Request extends BaseDeleteRequest {
 }

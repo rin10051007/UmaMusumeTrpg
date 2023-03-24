@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthApiService, environment, LocalStorageToken, LocalStorageService } from '../../../../dist/common';
+import { AuthApiService, environment, LocalStorageToken, LocalStorageService } from 'common';
 
 @Component({
   selector: 'UmaMusumeControl-root',

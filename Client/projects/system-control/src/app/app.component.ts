@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthApiService, environment, JwtManagementService, LocalStorageToken, LocalStorageService } from '../../../../dist/common';
+import { AuthApiService, environment, JwtManagementService, LocalStorageToken, LocalStorageService } from 'common';
 
 @Component({
   selector: 'SystemControl-root',

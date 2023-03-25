@@ -7,7 +7,9 @@ ng g interface login/models/response --type=model --project AuthControl
 ng g interface login/models/user --type=model --project AuthControl
 ng g service login/servises/api --project Common
 
-
+ng g guard guards/or-guardn/OrGuard  --project Common
+ng g guard guards/is-uma-musume-gm-player/isUmaMusumeGmPlayer --project Common
+ng g guard guards/is-uma-musume-player/isUmaMusumePlayer --project Common
 
 
 ng g s services/authority-conf-api/AuthorityConfApi  --project Common

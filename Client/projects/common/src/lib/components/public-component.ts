@@ -2,7 +2,5 @@
  * Public API Surface of common
  */
 
-export * from './left-menu/left-menu.component';
-export * from './left-menu/left-menu.module';
-
-
+export * from './header-menu/header-menu.component';
+export * from './header-menu/header-menu.module';

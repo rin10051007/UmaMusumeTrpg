@@ -22,5 +22,5 @@ ng g s services/jwt/JwtManagement --project=Common
 ng g interface models/auth/permission/PermissionResponse --type=model --project=Common
 ng g interface models/local-storage/view-project --type=model --project=Common
 
-ng g m components/left-menu --project=Common
-ng g c components/left-menu --project=Common
+ng g m components/header-menu --project=Common
+ng g c components/header-menu --project=Common

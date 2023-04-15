@@ -1,7 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthApiService, AuthorityConfApiService, BaseApiService, ErrorInterceptorProvider, JwtManagementService, LeftMenuModule, LocalStorageService, TokenInterceptorProvider } from 'common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthApiService, BaseApiService, ErrorInterceptorProvider, HeaderMenuModule, JwtManagementService, LocalStorageService, TokenInterceptorProvider } from 'common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -13,7 +15,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    LeftMenuModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    HeaderMenuModule,
   ],
   providers: [
     BaseApiService,

@@ -5,7 +5,7 @@ import { BaseApiService } from '../public-service';
 
 @Injectable()
 export class AuthApiService extends BaseApiService {
-  login(user: LoginUser): Observable<LoginResponse> {
+  logIn(user: LoginUser): Observable<LoginResponse> {
     const request: LoginRequest = {
       loginUser: user
     }

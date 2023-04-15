@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthApiService, environment, JwtManagementService, LocalStorageToken, LocalStorageService } from 'common';
+import { AuthApiService, environment, LocalStorageService, LocalStorageToken } from 'common';
 
 @Component({
   selector: 'SystemControl-root',
@@ -11,15 +11,10 @@ export class AppComponent {
   authUrl!: string;
   systemUrl!: string;
   umaMusumeUrl!: string;
-  constructor(private authApiService: AuthApiService, private lsService: LocalStorageService, private jwtManagementService: JwtManagementService) {
-    this.baseUrl = environment.baseUrl;
-    this.authUrl = environment.authUrl;
+  constructor(private authApiService: AuthApiService, private lsService: LocalStorageService) {
     this.systemUrl = environment.systemUrl;
-    this.umaMusumeUrl = environment.umaMusumeUrl;
     this.lsService.setViewProject({ viewProject: this.systemUrl });
-    this.authApiService.tokenUp().subscribe(s =>
+    this.authApiService.tokenUp().subscribe((s: { loginItem: unknown; }) =>
       this.lsService.setToken(s.loginItem as unknown as LocalStorageToken));
   }
-
-  title = 'SystemControl';
 }

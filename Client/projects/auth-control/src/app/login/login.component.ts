@@ -10,9 +10,11 @@ import { AuthApiService, AuthorityConfApiService, ConveniencesService, environme
 export class LoginComponent {
   user: LoginUser = { loginId: '', password: '' }
   constructor(private apiService: AuthApiService, private lsService: LocalStorageService, private conveniencesService: ConveniencesService,
-    private authorityConfApiService: AuthorityConfApiService) { }
+    private authorityConfApiService: AuthorityConfApiService) {
+    this.lsService.removeToken();
+  }
   login() {
-    this.apiService.login(this.user).subscribe(r => {
+    this.apiService.logIn(this.user).subscribe((r: { loginItem: unknown; }) => {
       this.lsService.setToken(r.loginItem as unknown as LocalStorageToken);
       var viewProject = this.lsService.getViewProject();
       if (!this.conveniencesService.isEmpty(viewProject)) {

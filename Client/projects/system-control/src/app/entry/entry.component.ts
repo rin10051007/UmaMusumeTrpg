@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SysPermission, UmaMusumeTrpgPermission } from 'common';
-import { Item } from './models/item.model';
-import { ApiService } from './services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {SysPermission, UmaMusumeTrpgPermission} from 'Common';
+import {Item} from './models/item.model';
+import {ApiService} from './services/api.service';
 
 @Component({
   selector: 'SystemControl-entry',
@@ -9,9 +9,12 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./entry.component.css']
 })
 export class EntryComponent implements OnInit {
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
   entry() {
     var entryItem: Item = {
       loginId: 'hoge1',

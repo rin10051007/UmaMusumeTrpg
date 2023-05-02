@@ -1,9 +1,8 @@
 ﻿using UmaMusumeTrpg.Models.Base.Delete;
 
-namespace UmaMusumeTrpg.Models.System.Delete
+namespace UmaMusumeTrpg.Models.System.Delete;
+
+public class DeleteRequest : BaseDeleteRequest
 {
-    public class DeleteRequest : BaseDeleteRequest
-    {
-        public new DeleteItem Delete { get; set; }
-    }
+    public new DeleteItem Delete { get; set; }
 }

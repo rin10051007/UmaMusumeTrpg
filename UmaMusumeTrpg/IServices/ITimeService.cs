@@ -1,7 +1,6 @@
-﻿namespace UmaMusumeTrpg.IServices
+﻿namespace UmaMusumeTrpg.IServices;
+
+public interface ITimeService
 {
-    public interface ITimeService
-    {
-        public DateTime NowTime();
-    }
+    public DateTime NowTime();
 }

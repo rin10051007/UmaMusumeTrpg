@@ -1,4 +1,4 @@
-import { BaseListItem, BaseListSearch } from "../../public-model";
+import {BaseListItem, BaseListSearch} from '../../public-model';
 
 export interface BaseListResponse {
   search: BaseListSearch;

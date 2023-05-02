@@ -1,6 +1,15 @@
-import { Component } from '@angular/core';
-import { concat, first } from 'rxjs';
-import { AuthApiService, AuthorityConfApiService, ConveniencesService, environment, LocalStorageToken, LocalStorageService, LoginUser, myPolicyName } from 'common';
+import {Component} from '@angular/core';
+import {concat, first} from 'rxjs';
+import {
+  AuthApiService,
+  AuthorityConfApiService,
+  ConveniencesService,
+  environment,
+  LocalStorageService,
+  LocalStorageToken,
+  LoginUser,
+  myPolicyName
+} from 'Common';
 
 @Component({
   selector: 'AuthControl-login',
@@ -8,11 +17,13 @@ import { AuthApiService, AuthorityConfApiService, ConveniencesService, environme
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  user: LoginUser = { loginId: '', password: '' }
+  user: LoginUser = {loginId: '', password: ''}
+
   constructor(private apiService: AuthApiService, private lsService: LocalStorageService, private conveniencesService: ConveniencesService,
-    private authorityConfApiService: AuthorityConfApiService) {
+              private authorityConfApiService: AuthorityConfApiService) {
     this.lsService.removeToken();
   }
+
   login() {
     this.apiService.logIn(this.user).subscribe((r: { loginItem: unknown; }) => {
       this.lsService.setToken(r.loginItem as unknown as LocalStorageToken);

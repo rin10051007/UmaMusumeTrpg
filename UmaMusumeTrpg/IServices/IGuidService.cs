@@ -1,7 +1,6 @@
-﻿namespace UmaMusumeTrpg.IServices
+﻿namespace UmaMusumeTrpg.IServices;
+
+public interface IGuidService
 {
-    public interface IGuidService
-    {
-        public string NewGuid();
-    }
+    public string NewGuid();
 }

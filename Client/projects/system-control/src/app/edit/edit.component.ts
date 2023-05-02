@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SysPermission, UmaMusumeTrpgPermission } from '../../../../common/src/public-lib';
-import { ApiService as DetailApiService } from '../detail/services/api.service';
-import { Item } from './models/item.model';
-import { ApiService } from './services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {SysPermission, UmaMusumeTrpgPermission} from '../../../../common/src/public-lib';
+import {ApiService as DetailApiService} from '../detail/services/api.service';
+import {Item} from './models/item.model';
+import {ApiService} from './services/api.service';
 
 @Component({
   selector: 'SystemControl-edit',
@@ -21,13 +21,15 @@ export class EditComponent implements OnInit {
     name: '',
     token: ''
   };
+
   constructor(private apiService: ApiService,
-    private detailApiService: DetailApiService,
-    private route: ActivatedRoute) { }
+              private detailApiService: DetailApiService,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.detailApiService.detail({ id: (Number(params['id']) || 0), token: '' })
+      this.detailApiService.detail({id: (Number(params['id']) || 0), token: ''})
         .subscribe(r => {
           this.editItem = r.detail as unknown as Item;
         });
@@ -36,7 +38,9 @@ export class EditComponent implements OnInit {
 
   edit() {
     this.editItem.password = 'adminPassword';
-    this.apiService.edit(this.editItem).subscribe(r => { console.log(r); });
+    this.apiService.edit(this.editItem).subscribe(r => {
+      console.log(r);
+    });
   }
 
 }

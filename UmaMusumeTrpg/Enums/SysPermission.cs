@@ -1,9 +1,8 @@
-﻿namespace UmaMusumeTrpg.Enums
+﻿namespace UmaMusumeTrpg.Enums;
+
+public enum SysPermission
 {
-    public enum SysPermission
-    {
-        None = 0,
-        NoQualification = 1,
-        SysAdmin = 2
-    }
+    None = 0,
+    NoQualification = 1,
+    SysAdmin = 2
 }

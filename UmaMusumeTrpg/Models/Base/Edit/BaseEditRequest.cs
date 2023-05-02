@@ -1,11 +1,11 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Edit
+﻿namespace UmaMusumeTrpg.Models.Base.Edit;
+
+public class BaseEditRequest
 {
-    public class BaseEditRequest
+    public BaseEditRequest(BaseEditItem edit)
     {
-        public BaseEditRequest(BaseEditItem edit)
-        {
-            Edit = edit;
-        }
-        public BaseEditItem Edit { get; set; }
+        Edit = edit;
     }
+
+    public BaseEditItem Edit { get; set; }
 }

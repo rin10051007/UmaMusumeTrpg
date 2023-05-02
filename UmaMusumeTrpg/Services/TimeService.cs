@@ -1,19 +1,18 @@
 ﻿using UmaMusumeTrpg.IServices;
 
-namespace UmaMusumeTrpg.Services
+namespace UmaMusumeTrpg.Services;
+
+public class TimeService : ITimeService
 {
-    public class TimeService : ITimeService
+    private readonly DateTime Now;
+
+    public TimeService()
     {
-        public TimeService()
-        {
-            Now = DateTime.Now;
-        }
+        Now = DateTime.Now;
+    }
 
-        private readonly DateTime Now;
-
-        public DateTime NowTime()
-        {
-            return Now;
-        }
+    public DateTime NowTime()
+    {
+        return Now;
     }
 }

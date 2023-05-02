@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { SysPermission, UmaMusumeTrpgPermission } from '../../enums/public-enum';
-import { ClaimItem } from '../../models/public-model';
-import jwt_decode from "jwt-decode";
-import { ConveniencesService, LocalStorageService } from '../public-service';
+import {Injectable} from '@angular/core';
+import {SysPermission, UmaMusumeTrpgPermission} from '../../enums/public-enum';
+import {ClaimItem} from '../../models/public-model';
+import jwt_decode from 'jwt-decode';
+import {ConveniencesService, LocalStorageService} from '../public-service';
 
 @Injectable()
 export class JwtManagementService {

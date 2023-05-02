@@ -1,11 +1,11 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Entry
+﻿namespace UmaMusumeTrpg.Models.Base.Entry;
+
+public class BaseEntryItem
 {
-    public class BaseEntryItem
+    public BaseEntryItem(string name)
     {
-        public BaseEntryItem(string name)
-        {
-            Name = name;
-        }
-        public string Name { get; set; }
+        Name = name;
     }
+
+    public string Name { get; set; }
 }

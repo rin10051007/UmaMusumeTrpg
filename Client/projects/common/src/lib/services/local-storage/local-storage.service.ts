@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { LocalStorageToken, LocalStorageViewProject } from '../../models/public-model';
-import { ConveniencesService } from '../public-service';
+import {Injectable} from '@angular/core';
+import {LocalStorageToken, LocalStorageViewProject} from '../../models/public-model';
+import {ConveniencesService} from '../public-service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,9 @@ import { ConveniencesService } from '../public-service';
 export class LocalStorageService {
   readonly tokenKey = 'token';
   readonly ViewProjectKey = 'viewProject';
-  constructor(private conveniencesService: ConveniencesService) { }
+
+  constructor(private conveniencesService: ConveniencesService) {
+  }
 
 
   setToken(token: LocalStorageToken) {

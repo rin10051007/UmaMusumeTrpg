@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { LocalStorageToken } from '../../models/public-model';
-import { AuthApiService, LocalStorageService } from '../../services/public-service';
+import {Component} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {LocalStorageToken} from '../../models/public-model';
+import {AuthApiService, LocalStorageService} from '../../services/public-service';
 
 @Component({
   selector: 'header-menu',
@@ -11,6 +11,7 @@ import { AuthApiService, LocalStorageService } from '../../services/public-servi
 export class HeaderMenuComponent {
   systemUrl!: string;
   umaMusumeUrl!: string;
+
   constructor(private authApiService: AuthApiService, private lsService: LocalStorageService) {
     this.systemUrl = environment.systemUrl;
     this.umaMusumeUrl = environment.umaMusumeUrl;

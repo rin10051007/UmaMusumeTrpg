@@ -1,13 +1,22 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, retry, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { environment } from '../../../public-lib';
+import {
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable, retry, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {environment} from '../../../public-lib';
 
 @Injectable()
 export class ErrorInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  constructor() {
+  }
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -23,4 +32,4 @@ export class ErrorInterceptorService implements HttpInterceptor {
   }
 }
 
-export const ErrorInterceptorProvider = { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true };
+export const ErrorInterceptorProvider = {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true};

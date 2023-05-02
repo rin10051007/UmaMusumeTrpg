@@ -1,11 +1,11 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Detail
+﻿namespace UmaMusumeTrpg.Models.Base.Detail;
+
+public class BaseDetailRequest
 {
-    public class BaseDetailRequest
+    public BaseDetailRequest(BaseDetailSearch serch)
     {
-        public BaseDetailRequest(BaseDetailSearch serch)
-        {
-            Search = serch;
-        }
-        public BaseDetailSearch Search { get; set; }
+        Search = serch;
     }
+
+    public BaseDetailSearch Search { get; set; }
 }

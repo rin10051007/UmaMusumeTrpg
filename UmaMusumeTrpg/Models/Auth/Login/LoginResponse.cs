@@ -1,7 +1,6 @@
-﻿namespace UmaMusumeTrpg.Models.Auth.Login
+﻿namespace UmaMusumeTrpg.Models.Auth.Login;
+
+public class LoginResponse
 {
-    public class LoginResponse
-    {
-        public LoginItem LoginItem { get; set; }
-    }
+    public LoginItem LoginItem { get; set; }
 }

@@ -1,11 +1,11 @@
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import {
   AuthApiService,
   AuthorityConfApiService,
@@ -13,8 +13,9 @@ import {
   ConveniencesService,
   LocalStorageService
 } from 'Common';
-import {LoginRoutingModule} from './login-routing.module';
-import {LoginComponent} from './login.component';
+import { LoginUserForm } from '../forms/login-user.form';
+import { LoginRoutingModule } from './login-routing.module';
+import { LoginComponent } from './login.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {LoginComponent} from './login.component';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatButtonModule,
@@ -37,6 +39,7 @@ import {LoginComponent} from './login.component';
     MatFormFieldModule,
     MatIconModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     BaseApiService,
@@ -44,6 +47,7 @@ import {LoginComponent} from './login.component';
     LocalStorageService,
     ConveniencesService,
     AuthorityConfApiService,
+    LoginUserForm
   ]
 })
 export class LoginModule {

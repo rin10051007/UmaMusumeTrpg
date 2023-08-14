@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {SysPermission, UmaMusumeTrpgPermission} from 'Common';
-import {Item} from './models/item.model';
-import {ApiService} from './services/api.service';
+import { Component, OnInit } from '@angular/core';
+import { SysPermission, UmaMusumeTrpgPermission } from 'Common';
+import { Item } from './models/item.model';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'SystemControl-entry',
@@ -16,10 +16,12 @@ export class EntryComponent implements OnInit {
   }
 
   entry() {
+    //todo:一時重複阻止用
+    var now = Date.now().toString();
     var entryItem: Item = {
-      loginId: 'hoge1',
-      name: 'hoge',
-      email: 'hoge@mail.com',
+      loginId: 'hoge' + now,
+      name: 'hoge' + now,
+      email: 'hoge' + now + '@mail.com',
       password: 'hogePassowrd',
       sysPermission: SysPermission.SysAdmin,
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.Player

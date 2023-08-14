@@ -1,7 +1,6 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Delete
+﻿namespace UmaMusumeTrpg.Models.Base.Delete;
+
+public class BaseDeleteRequest
 {
-    public class BaseDeleteRequest
-    {
-        public BaseDeleteItem Delete { get; set; }
-    }
+    public BaseDeleteItem Delete { get; set; }
 }

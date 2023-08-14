@@ -1,7 +1,6 @@
-﻿namespace UmaMusumeTrpg.IServices
+﻿namespace UmaMusumeTrpg.IServices;
+
+public interface IDisplayCountService
 {
-    public interface IDisplayCountService
-    {
-        public int Get(int index);
-    }
+    public int Get(int index);
 }

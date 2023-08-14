@@ -1,9 +1,19 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AuthApiService, BaseApiService, ErrorInterceptorProvider, JwtManagementService, LocalStorageService, TokenInterceptorProvider } from '../../../../dist/common';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  AuthApiService,
+  BaseApiService,
+  ErrorInterceptorProvider,
+  HeaderMenuModule,
+  JwtManagementService,
+  LocalStorageService,
+  TokenInterceptorProvider
+} from 'Common';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +23,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    HeaderMenuModule
   ],
   providers: [
     BaseApiService,
@@ -22,6 +35,9 @@ import { AppComponent } from './app.component';
     TokenInterceptorProvider,
     ErrorInterceptorProvider
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+  ]
 })
-export class AppModule { }
+export class AppModule {
+}

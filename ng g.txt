@@ -7,18 +7,20 @@ ng g interface login/models/response --type=model --project AuthControl
 ng g interface login/models/user --type=model --project AuthControl
 ng g service login/servises/api --project Common
 
-
+ng g guard guards/or-guardn/OrGuard  --project Common
+ng g guard guards/is-uma-musume-gm-player/isUmaMusumeGmPlayer --project Common
+ng g guard guards/is-uma-musume-player/isUmaMusumePlayer --project Common
 
 
 ng g s services/authority-conf-api/AuthorityConfApi  --project Common
 ng g s services/local-storage/local-storage  --project Common
 
-ng g interface models/jwt/ClaimItem --type=model --project Common
+ng g interface forms/auth/login/ --type=model --project Common
 
 ng g s services/jwt/JwtManagement --project=Common
 
-ng g interface models/auth/permission/PermissionResponse --type=model --project=Common
-ng g interface models/local-storage/view-project --type=model --project=Common
+ng g interface forms/search --type=form --project=SystemControl
+ng g interface forms/login-user --type=form --project=AuthControl
 
-
-ng g service services/auth-api/auth-api --project=Common
+ng g m components/header-menu --project=Common
+ng g c components/header-menu --project=Common

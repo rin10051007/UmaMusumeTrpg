@@ -3,44 +3,40 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using UmaMusumeTrpg.Models.Settings;
 
-namespace UmaMusumeTrpg.Configurations
+namespace UmaMusumeTrpg.Configurations;
+
+public class JwtBearerConfigureOptions : IConfigureNamedOptions<JwtBearerOptions>
 {
-    public class JwtBearerConfigureOptions : IConfigureNamedOptions<JwtBearerOptions>
+    private readonly JwtSettings _jwtSettings;
+
+    public JwtBearerConfigureOptions(IOptions<JwtSettings> jwtSettings)
     {
-        private readonly JwtSettings _jwtSettings;
+        _jwtSettings = jwtSettings.Value;
+    }
 
-        public JwtBearerConfigureOptions(IOptions<JwtSettings> jwtSettings)
+    public void Configure(string name, JwtBearerOptions options)
+    {
+        if (name != JwtBearerDefaults.AuthenticationScheme) return;
+
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            _jwtSettings = jwtSettings.Value;
-        }
+            AudienceValidator = AudienceValidatorDelegate,
+            ValidIssuer = _jwtSettings.Issuer,
+            IssuerSigningKey = _jwtSettings.SecurityKey(),
+            ValidateAudience = true,
+            ValidateIssuer = true,
+            ValidateIssuerSigningKey = true
+        };
+    }
 
-        public void Configure(string name, JwtBearerOptions options)
-        {
-            if (name != JwtBearerDefaults.AuthenticationScheme)
-            {
-                return;
-            }
+    public void Configure(JwtBearerOptions options)
+    {
+        Configure(JwtBearerDefaults.AuthenticationScheme, options);
+    }
 
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                AudienceValidator = AudienceValidatorDelegate,
-                ValidIssuer = _jwtSettings.Issuer,
-                IssuerSigningKey = _jwtSettings.SecurityKey(),
-                ValidateAudience = true,
-                ValidateIssuer = true,
-                ValidateIssuerSigningKey = true,
-            };
-        }
-
-        public void Configure(JwtBearerOptions options)
-        {
-            Configure(JwtBearerDefaults.AuthenticationScheme, options);
-        }
-
-        public bool AudienceValidatorDelegate(IEnumerable<string> audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
-        {
-            return true;
-        }
-
+    public bool AudienceValidatorDelegate(IEnumerable<string> audiences, SecurityToken securityToken,
+        TokenValidationParameters validationParameters)
+    {
+        return true;
     }
 }

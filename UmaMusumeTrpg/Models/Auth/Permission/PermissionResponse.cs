@@ -1,8 +1,7 @@
-﻿namespace UmaMusumeTrpg.Models.Auth.Permission
+﻿namespace UmaMusumeTrpg.Models.Auth.Permission;
+
+public class PermissionResponse
 {
-    public class PermissionResponse
-    {
-        public string PlayerName { get; set; }
-        public bool IsAllows { get; set; }
-    }
+    public string PlayerName { get; set; }
+    public bool IsAllows { get; set; }
 }

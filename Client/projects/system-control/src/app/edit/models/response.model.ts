@@ -1,4 +1,4 @@
-import { BaseEditRequest } from "../../../../../../dist/common";
+import {BaseEditRequest} from 'Common';
 
 export interface Response extends BaseEditRequest {
 }

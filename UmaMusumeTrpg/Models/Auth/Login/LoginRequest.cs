@@ -1,7 +1,6 @@
-﻿namespace UmaMusumeTrpg.Models.Auth.Login
+﻿namespace UmaMusumeTrpg.Models.Auth.Login;
+
+public class LoginRequest
 {
-    public class LoginRequest
-    {
-        public LoginUser LoginUser { get; set; }
-    }
+    public LoginUser LoginUser { get; set; }
 }

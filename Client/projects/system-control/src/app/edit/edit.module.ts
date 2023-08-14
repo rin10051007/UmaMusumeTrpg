@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { EditRoutingModule } from './edit-routing.module';
-import { EditComponent } from './edit.component';
-import { ApiService } from './services/api.service';
-import { ApiService as DetailApiService } from '../detail/services/api.service';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EditRoutingModule} from './edit-routing.module';
+import {EditComponent} from './edit.component';
+import {ApiService} from './services/api.service';
+import {ApiService as DetailApiService} from '../detail/services/api.service';
 
 
 @NgModule({
@@ -20,4 +19,5 @@ import { ApiService as DetailApiService } from '../detail/services/api.service';
     DetailApiService
   ]
 })
-export class EditModule { }
+export class EditModule {
+}

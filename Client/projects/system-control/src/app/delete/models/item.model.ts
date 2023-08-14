@@ -1,4 +1,5 @@
-import { BaseDeleteItem } from "../../../../../../dist/common";
+import {BaseDeleteItem} from 'Common';
+
 
 export interface Item extends BaseDeleteItem {
 }

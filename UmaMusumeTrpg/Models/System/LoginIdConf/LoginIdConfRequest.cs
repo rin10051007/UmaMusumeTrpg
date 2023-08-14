@@ -1,7 +1,6 @@
-﻿namespace UmaMusumeTrpg.Models.System.LoginIdConf
+﻿namespace UmaMusumeTrpg.Models.System.LoginIdConf;
+
+public class LoginIdConfRequest
 {
-    public class LoginIdConfRequest
-    {
-        public LoginIdConfItem LoginIdItem { get; set; }
-    }
+    public LoginIdConfItem LoginIdItem { get; set; }
 }

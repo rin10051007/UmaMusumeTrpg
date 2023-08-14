@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { DetailRoutingModule } from './detail-routing.module';
-import { DetailComponent } from './detail.component';
-import { ApiService } from './services/api.service';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {DetailRoutingModule} from './detail-routing.module';
+import {DetailComponent} from './detail.component';
+import {ApiService} from './services/api.service';
 
 
 @NgModule({
@@ -17,4 +17,5 @@ import { ApiService } from './services/api.service';
     ApiService
   ]
 })
-export class DetailModule { }
+export class DetailModule {
+}

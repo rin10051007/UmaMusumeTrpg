@@ -1,9 +1,10 @@
 ﻿using UmaMusumeTrpg.Models.Base.Delete;
 
-namespace UmaMusumeTrpg.Models.System.Delete
+namespace UmaMusumeTrpg.Models.System.Delete;
+
+public class DeleteResponse : BaseDeleteResponse
 {
-    public class DeleteResponse : BaseDeleteResponse
+    public DeleteResponse(int Id, DateTime? deleteTime) : base(Id, deleteTime)
     {
-        public DeleteResponse(int Id, DateTime? deleteTime) : base(Id, deleteTime) { }
     }
 }

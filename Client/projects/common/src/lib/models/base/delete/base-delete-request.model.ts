@@ -1,4 +1,4 @@
-import { BaseDeleteItem } from "../../public-model";
+import {BaseDeleteItem} from '../../public-model';
 
 
 export interface BaseDeleteRequest {

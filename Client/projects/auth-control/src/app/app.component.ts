@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { environment } from '../../../../dist/common';
+import {Component} from '@angular/core';
+import {environment} from 'Common';
 
 @Component({
   selector: 'AuthControl-root',
@@ -11,11 +11,13 @@ export class AppComponent {
   authUrl!: string;
   systemUrl!: string;
   umaMusumeUrl!: string;
+
   constructor() {
     this.baseUrl = environment.baseUrl;
     this.authUrl = environment.authUrl;
     this.systemUrl = environment.systemUrl;
     this.umaMusumeUrl = environment.umaMusumeUrl;
   }
+
   title = 'AuthControl';
 }

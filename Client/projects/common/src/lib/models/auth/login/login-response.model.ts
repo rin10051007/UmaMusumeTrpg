@@ -1,4 +1,4 @@
-import { LoginItem } from "../../public-model";
+import {LoginItem} from '../../public-model';
 
 
 export interface LoginResponse {

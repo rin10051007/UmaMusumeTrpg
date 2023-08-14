@@ -1,5 +1,4 @@
-import { BaseEditItem } from "../../../../../../dist/common";
-import { SysPermission, UmaMusumeTrpgPermission } from "../../../../../common/src/public-lib";
+import {BaseEditItem, SysPermission, UmaMusumeTrpgPermission} from 'Common';
 
 export interface Item extends BaseEditItem {
   loginId: string;

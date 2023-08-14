@@ -1,14 +1,13 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Entry
-{
-    public class BaseEntryResponse
-    {
-        public BaseEntryResponse(int id, string token)
-        {
-            Id = id;
-            Token = token;
-        }
+﻿namespace UmaMusumeTrpg.Models.Base.Entry;
 
-        public int Id { get; set; }
-        public string Token { get; set; }
+public class BaseEntryResponse
+{
+    public BaseEntryResponse(int id, string token)
+    {
+        Id = id;
+        Token = token;
     }
+
+    public int Id { get; set; }
+    public string Token { get; set; }
 }

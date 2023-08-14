@@ -1,8 +1,7 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Delete
+﻿namespace UmaMusumeTrpg.Models.Base.Delete;
+
+public class BaseDeleteItem
 {
-    public class BaseDeleteItem
-    {
-        public int Id { get; set; }
-        public string Token { get; set; }
-    }
+    public int Id { get; set; }
+    public string Token { get; set; }
 }

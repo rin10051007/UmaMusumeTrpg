@@ -1,8 +1,7 @@
-﻿namespace UmaMusumeTrpg.Models.Auth.Login
+﻿namespace UmaMusumeTrpg.Models.Auth.Login;
+
+public class LoginUser
 {
-    public class LoginUser
-    {
-        public string LoginId { get; set; }
-        public string Password { get; set; }
-    }
+    public string LoginId { get; set; }
+    public string Password { get; set; }
 }

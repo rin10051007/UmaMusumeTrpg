@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SysPermission, UmaMusumeTrpgPermission } from '../../../../../dist/common';
+import { SysPermission, UmaMusumeTrpgPermission } from 'Common';
 import { Item } from './models/item.model';
 import { ApiService } from './services/api.service';
 
@@ -9,14 +9,19 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./entry.component.css']
 })
 export class EntryComponent implements OnInit {
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
   entry() {
+    //todo:一時重複阻止用
+    var now = Date.now().toString();
     var entryItem: Item = {
-      loginId: 'hoge1',
-      name: 'hoge',
-      email: 'hoge@mail.com',
+      loginId: 'hoge' + now,
+      name: 'hoge' + now,
+      email: 'hoge' + now + '@mail.com',
       password: 'hogePassowrd',
       sysPermission: SysPermission.SysAdmin,
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.Player

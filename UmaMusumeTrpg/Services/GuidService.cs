@@ -1,12 +1,11 @@
 ﻿using UmaMusumeTrpg.IServices;
 
-namespace UmaMusumeTrpg.Services
+namespace UmaMusumeTrpg.Services;
+
+public class GuidService : IGuidService
 {
-    public class GuidService : IGuidService
+    public string NewGuid()
     {
-        public string NewGuid()
-        {
-            return Guid.NewGuid().ToString("N");
-        }
+        return Guid.NewGuid().ToString("N");
     }
 }

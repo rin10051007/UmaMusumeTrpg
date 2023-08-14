@@ -9,7 +9,7 @@ using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Settings;
 using UmaMusumeTrpg.Services;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -19,35 +19,35 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 IConfiguration config = new ConfigurationBuilder()
-.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-.AddEnvironmentVariables()
-.Build();
+    .AddJsonFile("appsettings.json", true, true)
+    .AddEnvironmentVariables()
+    .Build();
 
 builder.Services.AddOptions().Configure<JwtSettings>(config.GetSection("JwtSettings"));
 
 builder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerConfigureOptions>();
 
 
-builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt => opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
+builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(
+    opt => opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
+    .AddJwtBearer(options =>
+    {
+        var jwtSettings = new JwtSettings();
+        config.Bind("JwtSettings", jwtSettings);
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-
-            var jwtSettings = new JwtSettings();
-            config.Bind("JwtSettings", jwtSettings);
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtSettings.Issuer,
-                ValidAudience = jwtSettings.Audience,
-                IssuerSigningKey = jwtSettings.SecurityKey()
-            };
-        });
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings.Issuer,
+            ValidAudience = jwtSettings.Audience,
+            IssuerSigningKey = jwtSettings.SecurityKey()
+        };
+    });
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(MyPolicyName.SysAdminPolicy, policy =>
@@ -59,26 +59,26 @@ builder.Services.AddAuthorization(options =>
 });
 
 
-#region ServicsÇÃDI
+#region Servics„ÅÆDI
+
 builder.Services.AddScoped<IGuidService, GuidService>();
 builder.Services.AddScoped<ITimeService, TimeService>();
 builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISystemService, SystemService>();
+
 #endregion
 
 
-WebApplication app = builder.Build();
+var app = builder.Build();
 
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
-{
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     _ = app.UseHsts();
-}
 
 
 app.UseHttpsRedirection();
@@ -88,17 +88,16 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-// APIÇåƒÇÒÇæÇ∆Ç´
+// API„ÇíÂëº„Çì„Å†„Å®„Åç
 app.MapControllerRoute(
-    name: "default",
-    pattern: "/Api/{controller}/{action}");
+    "default",
+    "/Api/{controller}/{action}");
 
 
-// ÉNÉâÉCÉAÉìÉgÇåƒÇÒÇæÇ∆Ç´
+// „ÇØ„É©„Ç§„Ç¢„É≥„Éà„ÇíÂëº„Çì„Å†„Å®„Åç
 app.MapFallbackToFile("/AuthControl/{*path:nonfile}", "AuthControl/index.html");
 app.MapFallbackToFile("/SystemControl/{*path:nonfile}", "SystemControl/index.html");
 app.MapFallbackToFile("/UmaMusumeControl/{*path:nonfile}", "UmaMusumeControl/index.html");
 app.MapFallbackToFile("AuthControl/index.html");
 
 app.Run();
-

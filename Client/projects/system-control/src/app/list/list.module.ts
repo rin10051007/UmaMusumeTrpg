@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ListRoutingModule } from './list-routing.module';
-import { ListComponent } from './list.component';
-import { ApiService } from './services/api.service';
+import {ListRoutingModule} from './list-routing.module';
+import {ListComponent} from './list.component';
+import {ApiService} from './services/api.service';
 
 
 @NgModule({
@@ -18,4 +18,5 @@ import { ApiService } from './services/api.service';
     ApiService,
   ]
 })
-export class ListModule { }
+export class ListModule {
+}

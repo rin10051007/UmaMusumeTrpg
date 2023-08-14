@@ -1,4 +1,4 @@
-import { BaseDetailSearch } from "../../public-model";
+import {BaseDetailSearch} from '../../public-model';
 
 export interface BaseDetailRequest {
   search: BaseDetailSearch;

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DisplayCount, SortDirection, SysPermission, SystemSortItem, UmaMusumeTrpgPermission } from '../../../../../dist/common';
-import { Item } from './models/item.model';
-import { Search } from './models/search.model';
-import { ApiService } from './services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DisplayCount, SortDirection, SysPermission, SystemSortItem, UmaMusumeTrpgPermission} from 'Common';
+import {Item} from './models/item.model';
+import {Search} from './models/search.model';
+import {ApiService} from './services/api.service';
 
 @Component({
   selector: 'SystemControl-list',
@@ -12,9 +12,11 @@ import { ApiService } from './services/api.service';
 })
 export class ListComponent implements OnInit {
   lists: Item[] = [];
+
   constructor(private apiSetvise: ApiService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
+  }
 
 
   ngOnInit(): void {

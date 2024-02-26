@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { concat, first } from 'rxjs';
 import {
   AuthApiService,
   AuthorityConfApiService,
   ConveniencesService,
-  environment,
   LocalStorageService,
   LocalStorageToken,
   LoginUser,
+  environment,
   myPolicyName
 } from 'Common';
+import { concat, first } from 'rxjs';
 import { LoginUserForm } from '../forms/login-user.form';
 
 @Component({

@@ -1,4 +1,4 @@
-import {BaseEntryItem} from '../../public-model';
+import { BaseEntryItem } from '../../public-model';
 
 export interface BaseEntryRequest {
   entry: BaseEntryItem;

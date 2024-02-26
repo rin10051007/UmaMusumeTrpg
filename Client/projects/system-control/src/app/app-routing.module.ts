@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AuthorityConfApiService, IsSysPermissionToAdminGuard} from 'Common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthorityConfApiService, IsSysPermissionToAdminGuard } from 'Common';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./delete/delete.module').then(m => m.DeleteModule),
     canActivate: [IsSysPermissionToAdminGuard]
   },
-  {path: '**', redirectTo: 'list', pathMatch: 'full'}
+  { path: '**', redirectTo: 'list', pathMatch: 'full' }
 ];
 
 @NgModule({

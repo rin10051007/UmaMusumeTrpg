@@ -1,4 +1,4 @@
-import {SysPermission, UmaMusumeTrpgPermission} from '../../enums/public-enum'
+import { SysPermission, UmaMusumeTrpgPermission } from '../../enums/public-enum';
 
 export interface ClaimItem {
   Id: number;

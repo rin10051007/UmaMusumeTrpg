@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {LocalStorageToken, LocalStorageViewProject} from '../../models/public-model';
-import {ConveniencesService} from '../public-service';
+import { Injectable } from '@angular/core';
+import { LocalStorageToken, LocalStorageViewProject } from '../../models/public-model';
+import { ConveniencesService } from '../public-service';
 
 @Injectable({
   providedIn: 'root'

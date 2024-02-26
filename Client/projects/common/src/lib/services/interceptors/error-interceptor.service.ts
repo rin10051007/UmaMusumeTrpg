@@ -6,10 +6,10 @@ import {
   HttpInterceptor,
   HttpRequest
 } from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable, retry, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {environment} from '../../../public-lib';
+import { Injectable } from '@angular/core';
+import { Observable, retry, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from '../../../public-lib';
 
 @Injectable()
 export class ErrorInterceptorService implements HttpInterceptor {
@@ -32,4 +32,4 @@ export class ErrorInterceptorService implements HttpInterceptor {
   }
 }
 
-export const ErrorInterceptorProvider = {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true};
+export const ErrorInterceptorProvider = { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true };

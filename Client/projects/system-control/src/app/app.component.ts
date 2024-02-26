@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthApiService, environment, LocalStorageService } from 'Common';
+import { environment, LocalStorageService } from 'Common';
 
 @Component({
   selector: 'SystemControl-root',

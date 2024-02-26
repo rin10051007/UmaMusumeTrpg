@@ -1,6 +1,6 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {apiUrls} from '../../../const/api-url.const';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { apiUrls } from '../../../const/api-url.const';
 
 @Injectable()
 export class BaseApiService {

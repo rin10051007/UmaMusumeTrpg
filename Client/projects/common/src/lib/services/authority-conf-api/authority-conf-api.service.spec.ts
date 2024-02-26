@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {AuthorityConfApiService} from './authority-conf-api.service';
+import { AuthorityConfApiService } from './authority-conf-api.service';
 
 describe('AuthorityConfApiService', () => {
   let service: AuthorityConfApiService;

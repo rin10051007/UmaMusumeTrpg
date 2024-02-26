@@ -6,6 +6,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng generate component component-name --project Common` to generate a new component. You can also
 use `ng generate directive|pipe|service|class|guard|interface|enum|module --project Common`.
+
 > Note: Don't forget to add `--project Common` or else it will be added to the default project in your `angular.json`
 > file.
 

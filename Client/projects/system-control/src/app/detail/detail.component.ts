@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ApiService} from './services/api.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'SystemControl-detail',
@@ -9,7 +9,7 @@ import {ApiService} from './services/api.service';
 })
 export class DetailComponent implements OnInit {
   constructor(private apiService: ApiService,
-              private route: ActivatedRoute) {
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -18,7 +18,7 @@ export class DetailComponent implements OnInit {
 
   detail() {
     this.route.params.subscribe((params) => {
-      this.apiService.detail({id: (Number(params['id']) || 0), token: ''})
+      this.apiService.detail({ id: (Number(params['id']) || 0), token: '' })
         .subscribe(r => console.log(r));
     });
   }

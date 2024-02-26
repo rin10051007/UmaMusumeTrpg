@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {JwtManagementService} from './jwt-management.service';
+import { JwtManagementService } from './jwt-management.service';
 
 describe('JwtManagementService', () => {
   let service: JwtManagementService;

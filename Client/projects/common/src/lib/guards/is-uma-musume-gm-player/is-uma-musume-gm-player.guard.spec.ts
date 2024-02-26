@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {IsUmaMusumeGmPlayerGuard} from './is-uma-musume-gm-player.guard';
+import { IsUmaMusumeGmPlayerGuard } from './is-uma-musume-gm-player.guard';
 
 describe('IsUmaMusumeGmPlayerGuard', () => {
   let guard: IsUmaMusumeGmPlayerGuard;

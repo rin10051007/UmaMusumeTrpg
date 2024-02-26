@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {SysPermission, UmaMusumeTrpgPermission} from '../../enums/public-enum';
-import {ClaimItem} from '../../models/public-model';
-import jwt_decode from 'jwt-decode';
-import {ConveniencesService, LocalStorageService} from '../public-service';
+import { Injectable } from '@angular/core';
+import { jwtDecode } from "jwt-decode";
+import { SysPermission, UmaMusumeTrpgPermission } from '../../enums/public-enum';
+import { ClaimItem } from '../../models/public-model';
+import { ConveniencesService, LocalStorageService } from '../public-service';
 
 @Injectable()
 export class JwtManagementService {
@@ -23,7 +23,7 @@ export class JwtManagementService {
   constructor(private localStorageService: LocalStorageService, private conveniencesService: ConveniencesService) {
     var token = this.localStorageService.getToken();
     if (!this.conveniencesService.isEmpty(token)) {
-      var tmp = jwt_decode(token || '') as ClaimItem;
+      var tmp = jwtDecode(token || '') as ClaimItem;
       this.item = {
         Id: Number(tmp.Id),
         LoginId: tmp.LoginId,
@@ -44,7 +44,7 @@ export class JwtManagementService {
   }
 
   getClaimItem(token: string): ClaimItem {
-    var tmp = jwt_decode(token) as ClaimItem;
+    var tmp = jwtDecode(token) as ClaimItem;
     return {
       Id: Number(tmp.Id),
       LoginId: tmp.LoginId,

@@ -1,4 +1,4 @@
-import {BaseEditItem} from '../../public-model';
+import { BaseEditItem } from '../../public-model';
 
 export interface BaseEditRequest {
   edit: BaseEditItem;

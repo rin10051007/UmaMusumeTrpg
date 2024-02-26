@@ -5,7 +5,7 @@ namespace UmaMusumeTrpg.Models.System.List;
 
 public class ListSearch : BaseListSearch
 {
-    public ListSearch() : base(){}
+    public ListSearch() : base() { }
     public ListSearch(string name, SotrDirection sortDirection, UmaMusumeTrpgPermission umaMusumeTrpgPermission,
         SystemSortItem sortItem, int displayPage, int displayCount) : base(sortDirection, displayPage, displayCount)
     {

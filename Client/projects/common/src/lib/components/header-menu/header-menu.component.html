@@ -1,19 +1,27 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row class=" d-flex p-2 bd-highlight">
+  <mat-toolbar-row class="d-flex p-2 bd-highlight">
     <div class="p-2 bd-highlight">
-      <button mat-button (click)="screenTransition(systemUrl)" class="btn btn-lg">
+      <button
+        mat-button
+        (click)="screenTransition(systemUrl)"
+        class="btn btn-lg"
+      >
         <i class="bi bi-gear"></i>
         システム管理
       </button>
     </div>
     <div class="p-2 flex-grow-1 bd-highlight">
-      <button mat-button (click)='screenTransition(umaMusumeUrl)' class="btn btn-lg">
+      <button
+        mat-button
+        (click)="screenTransition(umaMusumeUrl)"
+        class="btn btn-lg"
+      >
         <i class="bi bi-android2"></i>
         ウマ娘TRPG
       </button>
     </div>
     <div class="p-2 bd-highlight">
-      <button mat-button (click)='logOut()' class="btn btn-sm d-flex">
+      <button mat-button (click)="logOut()" class="btn btn-sm d-flex">
         ログアウト
         <i class="bi bi-box-arrow-right"></i>
       </button>

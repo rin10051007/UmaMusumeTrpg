@@ -78,14 +78,8 @@ comment on column public."Users"."IsDeleted" is '削除フラグ'
 
 --管理者追加PW:AdminPassword
 INSERT 
-INTO public."Users" ("LoginId","Name","SysPermission","UmaMusumeTrpgPermission","Email","Password","Token") 
-VALUES ('admin','管理者',2,3,'admin@hoge.com','AQAAAAIAAYagAAAAELzOnl9hNdGGgtnWvbtLcIktzNK8D9L25rASjMe5ZW75mC7iinughSc+bKRalEn8XA==','adminToken')
+INTO public."Users" ("LoginId","Name","SysPermission","UmaMusumeTrpgPermission","Email","Password","Token","CreateTime","UpdateTime") 
+VALUES ('admin','管理者',2,3,'hoge@example.com','AQAAAAIAAYagAAAAEOHZjmwnxEU8v+JWrmFUrrOoyIylwel/fJHXc6yrhPrWizLhG0885/xnO468EKWvJQ==',
+'025e71982475421a97ec1879c22bc167','2024/02/26 19:50:19.181','2024/02/26 19:50:19.181')
 /
-INSERT 
-INTO public."Users" ("LoginId","Name","UmaMusumeTrpgPermission","Email","Password","Token") 
-VALUES ('Player1','プレイヤー1',1,'Player1@hoge.com','Player1password','Player1Token')
-/
-INSERT 
-INTO public."Users" ("LoginId","Name","UmaMusumeTrpgPermission","Email","Password","Token") 
-VALUES ('Player2','プレイヤー2',1,'Player2@hoge.com','Player2password','Player2Token')
-/
+

@@ -10,4 +10,5 @@ export * from './lib/forms/base.form';
 export * from './lib/guards/public-giard';
 export * from './lib/models/public-model';
 export * from './lib/services/public-service';
+export * from './lib/validators/public-validator';
 

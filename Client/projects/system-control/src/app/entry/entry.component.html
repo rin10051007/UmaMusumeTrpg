@@ -1,2 +1,71 @@
-<p>entry works!</p>
-<button (click)="entry()">登録</button>
+<div class="main-div">
+  <mat-card class="center">
+    <mat-card-header>
+      <mat-card-title>ユーザー登録</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+        <mat-form-field class="center">
+          <input matInput placeholder="ログインID" />
+        </mat-form-field>
+        <mat-form-field class="center">
+          <input matInput placeholder="名前" />
+        </mat-form-field>
+        <mat-form-field class="center">
+          <input matInput placeholder="メールアドレス" />
+        </mat-form-field>
+        <mat-form-field class="center">
+          <input matInput placeholder="パスワード" />
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="entry()">登録</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div class="login-card">
+  <mat-card class="form-container">
+    <mat-card-title>Login Form</mat-card-title>
+
+    <mat-card-content>
+      <form>
+        <div class="form-field">
+          <label for="loginId">Login ID</label>
+
+          <input type="text" id="loginId" name="loginId" ngModel required />
+        </div>
+
+        <div class="form-field">
+          <label for="name">Name</label>
+
+          <input type="text" id="name" name="name" ngModel required />
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+
+          <input type="email" id="email" name="email" ngModel required />
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password</label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            ngModel
+            required
+          />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" md-raised-button color="primary">Login</button>
+
+          <button type="reset" md-raised-button color="warn">Reset</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

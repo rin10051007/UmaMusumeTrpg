@@ -6,4 +6,5 @@ export interface Item extends BaseEntryItem {
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   email: string;
   password: string;
+  passwordcfm: string;
 }

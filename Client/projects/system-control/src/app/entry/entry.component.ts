@@ -23,6 +23,7 @@ export class EntryComponent implements OnInit {
       name: 'hoge' + now,
       email: 'hoge' + now + '@mail.com',
       password: 'hogePassowrd',
+      passwordcfm: 'hogePassowrd',
       sysPermission: SysPermission.SysAdmin,
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.Player
     };

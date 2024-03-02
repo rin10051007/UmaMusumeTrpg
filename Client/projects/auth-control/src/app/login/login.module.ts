@@ -6,14 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import {
-  AuthApiService,
-  AuthorityConfApiService,
-  BaseApiService,
-  ConveniencesService,
-  LocalStorageService
-} from 'Common';
-import { LoginUserForm } from '../forms/login-user.form';
+import { AuthApiService, AuthorityConfApiService, BaseApiService, ConveniencesService, LocalStorageService } from 'Common';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
@@ -30,7 +23,7 @@ import { LoginComponent } from './login.component';
     MatFormFieldModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     MatButtonModule,
@@ -39,7 +32,7 @@ import { LoginComponent } from './login.component';
     MatFormFieldModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     BaseApiService,
@@ -47,8 +40,8 @@ import { LoginComponent } from './login.component';
     LocalStorageService,
     ConveniencesService,
     AuthorityConfApiService,
-    LoginUserForm
-  ]
+  ],
+  bootstrap: [LoginComponent]
 })
 export class LoginModule {
 }

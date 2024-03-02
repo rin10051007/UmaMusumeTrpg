@@ -28,7 +28,8 @@ public class AuthService : IAuthService
 
         var user = _dbContext.Users.SingleOrDefault(x => x.LoginId.Equals(loginUser.LoginId) && !x.IsDeleted);
 
-        if (user == null || !user!.VerifyHashedPassword(loginUser.Password)) return new LoginItem("");
+        //todo:後でコメント解除
+        //if (user == null || !user!.VerifyHashedPassword(loginUser.Password)) return new LoginItem("");
 
         Claim[] claims =
         {

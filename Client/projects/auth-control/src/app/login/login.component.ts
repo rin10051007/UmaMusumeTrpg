@@ -1,7 +1,16 @@
-import { Component } from '@angular/core';
-import { AuthApiService, AuthorityConfApiService, ConveniencesService, LocalStorageService, LocalStorageToken, LoginUser, environment, myPolicyName } from 'Common';
-import { concat, first } from 'rxjs';
-import { LoginUserForm } from '../forms/login-user.form';
+import {Component} from '@angular/core';
+import {
+  AuthApiService,
+  AuthorityConfApiService,
+  ConveniencesService,
+  environment,
+  LocalStorageService,
+  LocalStorageToken,
+  LoginUser,
+  myPolicyName
+} from 'Common';
+import {concat, first} from 'rxjs';
+import {LoginUserForm} from '../forms/login-user.form';
 
 @Component({
   selector: 'AuthControl-login',
@@ -11,8 +20,9 @@ import { LoginUserForm } from '../forms/login-user.form';
 export class LoginComponent {
 
   loginUser: LoginUserForm;
+
   constructor(private apiService: AuthApiService, private lsService: LocalStorageService, private conveniencesService: ConveniencesService,
-    private authorityConfApiService: AuthorityConfApiService) {
+              private authorityConfApiService: AuthorityConfApiService) {
     this.lsService.removeToken();
     this.loginUser = new LoginUserForm();
   }

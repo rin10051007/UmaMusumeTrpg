@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SysPermission, UmaMusumeTrpgPermission } from 'Common';
-import { Item } from './models/item.model';
-import { ApiService } from './services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {SysPermission, UmaMusumeTrpgPermission} from 'Common';
+import {Entry} from './forms/entry.form';
+import {ApiService} from './services/api.service';
 
 @Component({
   selector: 'SystemControl-entry',
@@ -9,25 +9,21 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./entry.component.css']
 })
 export class EntryComponent implements OnInit {
+
+  entryForm: Entry;
+  protected readonly SysPermission = SysPermission;
+  protected readonly UmaMusumeTrpgPermission = UmaMusumeTrpgPermission;
+
   constructor(private apiService: ApiService) {
+    this.entryForm = new Entry();
   }
 
   ngOnInit() {
   }
 
   entry() {
-    //todo:一時重複阻止用
-    var now = Date.now().toString();
-    var entryItem: Item = {
-      loginId: 'hoge' + now,
-      name: 'hoge' + now,
-      email: 'hoge' + now + '@mail.com',
-      password: 'hogePassowrd',
-      passwordcfm: 'hogePassowrd',
-      sysPermission: SysPermission.SysAdmin,
-      umaMusumeTrpgPermission: UmaMusumeTrpgPermission.Player
-    };
-    this.apiService.entry(entryItem).subscribe(r => {
+    console.log(this.entryForm.getValues());
+    this.apiService.entry(this.entryForm.getValues()).subscribe(r => {
     })
   }
 }

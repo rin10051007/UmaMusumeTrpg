@@ -115,7 +115,6 @@ public class SystemService : ISystemService
         if (!item.Password.IsNullOrEmpty()) user.PasswordHash(item.Password);
         _ = _dbContext.SaveChanges();
         return (user.ID, user.Name, user.Token);
-
     }
 
     public (int, DateTime?) Delete(DeleteItem item)

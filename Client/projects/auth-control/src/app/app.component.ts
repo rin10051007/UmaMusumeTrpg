@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { environment } from 'Common';
+import {Component} from '@angular/core';
+import {environment} from 'Common';
 
 @Component({
   selector: 'AuthControl-root',

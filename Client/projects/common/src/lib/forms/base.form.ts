@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup } from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
 export class BaseForm {
   formGroup: FormGroup;
@@ -11,12 +11,16 @@ export class BaseForm {
     return this.formGroup;
   }
 
-  getForm(key: string): AbstractControl | null {
-    return this.getFormGroup().get(key);
+  getForm(key: string): FormControl {
+    return (this.getFormGroup().get(key)) as FormControl;
   }
 
-  getValue() {
+  getValues() {
     return this.formGroup.getRawValue();
+  }
+
+  getValue(key: string) {
+    return ((this.getFormGroup().get(key)) as FormControl).value;
   }
 
   patchValue(value: any) {
@@ -28,7 +32,7 @@ export class BaseForm {
   }
 
   hasError(key: string, type: string): boolean {
-    var form = this.formGroup.get(key);
+    const form = this.formGroup.get(key);
     return form != null && (form.invalid && (form.touched || form.dirty)) && form.hasError(type);
   }
 }

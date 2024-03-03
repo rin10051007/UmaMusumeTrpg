@@ -6,66 +6,53 @@
     <mat-card-content>
       <form>
         <mat-form-field class="center">
-          <input matInput placeholder="ログインID" />
+          <mat-label>ログインID</mat-label>
+          <input [formControl]="entryForm.getForm('loginId')" id="loginId" matInput type="text"/>
         </mat-form-field>
         <mat-form-field class="center">
-          <input matInput placeholder="名前" />
+          <mat-label>名前</mat-label>
+          <input [formControl]="entryForm.getForm('name')" id="name" matInput type="text"/>
         </mat-form-field>
         <mat-form-field class="center">
-          <input matInput placeholder="メールアドレス" />
+          <mat-label>システム管理権限</mat-label>
+          <mat-select [formControl]="entryForm.getForm('sysPermission')" id="sysPermission">
+            <mat-option
+              [value]="SysPermission.NoQualification">{{ SysPermission.NoQualification | sysPermission }}
+            </mat-option>
+            <mat-option [value]="SysPermission.SysAdmin">{{ SysPermission.SysAdmin |sysPermission }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field class="center">
-          <input matInput placeholder="パスワード" />
+          <mat-label>ウマ娘TRPG権限</mat-label>
+          <mat-select [formControl]="entryForm.getForm('umaMusumeTrpgPermission')" id="umaMusumeTrpgPermission">
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.NoQualification">{{ UmaMusumeTrpgPermission.NoQualification | umaMusumeTrpgPermission }}
+            </mat-option>
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.Player">{{ UmaMusumeTrpgPermission.Player |umaMusumeTrpgPermission }}
+            </mat-option>
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.GmPlayer">{{ UmaMusumeTrpgPermission.GmPlayer |umaMusumeTrpgPermission }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="center">
+          <mat-label>メールアドレス</mat-label>
+          <input [formControl]="entryForm.getForm('email')" id="email" matInput type="email"/>
+        </mat-form-field>
+        <mat-form-field class="center">
+          <mat-label>パスワード</mat-label>
+          <input [formControl]="entryForm.getForm('password')" id="password" matInput type="password"/>
+        </mat-form-field>
+        <mat-form-field class="center">
+          <mat-label>パスワード確認</mat-label>
+          <input [formControl]="entryForm.getForm('passwordCfm')" id="passwordCfm" matInput type="password"/>
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions>
       <button (click)="entry()">登録</button>
     </mat-card-actions>
-  </mat-card>
-</div>
-<div class="login-card">
-  <mat-card class="form-container">
-    <mat-card-title>Login Form</mat-card-title>
-
-    <mat-card-content>
-      <form>
-        <div class="form-field">
-          <label for="loginId">Login ID</label>
-
-          <input type="text" id="loginId" name="loginId" ngModel required />
-        </div>
-
-        <div class="form-field">
-          <label for="name">Name</label>
-
-          <input type="text" id="name" name="name" ngModel required />
-        </div>
-
-        <div class="form-field">
-          <label for="email">Email</label>
-
-          <input type="email" id="email" name="email" ngModel required />
-        </div>
-
-        <div class="form-field">
-          <label for="password">Password</label>
-
-          <input
-            type="password"
-            id="password"
-            name="password"
-            ngModel
-            required
-          />
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" md-raised-button color="primary">Login</button>
-
-          <button type="reset" md-raised-button color="warn">Reset</button>
-        </div>
-      </form>
-    </mat-card-content>
   </mat-card>
 </div>

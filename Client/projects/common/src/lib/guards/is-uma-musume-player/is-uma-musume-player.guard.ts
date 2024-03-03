@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, map } from 'rxjs';
-import { AuthorityConfApiService } from '../../services/public-service';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {map, Observable} from 'rxjs';
+import {AuthorityConfApiService} from '../../services/public-service';
 
 @Injectable()
 export class IsUmaMusumePlayerGuard {

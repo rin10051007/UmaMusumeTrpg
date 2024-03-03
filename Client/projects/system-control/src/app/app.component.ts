@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { environment, LocalStorageService } from 'Common';
+import {Component} from '@angular/core';
+import {environment, LocalStorageService} from 'Common';
 
 @Component({
   selector: 'SystemControl-root',
@@ -14,6 +14,6 @@ export class AppComponent {
 
   constructor(private lsService: LocalStorageService) {
     this.systemUrl = environment.systemUrl;
-    this.lsService.setViewProject({ viewProject: this.systemUrl });
+    this.lsService.setViewProject({viewProject: this.systemUrl});
   }
 }

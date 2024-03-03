@@ -1,7 +1,8 @@
-import { BaseEntryItem, SysPermission, UmaMusumeTrpgPermission } from 'Common';
+import {BaseEntryItem, SysPermission, UmaMusumeTrpgPermission} from 'Common';
 
 export interface Item extends BaseEntryItem {
   loginId: string;
+  name: string;
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   email: string;

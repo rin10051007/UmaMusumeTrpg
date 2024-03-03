@@ -1,4 +1,4 @@
-import { BaseDeleteItem } from 'Common';
+import {BaseDeleteItem} from 'Common';
 
 
 export interface Item extends BaseDeleteItem {

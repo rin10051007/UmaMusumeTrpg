@@ -1,5 +1,5 @@
-import { FormBuilder, Validators } from "@angular/forms";
-import { BaseForm, LoginUser } from "Common";
+import {FormBuilder, Validators} from "@angular/forms";
+import {BaseForm, LoginUser} from "Common";
 
 export class LoginUserForm extends BaseForm {
 

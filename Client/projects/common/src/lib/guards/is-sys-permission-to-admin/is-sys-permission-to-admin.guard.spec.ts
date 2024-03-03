@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { IsSysPermissionToAdminGuard } from './is-sys-permission-to-admin.guard';
+import {IsSysPermissionToAdminGuard} from './is-sys-permission-to-admin.guard';
 
 describe('IsSysPermissionToAdminGuard', () => {
   let guard: IsSysPermissionToAdminGuard;

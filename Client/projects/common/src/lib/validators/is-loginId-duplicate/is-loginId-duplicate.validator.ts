@@ -1,22 +1,20 @@
 import {IsLoginIdDuplicateApiService} from "../../services/public-service";
-import {AbstractControl, AsyncValidator, ValidationErrors} from '@angular/forms';
-import {Observable, of} from 'rxjs';
-import {catchError, debounceTime, map, switchMap} from 'rxjs/operators';
+import {AbstractControl, ValidationErrors, Validator, ValidatorFn} from '@angular/forms';
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class IsLoginIdDuplicateValidator implements AsyncValidator {
+export class IsLoginIdDuplicate implements Validator {
   constructor(private isLoginIdDuplicateApiService: IsLoginIdDuplicateApiService) {
   }
 
-  validate(control: AbstractControl): Observable<ValidationErrors | null> {
+  validate(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
+    return this.isLoginIdDuplicateApiService.isLoginIdDuplicate(value).subscribe(r => (r ? null : {'isLoginIdDuplicate': true}), e => null)
 
-    return of(value).pipe(
-      debounceTime(300),
-      switchMap(() => this.isLoginIdDuplicateApiService.isLoginIdDuplicate(value)),
-      map(result => (result ? null : {'isLoginIdDuplicate': true})),
-      catchError(() => of(null))
-    );
   }
+}
+
+export function IsLoginIdDuplicateValidator(isLoginIdDuplicateApiService: IsLoginIdDuplicateApiService): ValidatorFn {
+  const validator = new IsLoginIdDuplicate(isLoginIdDuplicateApiService);
+  return validator.validate.bind(validator);
 }

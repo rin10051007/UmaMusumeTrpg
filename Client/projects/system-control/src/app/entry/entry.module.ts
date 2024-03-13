@@ -11,7 +11,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
-import {SysPermissionPipe, UmaMusumeTrpgPermissionPipe} from "Common";
+import {IsLoginIdDuplicateApiService, SysPermissionPipe, UmaMusumeTrpgPermissionPipe} from "Common";
 import {Entry} from "./forms/entry.form";
 
 @NgModule({
@@ -46,6 +46,7 @@ import {Entry} from "./forms/entry.form";
   ],
   providers: [
     ApiService,
+    IsLoginIdDuplicateApiService,
     Entry
   ]
 })

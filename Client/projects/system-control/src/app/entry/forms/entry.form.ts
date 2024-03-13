@@ -1,21 +1,30 @@
-import {BaseForm, PasswordMatchValidator, SysPermission, UmaMusumeTrpgPermission} from "Common";
-import {FormGroup, Validators} from "@angular/forms";
+import {
+  BaseForm,
+  IsLoginIdDuplicateApiService,
+  IsLoginIdDuplicateValidator,
+  PasswordMatchValidator,
+  SysPermission,
+  UmaMusumeTrpgPermission
+} from "Common";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Injectable} from "@angular/core";
 
 @Injectable()
 export class Entry extends BaseForm {
 
-  constructor() {
+  constructor(private isLoginIdDuplicateApiService: IsLoginIdDuplicateApiService) {
     super(new FormGroup({}));
   }
 
   createForm() {
-    this.getFormGroup().addControl('loginId', ['', [Validators.required]]);
-    this.getFormGroup().addControl('name', ['', [Validators.required]]);
-    this.getFormGroup().addControl('sysPermission', [SysPermission.None, [Validators.required]]);
-    this.getFormGroup().addControl('umaMusumeTrpgPermission', [UmaMusumeTrpgPermission.None, [Validators.required]]);
-    this.getFormGroup().addControl('email', ['', [Validators.required]]);
-    this.getFormGroup().addControl('password', ['', [Validators.required]]);
-    this.getFormGroup().addControl('passwordCfm', ['', [Validators.required, PasswordMatchValidator]]);
+    this.getFormGroup(),
+      this.getFormGroup().addControl('loginId', new FormControl('', [Validators.required, IsLoginIdDuplicateValidator(this.isLoginIdDuplicateApiService)]));
+    this.getFormGroup().addControl('name', new FormControl('', [Validators.required]));
+    this.getFormGroup().addControl('sysPermission', new FormControl(SysPermission.None, [Validators.required]));
+    this.getFormGroup().addControl('umaMusumeTrpgPermission', new FormControl(UmaMusumeTrpgPermission.None, [Validators.required]));
+    this.getFormGroup().addControl('email', new FormControl('', [Validators.required]));
+    this.getFormGroup().addControl('password', new FormControl('', [Validators.required]));
+    this.getFormGroup().addControl('passwordCfm', new FormControl('', [Validators.required]));
+    this.getFormGroup().addControl('passwordCfm', new FormControl('', [Validators.required, Validators.minLength(1), PasswordMatchValidator]));
   }
 }

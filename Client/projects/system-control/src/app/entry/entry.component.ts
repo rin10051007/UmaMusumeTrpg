@@ -17,16 +17,15 @@ export class EntryComponent implements OnInit {
   protected readonly SysPermission = SysPermission;
   protected readonly UmaMusumeTrpgPermission = UmaMusumeTrpgPermission;
 
-  constructor(private apiService: ApiService, private router: Router, private hoge: Entry) {
-    console.log('U');
-    this.entryForm = hoge;
+  constructor(private apiService: ApiService, private router: Router, private entry: Entry) {
+    this.entryForm = entry;
     this.entryForm.createForm();
   }
 
   ngOnInit() {
   }
 
-  entry() {
+  click() {
     if (!this.entryForm.isError()) {
       this.apiService.entry(this.entryForm.getValues() as Item).subscribe(r => {
         switch (r.httpStatusCode) {

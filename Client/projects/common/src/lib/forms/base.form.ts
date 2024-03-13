@@ -1,9 +1,11 @@
 import {FormControl, FormGroup} from "@angular/forms";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class BaseForm {
   formGroup: FormGroup;
 
-  constructor(form: FormGroup) {
+  constructor(private form: FormGroup) {
     this.formGroup = form;
   }
 
@@ -16,7 +18,7 @@ export class BaseForm {
   }
 
   getValues() {
-    return this.formGroup.getRawValue();
+    return this.getFormGroup().getRawValue();
   }
 
   getValue(key: string) {
@@ -24,15 +26,35 @@ export class BaseForm {
   }
 
   patchValue(value: any) {
-    this.formGroup.patchValue(value);
+    this.getFormGroup().patchValue(value);
   }
 
   isRequired(key: string): boolean {
     return this.hasError(key, 'required');
   }
 
+  isPattern(key: string): boolean {
+    return this.hasError(key, 'pattern');
+  }
+
+  isPasswordMatch(): boolean {
+    return this.getFormGroup().hasError('passwordMismatch');
+  }
+
+  isError(): boolean {
+    for (const key in this.getFormGroup().controls) { // 'field' is a st
+      if (this.getForm(key).errors) return true;
+    }
+    return false;
+  }
+
+  setTouched() {
+    this.getFormGroup().markAllAsTouched();
+  }
+
+
   hasError(key: string, type: string): boolean {
-    const form = this.formGroup.get(key);
-    return form != null && (form.invalid && (form.touched || form.dirty)) && form.hasError(type);
+    const form = this.getFormGroup().get(key);
+    return form != null && ((form.touched || form.dirty)) && form.hasError(type);
   }
 }

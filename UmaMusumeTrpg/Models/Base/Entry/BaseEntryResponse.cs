@@ -1,6 +1,8 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Entry;
+﻿using UmaMusumeTrpg.Models.Base.Public;
 
-public class BaseEntryResponse
+namespace UmaMusumeTrpg.Models.Base.Entry;
+
+public class BaseEntryResponse : PublicBaseResponse
 {
     public BaseEntryResponse(int id, string token)
     {

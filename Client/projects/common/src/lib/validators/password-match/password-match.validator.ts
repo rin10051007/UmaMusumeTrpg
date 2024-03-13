@@ -1,8 +1,12 @@
-import {FormGroup, ValidationErrors} from "@angular/forms";
+import {AbstractControl, FormControl, ValidationErrors, Validator} from "@angular/forms";
+import {Injectable} from "@angular/core";
 
-export function passwordMatchValidator(control: FormGroup): ValidationErrors | null {
-  const password = control.get('password');
-  const confirmPassword = control.get('passwordCfm');
+@Injectable()
+export class PasswordMatchValidator implements Validator {
 
-  return password && confirmPassword && password.value === confirmPassword.value ? null : {'passwordMismatch': true};
+  validate(control: AbstractControl): ValidationErrors | null {
+    const password = control.parent?.get('password') as FormControl;
+    const passwordCfm = control.parent?.get('passwordCfm') as FormControl;
+    return (password && passwordCfm && password.value === passwordCfm.value) ? null : {'passwordMismatch': true};
+  }
 }

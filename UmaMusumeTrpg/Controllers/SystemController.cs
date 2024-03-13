@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UmaMusumeTrpg.Enums;
@@ -7,8 +8,8 @@ using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;
+using UmaMusumeTrpg.Models.System.IsLoginIdDuplicate;
 using UmaMusumeTrpg.Models.System.List;
-using UmaMusumeTrpg.Models.System.LoginIdConf;
 
 namespace UmaMusumeTrpg.Controllers;
 
@@ -39,8 +40,16 @@ public class SystemController : ControllerBase
     [Route("Entry")]
     public ActionResult<IEnumerable<EntryResponse>> Entry([Required] [FromBody] EntryRequest request)
     {
-        var (id, token) = _systemService.Entry(request.Entry);
-        return Ok(new EntryResponse(id, token));
+        try
+        {
+            var (id, token) = _systemService.Entry(request.Entry);
+            return Ok(new EntryResponse(id, token));
+        }
+        catch (Exception)
+        {
+            var entryResponse = new EntryResponse(0, "").HttpStatusCode = HttpStatusCode.BadRequest;
+            return BadRequest(entryResponse);
+        }
     }
 
     [HttpPost]
@@ -68,9 +77,9 @@ public class SystemController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost]
-    [Route("LoginIdConf")]
-    public bool LoginIdConf([Required] [FromBody] LoginIdConfRequest request)
+    [Route("IsLoginIdDuplicate")]
+    public bool IsLoginIdDuplicate([Required] [FromBody] IsLoginIdDuplicateRequest request)
     {
-        return _systemService.IsLoginIdDuplicate(request.LoginIdItem);
+        return _systemService.IsLoginIdDuplicate(request.LoginId);
     }
 }

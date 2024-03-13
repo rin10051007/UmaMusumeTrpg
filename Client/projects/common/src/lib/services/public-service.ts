@@ -11,4 +11,5 @@ export * from './interceptors/error-interceptor.service';
 export * from './interceptors/token-interceptor.service';
 export * from './jwt/jwt-management.service';
 export * from './local-storage/local-storage.service';
+export * from './is-login-id-duplicate-api/is-login-id-duplicate-api.service';
 

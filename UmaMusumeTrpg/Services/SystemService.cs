@@ -6,8 +6,8 @@ using UmaMusumeTrpg.Models.System.Delete;
 using UmaMusumeTrpg.Models.System.Detail;
 using UmaMusumeTrpg.Models.System.Edit;
 using UmaMusumeTrpg.Models.System.Entry;
+using UmaMusumeTrpg.Models.System.IsLoginIdDuplicate;
 using UmaMusumeTrpg.Models.System.List;
-using UmaMusumeTrpg.Models.System.LoginIdConf;
 
 namespace UmaMusumeTrpg.Services;
 
@@ -129,7 +129,7 @@ public class SystemService : ISystemService
         return (user.ID, user.DeleteTime);
     }
 
-    public bool IsLoginIdDuplicate(LoginIdConfItem item)
+    public bool IsLoginIdDuplicate(IsLoginIdDuplicateItem item)
     {
         return !_dbContext.Users.Any(x => x.LoginId.Equals(item.LoginId) && !x.ID.Equals(item.Id) && !x.IsDeleted);
     }

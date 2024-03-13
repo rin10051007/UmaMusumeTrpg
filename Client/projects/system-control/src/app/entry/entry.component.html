@@ -8,10 +8,16 @@
         <mat-form-field class="center">
           <mat-label>ログインID</mat-label>
           <input [formControl]="entryForm.getForm('loginId')" id="loginId" matInput type="text"/>
+          <mat-error *ngIf="entryForm.isRequired('loginId')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="center">
           <mat-label>名前</mat-label>
           <input [formControl]="entryForm.getForm('name')" id="name" matInput type="text"/>
+          <mat-error *ngIf="entryForm.isRequired('name')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="center">
           <mat-label>システム管理権限</mat-label>
@@ -19,9 +25,12 @@
             <mat-option
               [value]="SysPermission.NoQualification">{{ SysPermission.NoQualification | sysPermission }}
             </mat-option>
-            <mat-option [value]="SysPermission.SysAdmin">{{ SysPermission.SysAdmin |sysPermission }}
+            <mat-option [value]="SysPermission.SysAdmin">{{ SysPermission.SysAdmin | sysPermission }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="entryForm.isRequired('sysPermission')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="center">
           <mat-label>ウマ娘TRPG権限</mat-label>
@@ -30,29 +39,49 @@
               [value]="UmaMusumeTrpgPermission.NoQualification">{{ UmaMusumeTrpgPermission.NoQualification | umaMusumeTrpgPermission }}
             </mat-option>
             <mat-option
-              [value]="UmaMusumeTrpgPermission.Player">{{ UmaMusumeTrpgPermission.Player |umaMusumeTrpgPermission }}
+              [value]="UmaMusumeTrpgPermission.Player">{{ UmaMusumeTrpgPermission.Player | umaMusumeTrpgPermission }}
             </mat-option>
             <mat-option
-              [value]="UmaMusumeTrpgPermission.GmPlayer">{{ UmaMusumeTrpgPermission.GmPlayer |umaMusumeTrpgPermission }}
+              [value]="UmaMusumeTrpgPermission.GmPlayer">{{ UmaMusumeTrpgPermission.GmPlayer | umaMusumeTrpgPermission }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="entryForm.isRequired('umaMusumeTrpgPermission')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="center">
           <mat-label>メールアドレス</mat-label>
           <input [formControl]="entryForm.getForm('email')" id="email" matInput type="email"/>
+          <mat-error *ngIf="entryForm.isRequired('email')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="center">
           <mat-label>パスワード</mat-label>
           <input [formControl]="entryForm.getForm('password')" id="password" matInput type="password"/>
+          <mat-error *ngIf="entryForm.isRequired('password')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
+          <mat-error *ngIf="entryForm.isPattern('password')">
+            <i class="bi bi-exclamation-triangle"></i>&#47;&#94;&#91;a&#45;zA&#45;Z0&#45;9&#33;&#64;&#35;&#36;&#37;&#94;&#38;&#42;&#40;&#41;&#45;&#95;&#43;&#61;&#60;&#62;&#63;&#123;&#91;&#93;&#124;&#92;&#47;&#58;&#59;&#39;&#34;&#44;&#46;&#93;&#123;&#52;&#44;&#125;&#36;&#47;
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="center">
           <mat-label>パスワード確認</mat-label>
           <input [formControl]="entryForm.getForm('passwordCfm')" id="passwordCfm" matInput type="password"/>
+          <mat-error *ngIf="entryForm.isRequired('passwordCfm')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
+          <mat-error *ngIf="entryForm.isPasswordMatch()">
+            <i class="bi bi-exclamation-triangle"></i>パスワードが一致しません。
+          </mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button (click)="entry()">登録</button>
+      <button (click)="entry()" color="primary" mat-raised-button>
+        登録
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

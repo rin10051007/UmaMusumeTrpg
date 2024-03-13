@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {SysPermission, UmaMusumeTrpgPermission} from 'Common';
 import {Entry} from './forms/entry.form';
 import {ApiService} from './services/api.service';
+import {Item} from "./models/item.model";
+import {HttpStatusCode} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'SystemControl-entry',
@@ -14,16 +17,30 @@ export class EntryComponent implements OnInit {
   protected readonly SysPermission = SysPermission;
   protected readonly UmaMusumeTrpgPermission = UmaMusumeTrpgPermission;
 
-  constructor(private apiService: ApiService) {
-    this.entryForm = new Entry();
+  constructor(private apiService: ApiService, private router: Router, private hoge: Entry) {
+    console.log('U');
+    this.entryForm = hoge;
+    this.entryForm.createForm();
   }
 
   ngOnInit() {
   }
 
   entry() {
-    console.log(this.entryForm.getValues());
-    this.apiService.entry(this.entryForm.getValues()).subscribe(r => {
-    })
+    if (!this.entryForm.isError()) {
+      this.apiService.entry(this.entryForm.getValues() as Item).subscribe(r => {
+        switch (r.httpStatusCode) {
+          case HttpStatusCode.Ok:
+            this.router.navigateByUrl('/list').then(r => {
+            });
+            break;
+          case HttpStatusCode.BadRequest:
+            this.entryForm.setTouched();
+            break;
+        }
+      });
+    } else {
+      this.entryForm.setTouched();
+    }
   }
 }

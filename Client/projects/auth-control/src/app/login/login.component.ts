@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   login() {
-    this.apiService.logIn(this.loginUser.getValue() as LoginUser).subscribe((r: { loginItem: unknown; }) => {
+    this.apiService.logIn(this.loginUser.getValues() as LoginUser).subscribe((r: { loginItem: unknown; }) => {
       this.lsService.setToken(r.loginItem as unknown as LocalStorageToken);
       var viewProject = this.lsService.getViewProject();
       if (this.lsService.getToken()) {

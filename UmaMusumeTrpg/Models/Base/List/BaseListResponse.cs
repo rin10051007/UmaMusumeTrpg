@@ -1,6 +1,8 @@
-﻿namespace UmaMusumeTrpg.Models.Base.List;
+﻿using UmaMusumeTrpg.Models.Base.Public;
 
-public class BaseListResponse
+namespace UmaMusumeTrpg.Models.Base.List;
+
+public class BaseListResponse : PublicBaseResponse
 {
     protected BaseListResponse(List<BaseListItem> items, int totalCount, BaseListSearch search)
     {

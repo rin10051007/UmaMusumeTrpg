@@ -1,6 +1,8 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Detail;
+﻿using UmaMusumeTrpg.Models.Base.Public;
 
-public class BaseDetailResponse
+namespace UmaMusumeTrpg.Models.Base.Detail;
+
+public class BaseDetailResponse : PublicBaseResponse
 {
     public BaseDetailResponse(BaseDetailItem detail)
     {

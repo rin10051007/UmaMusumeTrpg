@@ -1,6 +1,8 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Delete;
+﻿using UmaMusumeTrpg.Models.Base.Public;
 
-public class BaseDeleteResponse
+namespace UmaMusumeTrpg.Models.Base.Delete;
+
+public class BaseDeleteResponse : PublicBaseResponse
 {
     public BaseDeleteResponse(int id, DateTime? dateTime)
     {

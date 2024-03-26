@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { LocalStorageToken } from '../../models/public-model';
-import { AuthApiService, LocalStorageService } from '../../services/public-service';
+import {Component} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {LocalStorageToken} from '../../models/public-model';
+import {AuthApiService, LocalStorageService} from '../../services/public-service';
 
 @Component({
   selector: 'header-menu',
@@ -18,7 +18,9 @@ export class HeaderMenuComponent {
     this.authApiService.tokenUp().subscribe(() => {
       (s: { loginItem: unknown; }) =>
         this.lsService.setToken(s.loginItem as unknown as LocalStorageToken)
-    }, error => { this.logOut(); });
+    }, error => {
+      this.logOut();
+    });
   }
 
   logOut() {

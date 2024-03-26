@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { concat, first } from 'rxjs';
+import {Component} from '@angular/core';
 import {
   AuthApiService,
   AuthorityConfApiService,
@@ -10,7 +9,8 @@ import {
   LoginUser,
   myPolicyName
 } from 'Common';
-import { LoginUserForm } from '../forms/login-user.form';
+import {concat, first} from 'rxjs';
+import {LoginUserForm} from '../forms/login-user.form';
 
 @Component({
   selector: 'AuthControl-login',
@@ -19,13 +19,16 @@ import { LoginUserForm } from '../forms/login-user.form';
 })
 export class LoginComponent {
 
+  loginUser: LoginUserForm;
+
   constructor(private apiService: AuthApiService, private lsService: LocalStorageService, private conveniencesService: ConveniencesService,
-    private authorityConfApiService: AuthorityConfApiService, public loginUser: LoginUserForm) {
+              private authorityConfApiService: AuthorityConfApiService) {
     this.lsService.removeToken();
+    this.loginUser = new LoginUserForm();
   }
 
   login() {
-    this.apiService.logIn(this.loginUser.getValue() as LoginUser).subscribe((r: { loginItem: unknown; }) => {
+    this.apiService.logIn(this.loginUser.getValues() as LoginUser).subscribe((r: { loginItem: unknown; }) => {
       this.lsService.setToken(r.loginItem as unknown as LocalStorageToken);
       var viewProject = this.lsService.getViewProject();
       if (this.lsService.getToken()) {

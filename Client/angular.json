@@ -99,10 +99,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "SystemControl:build:production"
+              "buildTarget": "SystemControl:build:production"
             },
             "development": {
-              "browserTarget": "SystemControl:build:development"
+              "buildTarget": "SystemControl:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -110,7 +110,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SystemControl:build"
+            "buildTarget": "SystemControl:build"
           }
         },
         "test": {
@@ -196,10 +196,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "UmaMusumeControl:build:production"
+              "buildTarget": "UmaMusumeControl:build:production"
             },
             "development": {
-              "browserTarget": "UmaMusumeControl:build:development"
+              "buildTarget": "UmaMusumeControl:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -207,7 +207,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "UmaMusumeControl:build"
+            "buildTarget": "UmaMusumeControl:build"
           }
         },
         "test": {
@@ -294,10 +294,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AuthControl:build:production"
+              "buildTarget": "AuthControl:build:production"
             },
             "development": {
-              "browserTarget": "AuthControl:build:development"
+              "buildTarget": "AuthControl:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -305,7 +305,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AuthControl:build"
+            "buildTarget": "AuthControl:build"
           }
         },
         "test": {

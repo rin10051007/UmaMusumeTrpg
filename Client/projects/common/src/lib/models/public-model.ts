@@ -24,7 +24,9 @@ export * from './base/list/base-list-item.model';
 export * from './base/list/base-list-request.model';
 export * from './base/list/base-list-response.model';
 export * from './base/list/base-list-search.model';
-export * from './local-storage/local-storage-item.model';
 export * from './jwt/claim-item.model';
+export * from './local-storage/local-storage-item.model';
+export * from './is-login-id-duplicate/is-login-id-duplicate-item.model';
+export * from './is-login-id-duplicate/is-login-id-duplicate-request.model';
 
 

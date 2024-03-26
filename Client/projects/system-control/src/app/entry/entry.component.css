@@ -1,0 +1,11 @@
+.center {
+  width: 90%;
+  margin: 10px auto;
+}
+
+.main-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

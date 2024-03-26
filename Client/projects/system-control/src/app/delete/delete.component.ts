@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {ApiService as DetailApiService} from '../detail/services/api.service';
 import {Item} from './models/item.model';
 import {ApiService} from './services/api.service';
-import {ApiService as DetailApiService} from '../detail/services/api.service';
 
 @Component({
   selector: 'SystemControl-delete',
@@ -11,7 +11,7 @@ import {ApiService as DetailApiService} from '../detail/services/api.service';
 })
 export class DeleteComponent {
 
-  item: Item = {id: 0, token: ''};
+  item: Item = {id: 0, token: '', name: '', updateTime: 0};
 
   constructor(private apiService: ApiService,
               private detailApiService: DetailApiService,
@@ -19,8 +19,7 @@ export class DeleteComponent {
     this.route.params.subscribe((params) => {
       this.detailApiService.detail({id: (Number(params['id']) || 0), token: ''})
         .subscribe(r => {
-          this.item.id = r.detail.id;
-          this.item.token = r.detail.token;
+          console.log(r)
         });
 
     })

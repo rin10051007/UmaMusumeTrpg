@@ -1,39 +1,12 @@
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginUser } from 'Common';
+import {FormBuilder, Validators} from "@angular/forms";
+import {BaseForm, LoginUser} from "Common";
 
-export class LoginUserForm {
+export class LoginUserForm extends BaseForm {
 
-  formGroup = new FormGroup({
-    loginId: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-  });
-
-  constructor() {
+  constructor(loginUser?: LoginUser) {
+    super(new FormBuilder().group({
+      loginId: [loginUser?.loginId, [Validators.required]],
+      password: [loginUser?.password, [Validators.required]]
+    }));
   }
-
-  getFormGroup(): FormGroup {
-    return this.formGroup;
-  }
-
-  getForm(key: string): AbstractControl | null {
-    return this.getFormGroup().get(key);
-  }
-
-  setValue(loginUser: LoginUser) {
-    this.formGroup.setValue(loginUser);
-  }
-
-  getValue(): LoginUser {
-    return this.formGroup.getRawValue() as LoginUser;
-  }
-
-  isRequired(key: string): boolean {
-    return this.hasError(key, 'required');
-  }
-
-  hasError(key: string, type: string): boolean {
-    var form = this.formGroup.get(key);
-    return form != null && (form.invalid && (form.touched || form.dirty)) && form.hasError(type);
-  }
-
 }

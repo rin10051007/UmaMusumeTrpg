@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("Login")]
-    public ActionResult<LoginResponse> Login([Required][FromBody] LoginRequest loginRequest)
+    public ActionResult<LoginResponse> Login([Required] [FromBody] LoginRequest loginRequest)
     {
         return Ok(new LoginResponse
         {

@@ -1,6 +1,8 @@
-﻿namespace UmaMusumeTrpg.Models.Base.Edit;
+﻿using UmaMusumeTrpg.Models.Base.Public;
 
-public class BaseEditResponse
+namespace UmaMusumeTrpg.Models.Base.Edit;
+
+public class BaseEditResponse : PublicBaseResponse
 {
     public BaseEditResponse(int id, string name, string token)
     {

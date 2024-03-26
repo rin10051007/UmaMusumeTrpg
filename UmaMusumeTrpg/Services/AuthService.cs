@@ -77,6 +77,5 @@ public class AuthService : IAuthService
             signingCredentials: credentials);
 
         return new LoginItem(handler.WriteToken(token));
-
     }
 }

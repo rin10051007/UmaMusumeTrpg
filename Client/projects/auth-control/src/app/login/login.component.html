@@ -4,18 +4,24 @@
       <mat-card-title class="login-title">ログイン</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form (ngSubmit)="login()" class="login-form" [formGroup]="loginUser.getFormGroup()">
-            <mat-form-field>
-                <input matInput placeholder="Login ID" id="loginId" formControlName="loginId">
-                <mat-error *ngIf="loginUser.isRequired('loginId')"><i class="bi bi-exclamation-triangle"></i>必須です。</mat-error>
-            </mat-form-field>
+      <form (ngSubmit)="login()" [formGroup]="loginUser.getFormGroup()" class="login-form">
+        <mat-form-field>
+          <input formControlName="loginId" id="loginId" matInput placeholder="Login ID"/>
+          <mat-error *ngIf="loginUser.isRequired('loginId')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
+        </mat-form-field>
 
-            <mat-form-field>
-                <input type="password" matInput placeholder="Password" id="password" formControlName="password">
-                <mat-error *ngIf="loginUser.isRequired('password')"><i class="bi bi-exclamation-triangle"></i>必須です。</mat-error>
-            </mat-form-field>
-            <button type="submit" mat-raised-button color="primary" [disabled]="loginUser.getFormGroup().invalid">Login</button>
-        </form>
+        <mat-form-field>
+          <input formControlName="password" id="password" matInput placeholder="Password" type="password"/>
+          <mat-error *ngIf="loginUser.isRequired('password')">
+            <i class="bi bi-exclamation-triangle"></i>必須です。
+          </mat-error>
+        </mat-form-field>
+        <button [disabled]="loginUser.getFormGroup().invalid" color="primary" mat-raised-button type="submit">
+          Login
+        </button>
+      </form>
     </mat-card-content>
   </mat-card>
 </div>

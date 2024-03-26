@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {SysPermission, UmaMusumeTrpgPermission} from '../../../../common/src/public-lib';
+import {SysPermission, UmaMusumeTrpgPermission} from "Common";
 import {ApiService as DetailApiService} from '../detail/services/api.service';
 import {Item} from './models/item.model';
 import {ApiService} from './services/api.service';

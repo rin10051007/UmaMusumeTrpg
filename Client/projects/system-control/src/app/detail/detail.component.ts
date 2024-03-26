@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {SysPermission, UmaMusumeTrpgPermission} from "Common";
+import {Item} from "./models/item.model";
 import {ApiService} from './services/api.service';
 
 @Component({
@@ -8,18 +10,40 @@ import {ApiService} from './services/api.service';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
+  detail: Item = this.initializingItem();
+
   constructor(private apiService: ApiService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.detail();
+    this.getDetail();
   }
 
-  detail() {
+  getDetail() {
     this.route.params.subscribe((params) => {
       this.apiService.detail({id: (Number(params['id']) || 0), token: ''})
-        .subscribe(r => console.log(r));
+        .subscribe(r => {
+          this.detail = r.detail as Item;
+          console.log(this.detail)
+        });
     });
+  }
+
+  initializingItem() {
+    const now = new Date(Date.now());
+    return {
+      id: 0,
+      loginId: '',
+      name: '',
+      sysPermission: SysPermission.None,
+      umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
+      email: '',
+      createTime: now,
+      deleteTime: null,
+      isDeleted: false,
+      updateTime: now,
+      token: ''
+    } as Item;
   }
 }

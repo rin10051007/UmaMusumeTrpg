@@ -1,20 +1,20 @@
-import {IsLoginIdDuplicateApiService} from "../../services/public-service";
-import {AbstractControl, ValidationErrors, Validator, ValidatorFn} from '@angular/forms';
 import {Injectable} from "@angular/core";
+import {AbstractControl, AsyncValidatorFn, ValidationErrors} from '@angular/forms';
+import {map, Observable, of} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {IsLoginIdDuplicateApiService} from "../../services/public-service";
 
 @Injectable()
-export class IsLoginIdDuplicate implements Validator {
-  constructor(private isLoginIdDuplicateApiService: IsLoginIdDuplicateApiService) {
+export class IsLoginIdDuplicate {
+  static validator(isLoginIdDuplicateApiService: IsLoginIdDuplicateApiService): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const loginId = control.value;
+      const id = control.root.get('id')?.value;
+      return isLoginIdDuplicateApiService.isLoginIdDuplicate(loginId, id).pipe(
+        map(r => {
+          return r ? {'isLoginIdDuplicate': true} : null;
+        }), catchError(() => of(null))
+      );
+    }
   }
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
-    return this.isLoginIdDuplicateApiService.isLoginIdDuplicate(value).subscribe(r => (r ? null : {'isLoginIdDuplicate': true}), e => null)
-
-  }
-}
-
-export function IsLoginIdDuplicateValidator(isLoginIdDuplicateApiService: IsLoginIdDuplicateApiService): ValidatorFn {
-  const validator = new IsLoginIdDuplicate(isLoginIdDuplicateApiService);
-  return validator.validate.bind(validator);
 }

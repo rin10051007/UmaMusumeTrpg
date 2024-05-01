@@ -17,6 +17,10 @@ public class DetailItem : BaseDetailItem
         IsDeleted = user.IsDeleted;
     }
 
+    public DetailItem()
+    {
+    }
+
     public string LoginId { get; set; }
     public SysPermission SysPermission { get; set; }
     public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }

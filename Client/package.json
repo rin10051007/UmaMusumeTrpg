@@ -10,9 +10,9 @@
     "build:AuthControl": "ng build AuthControl --configuration development",
     "build": "run-s build:All build:SystemControl build:UmaMusumeControl build:AuthControl",
     "watch:Common": "ng build Common --watch --configuration development",
-    "watch:SystemControl": "ng build SystemControl --watch --configuration development",
-    "watch:UmaMusumeControl": "ng build UmaMusumeControl --watch --configuration development",
-    "watch:AuthControl": "ng build AuthControl --watch --configuration development",
+    "watch:SystemControl": "ng build SystemControl --watch --configuration development --optimization=false",
+    "watch:UmaMusumeControl": "ng build UmaMusumeControl --watch --configuration development --optimization=false",
+    "watch:AuthControl": "ng build AuthControl --watch --configuration development --optimization=false",
     "watch:App": "run-p watch:SystemControl watch:UmaMusumeControl watch:AuthControl",
     "watch": "run-p watch:Common timeout:App",
     "prod:Common": "ng build Common --configuration production",
@@ -22,12 +22,13 @@
     "prod": "run-s prod:*",
     "test": "ng test",
     "timeout:10": "timeout /t 10",
-    "timeout:App": "run-s timeout:10 watch:App",
+    "timeout:App": "run-s timeout:10 install:common watch:App",
     "link": "npm link",
     "link:Common": "npm link common",
     "cd:dist": "cd C:\\App\\UmaMusumeTrpg\\Client\\dist\\common",
     "cd:Client": "cd C:\\App\\UmaMusumeTrpg\\Client",
-    "build:All": "run-s build:Common cd:dist link cd:Client link:Common"
+    "build:All": "run-s build:Common cd:dist link cd:Client link:Common",
+    "install:common": "npm install ./dist/common"
   },
   "private": true,
   "dependencies": {

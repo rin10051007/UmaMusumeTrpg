@@ -47,8 +47,10 @@ public class SystemController : ControllerBase
         }
         catch (Exception)
         {
-            var entryResponse = new EntryResponse(0, "").HttpStatusCode = HttpStatusCode.BadRequest;
-            return BadRequest(entryResponse);
+            return BadRequest(new EntryResponse(0, "")
+            {
+                HttpStatusCode = HttpStatusCode.BadRequest
+            });
         }
     }
 
@@ -56,15 +58,35 @@ public class SystemController : ControllerBase
     [Route("Detail")]
     public ActionResult<IEnumerable<DetailResponse>> Detail([Required] [FromBody] DetailRequest request)
     {
-        return Ok(new DetailResponse(_systemService.Detil(request.Search)));
+        try
+        {
+            return Ok(new DetailResponse(_systemService.Detil(request.Search)));
+        }
+        catch (Exception)
+        {
+            return BadRequest(new DetailResponse(new DetailItem())
+            {
+                HttpStatusCode = HttpStatusCode.BadRequest
+            });
+        }
     }
 
     [HttpPost]
     [Route("Edit")]
     public ActionResult<IEnumerable<EditResponse>> Edit([Required] [FromBody] EditRequest request)
     {
-        var (id, name, token) = _systemService.Edit(request.Edit);
-        return Ok(new EditResponse(id, name, token));
+        try
+        {
+            var (id, name, token) = _systemService.Edit(request.Edit);
+            return Ok(new EditResponse(id, token));
+        }
+        catch (Exception)
+        {
+            return BadRequest(new EditResponse(0, "")
+            {
+                HttpStatusCode = HttpStatusCode.BadRequest
+            });
+        }
     }
 
     [HttpPost]

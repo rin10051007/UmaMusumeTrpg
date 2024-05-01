@@ -1,4 +1,4 @@
-import {BaseEditRequest} from 'Common';
+import {BaseEditResponse} from 'Common';
 
-export interface Response extends BaseEditRequest {
+export interface Response extends BaseEditResponse {
 }

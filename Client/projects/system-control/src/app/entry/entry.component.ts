@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 import {SysPermission, UmaMusumeTrpgPermission} from 'Common';
 import {Entry} from './forms/entry.form';
 import {ApiService} from './services/api.service';
 import {Item} from "./models/item.model";
 import {HttpStatusCode} from "@angular/common/http";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'SystemControl-entry',
@@ -17,7 +17,7 @@ export class EntryComponent implements OnInit {
   protected readonly SysPermission = SysPermission;
   protected readonly UmaMusumeTrpgPermission = UmaMusumeTrpgPermission;
 
-  constructor(private apiService: ApiService, private router: Router, private entry: Entry) {
+  constructor(private apiService: ApiService, private router: Router, entry: Entry) {
     this.entryForm = entry;
     this.entryForm.createForm();
   }
@@ -30,7 +30,7 @@ export class EntryComponent implements OnInit {
       this.apiService.entry(this.entryForm.getValues() as Item).subscribe(r => {
         switch (r.httpStatusCode) {
           case HttpStatusCode.Ok:
-            this.router.navigateByUrl('/list').then(r => {
+            this.router.navigateByUrl('/list').then(() => {
             });
             break;
           case HttpStatusCode.BadRequest:

@@ -1,5 +1,5 @@
-import {FormControl, FormGroup} from "@angular/forms";
 import {Injectable} from "@angular/core";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Injectable()
 export class BaseForm {
@@ -37,6 +37,11 @@ export class BaseForm {
     return this.hasError(key, 'pattern');
   }
 
+  isLoginIdDuplicate(key: string): boolean {
+    return this.hasError(key, 'isLoginIdDuplicate');
+  }
+
+
   isPasswordMatch(): boolean {
     return this.getFormGroup().hasError('passwordMismatch');
   }
@@ -52,9 +57,10 @@ export class BaseForm {
     this.getFormGroup().markAllAsTouched();
   }
 
-
   hasError(key: string, type: string): boolean {
     const form = this.getFormGroup().get(key);
+    if (type == 'isLoginIdDuplicate') {
+    }
     return form != null && ((form.touched || form.dirty)) && form.hasError(type);
   }
 }

@@ -36,21 +36,32 @@
         <mat-list-item>
           <mat-grid-list cols="10">
             <mat-grid-tile colspan="2">作成日時</mat-grid-tile>
-            <mat-grid-tile colspan="8">{{ detail.createTime | date:"yyyy年MM月dd日" }}</mat-grid-tile>
+            <mat-grid-tile colspan="8">{{ detail.createTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
           <mat-grid-list cols="10">
             <mat-grid-tile colspan="2">更新日時</mat-grid-tile>
-            <mat-grid-tile colspan="8">{{ detail.updateTime | date:"yyyy年MM月dd日" }}</mat-grid-tile>
+            <mat-grid-tile colspan="8">{{ detail.updateTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item *ngIf="detail.isDeleted">
           <mat-grid-list cols="10">
             <mat-grid-tile colspan="2">削除日時</mat-grid-tile>
-            <mat-grid-tile colspan="8">{{ detail.deleteTime ? detail.deleteTime : 0 | date: 'yyyy年MM月dd日' }}
+            <mat-grid-tile colspan="8">{{ detail.deleteTime ? detail.deleteTime : 0 | date: "yyyy年MM月dd日 HH:mm.ss" }}
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngIf="!detail.isDeleted">
+          <mat-grid-list cols="10">
+            <mat-grid-tile colspan="5">
+              <button color="primary" mat-raised-button routerLink="/edit/{{detail.id}}">編集</button>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="5">
+              <button color="warn" mat-raised-button routerLink="/delete/{{detail.id}}">削除</button>
             </mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>

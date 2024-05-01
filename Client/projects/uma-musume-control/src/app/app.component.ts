@@ -11,6 +11,7 @@ export class AppComponent {
   authUrl!: string;
   systemUrl!: string;
   umaMusumeUrl!: string;
+  title = 'UmaMusumeControl';
 
   constructor(private authApiService: AuthApiService, private lsService: LocalStorageService) {
     this.baseUrl = environment.baseUrl;
@@ -23,6 +24,4 @@ export class AppComponent {
       window.location.href = `${this.baseUrl}${this.authUrl}`
     );
   }
-
-  title = 'UmaMusumeControl';
 }

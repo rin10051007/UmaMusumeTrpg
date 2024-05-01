@@ -1,5 +1,7 @@
+import {HttpStatusCode} from "@angular/common/http";
+
 export interface BaseEditResponse {
   id: number;
-  name: string;
   token: string;
+  httpStatusCode: HttpStatusCode;
 }

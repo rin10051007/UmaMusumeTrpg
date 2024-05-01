@@ -131,6 +131,6 @@ public class SystemService : ISystemService
 
     public bool IsLoginIdDuplicate(IsLoginIdDuplicateItem item)
     {
-        return !_dbContext.Users.Any(x => x.LoginId.Equals(item.LoginId) && !x.ID.Equals(item.Id) && !x.IsDeleted);
+        return _dbContext.Users.Any(x => x.LoginId.Equals(item.LoginId) && !x.ID.Equals(item.Id) && !x.IsDeleted);
     }
 }

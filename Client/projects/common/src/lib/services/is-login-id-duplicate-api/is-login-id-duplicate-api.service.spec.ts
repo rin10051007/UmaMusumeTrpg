@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { IsLoginIdDuplicateApiService } from './is-login-id-duplicate-api.service';
+import {IsLoginIdDuplicateApiService} from './is-login-id-duplicate-api.service';
 
 describe('IsLoginIdDuplicateApiService', () => {
   let service: IsLoginIdDuplicateApiService;

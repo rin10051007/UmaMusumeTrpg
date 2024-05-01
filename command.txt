@@ -1,0 +1,31 @@
+cd C:\App\UmaMusumeTrpg\Client
+cls
+npm install ./dist/common
+npm rum build:All
+npm rum watch
+
+cd C:\App\UmaMusumeTrpg\UmaMusumeTrpg
+dotnet watch
+
+cd C:\App\UmaMusumeTrpg\Client
+
+ng new Client --create-application=false  --skip-install
+cd Client
+ng generate library Common --prefix=Common --skip-install
+ng generate application SystemControl --prefix=SystemControl --skip-install
+ng generate application UmaMusumeControl --prefix=UmaMusumeControl --skip-install
+ng generate application AuthControl --prefix=AuthControl --skip-install
+
+cls
+cd C:\App\UmaMusumeTrpg\Client\projects\common
+npm cache verify
+npm cache clean --force
+npm install
+cd C:\App\UmaMusumeTrpg\Client
+npm cache verify
+npm cache clean --force
+npm install
+
+cd C:\App\UmaMusumeTrpg\Client
+npm rum build
+npm rum watch

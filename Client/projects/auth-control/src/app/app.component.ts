@@ -11,6 +11,7 @@ export class AppComponent {
   authUrl!: string;
   systemUrl!: string;
   umaMusumeUrl!: string;
+  title = 'AuthControl';
 
   constructor() {
     this.baseUrl = environment.baseUrl;
@@ -18,6 +19,4 @@ export class AppComponent {
     this.systemUrl = environment.systemUrl;
     this.umaMusumeUrl = environment.umaMusumeUrl;
   }
-
-  title = 'AuthControl';
 }

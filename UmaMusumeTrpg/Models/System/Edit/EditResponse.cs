@@ -4,7 +4,7 @@ namespace UmaMusumeTrpg.Models.System.Edit;
 
 public class EditResponse : BaseEditResponse
 {
-    public EditResponse(int id, string name, string token) : base(id, name, token)
+    public EditResponse(int id, string token) : base(id, token)
     {
     }
 }

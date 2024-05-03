@@ -11,43 +11,71 @@ import {ApiService} from './services/api.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  lists: Item[] = [];
+  columnsToDisplay: string[] = ['id', 'name', 'sysPermission', 'umaMusumeTrpgPermission', 'buttons'];
+  list: Item[] = [];
+  search: Search = {
+    name: '',
+    sysPermission: SysPermission.None,
+    umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
+    sortItem: SystemSortItem.none,
+    sortDirection: SortDirection.none,
+    displayPage: 1,
+    displayCount: DisplayCount[1]
+  };
+  count = 0;
+  protected readonly SystemSortItem = SystemSortItem;
 
-  constructor(private apiSetvise: ApiService,
+  constructor(private apiService: ApiService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
   }
 
-
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(
       params => {
-        this.apiSetvise.getList({
-          Name: (params as Search).Name,
-          SysPermission: Number((params as Search).SysPermission || 0),
-          UmaMusumeTrpgPermission: Number((params as Search).UmaMusumeTrpgPermission || 0),
-          SortItem: Number((params as Search).SortItem || 0),
-          SortDirection: Number((params as Search).SortDirection || 0),
-          DisplayPage: Number((params as Search).DisplayPage || 1),
-          DisplayCount: Number((params as Search).DisplayCount || DisplayCount[1]),
+        this.apiService.getList({
+          name: (params as Search).name,
+          sysPermission: Number((params as Search).sysPermission || 0),
+          umaMusumeTrpgPermission: Number((params as Search).umaMusumeTrpgPermission || 0),
+          sortItem: Number((params as Search).sortItem || 0),
+          sortDirection: Number((params as Search).sortDirection || 0),
+          displayPage: Number((params as Search).displayPage || 1),
+          displayCount: Number((params as Search).displayCount || DisplayCount[1]),
         } as Search).subscribe(r => {
-          this.lists = r.items
+          this.list = r.items;
+          this.search = r.search;
+          this.count = r.totalCount;
         });
       }
     );
   }
 
-  searchClick() {
+  sortItemSet(sortItem: SystemSortItem) {
+    if (sortItem !== this.search.sortItem) {
+      this.search.sortDirection = SortDirection.none;
+    }
+    this.addQueryParam(['sortItem', 'sortDirection'], [sortItem, (this.search.sortDirection + 1) % 3 as SortDirection]);
+  }
+
+  searchResetClick() {
     this.router.navigate([], {
       queryParams: {
-        Name: '',
-        SysPermission: [SysPermission.None],
-        UmaMusumeTrpgPermission: [UmaMusumeTrpgPermission.None],
-        SortItem: SystemSortItem.none,
-        SortDirection: SortDirection.none,
-        DisplayPage: 1,
-        DisplayCount: DisplayCount[0]
+        name: '',
+        sysPermission: [SysPermission.None],
+        umaMusumeTrpgPermission: [UmaMusumeTrpgPermission.None],
+        sortItem: SystemSortItem.none,
+        sortDirection: SortDirection.none,
+        displayPage: 1,
+        displayCount: DisplayCount[0]
       }
     });
+  }
+
+  addQueryParam(key: string[], values: (string | number)[]) {
+    const queryParams: any = {};
+    key.forEach((key, index) => {
+      queryParams[key] = values[index];
+    });
+    this.router.navigate([], {queryParams: queryParams, queryParamsHandling: 'merge'});
   }
 }

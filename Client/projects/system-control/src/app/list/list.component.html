@@ -1,2 +1,54 @@
 <p>list works!</p>
-<button (click)="searchClick()">検索</button>
+<button (click)="searchResetClick()">検索</button>
+<table [dataSource]="list" class="mat-elevation-z8" mat-table>
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.id)" class="active">
+        Id
+        <span *ngIf="search.sortItem==SystemSortItem.id" [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell>{{ item.id }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.name)" class="active">
+        Name
+        <span *ngIf="search.sortItem==SystemSortItem.name" [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.name }}</td>
+  </ng-container>
+  <ng-container matColumnDef="sysPermission">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.sysPermissions)" class="active">
+        システム管理権限
+        <span *ngIf="search.sortItem==SystemSortItem.sysPermissions"
+              [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.sysPermission | sysPermission }}</td>
+  </ng-container>
+  <ng-container matColumnDef="umaMusumeTrpgPermission">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.umaMusumeTrpgPermissions)" class="active">
+        ウマ娘TRPG権限
+        <span *ngIf="search.sortItem==SystemSortItem.umaMusumeTrpgPermissions"
+              [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.umaMusumeTrpgPermission | umaMusumeTrpgPermission }}</td>
+  </ng-container>
+  <ng-container matColumnDef="buttons">
+    <th *matHeaderCellDef mat-header-cell>
+    </th>
+    <td *matCellDef="let item" mat-cell>
+      <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}">編集</button>
+      <span class="spacer"></span>
+      <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}">削除</button>
+    </td>
+  </ng-container>
+  <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+  <tr *matRowDef="let myRowData; columns: columnsToDisplay" mat-row></tr>
+</table>

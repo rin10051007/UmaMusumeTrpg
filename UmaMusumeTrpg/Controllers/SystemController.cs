@@ -78,6 +78,7 @@ public class SystemController : ControllerBase
         try
         {
             var (id, name, token) = _systemService.Edit(request.Edit);
+            if (id == 0) throw new Exception();
             return Ok(new EditResponse(id, token));
         }
         catch (Exception)

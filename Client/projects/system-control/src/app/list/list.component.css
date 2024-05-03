@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+.active {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.spacer {
+  margin-right: 10px; /* 右側に 10px の余白を設定 */
+}

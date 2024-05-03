@@ -42,27 +42,48 @@ public class SystemService : ISystemService
             list = (IOrderedQueryable<User>)list.Where(x =>
                 x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
 
-        switch (search.SortItem)
-        {
-            default:
-            case SystemSortItem.None:
-            case SystemSortItem.Id:
-                list = list.OrderBy(x => x.ID);
-                break;
-            case SystemSortItem.Name:
-                list = list.OrderBy(x => x.Name);
-                break;
-            case SystemSortItem.SysPermissions:
-                list = list.OrderBy(x => x.SysPermission);
-                break;
-            case SystemSortItem.UmaMusumeTrpgPermissions:
-                list = list.OrderBy(x => x.UmaMusumeTrpgPermission);
-                break;
-        }
+        if (search.SortDirection == SotrDirection.AscendingOrder)
+            switch (search.SortItem)
+            {
+                default:
+                case SystemSortItem.None:
+                case SystemSortItem.Id:
+                    list = list.OrderBy(x => x.ID);
+                    break;
+                case SystemSortItem.Name:
+                    list = list.OrderBy(x => x.Name);
+                    break;
+                case SystemSortItem.SysPermissions:
+                    list = list.OrderBy(x => x.SysPermission);
+                    break;
+                case SystemSortItem.UmaMusumeTrpgPermissions:
+                    list = list.OrderBy(x => x.UmaMusumeTrpgPermission);
+                    break;
+            }
+        else if (search.SortDirection == SotrDirection.DescendingOrder)
+            switch (search.SortItem)
+            {
+                default:
+                case SystemSortItem.None:
+                    list = list.OrderBy(x => x.ID);
+                    break;
+                case SystemSortItem.Id:
+                    list = list.OrderByDescending(x => x.ID);
+                    break;
+                case SystemSortItem.Name:
+                    list = list.OrderByDescending(x => x.Name);
+                    break;
+                case SystemSortItem.SysPermissions:
+                    list = list.OrderByDescending(x => x.SysPermission);
+                    break;
+                case SystemSortItem.UmaMusumeTrpgPermissions:
+                    list = list.OrderByDescending(x => x.UmaMusumeTrpgPermission);
+                    break;
+            }
+        else
+            list = list.OrderBy(x => x.ID);
 
         list = list.ThenBy(x => x.ID);
-
-        list = (IOrderedQueryable<User>)(search.SortDirection != SotrDirection.DescendingOrder ? list : list.Reverse());
 
         var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
         if (maxPage > 1)

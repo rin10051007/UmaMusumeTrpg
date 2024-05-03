@@ -27,5 +27,9 @@ npm cache clean --force
 npm install
 
 cd C:\App\UmaMusumeTrpg\Client
-npm rum build
+npm install ./dist/common
+npm rum build:All
 npm rum watch
+
+
+ng generate pipe pipes/sort-direction/sort-direction --project=Common

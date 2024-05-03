@@ -1,4 +1,4 @@
-import { SortDirectionPipe } from './sort-direction.pipe';
+import {SortDirectionPipe} from './sort-direction.pipe';
 
 describe('SortDirectionPipe', () => {
   it('create an instance', () => {

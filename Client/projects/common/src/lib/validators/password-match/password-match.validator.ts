@@ -1,5 +1,5 @@
-import {AbstractControl, FormControl, ValidationErrors, Validator, ValidatorFn} from "@angular/forms";
 import {Injectable} from "@angular/core";
+import {AbstractControl, FormControl, ValidationErrors, Validator, ValidatorFn} from "@angular/forms";
 
 @Injectable()
 export class PasswordMatch implements Validator {

@@ -27,7 +27,7 @@ public class SystemService : ISystemService
         _timeService = timeService;
     }
 
-    public List<ListItem> GetList(ListSearch search)
+    public (List<ListItem>, int) GetList(ListSearch search)
     {
         IOrderedQueryable<User> list = null;
         list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => !x.IsDeleted);
@@ -84,15 +84,16 @@ public class SystemService : ISystemService
             list = list.OrderBy(x => x.ID);
 
         list = list.ThenBy(x => x.ID);
+        var length = list.Count();
 
         var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
-        if (maxPage > 1)
+        if (maxPage > 0)
             list = maxPage > search.DisplayPage
-                ? (IOrderedQueryable<User>)list.Skip((search.DisplayPage - 1) * search.DisplayCount)
+                ? (IOrderedQueryable<User>)list.Skip(search.DisplayPage * search.DisplayCount)
                 : (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
         list = (IOrderedQueryable<User>)list.Take(search.DisplayCount);
 
-        return list.Select(x => new ListItem(x)).ToList();
+        return (list.Select(x => new ListItem(x)).ToList(), length);
     }
 
     public (int, string) Entry(EntryItem item)

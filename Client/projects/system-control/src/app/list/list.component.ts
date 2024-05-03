@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from '@angular/router';
 import {DisplayCount, SortDirection, SysPermission, SystemSortItem, UmaMusumeTrpgPermission} from 'Common';
 import {Item} from './models/item.model';
@@ -23,7 +24,9 @@ export class ListComponent implements OnInit {
     displayCount: DisplayCount[1]
   };
   count = 0;
+
   protected readonly SystemSortItem = SystemSortItem;
+  protected readonly DisplayCount = DisplayCount;
 
   constructor(private apiService: ApiService,
               private activatedRoute: ActivatedRoute,
@@ -39,7 +42,7 @@ export class ListComponent implements OnInit {
           umaMusumeTrpgPermission: Number((params as Search).umaMusumeTrpgPermission || 0),
           sortItem: Number((params as Search).sortItem || 0),
           sortDirection: Number((params as Search).sortDirection || 0),
-          displayPage: Number((params as Search).displayPage || 1),
+          displayPage: Number((params as Search).displayPage || 0),
           displayCount: Number((params as Search).displayCount || DisplayCount[1]),
         } as Search).subscribe(r => {
           this.list = r.items;
@@ -65,7 +68,7 @@ export class ListComponent implements OnInit {
         umaMusumeTrpgPermission: [UmaMusumeTrpgPermission.None],
         sortItem: SystemSortItem.none,
         sortDirection: SortDirection.none,
-        displayPage: 1,
+        displayPage: 0,
         displayCount: DisplayCount[0]
       }
     });
@@ -77,5 +80,9 @@ export class ListComponent implements OnInit {
       queryParams[key] = values[index];
     });
     this.router.navigate([], {queryParams: queryParams, queryParamsHandling: 'merge'});
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.addQueryParam(['displayPage', 'displayCount'], [e.pageIndex, e.pageSize]);
   }
 }

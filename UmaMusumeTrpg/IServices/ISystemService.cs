@@ -9,7 +9,7 @@ namespace UmaMusumeTrpg.IServices;
 
 public interface ISystemService
 {
-    public List<ListItem> GetList(ListSearch search);
+    public (List<ListItem>, int) GetList(ListSearch search);
     public (int, string) Entry(EntryItem item);
     public DetailItem Detil(DetailSearch serch);
     public (int, string, string) Edit(EditItem item);

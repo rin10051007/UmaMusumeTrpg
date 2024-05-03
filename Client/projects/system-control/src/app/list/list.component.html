@@ -52,3 +52,13 @@
   <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
   <tr *matRowDef="let myRowData; columns: columnsToDisplay" mat-row></tr>
 </table>
+<mat-paginator
+  #paginator
+  (page)="handlePageEvent($event)"
+  [length]="count"
+  [pageIndex]="search.displayPage"
+  [pageSizeOptions]="[1,2]"
+  [pageSize]="search.displayCount"
+  [showFirstLastButtons]="true"
+  class="demo-paginator"
+></mat-paginator>

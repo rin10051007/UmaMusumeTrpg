@@ -32,8 +32,8 @@ public class SystemController : ControllerBase
     [Route("GetList")]
     public ActionResult<IEnumerable<ListResponse>> GetList([Required] [FromBody] ListRequest request)
     {
-        var items = _systemService.GetList(request.Search);
-        return Ok(new ListResponse(items, items.Count, request.Search));
+        var (items, length) = _systemService.GetList(request.Search);
+        return Ok(new ListResponse(items, length, request.Search));
     }
 
     [HttpPost]

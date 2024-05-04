@@ -22,9 +22,9 @@
   </ng-container>
   <ng-container matColumnDef="sysPermission">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.sysPermissions)" class="active">
+      <a (click)="sortItemSet(SystemSortItem.sysPermission)" class="active">
         システム管理権限
-        <span *ngIf="search.sortItem==SystemSortItem.sysPermissions"
+        <span *ngIf="search.sortItem==SystemSortItem.sysPermission"
               [innerHTML]="search.sortDirection | sortDirection"></span>
       </a>
     </th>
@@ -32,9 +32,9 @@
   </ng-container>
   <ng-container matColumnDef="umaMusumeTrpgPermission">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.umaMusumeTrpgPermissions)" class="active">
+      <a (click)="sortItemSet(SystemSortItem.umaMusumeTrpgPermission)" class="active">
         ウマ娘TRPG権限
-        <span *ngIf="search.sortItem==SystemSortItem.umaMusumeTrpgPermissions"
+        <span *ngIf="search.sortItem==SystemSortItem.umaMusumeTrpgPermission"
               [innerHTML]="search.sortDirection | sortDirection"></span>
       </a>
     </th>

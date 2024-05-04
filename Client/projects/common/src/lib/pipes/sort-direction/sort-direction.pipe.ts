@@ -13,9 +13,9 @@ export class SortDirectionPipe implements PipeTransform {
   transform(sortDirection: SortDirection): SafeHtml {
     switch (sortDirection) {
       case SortDirection.ascendingOrder:
-        return this.sanitizer.bypassSecurityTrustHtml('<i class="bi bi-caret-up-fill"></i>');
+        return this.sanitizer.bypassSecurityTrustHtml('<i class="bi bi-arrow-up"></i>');
       case SortDirection.descendingOrder:
-        return this.sanitizer.bypassSecurityTrustHtml('<i class="bi bi-caret-down-fill"></i>');
+        return this.sanitizer.bypassSecurityTrustHtml('<i class="bi bi-arrow-down"></i>');
       default:
         return '';
     }

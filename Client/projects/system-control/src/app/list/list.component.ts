@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from '@angular/router';
-import {DisplayCount, SortDirection, SysPermission, SystemSortItem, UmaMusumeTrpgPermission} from 'Common';
+import {PageSizeOptions, SortDirection, SysPermission, SystemSortItem, UmaMusumeTrpgPermission} from 'Common';
 import {Item} from './models/item.model';
 import {Search} from './models/search.model';
 import {ApiService} from './services/api.service';
@@ -20,13 +20,13 @@ export class ListComponent implements OnInit {
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
     sortItem: SystemSortItem.none,
     sortDirection: SortDirection.none,
-    displayPage: 1,
-    displayCount: DisplayCount[1]
+    pageIndex: 1,
+    pageSize: PageSizeOptions[1]
   };
-  count = 0;
+  length = 0;
 
   protected readonly SystemSortItem = SystemSortItem;
-  protected readonly DisplayCount = DisplayCount;
+  protected readonly PageSizeOptions = PageSizeOptions;
 
   constructor(private apiService: ApiService,
               private activatedRoute: ActivatedRoute,
@@ -42,12 +42,12 @@ export class ListComponent implements OnInit {
           umaMusumeTrpgPermission: Number((params as Search).umaMusumeTrpgPermission || 0),
           sortItem: Number((params as Search).sortItem || 0),
           sortDirection: Number((params as Search).sortDirection || 0),
-          displayPage: Number((params as Search).displayPage || 0),
-          displayCount: Number((params as Search).displayCount || DisplayCount[1]),
+          pageIndex: Number((params as Search).pageIndex || 0),
+          pageSize: Number((params as Search).pageSize || PageSizeOptions[1]),
         } as Search).subscribe(r => {
           this.list = r.items;
           this.search = r.search;
-          this.count = r.totalCount;
+          this.length = r.length;
         });
       }
     );
@@ -68,8 +68,8 @@ export class ListComponent implements OnInit {
         umaMusumeTrpgPermission: [UmaMusumeTrpgPermission.None],
         sortItem: SystemSortItem.none,
         sortDirection: SortDirection.none,
-        displayPage: 0,
-        displayCount: DisplayCount[0]
+        pageIndex: 0,
+        pageSize: PageSizeOptions[0]
       }
     });
   }
@@ -83,6 +83,6 @@ export class ListComponent implements OnInit {
   }
 
   handlePageEvent(e: PageEvent) {
-    this.addQueryParam(['displayPage', 'displayCount'], [e.pageIndex, e.pageSize]);
+    this.addQueryParam(['pageIndex', 'pageSize'], [e.pageIndex, e.pageSize]);
   }
 }

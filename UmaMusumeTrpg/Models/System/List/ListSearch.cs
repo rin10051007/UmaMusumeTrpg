@@ -10,7 +10,7 @@ public class ListSearch : BaseListSearch
     }
 
     public ListSearch(string name, SotrDirection sortDirection, UmaMusumeTrpgPermission umaMusumeTrpgPermission,
-        SystemSortItem sortItem, int displayPage, int displayCount) : base(sortDirection, displayPage, displayCount)
+        SystemSortItem sortItem, int pageIndexIndex, int pageSize) : base(sortDirection, pageIndexIndex, pageSize)
     {
         Name = name;
         SortDirection = sortDirection;

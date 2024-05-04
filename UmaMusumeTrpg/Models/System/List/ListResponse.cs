@@ -4,10 +4,10 @@ namespace UmaMusumeTrpg.Models.System.List;
 
 public class ListResponse : BaseListResponse
 {
-    public ListResponse(List<ListItem> items, int totalCount, ListSearch search) : base(new List<BaseListItem>
+    public ListResponse(List<ListItem> items, int length, ListSearch search) : base(new List<BaseListItem>
     {
         new(1)
-    }, totalCount, search)
+    }, length, search)
     {
         Search = search;
         Items = items;

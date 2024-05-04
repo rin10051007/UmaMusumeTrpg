@@ -8,14 +8,14 @@ public class BaseListSearch
     {
     }
 
-    protected BaseListSearch(SotrDirection sortDirection, int displayPage, int displayCount)
+    protected BaseListSearch(SotrDirection sortDirection, int pageIndexIndex, int pageSize)
     {
         SortDirection = sortDirection;
-        DisplayPage = displayPage;
-        DisplayCount = displayCount;
+        PageIndex = pageIndexIndex;
+        PageSize = pageSize;
     }
 
     public SotrDirection SortDirection { get; set; }
-    public int DisplayPage { get; set; }
-    public int DisplayCount { get; set; }
+    public int PageIndex { get; set; }
+    public int PageSize { get; set; }
 }

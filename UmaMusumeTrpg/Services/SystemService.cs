@@ -86,12 +86,12 @@ public class SystemService : ISystemService
         list = list.ThenBy(x => x.ID);
         var length = list.Count();
 
-        var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
+        var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.PageSize));
         if (maxPage > 0)
-            list = maxPage > search.DisplayPage
-                ? (IOrderedQueryable<User>)list.Skip(search.DisplayPage * search.DisplayCount)
-                : (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
-        list = (IOrderedQueryable<User>)list.Take(search.DisplayCount);
+            list = maxPage > search.PageIndex
+                ? (IOrderedQueryable<User>)list.Skip(search.PageIndex * search.PageSize)
+                : (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.PageSize);
+        list = (IOrderedQueryable<User>)list.Take(search.PageSize);
 
         return (list.Select(x => new ListItem(x)).ToList(), length);
     }

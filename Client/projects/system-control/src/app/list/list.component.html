@@ -143,8 +143,8 @@
       <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}">削除</button>
     </td>
   </ng-container>
-  <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-  <tr *matRowDef="let myRowData; columns: columnsToDisplay" mat-row></tr>
+  <tr *matHeaderRowDef="ColumnsToDisplay" mat-header-row></tr>
+  <tr *matRowDef="let myRowData; columns: ColumnsToDisplay" mat-row></tr>
 </table>
 <mat-paginator
   #paginator

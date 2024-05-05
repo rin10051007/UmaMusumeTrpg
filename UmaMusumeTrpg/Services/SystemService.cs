@@ -54,10 +54,11 @@ public class SystemService : ISystemService
                 x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
 
         if (search.CreateTimeStart.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x => x.CreateTime.Date >= search.CreateTimeStart);
+            list = (IOrderedQueryable<User>)list.Where(x =>
+                DateTime.Compare(x.CreateTime.Date, search.CreateTimeStart.Value) >= 0);
 
         if (search.CreateTimeEnd.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x => x.CreateTime.Date <= search.CreateTimeEnd);
+            list = (IOrderedQueryable<User>)list.Where(x => x.CreateTime.Date <= search.CreateTimeEnd.Value);
 
         if (search.UpdateTimeStart.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date >= search.UpdateTimeStart);

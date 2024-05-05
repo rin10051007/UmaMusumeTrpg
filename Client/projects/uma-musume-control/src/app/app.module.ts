@@ -1,5 +1,5 @@
 import {HttpClientModule} from '@angular/common/http';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {
   AuthApiService,
@@ -25,7 +25,8 @@ import {AppComponent} from './app.component';
     AuthApiService,
     LocalStorageService,
     TokenInterceptorProvider,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    {provide: LOCALE_ID, useValue: 'ja-JP'}
   ],
   bootstrap: [AppComponent]
 })

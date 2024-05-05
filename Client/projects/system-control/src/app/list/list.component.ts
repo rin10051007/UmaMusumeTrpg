@@ -1,7 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from '@angular/router';
-import {PageSizeOptions, SortDirection, SysPermission, SystemSortItem, UmaMusumeTrpgPermission} from 'Common';
+import {
+  PageSizeOptions,
+  SortDirection,
+  SysListColumnsToDisplay,
+  SysPermission,
+  SystemSortItem,
+  UmaMusumeTrpgPermission
+} from 'Common';
 import {Item} from './models/item.model';
 import {SearchItem} from './models/search-item.model';
 import {ApiService} from './services/api.service';
@@ -12,7 +19,6 @@ import {ApiService} from './services/api.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  columnsToDisplay: string[] = ['id', 'name', 'loginId', 'sysPermission', 'umaMusumeTrpgPermission', 'email', 'createTime', 'updateTime', 'deleteTime', 'buttons'];
   list: Item[] = [];
   search: SearchItem = {
     integration: '',
@@ -38,6 +44,7 @@ export class ListComponent implements OnInit {
   isDetailSearch: boolean = false;
   protected readonly SystemSortItem = SystemSortItem;
   protected readonly PageSizeOptions = PageSizeOptions;
+  protected readonly ColumnsToDisplay = SysListColumnsToDisplay;
 
   constructor(private apiService: ApiService,
               private activatedRoute: ActivatedRoute,
@@ -47,19 +54,21 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(
       params => {
+        const item = params as SearchItem;
         this.apiService.getList({
-          integration: (params as SearchItem).integration,
-          loginId: (params as SearchItem).loginId,
-          name: (params as SearchItem).name,
-          email: (params as SearchItem).email,
-          sysPermission: Number((params as SearchItem).sysPermission || 0),
-          umaMusumeTrpgPermission: Number((params as SearchItem).umaMusumeTrpgPermission || 0),
-          isUndeleted: (params as SearchItem).isUndeleted || true,
-          isDeleted: (params as SearchItem).isDeleted || false,
-          sortItem: Number((params as SearchItem).sortItem || 0),
-          sortDirection: Number((params as SearchItem).sortDirection || 0),
-          pageIndex: Number((params as SearchItem).pageIndex || 0),
-          pageSize: Number((params as SearchItem).pageSize || PageSizeOptions[1]),
+          integration: item.integration,
+          loginId: item.loginId,
+          name: item.name,
+          email: item.email,
+          sysPermission: Number(item.sysPermission || 0),
+          umaMusumeTrpgPermission: Number(item.umaMusumeTrpgPermission || 0),
+          isUndeleted: Number(item.isUndeleted) == 1 || true,
+          isDeleted: Number(item.isDeleted) == 1 || false,
+          createTimeStart: item.createTimeStart ? new Date(item.createTimeStart) : null,
+          sortItem: Number(item.sortItem || 0),
+          sortDirection: Number(item.sortDirection || 0),
+          pageIndex: Number(item.pageIndex || 0),
+          pageSize: Number(item.pageSize || PageSizeOptions[1]),
         } as SearchItem).subscribe(r => {
           this.list = r.items;
           this.search = r.search;
@@ -79,9 +88,20 @@ export class ListComponent implements OnInit {
   searchResetClick() {
     this.router.navigate([], {
       queryParams: {
+        integration: '',
+        loginId: '',
         name: '',
-        sysPermission: [SysPermission.None],
-        umaMusumeTrpgPermission: [UmaMusumeTrpgPermission.None],
+        email: '',
+        sysPermission: SysPermission.None,
+        umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
+        isUndeleted: 1,
+        isDeleted: 0,
+        createTimeStart: '2024/5/4',
+        createTimeEnd: '',
+        updateTimeStart: '',
+        updateTimeEnd: '',
+        deleteTimeStart: '',
+        deleteTimeEnd: '',
         sortItem: SystemSortItem.none,
         sortDirection: SortDirection.none,
         pageIndex: 0,

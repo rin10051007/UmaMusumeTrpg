@@ -27,12 +27,12 @@ import {ApiService} from './services/api.service';
     MatGridListModule,
     MatSlideToggleModule,
     SysPermissionPipe,
-    UmaMusumeTrpgPermissionPipe,
-    SortDirectionPipe,
     MatButton,
     MatGridTile,
     FormsModule,
     ReactiveFormsModule,
+    UmaMusumeTrpgPermissionPipe,
+    SortDirectionPipe
   ],
   exports: [
     MatTableModule,

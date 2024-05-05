@@ -1,6 +1,6 @@
 import {BaseDetailRequest} from 'Common';
-import {Search} from './search.model';
+import {Select} from './select.model';
 
 export interface Request extends BaseDetailRequest {
-  search: Search
+  select: Select
 }

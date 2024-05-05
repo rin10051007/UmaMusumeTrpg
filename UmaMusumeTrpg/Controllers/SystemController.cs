@@ -60,7 +60,7 @@ public class SystemController : ControllerBase
     {
         try
         {
-            return Ok(new DetailResponse(_systemService.Detil(request.Search)));
+            return Ok(new DetailResponse(_systemService.Detail(request.Select)));
         }
         catch (Exception)
         {

@@ -1,5 +1,5 @@
-import {BaseDetailSearch} from '../../public-model';
+import {BaseDetailSelect} from '../../public-model';
 
 export interface BaseDetailRequest {
-  search: BaseDetailSearch;
+  select: BaseDetailSelect;
 }

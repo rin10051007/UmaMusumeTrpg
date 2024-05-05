@@ -1,8 +1,11 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
-import {MatGridTile} from "@angular/material/grid-list";
+import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule, MatGridTile} from "@angular/material/grid-list";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatTableModule} from "@angular/material/table";
 import {SortDirectionPipe, SysPermissionPipe, UmaMusumeTrpgPermissionPipe} from "Common";
 
@@ -20,15 +23,25 @@ import {ApiService} from './services/api.service';
     ListRoutingModule,
     MatTableModule,
     MatPaginatorModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSlideToggleModule,
     SysPermissionPipe,
     UmaMusumeTrpgPermissionPipe,
     SortDirectionPipe,
     MatButton,
-    MatGridTile
+    MatGridTile,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSlideToggleModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     ApiService,

@@ -3,7 +3,7 @@ import {PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from '@angular/router';
 import {PageSizeOptions, SortDirection, SysPermission, SystemSortItem, UmaMusumeTrpgPermission} from 'Common';
 import {Item} from './models/item.model';
-import {Search} from './models/search.model';
+import {SearchItem} from './models/search-item.model';
 import {ApiService} from './services/api.service';
 
 @Component({
@@ -12,19 +12,30 @@ import {ApiService} from './services/api.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  columnsToDisplay: string[] = ['id', 'name', 'sysPermission', 'umaMusumeTrpgPermission', 'buttons'];
+  columnsToDisplay: string[] = ['id', 'name', 'loginId', 'sysPermission', 'umaMusumeTrpgPermission', 'email', 'createTime', 'updateTime', 'deleteTime', 'buttons'];
   list: Item[] = [];
-  search: Search = {
+  search: SearchItem = {
+    integration: '',
+    loginId: '',
     name: '',
+    email: '',
     sysPermission: SysPermission.None,
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
+    isUndeleted: true,
+    isDeleted: false,
+    createTimeStart: null,
+    createTimeEnd: null,
+    updateTimeStart: null,
+    updateTimeEnd: null,
+    deleteTimeStart: null,
+    deleteTimeEnd: null,
     sortItem: SystemSortItem.none,
     sortDirection: SortDirection.none,
     pageIndex: 1,
     pageSize: PageSizeOptions[1]
   };
   length = 0;
-
+  isDetailSearch: boolean = false;
   protected readonly SystemSortItem = SystemSortItem;
   protected readonly PageSizeOptions = PageSizeOptions;
 
@@ -37,14 +48,19 @@ export class ListComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(
       params => {
         this.apiService.getList({
-          name: (params as Search).name,
-          sysPermission: Number((params as Search).sysPermission || 0),
-          umaMusumeTrpgPermission: Number((params as Search).umaMusumeTrpgPermission || 0),
-          sortItem: Number((params as Search).sortItem || 0),
-          sortDirection: Number((params as Search).sortDirection || 0),
-          pageIndex: Number((params as Search).pageIndex || 0),
-          pageSize: Number((params as Search).pageSize || PageSizeOptions[1]),
-        } as Search).subscribe(r => {
+          integration: (params as SearchItem).integration,
+          loginId: (params as SearchItem).loginId,
+          name: (params as SearchItem).name,
+          email: (params as SearchItem).email,
+          sysPermission: Number((params as SearchItem).sysPermission || 0),
+          umaMusumeTrpgPermission: Number((params as SearchItem).umaMusumeTrpgPermission || 0),
+          isUndeleted: (params as SearchItem).isUndeleted || true,
+          isDeleted: (params as SearchItem).isDeleted || false,
+          sortItem: Number((params as SearchItem).sortItem || 0),
+          sortDirection: Number((params as SearchItem).sortDirection || 0),
+          pageIndex: Number((params as SearchItem).pageIndex || 0),
+          pageSize: Number((params as SearchItem).pageSize || PageSizeOptions[1]),
+        } as SearchItem).subscribe(r => {
           this.list = r.items;
           this.search = r.search;
           this.length = r.length;

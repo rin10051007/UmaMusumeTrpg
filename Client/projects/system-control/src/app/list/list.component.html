@@ -1,4 +1,48 @@
-<p>list works!</p>
+<mat-card>
+  <mat-card-content>
+    <!--
+    基本検索
+    テキスト;loginId,name,emailの一括検索
+    セレクト:システム管理権限,ウマ娘TRPG権限
+    チェック:非表示で未削除のみ
+    詳細検索
+    テキスト:loginId,name,email
+    セレクト:システム管理権限,ウマ娘TRPG権限
+    チェック:未削除、削除済
+    デートピッカー:作成日、更新日、削除日で範囲検索
+    -->
+    <mat-grid-list cols="8" rowHeight="50px">
+      <mat-grid-tile [colspan]="isDetailSearch?2:8" rowspan="1">統合検索
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">loginID
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">name
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">email
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="1">システム管理権限
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="1">ウマ娘TRPG権限
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="1" rowspan="1">未削除
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="1" rowspan="1">削除済
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">作成日
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">更新日
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <span *ngIf="search.isDeleted">削除日</span>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-slide-toggle [(ngModel)]="isDetailSearch">詳細検索</mat-slide-toggle>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">検索ボタン
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
 <button (click)="searchResetClick()">検索</button>
 <table [dataSource]="list" class="mat-elevation-z8" mat-table>
   <ng-container matColumnDef="id">
@@ -10,6 +54,15 @@
     </th>
     <td *matCellDef="let item" mat-cell>{{ item.id }}
     </td>
+  </ng-container>
+  <ng-container matColumnDef="loginId">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.loginId)" class="active">
+        LoginId
+        <span *ngIf="search.sortItem==SystemSortItem.loginId" [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.loginId }}</td>
   </ng-container>
   <ng-container matColumnDef="name">
     <th *matHeaderCellDef mat-header-cell>
@@ -39,6 +92,47 @@
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.umaMusumeTrpgPermission | umaMusumeTrpgPermission }}</td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.email)" class="active">
+        Email
+        <span *ngIf="search.sortItem==SystemSortItem.email"
+              [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.email }}</td>
+  </ng-container>
+  <ng-container matColumnDef="createTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.createTime)" class="active">
+        作成日時
+        <span *ngIf="search.sortItem==SystemSortItem.createTime"
+              [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.createTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
+  </ng-container>
+  <ng-container matColumnDef="updateTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.updateTime)" class="active">
+        更新日時
+        <span *ngIf="search.sortItem==SystemSortItem.updateTime"
+              [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
+  </ng-container>
+  <ng-container matColumnDef="deleteTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.deleteTime)" class="active">
+        削除日時
+        <span *ngIf="search.sortItem==SystemSortItem.deleteTime"
+              [innerHTML]="search.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.deleteTime ? (item.deleteTime | date:"yyyy年MM月dd日 HH:mm.ss") : '' }}
+    </td>
   </ng-container>
   <ng-container matColumnDef="buttons">
     <th *matHeaderCellDef mat-header-cell>

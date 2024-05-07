@@ -10,3 +10,8 @@ table {
 .spacer {
   margin-right: 10px;
 }
+
+.center {
+  width: 90%;
+  margin: 10px auto;
+}

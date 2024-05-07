@@ -11,14 +11,46 @@
     チェック:未削除、削除済
     デートピッカー:作成日、更新日、削除日で範囲検索
     -->
-    <mat-grid-list cols="8" rowHeight="50px">
-      <mat-grid-tile [colspan]="isDetailSearch?2:8" rowspan="1">統合検索
+    <mat-grid-list cols="8" rowHeight="75px">
+      <mat-grid-tile [colspan]="isDetailSearch?2:8" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>統合検索</mat-label>
+          <input [formControl]="searchForm.getForm('integration')" id="integration" matInput type="text"/>
+          <button (click)="searchForm.setValue('integration','')" *ngIf="searchForm.getValue('integration')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">loginID
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>LoginID</mat-label>
+          <input [formControl]="searchForm.getForm('loginId')" id="loginId" matInput type="text"/>
+          <button (click)="searchForm.setValue('loginId','')" *ngIf="searchForm.getValue('loginId')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">name
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>Name</mat-label>
+          <input [formControl]="searchForm.getForm('name')" id="name" matInput type="text"/>
+          <button (click)="searchForm.setValue('name','')" *ngIf="searchForm.getValue('name')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">email
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>Email</mat-label>
+          <input [formControl]="searchForm.getForm('email')" id="email" matInput type="text"/>
+          <button (click)="searchForm.setValue('email','')" *ngIf="searchForm.getValue('email')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="3" rowspan="1">システム管理権限
       </mat-grid-tile>
@@ -33,7 +65,7 @@
       <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">更新日
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
-        <span *ngIf="search.isDeleted">削除日</span>
+        <span *ngIf="searchItem.isDeleted">削除日</span>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="1">
         <mat-slide-toggle [(ngModel)]="isDetailSearch">詳細検索</mat-slide-toggle>
@@ -49,7 +81,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.id)" class="active">
         Id
-        <span *ngIf="search.sortItem==SystemSortItem.id" [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.id"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell>{{ item.id }}
@@ -59,7 +92,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.loginId)" class="active">
         LoginId
-        <span *ngIf="search.sortItem==SystemSortItem.loginId" [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.loginId"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.loginId }}</td>
@@ -68,7 +102,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.name)" class="active">
         Name
-        <span *ngIf="search.sortItem==SystemSortItem.name" [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.name"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.name }}</td>
@@ -77,8 +112,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.sysPermission)" class="active">
         システム管理権限
-        <span *ngIf="search.sortItem==SystemSortItem.sysPermission"
-              [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.sysPermission"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.sysPermission | sysPermission }}</td>
@@ -87,8 +122,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.umaMusumeTrpgPermission)" class="active">
         ウマ娘TRPG権限
-        <span *ngIf="search.sortItem==SystemSortItem.umaMusumeTrpgPermission"
-              [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.umaMusumeTrpgPermission"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.umaMusumeTrpgPermission | umaMusumeTrpgPermission }}</td>
@@ -97,8 +132,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.email)" class="active">
         Email
-        <span *ngIf="search.sortItem==SystemSortItem.email"
-              [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.email"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.email }}</td>
@@ -107,8 +142,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.createTime)" class="active">
         作成日時
-        <span *ngIf="search.sortItem==SystemSortItem.createTime"
-              [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.createTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.createTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
@@ -117,8 +152,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.updateTime)" class="active">
         更新日時
-        <span *ngIf="search.sortItem==SystemSortItem.updateTime"
-              [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.updateTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
@@ -127,8 +162,8 @@
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.deleteTime)" class="active">
         削除日時
-        <span *ngIf="search.sortItem==SystemSortItem.deleteTime"
-              [innerHTML]="search.sortDirection | sortDirection"></span>
+        <span *ngIf="searchItem.sortItem==SystemSortItem.deleteTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.deleteTime ? (item.deleteTime | date:"yyyy年MM月dd日 HH:mm.ss") : '' }}
@@ -150,9 +185,9 @@
   #paginator
   (page)="handlePageEvent($event)"
   [length]="length"
-  [pageIndex]="search.pageIndex"
+  [pageIndex]="searchItem.pageIndex"
   [pageSizeOptions]="PageSizeOptions"
-  [pageSize]="search.pageSize"
+  [pageSize]="searchItem.pageSize"
   [showFirstLastButtons]="true"
   class="demo-paginator"
 ></mat-paginator>

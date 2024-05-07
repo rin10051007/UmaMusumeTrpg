@@ -9,6 +9,7 @@ import {
   SystemSortItem,
   UmaMusumeTrpgPermission
 } from 'Common';
+import {Search} from "./forms/search.form";
 import {Item} from './models/item.model';
 import {SearchItem} from './models/search-item.model';
 import {ApiService} from './services/api.service';
@@ -19,8 +20,9 @@ import {ApiService} from './services/api.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+  hoge: string = '';
   list: Item[] = [];
-  search: SearchItem = {
+  searchItem: SearchItem = {
     integration: '',
     loginId: '',
     name: '',
@@ -40,6 +42,7 @@ export class ListComponent implements OnInit {
     pageIndex: 1,
     pageSize: PageSizeOptions[1]
   };
+  searchForm: Search;
   length = 0;
   isDetailSearch: boolean = false;
   protected readonly SystemSortItem = SystemSortItem;
@@ -48,7 +51,9 @@ export class ListComponent implements OnInit {
 
   constructor(private apiService: ApiService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router, search: Search) {
+    this.searchForm = search;
+    this.searchForm.createForm();
   }
 
   ngOnInit(): void {
@@ -71,7 +76,7 @@ export class ListComponent implements OnInit {
           pageSize: Number(item.pageSize || PageSizeOptions[1]),
         } as SearchItem).subscribe(r => {
           this.list = r.items;
-          this.search = r.search;
+          this.searchItem = r.search;
           this.length = r.length;
         });
       }
@@ -79,10 +84,10 @@ export class ListComponent implements OnInit {
   }
 
   sortItemSet(sortItem: SystemSortItem) {
-    if (sortItem !== this.search.sortItem) {
-      this.search.sortDirection = SortDirection.none;
+    if (sortItem !== this.searchItem.sortItem) {
+      this.searchItem.sortDirection = SortDirection.none;
     }
-    this.addQueryParam(['sortItem', 'sortDirection'], [sortItem, (this.search.sortDirection + 1) % 3 as SortDirection]);
+    this.addQueryParam(['sortItem', 'sortDirection'], [sortItem, (this.searchItem.sortDirection + 1) % 3 as SortDirection]);
   }
 
   searchResetClick() {

@@ -30,6 +30,7 @@ export class EntryComponent implements OnInit {
       this.apiService.entry(this.entryForm.getValues() as Item).subscribe(r => {
         switch (r.httpStatusCode) {
           case HttpStatusCode.Ok:
+            this.entryForm.toReset();
             this.router.navigateByUrl('/list').then(() => {
             });
             break;

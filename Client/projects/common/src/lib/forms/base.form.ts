@@ -25,6 +25,10 @@ export class BaseForm {
     return ((this.getFormGroup().get(key)) as FormControl).value;
   }
 
+  toReset() {
+    this.getFormGroup().reset();
+  }
+
   patchValue(value: any) {
     this.getFormGroup().patchValue(value);
   }

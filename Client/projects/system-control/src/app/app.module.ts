@@ -1,4 +1,6 @@
+import {registerLocaleData} from "@angular/common";
 import {HttpClientModule} from '@angular/common/http';
+import localeJa from '@angular/common/locales/ja';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
@@ -14,6 +16,8 @@ import {
 } from 'Common';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+
+registerLocaleData(localeJa);
 
 @NgModule({
   declarations: [

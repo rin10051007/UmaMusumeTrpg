@@ -52,25 +52,107 @@
           </button>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile colspan="3" rowspan="1">システム管理権限
+      <mat-grid-tile colspan="3" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>システム管理権限</mat-label>
+          <mat-select [formControl]="searchForm.getForm('sysPermission')" id="sysPermission">
+            <mat-option [value]="SysPermission.None">{{ SysPermission.None | sysPermission }}</mat-option>
+            <mat-option [value]="SysPermission.NoQualification">{{ SysPermission.NoQualification | sysPermission }}
+            </mat-option>
+            <mat-option [value]="SysPermission.SysAdmin">{{ SysPermission.SysAdmin | sysPermission }}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile colspan="3" rowspan="1">ウマ娘TRPG権限
+      <mat-grid-tile colspan="3" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>ウマ娘TRPG権限</mat-label>
+          <mat-select [formControl]="searchForm.getForm('umaMusumeTrpgPermission')" id="umaMusumeTrpgPermission">
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.None">{{ UmaMusumeTrpgPermission.None | umaMusumeTrpgPermission }}
+            </mat-option>
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.NoQualification">{{ UmaMusumeTrpgPermission.NoQualification | umaMusumeTrpgPermission }}
+            </mat-option>
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.Player">{{ UmaMusumeTrpgPermission.Player | umaMusumeTrpgPermission }}
+            </mat-option>
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.GmPlayer">{{ UmaMusumeTrpgPermission.GmPlayer | umaMusumeTrpgPermission }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="1" rowspan="1">未削除
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="1" rowspan="1">削除済
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">作成日
-      </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">更新日
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field color="accent">
+          <mat-label>作成日</mat-label>
+          <input [formControl]="searchForm.getForm('createTimeStart')" [matDatepicker]="createTimeStart"
+                 id="createTimeStart"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="createTimeStart" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #createTimeStart></mat-datepicker>
+        </mat-form-field>
+        ～
+        <mat-form-field class="spacer" color="accent">
+          <mat-label>作成日</mat-label>
+          <input [formControl]="searchForm.getForm('createTimeEnd')" [matDatepicker]="createTimeEnd" id="createTimeEnd"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="createTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #createTimeEnd color="primary"></mat-datepicker>
+        </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
-        <span *ngIf="searchItem.isDeleted">削除日</span>
+        <mat-form-field color="accent">
+          <mat-label>更新日</mat-label>
+          <input [formControl]="searchForm.getForm('updateTimeStart')" [matDatepicker]="updateTimeStart"
+                 id="updateTimeStart"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="updateTimeStart" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updateTimeStart></mat-datepicker>
+        </mat-form-field>
+        ～
+        <mat-form-field class="spacer" color="accent">
+          <mat-label>更新日</mat-label>
+          <input [formControl]="searchForm.getForm('updateTimeEnd')" [matDatepicker]="updateTimeEnd" id="updateTimeEnd"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="updateTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updateTimeEnd color="primary"></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <ng-container *ngIf="searchItem.isDeleted">
+          <mat-form-field color="accent">
+            <mat-label>削除日</mat-label>
+            <input [formControl]="searchForm.getForm('deleteTimeStart')" [matDatepicker]="deleteTimeStart"
+                   id="deleteTimeStart"
+                   matInput/>
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle [for]="deleteTimeStart" matIconSuffix></mat-datepicker-toggle>
+            <mat-datepicker #deleteTimeStart></mat-datepicker>
+          </mat-form-field>
+          ～
+          <mat-form-field color="accent">
+            <mat-label>削除日</mat-label>
+            <input [formControl]="searchForm.getForm('deleteTimeEnd')" [matDatepicker]="deleteTimeEnd"
+                   id="deleteTimeEnd"
+                   matInput/>
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle [for]="deleteTimeEnd" matIconSuffix></mat-datepicker-toggle>
+            <mat-datepicker #deleteTimeEnd color="primary"></mat-datepicker>
+          </mat-form-field>
+        </ng-container>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="1">
         <mat-slide-toggle [(ngModel)]="isDetailSearch">詳細検索</mat-slide-toggle>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">検索ボタン
+      <mat-grid-tile colspan="1" rowspan="1"><a (click)="searchClick()">検索ボタン</a>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>

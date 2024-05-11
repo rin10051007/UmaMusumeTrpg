@@ -28,5 +28,19 @@ export class Search extends BaseForm {
   }
 
   setValues(search: SearchItem) {
+    this.setValue('integration', search.integration);
+    this.setValue('loginId', search.loginId);
+    this.setValue('name', search.name);
+    this.setValue('email', search.email);
+    this.setValue('sysPermission', search.sysPermission);
+    this.setValue('umaMusumeTrpgPermission', search.umaMusumeTrpgPermission);
+    this.setValue('isUndeleted', search.isUndeleted);
+    this.setValue('isDeleted', search.isDeleted);
+    this.setValue('createTimeStart', search.createTimeStart);
+    this.setValue('createTimeEnd', search.createTimeEnd);
+    this.setValue('updateTimeStart', search.updateTimeStart);
+    this.setValue('updateTimeEnd', search.updateTimeEnd);
+    this.setValue('deleteTimeStart', search.deleteTimeStart);
+    this.setValue('deleteTimeEnd', search.deleteTimeEnd);
   }
 }

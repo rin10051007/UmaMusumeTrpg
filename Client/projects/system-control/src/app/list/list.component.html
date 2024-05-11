@@ -1,2 +1,275 @@
-<p>list works!</p>
-<button (click)="searchClick()">検索</button>
+<mat-card>
+  <mat-card-content>
+    <!--
+    基本検索
+    テキスト;loginId,name,emailの一括検索
+    セレクト:システム管理権限,ウマ娘TRPG権限
+    チェック:非表示で未削除のみ
+    詳細検索
+    テキスト:loginId,name,email
+    セレクト:システム管理権限,ウマ娘TRPG権限
+    チェック:未削除、削除済
+    デートピッカー:作成日、更新日、削除日で範囲検索
+    -->
+    <mat-grid-list cols="8" rowHeight="75px">
+      <mat-grid-tile [colspan]="isDetailSearch?2:8" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>統合検索</mat-label>
+          <input [formControl]="searchForm.getForm('integration')" id="integration" matInput type="text"/>
+          <button (click)="searchForm.setValue('integration','')" *ngIf="searchForm.getValue('integration')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>LoginID</mat-label>
+          <input [formControl]="searchForm.getForm('loginId')" id="loginId" matInput type="text"/>
+          <button (click)="searchForm.setValue('loginId','')" *ngIf="searchForm.getValue('loginId')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>Name</mat-label>
+          <input [formControl]="searchForm.getForm('name')" id="name" matInput type="text"/>
+          <button (click)="searchForm.setValue('name','')" *ngIf="searchForm.getValue('name')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>Email</mat-label>
+          <input [formControl]="searchForm.getForm('email')" id="email" matInput type="text"/>
+          <button (click)="searchForm.setValue('email','')" *ngIf="searchForm.getValue('email')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>システム管理権限</mat-label>
+          <mat-select [formControl]="searchForm.getForm('sysPermission')" id="sysPermission">
+            <mat-option [value]="SysPermission.None">{{ SysPermission.None | sysPermission }}</mat-option>
+            <mat-option [value]="SysPermission.NoQualification">{{ SysPermission.NoQualification | sysPermission }}
+            </mat-option>
+            <mat-option [value]="SysPermission.SysAdmin">{{ SysPermission.SysAdmin | sysPermission }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>ウマ娘TRPG権限</mat-label>
+          <mat-select [formControl]="searchForm.getForm('umaMusumeTrpgPermission')" id="umaMusumeTrpgPermission">
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.None">{{ UmaMusumeTrpgPermission.None | umaMusumeTrpgPermission }}
+            </mat-option>
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.NoQualification">{{ UmaMusumeTrpgPermission.NoQualification | umaMusumeTrpgPermission }}
+            </mat-option>
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.Player">{{ UmaMusumeTrpgPermission.Player | umaMusumeTrpgPermission }}
+            </mat-option>
+            <mat-option
+              [value]="UmaMusumeTrpgPermission.GmPlayer">{{ UmaMusumeTrpgPermission.GmPlayer | umaMusumeTrpgPermission }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="1" rowspan="1">未削除
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="1" rowspan="1">削除済
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field color="accent">
+          <mat-label>作成日</mat-label>
+          <input [formControl]="searchForm.getForm('createTimeStart')" [matDatepicker]="createTimeStart"
+                 id="createTimeStart"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="createTimeStart" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #createTimeStart></mat-datepicker>
+        </mat-form-field>
+        ～
+        <mat-form-field class="spacer" color="accent">
+          <mat-label>作成日</mat-label>
+          <input [formControl]="searchForm.getForm('createTimeEnd')" [matDatepicker]="createTimeEnd" id="createTimeEnd"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="createTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #createTimeEnd color="primary"></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-form-field color="accent">
+          <mat-label>更新日</mat-label>
+          <input [formControl]="searchForm.getForm('updateTimeStart')" [matDatepicker]="updateTimeStart"
+                 id="updateTimeStart"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="updateTimeStart" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updateTimeStart></mat-datepicker>
+        </mat-form-field>
+        ～
+        <mat-form-field class="spacer" color="accent">
+          <mat-label>更新日</mat-label>
+          <input [formControl]="searchForm.getForm('updateTimeEnd')" [matDatepicker]="updateTimeEnd" id="updateTimeEnd"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="updateTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updateTimeEnd color="primary"></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <ng-container *ngIf="searchItem.isDeleted">
+          <mat-form-field color="accent">
+            <mat-label>削除日</mat-label>
+            <input [formControl]="searchForm.getForm('deleteTimeStart')" [matDatepicker]="deleteTimeStart"
+                   id="deleteTimeStart"
+                   matInput/>
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle [for]="deleteTimeStart" matIconSuffix></mat-datepicker-toggle>
+            <mat-datepicker #deleteTimeStart></mat-datepicker>
+          </mat-form-field>
+          ～
+          <mat-form-field color="accent">
+            <mat-label>削除日</mat-label>
+            <input [formControl]="searchForm.getForm('deleteTimeEnd')" [matDatepicker]="deleteTimeEnd"
+                   id="deleteTimeEnd"
+                   matInput/>
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle [for]="deleteTimeEnd" matIconSuffix></mat-datepicker-toggle>
+            <mat-datepicker #deleteTimeEnd color="primary"></mat-datepicker>
+          </mat-form-field>
+        </ng-container>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-slide-toggle [(ngModel)]="isDetailSearch">詳細検索</mat-slide-toggle>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1"><a (click)="searchClick()">検索ボタン</a>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
+<button (click)="searchResetClick()">検索</button>
+<table [dataSource]="list" class="mat-elevation-z8" mat-table>
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.id)" class="active">
+        Id
+        <span *ngIf="searchItem.sortItem==SystemSortItem.id"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell>{{ item.id }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="loginId">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.loginId)" class="active">
+        LoginId
+        <span *ngIf="searchItem.sortItem==SystemSortItem.loginId"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.loginId }}</td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.name)" class="active">
+        Name
+        <span *ngIf="searchItem.sortItem==SystemSortItem.name"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.name }}</td>
+  </ng-container>
+  <ng-container matColumnDef="sysPermission">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.sysPermission)" class="active">
+        システム管理権限
+        <span *ngIf="searchItem.sortItem==SystemSortItem.sysPermission"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.sysPermission | sysPermission }}</td>
+  </ng-container>
+  <ng-container matColumnDef="umaMusumeTrpgPermission">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.umaMusumeTrpgPermission)" class="active">
+        ウマ娘TRPG権限
+        <span *ngIf="searchItem.sortItem==SystemSortItem.umaMusumeTrpgPermission"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.umaMusumeTrpgPermission | umaMusumeTrpgPermission }}</td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.email)" class="active">
+        Email
+        <span *ngIf="searchItem.sortItem==SystemSortItem.email"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.email }}</td>
+  </ng-container>
+  <ng-container matColumnDef="createTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.createTime)" class="active">
+        作成日時
+        <span *ngIf="searchItem.sortItem==SystemSortItem.createTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.createTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
+  </ng-container>
+  <ng-container matColumnDef="updateTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.updateTime)" class="active">
+        更新日時
+        <span *ngIf="searchItem.sortItem==SystemSortItem.updateTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
+  </ng-container>
+  <ng-container matColumnDef="deleteTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.deleteTime)" class="active">
+        削除日時
+        <span *ngIf="searchItem.sortItem==SystemSortItem.deleteTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.deleteTime ? (item.deleteTime | date:"yyyy年MM月dd日 HH:mm.ss") : '' }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="buttons">
+    <th *matHeaderCellDef mat-header-cell>
+    </th>
+    <td *matCellDef="let item" mat-cell>
+      <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}">編集</button>
+      <span class="spacer"></span>
+      <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}">削除</button>
+    </td>
+  </ng-container>
+  <tr *matHeaderRowDef="ColumnsToDisplay" mat-header-row></tr>
+  <tr *matRowDef="let myRowData; columns: ColumnsToDisplay" mat-row></tr>
+</table>
+<mat-paginator
+  #paginator
+  (page)="handlePageEvent($event)"
+  [length]="length"
+  [pageIndex]="searchItem.pageIndex"
+  [pageSizeOptions]="PageSizeOptions"
+  [pageSize]="searchItem.pageSize"
+  [showFirstLastButtons]="true"
+  class="demo-paginator"
+></mat-paginator>

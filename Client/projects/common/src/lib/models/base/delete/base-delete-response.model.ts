@@ -1,4 +1,7 @@
+import {HttpStatusCode} from "@angular/common/http";
+
 export interface BaseDeleteResponse {
   id: number;
-  daleteTime: Date;
+  deleteTime: Date;
+  httpStatusCode: HttpStatusCode;
 }

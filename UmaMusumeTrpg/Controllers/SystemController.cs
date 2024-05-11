@@ -32,8 +32,8 @@ public class SystemController : ControllerBase
     [Route("GetList")]
     public ActionResult<IEnumerable<ListResponse>> GetList([Required] [FromBody] ListRequest request)
     {
-        var items = _systemService.GetList(request.Search);
-        return Ok(new ListResponse(items, items.Count, request.Search));
+        var (items, length) = _systemService.GetList(request.Search);
+        return Ok(new ListResponse(items, length, request.Search));
     }
 
     [HttpPost]
@@ -60,7 +60,7 @@ public class SystemController : ControllerBase
     {
         try
         {
-            return Ok(new DetailResponse(_systemService.Detil(request.Search)));
+            return Ok(new DetailResponse(_systemService.Detail(request.Select)));
         }
         catch (Exception)
         {
@@ -78,6 +78,7 @@ public class SystemController : ControllerBase
         try
         {
             var (id, name, token) = _systemService.Edit(request.Edit);
+            if (id == 0) throw new Exception();
             return Ok(new EditResponse(id, token));
         }
         catch (Exception)

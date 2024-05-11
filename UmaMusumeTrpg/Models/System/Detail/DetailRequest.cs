@@ -4,10 +4,10 @@ namespace UmaMusumeTrpg.Models.System.Detail;
 
 public class DetailRequest : BaseDetailRequest
 {
-    public DetailRequest(DetailSearch search) : base(search)
+    public DetailRequest(DetailSelect select) : base(select)
     {
-        Search = search;
+        Select = select;
     }
 
-    public new DetailSearch Search { get; set; }
+    public new DetailSelect Select { get; set; }
 }

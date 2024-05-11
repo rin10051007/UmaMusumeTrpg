@@ -1,10 +1,10 @@
+import {HttpStatusCode} from "@angular/common/http";
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {SysPermission, UmaMusumeTrpgPermission} from 'Common';
 import {Entry} from './forms/entry.form';
-import {ApiService} from './services/api.service';
 import {Item} from "./models/item.model";
-import {HttpStatusCode} from "@angular/common/http";
+import {ApiService} from './services/api.service';
 
 @Component({
   selector: 'SystemControl-entry',
@@ -30,6 +30,7 @@ export class EntryComponent implements OnInit {
       this.apiService.entry(this.entryForm.getValues() as Item).subscribe(r => {
         switch (r.httpStatusCode) {
           case HttpStatusCode.Ok:
+            this.entryForm.toReset();
             this.router.navigateByUrl('/list').then(() => {
             });
             break;

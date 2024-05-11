@@ -1,6 +1,6 @@
 import {BaseListRequest} from 'Common';
-import {Search} from './search.model';
+import {SearchItem} from './search-item.model';
 
 export interface Request extends BaseListRequest {
-  Search: Search;
+  search: SearchItem;
 }

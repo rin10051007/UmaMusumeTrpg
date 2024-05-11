@@ -23,7 +23,6 @@ import {ApiService} from './services/api.service';
   imports: [
     CommonModule,
     EditRoutingModule,
-    FormsModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,

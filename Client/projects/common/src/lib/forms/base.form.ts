@@ -22,7 +22,15 @@ export class BaseForm {
   }
 
   getValue(key: string) {
-    return ((this.getFormGroup().get(key)) as FormControl).value;
+    return (this.getForm(key) as FormControl).value;
+  }
+
+  setValue(key: string, value: any) {
+    this.getForm(key).setValue(value);
+  }
+
+  toReset() {
+    this.getFormGroup().reset();
   }
 
   patchValue(value: any) {

@@ -13,7 +13,7 @@ export * from './base/delete/base-delete-response.model';
 export * from './base/detail/base-detail-item.model';
 export * from './base/detail/base-detail-request.model';
 export * from './base/detail/base-detail-response.model';
-export * from './base/detail/base-detail-search.model';
+export * from './base/detail/base-detail-select.model';
 export * from './base/edit/base-edit-item.model';
 export * from './base/edit/base-edit-request.model';
 export * from './base/edit/base-edit-response.model';

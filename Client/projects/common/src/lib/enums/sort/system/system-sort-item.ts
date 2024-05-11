@@ -1,7 +1,12 @@
 export enum SystemSortItem {
   none,
   id,
+  loginId,
   name,
-  sysPermissions,
-  umaMusumeTrpgPermissions
+  sysPermission,
+  umaMusumeTrpgPermission,
+  email,
+  createTime,
+  updateTime,
+  deleteTime
 }

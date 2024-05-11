@@ -1,5 +1,7 @@
+import {registerLocaleData} from "@angular/common";
 import {HttpClientModule} from '@angular/common/http';
-import {NgModule} from '@angular/core';
+import localeJa from '@angular/common/locales/ja';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -14,6 +16,8 @@ import {
 } from 'Common';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+
+registerLocaleData(localeJa);
 
 @NgModule({
   declarations: [
@@ -33,7 +37,8 @@ import {AppComponent} from './app.component';
     LocalStorageService,
     JwtManagementService,
     TokenInterceptorProvider,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    {provide: LOCALE_ID, useValue: 'ja-JP'}
   ],
   bootstrap: [
     AppComponent,

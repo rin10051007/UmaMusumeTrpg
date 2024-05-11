@@ -1,7 +1,7 @@
-import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
-import {BaseApiService} from "../public-service";
+import {Observable} from "rxjs";
 import {IsLoginIdDuplicateRequestModel} from "../../models/public-model";
+import {BaseApiService} from "../public-service";
 
 @Injectable()
 export class IsLoginIdDuplicateApiService extends BaseApiService {

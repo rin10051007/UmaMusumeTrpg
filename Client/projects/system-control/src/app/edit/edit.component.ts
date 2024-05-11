@@ -37,6 +37,7 @@ export class EditComponent implements OnInit {
     this.apiService.edit(this.editForm.getValues() as Item).subscribe(r => {
       switch (r.httpStatusCode) {
         case HttpStatusCode.Ok:
+          this.editForm.toReset();
           this.router.navigateByUrl('/list').then(() => {
           });
           break;

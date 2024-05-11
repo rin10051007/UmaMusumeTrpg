@@ -2,6 +2,6 @@
 
 namespace UmaMusumeTrpg.Models.System.Detail;
 
-public class DetailSearch : BaseDetailSearch
+public class DetailSelect : BaseDetailSelect
 {
 }

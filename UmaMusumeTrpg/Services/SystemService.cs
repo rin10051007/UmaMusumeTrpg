@@ -27,13 +27,24 @@ public class SystemService : ISystemService
         _timeService = timeService;
     }
 
-    public List<ListItem> GetList(ListSearch search)
+    public (List<ListItem>, int) GetList(ListSearch search)
     {
         IOrderedQueryable<User> list = null;
         list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => !x.IsDeleted);
 
+        if (!string.IsNullOrWhiteSpace(search.Integration))
+            list = (IOrderedQueryable<User>)list.Where(x =>
+                x.LoginId.Contains(search.Integration) || x.Name.Contains(search.Integration) ||
+                x.Email.Contains(search.Integration));
+
+        if (!string.IsNullOrWhiteSpace(search.LoginId))
+            list = (IOrderedQueryable<User>)list.Where(x => x.LoginId.Contains(search.LoginId));
+
         if (!string.IsNullOrWhiteSpace(search.Name))
             list = (IOrderedQueryable<User>)list.Where(x => x.Name.Contains(search.Name));
+
+        if (!string.IsNullOrWhiteSpace(search.Email))
+            list = (IOrderedQueryable<User>)list.Where(x => x.Email.Contains(search.Email));
 
         if (search.SysPermission != SysPermission.None)
             list = (IOrderedQueryable<User>)list.Where(x => x.SysPermission == search.SysPermission);
@@ -42,36 +53,114 @@ public class SystemService : ISystemService
             list = (IOrderedQueryable<User>)list.Where(x =>
                 x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
 
-        switch (search.SortItem)
+        if (search.CreateTimeStart.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x =>
+                DateTime.Compare(x.CreateTime.Date, search.CreateTimeStart.Value) >= 0);
+
+        if (search.CreateTimeEnd.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.CreateTime.Date <= search.CreateTimeEnd.Value);
+
+        if (search.UpdateTimeStart.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date >= search.UpdateTimeStart);
+
+        if (search.UpdateTimeEnd.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date <= search.UpdateTimeEnd);
+
+        if (search.IsDelete)
         {
-            default:
-            case SystemSortItem.None:
-            case SystemSortItem.Id:
-                list = list.OrderBy(x => x.ID);
-                break;
-            case SystemSortItem.Name:
-                list = list.OrderBy(x => x.Name);
-                break;
-            case SystemSortItem.SysPermissions:
-                list = list.OrderBy(x => x.SysPermission);
-                break;
-            case SystemSortItem.UmaMusumeTrpgPermissions:
-                list = list.OrderBy(x => x.UmaMusumeTrpgPermission);
-                break;
+            if (search.DeletedTimeStart.HasValue)
+                list = (IOrderedQueryable<User>)list.Where(x =>
+                    x.DeleteTime.HasValue && x.DeleteTime.Value.Date >= search.DeletedTimeStart);
+
+            if (search.DeletedTimeEnd.HasValue)
+                list = (IOrderedQueryable<User>)list.Where(x =>
+                    x.DeleteTime.HasValue && x.DeleteTime.Value.Date <= search.DeletedTimeEnd);
         }
 
+        if (!search.IsUndeleted)
+            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == true);
+        if (!search.IsDelete)
+            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == false);
+
+        if (search.SortDirection == SotrDirection.AscendingOrder)
+            switch (search.SortItem)
+            {
+                default:
+                case SystemSortItem.None:
+                case SystemSortItem.Id:
+                    list = list.OrderBy(x => x.ID);
+                    break;
+                case SystemSortItem.LoginId:
+                    list = list.OrderBy(x => x.LoginId);
+                    break;
+                case SystemSortItem.Name:
+                    list = list.OrderBy(x => x.Name);
+                    break;
+                case SystemSortItem.SysPermission:
+                    list = list.OrderBy(x => x.SysPermission);
+                    break;
+                case SystemSortItem.UmaMusumeTrpgPermission:
+                    list = list.OrderBy(x => x.UmaMusumeTrpgPermission);
+                    break;
+                case SystemSortItem.Email:
+                    list = list.OrderBy(x => x.Email);
+                    break;
+                case SystemSortItem.CreateTime:
+                    list = list.OrderBy(x => x.CreateTime);
+                    break;
+                case SystemSortItem.UpdateTime:
+                    list = list.OrderBy(x => x.UpdateTime);
+                    break;
+                case SystemSortItem.DeleteTime:
+                    list = list.OrderBy(x => x.DeleteTime);
+                    break;
+            }
+        else if (search.SortDirection == SotrDirection.DescendingOrder)
+            switch (search.SortItem)
+            {
+                default:
+                case SystemSortItem.None:
+                    list = list.OrderBy(x => x.ID);
+                    break;
+                case SystemSortItem.Id:
+                    list = list.OrderByDescending(x => x.ID);
+                    break;
+                case SystemSortItem.Name:
+                    list = list.OrderByDescending(x => x.Name);
+                    break;
+                case SystemSortItem.SysPermission:
+                    list = list.OrderByDescending(x => x.SysPermission);
+                    break;
+                case SystemSortItem.UmaMusumeTrpgPermission:
+                    list = list.OrderByDescending(x => x.UmaMusumeTrpgPermission);
+                    break;
+                case SystemSortItem.Email:
+                    list = list.OrderByDescending(x => x.Email);
+                    break;
+                case SystemSortItem.CreateTime:
+                    list = list.OrderByDescending(x => x.CreateTime);
+                    break;
+                case SystemSortItem.UpdateTime:
+                    list = list.OrderByDescending(x => x.UpdateTime);
+                    break;
+                case SystemSortItem.DeleteTime:
+                    list = list.OrderByDescending(x => x.DeleteTime);
+                    break;
+            }
+        else
+            list = list.OrderBy(x => x.ID);
+
         list = list.ThenBy(x => x.ID);
+        var length = list.Count();
 
-        list = (IOrderedQueryable<User>)(search.SortDirection != SotrDirection.DescendingOrder ? list : list.Reverse());
+        var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.PageSize));
+        if (maxPage > 0)
+            list = maxPage > search.PageIndex
+                ? (IOrderedQueryable<User>)list.Skip(search.PageIndex * search.PageSize)
+                : (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.PageSize);
+        list = (IOrderedQueryable<User>)list.Take(search.PageSize);
 
-        var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.DisplayCount));
-        if (maxPage > 1)
-            list = maxPage > search.DisplayPage
-                ? (IOrderedQueryable<User>)list.Skip((search.DisplayPage - 1) * search.DisplayCount)
-                : (IOrderedQueryable<User>)list.Skip((maxPage - 1) * search.DisplayCount);
-        list = (IOrderedQueryable<User>)list.Take(search.DisplayCount);
-
-        return list.Select(x => new ListItem(x)).ToList();
+        return (list.Select(x => new ListItem(x)).ToList(), length);
     }
 
     public (int, string) Entry(EntryItem item)
@@ -94,11 +183,12 @@ public class SystemService : ISystemService
         return (user.ID, user.Token);
     }
 
-    public DetailItem Detil(DetailSearch serch)
+    public DetailItem Detail(DetailSelect select)
     {
         return new DetailItem(_dbContext.Users
-            .FirstOrDefault(x => (x.ID == serch.Id && serch.Token.IsNullOrEmpty()) ||
-                                 (x.ID == serch.Id && !serch.Token.IsNullOrEmpty() && serch.Token.Equals(x.Token))));
+            .FirstOrDefault(x => x.ID == select.Id && (select.Token.IsNullOrEmpty() ||
+                                                       (!select.Token.IsNullOrEmpty() &&
+                                                        select.Token.Equals(x.Token)))));
     }
 
     public (int, string, string) Edit(EditItem item)

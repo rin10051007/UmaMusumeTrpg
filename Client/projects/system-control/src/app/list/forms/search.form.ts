@@ -18,7 +18,7 @@ export class Search extends BaseForm {
     this.getFormGroup().addControl('sysPermission', new FormControl(SysPermission.None));
     this.getFormGroup().addControl('umaMusumeTrpgPermission', new FormControl(UmaMusumeTrpgPermission.None));
     this.getFormGroup().addControl('isUndeleted', new FormControl(true));
-    this.getFormGroup().addControl('IsDeleted', new FormControl(false));
+    this.getFormGroup().addControl('isDeleted', new FormControl(false));
     this.getFormGroup().addControl('createTimeStart', new FormControl(''));
     this.getFormGroup().addControl('createTimeEnd', new FormControl(''));
     this.getFormGroup().addControl('updateTimeStart', new FormControl(''));

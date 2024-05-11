@@ -9,7 +9,7 @@ import {SearchItem} from '../models/search-item.model';
 export class ApiService extends BaseApiService {
   getList(search: SearchItem): Observable<Response> {
     const request: Request = {
-      Search: search
+      search: search
     }
     return this.getHttp().post<Response>(this.getApiUrl().sysUrls.getList, request, {headers: this.getHeader()});
   }

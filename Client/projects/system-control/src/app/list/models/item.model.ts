@@ -9,5 +9,5 @@ export interface Item extends BaseListItem {
   createTime: Date;
   updateTime: Date;
   deleteTime: Date | null;
-  isDelete: boolean;
+  isDeleted: boolean;
 }

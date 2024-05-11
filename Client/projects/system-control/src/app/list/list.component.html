@@ -261,9 +261,11 @@
     <th *matHeaderCellDef mat-header-cell>
     </th>
     <td *matCellDef="let item" mat-cell>
-      <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}">編集</button>
-      <span class="spacer"></span>
-      <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}">削除</button>
+      <ng-container *ngIf="!item.isDeleted">
+        <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}">編集</button>
+        <span class="spacer"></span>
+        <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}">削除</button>
+      </ng-container>
     </td>
   </ng-container>
   <tr *matHeaderRowDef="ColumnsToDisplay" mat-header-row></tr>

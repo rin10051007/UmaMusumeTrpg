@@ -17,8 +17,8 @@ export class Search extends BaseForm {
     this.getFormGroup().addControl('email', new FormControl(''));
     this.getFormGroup().addControl('sysPermission', new FormControl(SysPermission.None));
     this.getFormGroup().addControl('umaMusumeTrpgPermission', new FormControl(UmaMusumeTrpgPermission.None));
-    this.getFormGroup().addControl('isUndeleted', new FormControl(1));
-    this.getFormGroup().addControl('isDeleted', new FormControl(0));
+    this.getFormGroup().addControl('isUndeleted', new FormControl(true));
+    this.getFormGroup().addControl('isDeleted', new FormControl(false));
     this.getFormGroup().addControl('createTimeStart', new FormControl(''));
     this.getFormGroup().addControl('createTimeEnd', new FormControl(''));
     this.getFormGroup().addControl('updateTimeStart', new FormControl(''));
@@ -32,10 +32,10 @@ export class Search extends BaseForm {
     this.setValue('loginId', search.loginId);
     this.setValue('name', search.name);
     this.setValue('email', search.email);
-    this.setValue('sysPermission', Number(search.sysPermission));
-    this.setValue('umaMusumeTrpgPermission', Number(search.umaMusumeTrpgPermission));
-    this.setValue('isUndeleted', Number(search.isUndeleted));
-    this.setValue('isDeleted', Number(search.isDeleted));
+    this.setValue('sysPermission', Number(search.sysPermission || 0));
+    this.setValue('umaMusumeTrpgPermission', Number(search.umaMusumeTrpgPermission || 0));
+    this.setValue('isUndeleted', Number(search.isUndeleted || 1) == 1);
+    this.setValue('isDeleted', Number(search.isDeleted || 0) == 1);
     this.setValue('createTimeStart', search.createTimeStart);
     this.setValue('createTimeEnd', search.createTimeEnd);
     this.setValue('updateTimeStart', search.updateTimeStart);

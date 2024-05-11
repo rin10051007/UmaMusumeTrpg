@@ -10,7 +10,6 @@ import {
   SystemSortItem,
   UmaMusumeTrpgPermission
 } from 'Common';
-import {tap} from "rxjs";
 import {Search} from "./forms/search.form";
 import {Item} from './models/item.model';
 import {SearchItem} from './models/search-item.model';
@@ -61,26 +60,27 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.pipe(tap(params => {
-      const item = params as SearchItem;
-      if (!(Object.keys(item).length === 0)) {
-        this.isDetailSearch =
-          item.loginId.length > 0 ||
-          item.name.length > 0 ||
-          item.email.length > 0 ||
-          item.isUndeleted != 1 ||
-          item.isDeleted == 1 ||
-          item.createTimeStart != null ||
-          item.createTimeEnd != null ||
-          item.updateTimeStart != null ||
-          item.updateTimeEnd != null ||
-          item.deleteTimeStart != null ||
-          item.deleteTimeEnd != null;
-      }
-    })).subscribe(
+    let isFirst = false;
+    this.activatedRoute.queryParams.subscribe(
       params => {
         const item = params as SearchItem;
-        console.log(item);
+        if (!isFirst) {
+          isFirst = true;
+          if (!(Object.keys(item).length === 0)) {
+            this.isDetailSearch =
+              item.loginId.length > 0 ||
+              item.name.length > 0 ||
+              item.email.length > 0 ||
+              item.isUndeleted != 1 ||
+              item.isDeleted == 1 ||
+              item.createTimeStart != null ||
+              item.createTimeEnd != null ||
+              item.updateTimeStart != null ||
+              item.updateTimeEnd != null ||
+              item.deleteTimeStart != null ||
+              item.deleteTimeEnd != null;
+          }
+        }
         this.apiService.getList({
           integration: item.integration,
           loginId: item.loginId,
@@ -108,6 +108,12 @@ export class ListComponent implements OnInit {
         });
       }
     );
+    this.searchForm.getForm('isUndeleted').valueChanges.subscribe(c => {
+      this.searchForm.getForm('isUndeleted').setValue(c ? 1 : 0, {emitEvent: false});
+    });
+    this.searchForm.getForm('isDeleted').valueChanges.subscribe(c => {
+      this.searchForm.getForm('isDeleted').setValue(c ? 1 : 0, {emitEvent: false});
+    });
   }
 
   sortItemSet(sortItem: SystemSortItem) {
@@ -140,7 +146,7 @@ export class ListComponent implements OnInit {
       this.searchForm.getValue('email') ?? '',
       Number(this.searchForm.getValue('sysPermission') || 0),
       Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
-      Number(this.searchForm.getValue('isUndeleted') || 1),
+      Number(this.searchForm.getValue('isUndeleted') || 0),
       Number(this.searchForm.getValue('isDeleted') || 0),
       this.datePipe.transform(this.searchForm.getValue('createTimeStart'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('createTimeEnd'), 'YYYY-MM-dd'),
@@ -174,9 +180,6 @@ export class ListComponent implements OnInit {
         pageSize: PageSizeOptions[0]
       }
     });
-  }
-
-  IsDetailSearch() {
   }
 
   addQueryParam(key: string[], values: (string | number)[]) {

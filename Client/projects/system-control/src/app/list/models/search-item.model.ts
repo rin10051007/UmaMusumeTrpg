@@ -7,8 +7,8 @@ export interface SearchItem extends BaseListSearch {
   email: string;
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
-  isUndeleted: boolean;
-  isDeleted: boolean;
+  isUndeleted: 1 | 0;
+  isDeleted: 1 | 0;
   createTimeStart: Date | null;
   createTimeEnd: Date | null;
   updateTimeStart: Date | null;

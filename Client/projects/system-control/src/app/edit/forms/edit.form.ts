@@ -30,12 +30,12 @@ export class Edit extends BaseForm {
   }
 
   setValues(item: Item) {
-    this.getForm('loginId').setValue(item.loginId);
-    this.getForm('name').setValue(item.name);
-    this.getForm('sysPermission').setValue(item.sysPermission);
-    this.getForm('umaMusumeTrpgPermission').setValue(item.umaMusumeTrpgPermission);
-    this.getForm('email').setValue(item.email);
-    this.getForm('id').setValue(item.id);
-    this.getForm('token').setValue(item.token);
+    this.setValue('loginId', item.loginId);
+    this.setValue('name', item.name);
+    this.setValue('sysPermission', item.sysPermission);
+    this.setValue('umaMusumeTrpgPermission', item.umaMusumeTrpgPermission);
+    this.setValue('email', item.email);
+    this.setValue('id', item.id);
+    this.setValue('token', item.token);
   }
 }

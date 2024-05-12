@@ -50,7 +50,8 @@
         <mat-list-item *ngIf="detail.isDeleted">
           <mat-grid-list cols="10">
             <mat-grid-tile colspan="2">削除日時</mat-grid-tile>
-            <mat-grid-tile colspan="8">{{ detail.deleteTime ? detail.deleteTime : 0 | date: "yyyy年MM月dd日 HH:mm.ss" }}
+            <mat-grid-tile
+              colspan="8">{{ detail.deleteTime  | date: "yyyy年MM月dd日 HH:mm.ss" }}
             </mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>

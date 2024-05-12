@@ -25,7 +25,6 @@ export class DetailComponent implements OnInit {
       this.apiService.detail({id: (Number(params['id']) || 0), token: ''})
         .subscribe(r => {
           this.detail = r.detail as Item;
-          console.log(this.detail)
         });
     });
   }
@@ -40,9 +39,9 @@ export class DetailComponent implements OnInit {
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
       email: '',
       createTime: now,
+      updateTime: now,
       deleteTime: null,
       isDeleted: false,
-      updateTime: now,
       token: ''
     } as Item;
   }

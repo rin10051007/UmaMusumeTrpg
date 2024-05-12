@@ -1,4 +1,3 @@
-import {Data} from '@angular/router';
 import {BaseDetailItem, SysPermission, UmaMusumeTrpgPermission} from 'Common';
 
 export interface Item extends BaseDetailItem {
@@ -7,6 +6,6 @@ export interface Item extends BaseDetailItem {
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   email: string;
   createTime: Date;
-  deleteTime: Data | null;
+  deleteTime: Date | null;
   isDeleted: boolean;
 }

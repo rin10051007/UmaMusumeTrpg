@@ -29,8 +29,8 @@ export class ListComponent implements OnInit {
     email: '',
     sysPermission: SysPermission.None,
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
-    isUndeleted: true,
-    isDeleted: false,
+    isUndeleted: 1,
+    isDeleted: 0,
     createTimeStart: null,
     createTimeEnd: null,
     updateTimeStart: null,
@@ -60,10 +60,27 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let isFirst = false;
     this.activatedRoute.queryParams.subscribe(
       params => {
         const item = params as SearchItem;
-        this.searchForm.setValues(item);
+        if (!isFirst) {
+          isFirst = true;
+          if (!(Object.keys(item).length === 0)) {
+            this.isDetailSearch =
+              item.loginId.length > 0 ||
+              item.name.length > 0 ||
+              item.email.length > 0 ||
+              item.isUndeleted != 1 ||
+              item.isDeleted == 1 ||
+              item.createTimeStart != null ||
+              item.createTimeEnd != null ||
+              item.updateTimeStart != null ||
+              item.updateTimeEnd != null ||
+              item.deleteTimeStart != null ||
+              item.deleteTimeEnd != null;
+          }
+        }
         this.apiService.getList({
           integration: item.integration,
           loginId: item.loginId,
@@ -71,8 +88,8 @@ export class ListComponent implements OnInit {
           email: item.email,
           sysPermission: Number(item.sysPermission || 0),
           umaMusumeTrpgPermission: Number(item.umaMusumeTrpgPermission || 0),
-          isUndeleted: Number(item.isUndeleted) == 1 || true,
-          isDeleted: Number(item.isDeleted) == 1 || false,
+          isUndeleted: Number(item.isUndeleted || 1),
+          isDeleted: Number(item.isDeleted || 0),
           createTimeStart: item.createTimeStart || null,
           createTimeEnd: item.createTimeEnd || null,
           updateTimeStart: item.updateTimeStart || null,
@@ -87,9 +104,16 @@ export class ListComponent implements OnInit {
           this.list = r.items;
           this.searchItem = r.search;
           this.length = r.length;
+          this.searchForm.setValues(item);
         });
       }
     );
+    this.searchForm.getForm('isUndeleted').valueChanges.subscribe(c => {
+      this.searchForm.getForm('isUndeleted').setValue(c ? 1 : 0, {emitEvent: false});
+    });
+    this.searchForm.getForm('isDeleted').valueChanges.subscribe(c => {
+      this.searchForm.getForm('isDeleted').setValue(c ? 1 : 0, {emitEvent: false});
+    });
   }
 
   sortItemSet(sortItem: SystemSortItem) {
@@ -120,10 +144,10 @@ export class ListComponent implements OnInit {
       this.searchForm.getValue('loginId') ?? '',
       this.searchForm.getValue('name') ?? '',
       this.searchForm.getValue('email') ?? '',
-      this.searchForm.getValue('sysPermission'),
-      this.searchForm.getValue('umaMusumeTrpgPermission'),
-      this.searchForm.getValue('isUndeleted') ? 1 : 0,
-      this.searchForm.getValue('isDeleted') ? 1 : 0,
+      Number(this.searchForm.getValue('sysPermission') || 0),
+      Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
+      Number(this.searchForm.getValue('isUndeleted') || 0),
+      Number(this.searchForm.getValue('isDeleted') || 0),
       this.datePipe.transform(this.searchForm.getValue('createTimeStart'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('createTimeEnd'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('updateTimeStart'), 'YYYY-MM-dd'),

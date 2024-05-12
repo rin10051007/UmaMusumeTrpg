@@ -1,6 +1,7 @@
 import {HttpStatusCode} from "@angular/common/http";
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SysPermission, UmaMusumeTrpgPermission} from "Common";
 import {ApiService as DetailApiService} from '../detail/services/api.service';
 import {Item} from './models/item.model';
 import {ApiService} from './services/api.service';
@@ -12,7 +13,7 @@ import {ApiService} from './services/api.service';
 })
 export class DeleteComponent {
 
-  item: Item = {id: 0, token: '', name: '', updateTime: new Date()};
+  item: Item = this.initializingItem();
 
   constructor(private apiService: ApiService,
               private detailApiService: DetailApiService,
@@ -21,12 +22,8 @@ export class DeleteComponent {
     this.route.params.subscribe((params) => {
       this.detailApiService.detail({id: (Number(params['id']) || 0), token: ''})
         .subscribe(r => {
-          this.item.id = (r.detail as Item).id;
-          this.item.token = (r.detail as Item).token;
-          this.item.name = (r.detail as Item).name;
-          this.item.updateTime = (r.detail as Item).updateTime;
+          this.item = (r.detail as Item);
         });
-
     })
   };
 
@@ -42,5 +39,22 @@ export class DeleteComponent {
             break;
         }
       });
+  }
+
+  initializingItem() {
+    const now = new Date(Date.now());
+    return {
+      id: 0,
+      loginId: '',
+      name: '',
+      sysPermission: SysPermission.None,
+      umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
+      email: '',
+      createTime: now,
+      updateTime: now,
+      deleteTime: null,
+      isDeleted: false,
+      token: ''
+    } as Item;
   }
 }

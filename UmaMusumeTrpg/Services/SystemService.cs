@@ -29,8 +29,7 @@ public class SystemService : ISystemService
 
     public (List<ListItem>, int) GetList(ListSearch search)
     {
-        IOrderedQueryable<User> list = null;
-        list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => !x.IsDeleted);
+        var list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => true);
 
         if (!string.IsNullOrWhiteSpace(search.Integration))
             list = (IOrderedQueryable<User>)list.Where(x =>
@@ -66,7 +65,7 @@ public class SystemService : ISystemService
         if (search.UpdateTimeEnd.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date <= search.UpdateTimeEnd);
 
-        if (search.IsDelete)
+        if (search.IsDeleted > 0)
         {
             if (search.DeletedTimeStart.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
@@ -77,9 +76,9 @@ public class SystemService : ISystemService
                     x.DeleteTime.HasValue && x.DeleteTime.Value.Date <= search.DeletedTimeEnd);
         }
 
-        if (!search.IsUndeleted)
+        if (!(search.IsUndeleted > 0))
             list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == true);
-        if (!search.IsDelete)
+        if (!(search.IsDeleted > 0))
             list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == false);
 
         if (search.SortDirection == SotrDirection.AscendingOrder)

@@ -10,7 +10,7 @@ public class ListSearch : BaseListSearch
     }
 
     public ListSearch(string integration, string loginId, string name, string email, SotrDirection sortDirection,
-        UmaMusumeTrpgPermission umaMusumeTrpgPermission, SystemSortItem sortItem, bool isUndeleted, bool isDelete,
+        UmaMusumeTrpgPermission umaMusumeTrpgPermission, SystemSortItem sortItem, int isUndeleted, int isDeleted,
         DateTime createTimeStart, DateTime createTimeEnd, DateTime updateTimeStart, DateTime updateTimeEnd,
         DateTime deletedTimeStart, DateTime deletedTimeEnd, int pageIndexIndex, int pageSize) : base(sortDirection,
         pageIndexIndex, pageSize)
@@ -22,7 +22,7 @@ public class ListSearch : BaseListSearch
         SortDirection = sortDirection;
         UmaMusumeTrpgPermission = umaMusumeTrpgPermission;
         IsUndeleted = isUndeleted;
-        IsDelete = isDelete;
+        IsDeleted = isDeleted;
         CreateTimeStart = createTimeStart;
         CreateTimeEnd = createTimeEnd;
         UpdateTimeStart = updateTimeStart;
@@ -38,8 +38,8 @@ public class ListSearch : BaseListSearch
     public string Email { get; set; }
     public SysPermission SysPermission { get; set; }
     public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }
-    public bool IsUndeleted { get; set; }
-    public bool IsDelete { get; set; }
+    public int IsUndeleted { get; set; }
+    public int IsDeleted { get; set; }
     public DateTime? CreateTimeStart { get; set; }
     public DateTime? CreateTimeEnd { get; set; }
     public DateTime? UpdateTimeStart { get; set; }

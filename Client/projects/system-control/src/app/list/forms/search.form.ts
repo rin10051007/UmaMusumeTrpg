@@ -32,10 +32,10 @@ export class Search extends BaseForm {
     this.setValue('loginId', search.loginId);
     this.setValue('name', search.name);
     this.setValue('email', search.email);
-    this.setValue('sysPermission', search.sysPermission);
-    this.setValue('umaMusumeTrpgPermission', search.umaMusumeTrpgPermission);
-    this.setValue('isUndeleted', search.isUndeleted);
-    this.setValue('isDeleted', search.isDeleted);
+    this.setValue('sysPermission', Number(search.sysPermission || 0));
+    this.setValue('umaMusumeTrpgPermission', Number(search.umaMusumeTrpgPermission || 0));
+    this.setValue('isUndeleted', Number(search.isUndeleted || 1) == 1);
+    this.setValue('isDeleted', Number(search.isDeleted || 0) == 1);
     this.setValue('createTimeStart', search.createTimeStart);
     this.setValue('createTimeEnd', search.createTimeEnd);
     this.setValue('updateTimeStart', search.updateTimeStart);

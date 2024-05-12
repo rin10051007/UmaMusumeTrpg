@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButton, MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatGridListModule, MatGridTile} from "@angular/material/grid-list";
@@ -36,6 +37,7 @@ import {ApiService} from './services/api.service';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
     SysPermissionPipe,
     MatButton,
     MatGridTile,
@@ -55,6 +57,7 @@ import {ApiService} from './services/api.service';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
   ],

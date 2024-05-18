@@ -27,20 +27,21 @@ export class Search extends BaseForm {
     this.getFormGroup().addControl('deleteTimeEnd', new FormControl(''));
   }
 
-  setValues(search: SearchItem) {
-    this.setValue('integration', search.integration);
-    this.setValue('loginId', search.loginId);
-    this.setValue('name', search.name);
-    this.setValue('email', search.email);
-    this.setValue('sysPermission', Number(search.sysPermission || 0));
-    this.setValue('umaMusumeTrpgPermission', Number(search.umaMusumeTrpgPermission || 0));
-    this.setValue('isUndeleted', Number(search.isUndeleted || 1) == 1);
-    this.setValue('isDeleted', Number(search.isDeleted || 0) == 1);
-    this.setValue('createTimeStart', search.createTimeStart);
-    this.setValue('createTimeEnd', search.createTimeEnd);
-    this.setValue('updateTimeStart', search.updateTimeStart);
-    this.setValue('updateTimeEnd', search.updateTimeEnd);
-    this.setValue('deleteTimeStart', search.deleteTimeStart);
-    this.setValue('deleteTimeEnd', search.deleteTimeEnd);
+  setValues(search: SearchItem | null) {
+    console.log(search);
+    this.setValue('integration', search?.integration || '');
+    this.setValue('loginId', search?.loginId || '');
+    this.setValue('name', search?.name || '');
+    this.setValue('email', search?.email || '');
+    this.setValue('sysPermission', Number(search?.sysPermission || 0));
+    this.setValue('umaMusumeTrpgPermission', Number(search?.umaMusumeTrpgPermission || 0));
+    this.setValue('isUndeleted', Number(search?.isUndeleted || 1) == 1);
+    this.setValue('isDeleted', Number(search?.isDeleted || 0) == 1);
+    this.setValue('createTimeStart', search?.createTimeStart || '');
+    this.setValue('createTimeEnd', search?.createTimeEnd || '');
+    this.setValue('updateTimeStart', search?.updateTimeStart || '');
+    this.setValue('updateTimeEnd', search?.updateTimeEnd || '');
+    this.setValue('deleteTimeStart', search?.deleteTimeStart || '');
+    this.setValue('deleteTimeEnd', search?.deleteTimeEnd || '');
   }
 }

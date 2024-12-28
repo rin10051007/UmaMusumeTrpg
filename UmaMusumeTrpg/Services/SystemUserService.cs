@@ -11,13 +11,13 @@ using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.Services;
 
-public class SystemUserUserService : ISystemUserService
+public class SystemUserService : ISystemUserService
 {
     private readonly UmaMusumeTrpgDbContext _dbContext;
     private readonly IGuidService _guidService;
     private readonly ITimeService _timeService;
 
-    public SystemUserUserService(
+    public SystemUserService(
         UmaMusumeTrpgDbContext dbContext,
         IGuidService guidService,
         ITimeService timeService)
@@ -104,6 +104,12 @@ public class SystemUserUserService : ISystemUserService
                 case SystemSortItem.Email:
                     list = list.OrderBy(x => x.Email);
                     break;
+                case SystemSortItem.CreationThreadCount:
+                    list = list.OrderBy(x => x.CreationThreadCount);
+                    break;
+                case SystemSortItem.TotalResCount:
+                    list = list.OrderBy(x => x.TotalResCount);
+                    break;
                 case SystemSortItem.CreateTime:
                     list = list.OrderBy(x => x.CreateTime);
                     break;
@@ -135,6 +141,12 @@ public class SystemUserUserService : ISystemUserService
                     break;
                 case SystemSortItem.Email:
                     list = list.OrderByDescending(x => x.Email);
+                    break;
+                case SystemSortItem.CreationThreadCount:
+                    list = list.OrderByDescending(x => x.CreationThreadCount);
+                    break;
+                case SystemSortItem.TotalResCount:
+                    list = list.OrderByDescending(x => x.TotalResCount);
                     break;
                 case SystemSortItem.CreateTime:
                     list = list.OrderByDescending(x => x.CreateTime);

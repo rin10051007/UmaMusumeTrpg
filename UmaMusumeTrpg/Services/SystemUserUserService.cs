@@ -11,13 +11,13 @@ using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.Services;
 
-public class SystemService : ISystemService
+public class SystemUserUserService : ISystemUserService
 {
     private readonly UmaMusumeTrpgDbContext _dbContext;
     private readonly IGuidService _guidService;
     private readonly ITimeService _timeService;
 
-    public SystemService(
+    public SystemUserUserService(
         UmaMusumeTrpgDbContext dbContext,
         IGuidService guidService,
         ITimeService timeService)

@@ -13,18 +13,18 @@ using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.Controllers;
 
-[Route("Api/System")]
+[Route("Api/System/User")]
 [Authorize(Policy = MyPolicyName.SysAdminPolicy)]
 [ApiController]
-public class SystemController : ControllerBase
+public class SystemUserController : ControllerBase
 {
-    private readonly ILogger<SystemController> _logger;
-    private readonly ISystemService _systemService;
+    private readonly ILogger<SystemUserController> _logger;
+    private readonly ISystemUserService _systemUserService;
 
-    public SystemController(ILogger<SystemController> logger, ISystemService systemService)
+    public SystemUserController(ILogger<SystemUserController> logger, ISystemUserService systemUserService)
     {
         _logger = logger;
-        _systemService = systemService;
+        _systemUserService = systemUserService;
     }
 
 
@@ -32,7 +32,7 @@ public class SystemController : ControllerBase
     [Route("GetList")]
     public ActionResult<IEnumerable<ListResponse>> GetList([Required] [FromBody] ListRequest request)
     {
-        var (items, length) = _systemService.GetList(request.Search);
+        var (items, length) = _systemUserService.GetList(request.Search);
         return Ok(new ListResponse(items, length, request.Search));
     }
 
@@ -42,7 +42,7 @@ public class SystemController : ControllerBase
     {
         try
         {
-            var (id, token) = _systemService.Entry(request.Entry);
+            var (id, token) = _systemUserService.Entry(request.Entry);
             return Ok(new EntryResponse(id, token));
         }
         catch (Exception)
@@ -60,7 +60,7 @@ public class SystemController : ControllerBase
     {
         try
         {
-            return Ok(new DetailResponse(_systemService.Detail(request.Select)));
+            return Ok(new DetailResponse(_systemUserService.Detail(request.Select)));
         }
         catch (Exception)
         {
@@ -77,7 +77,7 @@ public class SystemController : ControllerBase
     {
         try
         {
-            var (id, name, token) = _systemService.Edit(request.Edit);
+            var (id, name, token) = _systemUserService.Edit(request.Edit);
             if (id == 0) throw new Exception();
             return Ok(new EditResponse(id, token));
         }
@@ -94,7 +94,7 @@ public class SystemController : ControllerBase
     [Route("Delete")]
     public ActionResult<IEnumerable<DeleteResponse>> Delete([Required] [FromBody] DeleteRequest request)
     {
-        var (id, deleteTime) = _systemService.Delete(request.Delete);
+        var (id, deleteTime) = _systemUserService.Delete(request.Delete);
         return Ok(new DeleteResponse(id, deleteTime));
     }
 
@@ -103,6 +103,6 @@ public class SystemController : ControllerBase
     [Route("IsLoginIdDuplicate")]
     public bool IsLoginIdDuplicate([Required] [FromBody] IsLoginIdDuplicateRequest request)
     {
-        return _systemService.IsLoginIdDuplicate(request.LoginId);
+        return _systemUserService.IsLoginIdDuplicate(request.LoginId);
     }
 }

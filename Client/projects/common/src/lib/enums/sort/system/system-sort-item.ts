@@ -6,6 +6,8 @@ export enum SystemSortItem {
   sysPermission,
   umaMusumeTrpgPermission,
   email,
+  creationThreadCount,
+  totalResCount,
   createTime,
   updateTime,
   deleteTime

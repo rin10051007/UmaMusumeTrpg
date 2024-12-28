@@ -224,6 +224,26 @@
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.email }}</td>
   </ng-container>
+  <ng-container matColumnDef="creationThreadCount">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.creationThreadCount)" class="active">
+        作成スレ数
+        <span *ngIf="searchItem.sortItem==SystemSortItem.creationThreadCount"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.creationThreadCount | number }}</td>
+  </ng-container>
+  <ng-container matColumnDef="totalResCount">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.totalResCount)" class="active">
+        総レス数
+        <span *ngIf="searchItem.sortItem==SystemSortItem.totalResCount"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.totalResCount | number }}</td>
+  </ng-container>
   <ng-container matColumnDef="createTime">
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.createTime)" class="active">

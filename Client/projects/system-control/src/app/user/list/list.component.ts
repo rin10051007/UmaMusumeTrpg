@@ -68,10 +68,10 @@ export class ListComponent implements OnInit {
           isFirst = true;
           if (!(Object.keys(item).length === 0)) {
             this.isDetailSearch =
-              item.loginId.length > 0 ||
-              item.name.length > 0 ||
-              item.email.length > 0 ||
-              item.isUndeleted != 1 ||
+              (item.loginId?.length??0) > 0 ||
+              (item.name?.length??0) > 0 ||
+              (item.email?.length??0) > 0 ||
+              item.isUndeleted == 0 ||
               item.isDeleted == 1 ||
               item.createTimeStart != null ||
               item.createTimeEnd != null ||

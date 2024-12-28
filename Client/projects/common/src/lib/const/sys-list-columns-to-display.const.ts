@@ -1,1 +1,1 @@
-export const SysListColumnsToDisplay = ['id', 'name', 'loginId', 'sysPermission', 'umaMusumeTrpgPermission', 'email', 'createTime', 'updateTime', 'deleteTime', 'buttons']
+export const SysListColumnsToDisplay = ['id', 'name', 'loginId', 'sysPermission', 'umaMusumeTrpgPermission', 'email', 'creationThreadCount','totalResCount', 'createTime', 'updateTime', 'deleteTime', 'buttons']

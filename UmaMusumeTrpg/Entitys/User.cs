@@ -46,6 +46,18 @@ public class User : PasswordHasher<User>
     public string Email { get; set; }
 
     /// <summary>
+    ///     作成スレッド数
+    /// </summary>
+
+    public int CreationThreadCount { get; set; }
+
+    /// <summary>
+    ///     総レス数
+    /// </summary>
+
+    public int TotalResCount { get; set; }
+
+    /// <summary>
     ///     パスワード
     /// </summary>
     public string Password { get; set; }

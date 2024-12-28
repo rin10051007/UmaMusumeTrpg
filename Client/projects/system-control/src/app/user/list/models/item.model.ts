@@ -6,6 +6,8 @@ export interface Item extends BaseListItem {
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   email: string;
+  creationThreadCount: number;
+  totalResCount: number;
   createTime: Date;
   updateTime: Date;
   deleteTime: Date | null;

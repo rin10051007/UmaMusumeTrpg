@@ -2,6 +2,6 @@
 
 public class PermissionResponse
 {
-    public string PlayerName { get; set; }
+    public string PolicyName { get; set; }
     public bool IsAllows { get; set; }
 }

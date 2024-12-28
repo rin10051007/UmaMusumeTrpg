@@ -27,6 +27,7 @@ npm cache clean --force
 npm install
 
 cd C:\App\UmaMusumeTrpg\Client
+npm rum build:Common
 npm install ./dist/common
 npm rum build:All
 npm rum watch

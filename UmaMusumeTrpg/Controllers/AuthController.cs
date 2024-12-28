@@ -53,7 +53,7 @@ public class AuthController : ControllerBase
     {
         return Ok(new PermissionResponse
         {
-            PlayerName = MyPolicyName.SysAdminPolicy,
+            PolicyName = MyPolicyName.SysAdminPolicy,
             IsAllows = IsPermission(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString())
         });
         ;
@@ -66,7 +66,7 @@ public class AuthController : ControllerBase
     {
         return Ok(new PermissionResponse
         {
-            PlayerName = MyPolicyName.UmaMusumeGmPlayerPolicy,
+            PolicyName = MyPolicyName.UmaMusumeGmPlayerPolicy,
             IsAllows = IsPermission(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.GmPlayer.ToString())
         });
     }
@@ -78,7 +78,7 @@ public class AuthController : ControllerBase
     {
         return Ok(new PermissionResponse
         {
-            PlayerName = MyPolicyName.UmaMusumePlayerPolicy,
+            PolicyName = MyPolicyName.UmaMusumePlayerPolicy,
             IsAllows = IsPermission(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.Player.ToString())
         });
     }

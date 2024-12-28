@@ -1,18 +1,7 @@
 <mat-card>
   <mat-card-content>
-    <!--
-    基本検索
-    テキスト;loginId,name,emailの一括検索
-    セレクト:システム管理権限,ウマ娘TRPG権限
-    チェック:非表示で未削除のみ
-    詳細検索
-    テキスト:loginId,name,email
-    セレクト:システム管理権限,ウマ娘TRPG権限
-    チェック:未削除、削除済
-    デートピッカー:作成日、更新日、削除日で範囲検索
-    -->
-    <mat-grid-list cols="8" rowHeight="75px">
-      <mat-grid-tile [colspan]="isDetailSearch?2:8" rowspan="1">
+    <mat-grid-list cols="16" rowHeight="75px">
+      <mat-grid-tile [colspan]="isDetailSearch?4:16" rowspan="1">
         <mat-form-field class="center">
           <mat-label>統合検索</mat-label>
           <input [formControl]="searchForm.getForm('integration')" id="integration" matInput type="text"/>
@@ -22,7 +11,7 @@
           </button>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field class="center">
           <mat-label>LoginID</mat-label>
           <input [formControl]="searchForm.getForm('loginId')" id="loginId" matInput type="text"/>
@@ -32,7 +21,7 @@
           </button>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field class="center">
           <mat-label>Name</mat-label>
           <input [formControl]="searchForm.getForm('name')" id="name" matInput type="text"/>
@@ -42,7 +31,7 @@
           </button>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field class="center">
           <mat-label>Email</mat-label>
           <input [formControl]="searchForm.getForm('email')" id="email" matInput type="text"/>
@@ -52,7 +41,7 @@
           </button>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile colspan="3" rowspan="1">
+      <mat-grid-tile colspan="6" rowspan="1">
         <mat-form-field class="center">
           <mat-label>システム管理権限</mat-label>
           <mat-select [formControl]="searchForm.getForm('sysPermission')" id="sysPermission">
@@ -63,7 +52,7 @@
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile colspan="3" rowspan="1">
+      <mat-grid-tile colspan="6" rowspan="1">
         <mat-form-field class="center">
           <mat-label>ウマ娘TRPG権限</mat-label>
           <mat-select [formControl]="searchForm.getForm('umaMusumeTrpgPermission')" id="umaMusumeTrpgPermission">
@@ -82,17 +71,17 @@
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="1" rowspan="1">
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
         <mat-checkbox [formControl]="searchForm.getForm('isUndeleted')" id="isUndeleted">
           <mat-label>未削除</mat-label>
         </mat-checkbox>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="1" rowspan="1">
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
         <mat-checkbox [formControl]="searchForm.getForm('isDeleted')" id="isDeleted">
           <mat-label>削除済</mat-label>
         </mat-checkbox>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field color="accent">
           <mat-label>作成日</mat-label>
           <input [formControl]="searchForm.getForm('createTimeStart')" [matDatepicker]="createTimeStart"
@@ -112,7 +101,7 @@
           <mat-datepicker #createTimeEnd color="primary"></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field color="accent">
           <mat-label>更新日</mat-label>
           <input [formControl]="searchForm.getForm('updateTimeStart')" [matDatepicker]="updateTimeStart"
@@ -132,7 +121,7 @@
           <mat-datepicker #updateTimeEnd color="primary"></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <ng-container *ngIf="searchForm.getValue('isDeleted')">
           <mat-form-field color="accent">
             <mat-label>削除日</mat-label>
@@ -155,15 +144,24 @@
           </mat-form-field>
         </ng-container>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
+      <mat-grid-tile colspan="2" rowspan="1">
         <mat-slide-toggle [(ngModel)]="isDetailSearch">詳細検索</mat-slide-toggle>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <button (click)="searchResetClick()" color="warn" mat-raised-button><i class="bi bi-x-lg"></i>リセット
+        </button>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="1">
         <button (click)="searchClick()" color="accent" mat-raised-button><i class="bi bi-search"></i>検索</button>
       </mat-grid-tile>
+      <mat-grid-tile colspan="14" rowspan="1"></mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <button routerLink="/entry" color="primary" mat-raised-button><i class="bi bi-person-add"></i>新規作成</button>
+      </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
-</mat-card>-
+</mat-card>
+
 <table [dataSource]="list" class="mat-elevation-z8" mat-table>
   <ng-container matColumnDef="id">
     <th *matHeaderCellDef mat-header-cell>
@@ -234,7 +232,7 @@
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.createTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.createTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
   <ng-container matColumnDef="updateTime">
     <th *matHeaderCellDef mat-header-cell>
@@ -244,7 +242,7 @@
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
   <ng-container matColumnDef="deleteTime">
     <th *matHeaderCellDef mat-header-cell>
@@ -254,19 +252,19 @@
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.deleteTime ? (item.deleteTime | date:"yyyy年MM月dd日 HH:mm.ss") : '' }}
+    <td *matCellDef="let item" mat-cell> {{ item.deleteTime ? (item.deleteTime | date:"yyyy/MM/dd HH:mm.ss") : '' }}
     </td>
   </ng-container>
   <ng-container matColumnDef="buttons">
     <th *matHeaderCellDef mat-header-cell>
     </th>
     <td *matCellDef="let item" mat-cell>
-      <button color="accent" mat-raised-button routerLink="/detail/{{item.id}}">詳細</button>
+      <button color="accent" mat-raised-button routerLink="/detail/{{item.id}}"><i class="bi bi-book"></i>詳細</button>
       <ng-container *ngIf="!item.isDeleted">
         <span class="spacer"></span>
-        <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}">編集</button>
+        <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}"><i class="bi bi-pen"></i>編集</button>
         <span class="spacer"></span>
-        <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}">削除</button>
+        <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}"><i class="bi bi-person-dash"></i>削除</button>
       </ng-container>
     </td>
   </ng-container>

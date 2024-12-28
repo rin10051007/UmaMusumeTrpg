@@ -1,4 +1,4 @@
 export interface PermissionResponse {
   isAllows: boolean;
-  playerName: string;
+  PolicyName: string;
 }

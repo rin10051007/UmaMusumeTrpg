@@ -154,9 +154,14 @@
       <mat-grid-tile colspan="1" rowspan="1">
         <button (click)="searchClick()" color="accent" mat-raised-button><i class="bi bi-search"></i>検索</button>
       </mat-grid-tile>
+      <mat-grid-tile colspan="14" rowspan="1"></mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <button routerLink="/entry" color="primary" mat-raised-button><i class="bi bi-person-add"></i>新規作成</button>
+      </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
-</mat-card>-
+</mat-card>
+
 <table [dataSource]="list" class="mat-elevation-z8" mat-table>
   <ng-container matColumnDef="id">
     <th *matHeaderCellDef mat-header-cell>
@@ -227,7 +232,7 @@
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.createTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.createTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
   <ng-container matColumnDef="updateTime">
     <th *matHeaderCellDef mat-header-cell>
@@ -237,7 +242,7 @@
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
   <ng-container matColumnDef="deleteTime">
     <th *matHeaderCellDef mat-header-cell>
@@ -247,19 +252,19 @@
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.deleteTime ? (item.deleteTime | date:"yyyy年MM月dd日 HH:mm.ss") : '' }}
+    <td *matCellDef="let item" mat-cell> {{ item.deleteTime ? (item.deleteTime | date:"yyyy/MM/dd HH:mm.ss") : '' }}
     </td>
   </ng-container>
   <ng-container matColumnDef="buttons">
     <th *matHeaderCellDef mat-header-cell>
     </th>
     <td *matCellDef="let item" mat-cell>
-      <button color="accent" mat-raised-button routerLink="/detail/{{item.id}}">詳細</button>
+      <button color="accent" mat-raised-button routerLink="/detail/{{item.id}}"><i class="bi bi-book"></i>詳細</button>
       <ng-container *ngIf="!item.isDeleted">
         <span class="spacer"></span>
-        <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}">編集</button>
+        <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}"><i class="bi bi-pen"></i>編集</button>
         <span class="spacer"></span>
-        <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}">削除</button>
+        <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}"><i class="bi bi-person-dash"></i>削除</button>
       </ng-container>
     </td>
   </ng-container>

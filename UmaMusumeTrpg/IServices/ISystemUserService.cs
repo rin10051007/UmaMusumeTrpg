@@ -7,7 +7,7 @@ using UmaMusumeTrpg.Models.System.List;
 
 namespace UmaMusumeTrpg.IServices;
 
-public interface ISystemService
+public interface ISystemUserService
 {
     public (List<ListItem>, int) GetList(ListSearch search);
     public (int, string) Entry(EntryItem item);

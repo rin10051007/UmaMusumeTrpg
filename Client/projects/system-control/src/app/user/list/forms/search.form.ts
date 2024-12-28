@@ -28,7 +28,6 @@ export class Search extends BaseForm {
   }
 
   setValues(search: SearchItem | null) {
-    console.log(search);
     this.setValue('integration', search?.integration || '');
     this.setValue('loginId', search?.loginId || '');
     this.setValue('name', search?.name || '');

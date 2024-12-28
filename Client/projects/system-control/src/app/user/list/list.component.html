@@ -156,7 +156,7 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="14" rowspan="1"></mat-grid-tile>
       <mat-grid-tile colspan="2" rowspan="1">
-        <button routerLink="/entry" color="primary" mat-raised-button><i class="bi bi-person-add"></i>新規作成</button>
+        <button routerLink="/user/entry" color="primary" mat-raised-button><i class="bi bi-person-add"></i>新規作成</button>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
@@ -224,6 +224,26 @@
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.email }}</td>
   </ng-container>
+  <ng-container matColumnDef="creationThreadCount">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.creationThreadCount)" class="active">
+        作成スレ数
+        <span *ngIf="searchItem.sortItem==SystemSortItem.creationThreadCount"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.creationThreadCount | number }}</td>
+  </ng-container>
+  <ng-container matColumnDef="totalResCount">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(SystemSortItem.totalResCount)" class="active">
+        総レス数
+        <span *ngIf="searchItem.sortItem==SystemSortItem.totalResCount"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.totalResCount | number }}</td>
+  </ng-container>
   <ng-container matColumnDef="createTime">
     <th *matHeaderCellDef mat-header-cell>
       <a (click)="sortItemSet(SystemSortItem.createTime)" class="active">
@@ -259,12 +279,12 @@
     <th *matHeaderCellDef mat-header-cell>
     </th>
     <td *matCellDef="let item" mat-cell>
-      <button color="accent" mat-raised-button routerLink="/detail/{{item.id}}"><i class="bi bi-book"></i>詳細</button>
+      <button color="accent" mat-raised-button routerLink="/user/detail/{{item.id}}"><i class="bi bi-book"></i>詳細</button>
       <ng-container *ngIf="!item.isDeleted">
         <span class="spacer"></span>
-        <button color="primary" mat-raised-button routerLink="/edit/{{item.id}}"><i class="bi bi-pen"></i>編集</button>
+        <button color="primary" mat-raised-button routerLink="/user/edit/{{item.id}}"><i class="bi bi-pen"></i>編集</button>
         <span class="spacer"></span>
-        <button color="warn" mat-raised-button routerLink="/delete/{{item.id}}"><i class="bi bi-person-dash"></i>削除</button>
+        <button color="warn" mat-raised-button routerLink="/user/delete/{{item.id}}"><i class="bi bi-person-dash"></i>削除</button>
       </ng-container>
     </td>
   </ng-container>

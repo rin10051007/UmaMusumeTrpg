@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
       switch (r.httpStatusCode) {
         case HttpStatusCode.Ok:
           this.editForm.toReset();
-          this.router.navigateByUrl('/list').then(() => {
+          this.router.navigateByUrl('/user/list').then(() => {
           });
           break;
         case HttpStatusCode.BadRequest:

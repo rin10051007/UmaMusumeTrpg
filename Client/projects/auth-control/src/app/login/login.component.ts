@@ -33,7 +33,7 @@ export class LoginComponent {
       var viewProject = this.lsService.getViewProject();
       if (this.lsService.getToken()) {
         if (!this.conveniencesService.isEmpty(viewProject)) {
-          window.location.href = environment.baseUrl + viewProject;
+         // window.location.href = environment.baseUrl + viewProject;
         }
         concat(
           this.authorityConfApiService.isSysPermissionToAdmin(),
@@ -41,7 +41,7 @@ export class LoginComponent {
           this.authorityConfApiService.isUmaMusumePlayer(),
         ).pipe(first(r => r.isAllows)).subscribe(r => {
           if (r.isAllows) {
-            switch (r.playerName) {
+            switch (r.policyName) {
               case myPolicyName.sysAdminPolicy:
                 window.location.href = environment.baseUrl + environment.systemUrl;
                 break;

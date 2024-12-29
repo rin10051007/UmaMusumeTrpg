@@ -2,12 +2,7 @@
 
 namespace UmaMusumeTrpg.Models.Base.Detail;
 
-public class BaseDetailResponse : PublicBaseResponse
+public class BaseDetailResponse(BaseDetailItem detail) : PublicBaseResponse
 {
-    public BaseDetailResponse(BaseDetailItem detail)
-    {
-        Detail = detail;
-    }
-
-    public BaseDetailItem Detail { get; set; }
+    public BaseDetailItem Detail { get; set; } = detail;
 }

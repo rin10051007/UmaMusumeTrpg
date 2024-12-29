@@ -1,13 +1,8 @@
 ﻿using UmaMusumeTrpg.Models.Base.Detail;
 
-namespace UmaMusumeTrpg.Models.System.Detail;
+namespace UmaMusumeTrpg.Models.System.User.Detail;
 
-public class DetailRequest : BaseDetailRequest
+public class DetailRequest(DetailSelect select) : BaseDetailRequest(select)
 {
-    public DetailRequest(DetailSelect select) : base(select)
-    {
-        Select = select;
-    }
-
-    public new DetailSelect Select { get; set; }
+    public new DetailSelect Select { get; set; } = select;
 }

@@ -1,13 +1,8 @@
 ﻿using UmaMusumeTrpg.Models.Base.Edit;
 
-namespace UmaMusumeTrpg.Models.System.Edit;
+namespace UmaMusumeTrpg.Models.System.User.Edit;
 
-public class EditRequest : BaseEditRequest
+public class EditRequest(EditItem edit) : BaseEditRequest(edit)
 {
-    public EditRequest(EditItem edit) : base(edit)
-    {
-        Edit = edit;
-    }
-
-    public new EditItem Edit { get; set; }
+    public new EditItem Edit { get; set; } = edit;
 }

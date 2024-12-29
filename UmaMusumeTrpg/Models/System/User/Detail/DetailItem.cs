@@ -1,12 +1,11 @@
-﻿using UmaMusumeTrpg.Entitys;
-using UmaMusumeTrpg.Enums;
+﻿using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.Models.Base.Detail;
 
-namespace UmaMusumeTrpg.Models.System.Detail;
+namespace UmaMusumeTrpg.Models.System.User.Detail;
 
 public class DetailItem : BaseDetailItem
 {
-    public DetailItem(User user) : base(user.ID, user.Name, user.Token, user.UpdateTime)
+    public DetailItem(Entitys.User user) : base(user.Id, user.Name, user.Token, user.UpdateTime)
     {
         LoginId = user.LoginId;
         SysPermission = user.SysPermission;

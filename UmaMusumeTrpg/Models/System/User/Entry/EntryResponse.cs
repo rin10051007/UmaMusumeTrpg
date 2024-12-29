@@ -1,6 +1,6 @@
 ﻿using UmaMusumeTrpg.Models.Base.Entry;
 
-namespace UmaMusumeTrpg.Models.System.Entry;
+namespace UmaMusumeTrpg.Models.System.User.Entry;
 
 public class EntryResponse : BaseEntryResponse
 {

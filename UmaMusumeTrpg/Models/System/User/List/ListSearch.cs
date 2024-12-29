@@ -1,7 +1,7 @@
 ﻿using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.Models.Base.List;
 
-namespace UmaMusumeTrpg.Models.System.List;
+namespace UmaMusumeTrpg.Models.System.User.List;
 
 public class ListSearch : BaseListSearch
 {
@@ -9,17 +9,18 @@ public class ListSearch : BaseListSearch
     {
     }
 
-    public ListSearch(string integration, string loginId, string name, string email, SotrDirection sortDirection,
+    public ListSearch(string integration, string loginId, string name, string email, SysPermission sysPermission,
         UmaMusumeTrpgPermission umaMusumeTrpgPermission, SystemSortItem sortItem, int isUndeleted, int isDeleted,
         DateTime createTimeStart, DateTime createTimeEnd, DateTime updateTimeStart, DateTime updateTimeEnd,
-        DateTime deletedTimeStart, DateTime deletedTimeEnd, int pageIndexIndex, int pageSize) : base(sortDirection,
-        pageIndexIndex, pageSize)
+        DateTime deletedTimeStart, DateTime deletedTimeEnd, SortDirection sortDirection, int pageIndexIndex,
+        int pageSize) : base(sortDirection, pageIndexIndex, pageSize)
     {
         Integration = integration;
         LoginId = loginId;
         Name = name;
         Email = email;
         SortDirection = sortDirection;
+        SysPermission = sysPermission;
         UmaMusumeTrpgPermission = umaMusumeTrpgPermission;
         IsUndeleted = isUndeleted;
         IsDeleted = isDeleted;

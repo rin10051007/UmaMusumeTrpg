@@ -1,6 +1,6 @@
 ﻿namespace UmaMusumeTrpg.Enums;
 
-public enum SotrDirection
+public enum SortDirection
 {
     None,
     AscendingOrder,

@@ -1,11 +1,6 @@
 ﻿namespace UmaMusumeTrpg.Models.Base.Entry;
 
-public class BaseEntryRequest
+public class BaseEntryRequest(BaseEntryItem entry)
 {
-    public BaseEntryRequest(BaseEntryItem entry)
-    {
-        Entry = entry;
-    }
-
-    public BaseEntryItem Entry { get; set; }
+    public BaseEntryItem Entry { get; set; } = entry;
 }

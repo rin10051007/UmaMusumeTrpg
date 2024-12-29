@@ -9,6 +9,8 @@ public enum SystemSortItem
     SysPermission,
     UmaMusumeTrpgPermission,
     Email,
+    CreationThreadCount,
+    TotalResCount,
     CreateTime,
     UpdateTime,
     DeleteTime

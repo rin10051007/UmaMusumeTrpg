@@ -34,7 +34,7 @@ public class JwtBearerConfigureOptions : IConfigureNamedOptions<JwtBearerOptions
         Configure(JwtBearerDefaults.AuthenticationScheme, options);
     }
 
-    public bool AudienceValidatorDelegate(IEnumerable<string> audiences, SecurityToken securityToken,
+    private static bool AudienceValidatorDelegate(IEnumerable<string> audiences, SecurityToken securityToken,
         TokenValidationParameters validationParameters)
     {
         return true;

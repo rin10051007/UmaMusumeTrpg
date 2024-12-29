@@ -1,6 +1,6 @@
 ﻿using UmaMusumeTrpg.Models.Base.List;
 
-namespace UmaMusumeTrpg.Models.System.List;
+namespace UmaMusumeTrpg.Models.System.User.List;
 
 public class ListRequest : BaseListRequest
 {

@@ -1,13 +1,7 @@
-﻿namespace UmaMusumeTrpg.Models.System.IsLoginIdDuplicate;
+﻿namespace UmaMusumeTrpg.Models.System.User.IsLoginIdDuplicate;
 
-public class IsLoginIdDuplicateItem
+public class IsLoginIdDuplicateItem(string loginId, int id = 0)
 {
-    public IsLoginIdDuplicateItem(string loginId, int id = 0)
-    {
-        LoginId = loginId;
-        Id = id;
-    }
-
-    public string LoginId { get; set; }
-    public int Id { get; set; }
+    public string LoginId { get; set; } = loginId;
+    public int Id { get; set; } = id;
 }

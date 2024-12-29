@@ -1,11 +1,6 @@
 ﻿namespace UmaMusumeTrpg.Models.Auth.Login;
 
-public class LoginItem
+public class LoginItem(string token)
 {
-    public LoginItem(string token)
-    {
-        Token = token;
-    }
-
-    public string Token { get; set; }
+    public string Token { get; set; } = token;
 }

@@ -2,14 +2,8 @@
 
 namespace UmaMusumeTrpg.Models.Base.Entry;
 
-public class BaseEntryResponse : PublicBaseResponse
+public class BaseEntryResponse(int id, string token) : PublicBaseResponse
 {
-    public BaseEntryResponse(int id, string token)
-    {
-        Id = id;
-        Token = token;
-    }
-
-    public int Id { get; set; }
-    public string Token { get; set; }
+    public int Id { get; set; } = id;
+    public string Token { get; set; } = token;
 }

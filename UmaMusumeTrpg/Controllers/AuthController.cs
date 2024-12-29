@@ -8,19 +8,11 @@ using UmaMusumeTrpg.Models.Auth.Permission;
 
 namespace UmaMusumeTrpg.Controllers;
 
-[AllowAnonymous]
 [Route("Api/Auth")]
 [ApiController]
-public class AuthController : ControllerBase
+public class AuthController(ILogger<AuthController> logger, IAuthService authService) : ControllerBase
 {
-    private readonly IAuthService _authService;
-    private readonly ILogger<AuthController> _logger;
-
-    public AuthController(ILogger<AuthController> logger, IAuthService authService)
-    {
-        _logger = logger;
-        _authService = authService;
-    }
+    private readonly ILogger<AuthController> _logger = logger;
 
 
     [HttpPost]
@@ -29,7 +21,7 @@ public class AuthController : ControllerBase
     {
         return Ok(new LoginResponse
         {
-            LoginItem = _authService.Login(loginRequest.LoginUser)
+            LoginItem = authService.Login(loginRequest.LoginUser)
         });
     }
 
@@ -41,7 +33,7 @@ public class AuthController : ControllerBase
     {
         return Ok(new LoginResponse
         {
-            LoginItem = _authService.TokenUpdate(
+            LoginItem = authService.TokenUpdate(
                 int.Parse(HttpContext.User.Claims.First(x => x.Type.Equals(MyClaimTypes.Id)).Value))
         });
     }
@@ -56,7 +48,6 @@ public class AuthController : ControllerBase
             PolicyName = MyPolicyName.SysAdminPolicy,
             IsAllows = IsPermission(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString())
         });
-        ;
     }
 
     [Authorize]
@@ -83,6 +74,9 @@ public class AuthController : ControllerBase
         });
     }
 
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("isPermission")]
     private bool IsPermission(string myClaimType, string permissionStr)
     {
         return HttpContext.User.Claims.First(x => x.Type.Equals(myClaimType)).Value.Equals(permissionStr);

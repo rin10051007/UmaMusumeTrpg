@@ -9,35 +9,31 @@ using UmaMusumeTrpg.Models.Settings;
 
 namespace UmaMusumeTrpg.Services;
 
-public class AuthService : IAuthService
+public class AuthService(
+    UmaMusumeTrpgDbContext dbContext,
+    IOptions<JwtSettings> jwtSettings,
+    ILogger<AuthService> logger)
+    : IAuthService
 {
-    private readonly UmaMusumeTrpgDbContext _dbContext;
-    private readonly JwtSettings _jwtSettings;
-    private readonly ILogger<AuthService> _logger;
-
-    public AuthService(UmaMusumeTrpgDbContext dbContext, IOptions<JwtSettings> jwtSettings, ILogger<AuthService> logger)
-    {
-        _dbContext = dbContext;
-        _jwtSettings = jwtSettings.Value;
-        _logger = logger;
-    }
+    private readonly JwtSettings _jwtSettings = jwtSettings.Value;
+    private readonly ILogger<AuthService> _logger = logger;
 
     public LoginItem Login(LoginUser loginUser)
     {
         JwtSecurityTokenHandler handler = new();
 
-        var user = _dbContext.Users.SingleOrDefault(x => x.LoginId.Equals(loginUser.LoginId) && !x.IsDeleted);
+        var user = dbContext.Users.SingleOrDefault(x => x.LoginId.Equals(loginUser.LoginId) && !x.IsDeleted);
 
-        if (user == null || !user!.VerifyHashedPassword(loginUser.Password)) return new LoginItem("");
+        if (user == null || !user.VerifyHashedPassword(loginUser.Password)) return new LoginItem("");
 
         Claim[] claims =
-        {
+        [
             new(MyClaimTypes.LoginId, user.LoginId),
-            new(MyClaimTypes.Id, user.ID.ToString()),
+            new(MyClaimTypes.Id, user.Id.ToString()),
             new(MyClaimTypes.Name, user.Name),
             new(MyClaimTypes.SysPermission, user.SysPermission.ToString()),
             new(MyClaimTypes.UmaMusumeTrpgPermission, user.UmaMusumeTrpgPermission.ToString())
-        };
+        ];
 
         SigningCredentials credentials = new(
             _jwtSettings.SecurityKey(),
@@ -55,16 +51,16 @@ public class AuthService : IAuthService
     public LoginItem TokenUpdate(int id)
     {
         JwtSecurityTokenHandler handler = new();
-        var user = _dbContext.Users.SingleOrDefault(x => x.ID == id && !x.IsDeleted);
+        var user = dbContext.Users.SingleOrDefault(x => x.Id == id && !x.IsDeleted);
         if (user == null) return new LoginItem("");
         Claim[] claims =
-        {
+        [
             new(MyClaimTypes.LoginId, user.LoginId),
-            new(MyClaimTypes.Id, user.ID.ToString()),
+            new(MyClaimTypes.Id, user.Id.ToString()),
             new(MyClaimTypes.Name, user.Name),
             new(MyClaimTypes.SysPermission, user.SysPermission.ToString()),
             new(MyClaimTypes.UmaMusumeTrpgPermission, user.UmaMusumeTrpgPermission.ToString())
-        };
+        ];
 
         SigningCredentials credentials = new(
             _jwtSettings.SecurityKey(),

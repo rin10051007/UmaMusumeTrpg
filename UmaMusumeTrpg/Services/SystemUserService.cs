@@ -1,35 +1,24 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using UmaMusumeTrpg.Entitys;
+﻿using UmaMusumeTrpg.Entitys;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
-using UmaMusumeTrpg.Models.System.Delete;
-using UmaMusumeTrpg.Models.System.Detail;
-using UmaMusumeTrpg.Models.System.Edit;
-using UmaMusumeTrpg.Models.System.Entry;
-using UmaMusumeTrpg.Models.System.IsLoginIdDuplicate;
-using UmaMusumeTrpg.Models.System.List;
+using UmaMusumeTrpg.Models.System.User.Delete;
+using UmaMusumeTrpg.Models.System.User.Detail;
+using UmaMusumeTrpg.Models.System.User.Edit;
+using UmaMusumeTrpg.Models.System.User.Entry;
+using UmaMusumeTrpg.Models.System.User.IsLoginIdDuplicate;
+using UmaMusumeTrpg.Models.System.User.List;
 
 namespace UmaMusumeTrpg.Services;
 
-public class SystemUserService : ISystemUserService
+public class SystemUserService(
+    UmaMusumeTrpgDbContext dbContext,
+    IGuidService guidService,
+    ITimeService timeService)
+    : ISystemUserService
 {
-    private readonly UmaMusumeTrpgDbContext _dbContext;
-    private readonly IGuidService _guidService;
-    private readonly ITimeService _timeService;
-
-    public SystemUserService(
-        UmaMusumeTrpgDbContext dbContext,
-        IGuidService guidService,
-        ITimeService timeService)
-    {
-        _dbContext = dbContext;
-        _guidService = guidService;
-        _timeService = timeService;
-    }
-
     public (List<ListItem>, int) GetList(ListSearch search)
     {
-        var list = (IOrderedQueryable<User>)_dbContext.Users.Where(x => true);
+        var list = (IOrderedQueryable<User>)dbContext.Users.Where(x => true);
 
         if (!string.IsNullOrWhiteSpace(search.Integration))
             list = (IOrderedQueryable<User>)list.Where(x =>
@@ -81,87 +70,99 @@ public class SystemUserService : ISystemUserService
         if (!(search.IsDeleted > 0))
             list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == false);
 
-        if (search.SortDirection == SotrDirection.AscendingOrder)
-            switch (search.SortItem)
-            {
-                default:
-                case SystemSortItem.None:
-                case SystemSortItem.Id:
-                    list = list.OrderBy(x => x.ID);
-                    break;
-                case SystemSortItem.LoginId:
-                    list = list.OrderBy(x => x.LoginId);
-                    break;
-                case SystemSortItem.Name:
-                    list = list.OrderBy(x => x.Name);
-                    break;
-                case SystemSortItem.SysPermission:
-                    list = list.OrderBy(x => x.SysPermission);
-                    break;
-                case SystemSortItem.UmaMusumeTrpgPermission:
-                    list = list.OrderBy(x => x.UmaMusumeTrpgPermission);
-                    break;
-                case SystemSortItem.Email:
-                    list = list.OrderBy(x => x.Email);
-                    break;
-                case SystemSortItem.CreationThreadCount:
-                    list = list.OrderBy(x => x.CreationThreadCount);
-                    break;
-                case SystemSortItem.TotalResCount:
-                    list = list.OrderBy(x => x.TotalResCount);
-                    break;
-                case SystemSortItem.CreateTime:
-                    list = list.OrderBy(x => x.CreateTime);
-                    break;
-                case SystemSortItem.UpdateTime:
-                    list = list.OrderBy(x => x.UpdateTime);
-                    break;
-                case SystemSortItem.DeleteTime:
-                    list = list.OrderBy(x => x.DeleteTime);
-                    break;
-            }
-        else if (search.SortDirection == SotrDirection.DescendingOrder)
-            switch (search.SortItem)
-            {
-                default:
-                case SystemSortItem.None:
-                    list = list.OrderBy(x => x.ID);
-                    break;
-                case SystemSortItem.Id:
-                    list = list.OrderByDescending(x => x.ID);
-                    break;
-                case SystemSortItem.Name:
-                    list = list.OrderByDescending(x => x.Name);
-                    break;
-                case SystemSortItem.SysPermission:
-                    list = list.OrderByDescending(x => x.SysPermission);
-                    break;
-                case SystemSortItem.UmaMusumeTrpgPermission:
-                    list = list.OrderByDescending(x => x.UmaMusumeTrpgPermission);
-                    break;
-                case SystemSortItem.Email:
-                    list = list.OrderByDescending(x => x.Email);
-                    break;
-                case SystemSortItem.CreationThreadCount:
-                    list = list.OrderByDescending(x => x.CreationThreadCount);
-                    break;
-                case SystemSortItem.TotalResCount:
-                    list = list.OrderByDescending(x => x.TotalResCount);
-                    break;
-                case SystemSortItem.CreateTime:
-                    list = list.OrderByDescending(x => x.CreateTime);
-                    break;
-                case SystemSortItem.UpdateTime:
-                    list = list.OrderByDescending(x => x.UpdateTime);
-                    break;
-                case SystemSortItem.DeleteTime:
-                    list = list.OrderByDescending(x => x.DeleteTime);
-                    break;
-            }
-        else
-            list = list.OrderBy(x => x.ID);
+        switch (search.SortDirection)
+        {
+            case SortDirection.AscendingOrder:
+                switch (search.SortItem)
+                {
+                    default:
+                    case SystemSortItem.None:
+                    case SystemSortItem.Id:
+                        list = list.OrderBy(x => x.Id);
+                        break;
+                    case SystemSortItem.LoginId:
+                        list = list.OrderBy(x => x.LoginId);
+                        break;
+                    case SystemSortItem.Name:
+                        list = list.OrderBy(x => x.Name);
+                        break;
+                    case SystemSortItem.SysPermission:
+                        list = list.OrderBy(x => x.SysPermission);
+                        break;
+                    case SystemSortItem.UmaMusumeTrpgPermission:
+                        list = list.OrderBy(x => x.UmaMusumeTrpgPermission);
+                        break;
+                    case SystemSortItem.Email:
+                        list = list.OrderBy(x => x.Email);
+                        break;
+                    case SystemSortItem.CreationThreadCount:
+                        list = list.OrderBy(x => x.CreationThreadCount);
+                        break;
+                    case SystemSortItem.TotalResCount:
+                        list = list.OrderBy(x => x.TotalResCount);
+                        break;
+                    case SystemSortItem.CreateTime:
+                        list = list.OrderBy(x => x.CreateTime);
+                        break;
+                    case SystemSortItem.UpdateTime:
+                        list = list.OrderBy(x => x.UpdateTime);
+                        break;
+                    case SystemSortItem.DeleteTime:
+                        list = list.OrderBy(x => x.DeleteTime);
+                        break;
+                }
 
-        list = list.ThenBy(x => x.ID);
+                break;
+            case SortDirection.DescendingOrder:
+                switch (search.SortItem)
+                {
+                    default:
+                    case SystemSortItem.None:
+                        list = list.OrderBy(x => x.Id);
+                        break;
+                    case SystemSortItem.Id:
+                        list = list.OrderByDescending(x => x.Id);
+                        break;
+                    case SystemSortItem.LoginId:
+                        list = list.OrderByDescending(x => x.LoginId);
+                        break;
+                    case SystemSortItem.Name:
+                        list = list.OrderByDescending(x => x.Name);
+                        break;
+                    case SystemSortItem.SysPermission:
+                        list = list.OrderByDescending(x => x.SysPermission);
+                        break;
+                    case SystemSortItem.UmaMusumeTrpgPermission:
+                        list = list.OrderByDescending(x => x.UmaMusumeTrpgPermission);
+                        break;
+                    case SystemSortItem.Email:
+                        list = list.OrderByDescending(x => x.Email);
+                        break;
+                    case SystemSortItem.CreationThreadCount:
+                        list = list.OrderByDescending(x => x.CreationThreadCount);
+                        break;
+                    case SystemSortItem.TotalResCount:
+                        list = list.OrderByDescending(x => x.TotalResCount);
+                        break;
+                    case SystemSortItem.CreateTime:
+                        list = list.OrderByDescending(x => x.CreateTime);
+                        break;
+                    case SystemSortItem.UpdateTime:
+                        list = list.OrderByDescending(x => x.UpdateTime);
+                        break;
+                    case SystemSortItem.DeleteTime:
+                        list = list.OrderByDescending(x => x.DeleteTime);
+                        break;
+                }
+
+                break;
+            case SortDirection.None:
+            default:
+                list = list.OrderBy(x => x.Id);
+                break;
+        }
+
+        list = list.ThenBy(x => x.Id);
         var length = list.Count();
 
         var maxPage = Convert.ToInt32(Math.Ceiling((decimal)list.Count() / search.PageSize));
@@ -184,54 +185,54 @@ public class SystemUserService : ISystemUserService
             UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission,
             Email = item.Email,
             Password = item.Password,
-            Token = _guidService.NewGuid(),
-            CreateTime = _timeService.NowTime(),
-            UpdateTime = _timeService.NowTime()
+            Token = guidService.NewGuid(),
+            CreateTime = timeService.NowTime(),
+            UpdateTime = timeService.NowTime()
         };
         user.PasswordHash();
-        _ = _dbContext.Add(user);
-        _ = _dbContext.SaveChanges();
-        return (user.ID, user.Token);
+        _ = dbContext.Add(user);
+        _ = dbContext.SaveChanges();
+        return (user.Id, user.Token);
     }
 
     public DetailItem Detail(DetailSelect select)
     {
-        return new DetailItem(_dbContext.Users
-            .FirstOrDefault(x => x.ID == select.Id && (select.Token.IsNullOrEmpty() ||
-                                                       (!select.Token.IsNullOrEmpty() &&
+        return new DetailItem(dbContext.Users
+            .FirstOrDefault(x => x.Id == select.Id && (string.IsNullOrEmpty(select.Token) ||
+                                                       (!string.IsNullOrEmpty(select.Token) &&
                                                         select.Token.Equals(x.Token)))));
     }
 
-    public (int, string, string) Edit(EditItem item)
+    public (int, string) Edit(EditItem item)
     {
-        var user = _dbContext.Users.FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
-        if (user == null) return (0, "", "");
+        var user = dbContext.Users.FirstOrDefault(x => x.Id == item.Id && x.Token.Equals(item.Token));
+        if (user == null) return (0, "");
         user.LoginId = item.LoginId;
         user.Name = item.Name;
         user.SysPermission = item.SysPermission;
         user.UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission;
         user.Email = item.Email;
-        user.Token = _guidService.NewGuid();
-        user.UpdateTime = _timeService.NowTime();
-        if (!item.Password.IsNullOrEmpty()) user.PasswordHash(item.Password);
-        _ = _dbContext.SaveChanges();
-        return (user.ID, user.Name, user.Token);
+        user.Token = guidService.NewGuid();
+        user.UpdateTime = timeService.NowTime();
+        if (!string.IsNullOrEmpty(item.Password)) user.PasswordHash(item.Password);
+        _ = dbContext.SaveChanges();
+        return (user.Id, user.Token);
     }
 
     public (int, DateTime?) Delete(DeleteItem item)
     {
-        var user = _dbContext.Users
-            .FirstOrDefault(x => x.ID == item.Id && x.Token.Equals(item.Token));
-        if (user == null) return (0, _timeService.NowTime());
-        user.DeleteTime = _timeService.NowTime();
+        var user = dbContext.Users
+            .FirstOrDefault(x => x.Id == item.Id && x.Token.Equals(item.Token));
+        if (user == null) return (0, timeService.NowTime());
+        user.DeleteTime = timeService.NowTime();
         user.IsDeleted = true;
-        user.Token = _guidService.NewGuid();
-        _ = _dbContext.SaveChanges();
-        return (user.ID, user.DeleteTime);
+        user.Token = guidService.NewGuid();
+        _ = dbContext.SaveChanges();
+        return (user.Id, user.DeleteTime);
     }
 
     public bool IsLoginIdDuplicate(IsLoginIdDuplicateItem item)
     {
-        return _dbContext.Users.Any(x => x.LoginId.Equals(item.LoginId) && !x.ID.Equals(item.Id) && !x.IsDeleted);
+        return dbContext.Users.Any(x => x.LoginId.Equals(item.LoginId) && !x.Id.Equals(item.Id) && !x.IsDeleted);
     }
 }

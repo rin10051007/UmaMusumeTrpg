@@ -18,7 +18,7 @@ public class User : PasswordHasher<User>
     /// <summary>
     ///     ID
     /// </summary>
-    public int ID { get; set; }
+    public int Id { get; init; }
 
     /// <summary>
     ///     ログインID
@@ -70,7 +70,7 @@ public class User : PasswordHasher<User>
     /// <summary>
     ///     作成日時
     /// </summary>
-    public DateTime CreateTime { get; set; }
+    public DateTime CreateTime { get; init; }
 
     /// <summary>
     ///     更新日時

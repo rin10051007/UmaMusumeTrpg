@@ -1,11 +1,6 @@
 ﻿namespace UmaMusumeTrpg.Models.Base.List;
 
-public class BaseListRequest
+public class BaseListRequest(BaseListSearch search)
 {
-    public BaseListRequest(BaseListSearch search)
-    {
-        Search = search;
-    }
-
-    public BaseListSearch Search { get; set; }
+    public BaseListSearch Search { get; set; } = search;
 }

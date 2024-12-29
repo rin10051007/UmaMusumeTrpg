@@ -2,14 +2,8 @@
 
 namespace UmaMusumeTrpg.Models.Base.Edit;
 
-public class BaseEditResponse : PublicBaseResponse
+public class BaseEditResponse(int id, string token) : PublicBaseResponse
 {
-    public BaseEditResponse(int id, string token)
-    {
-        Id = id;
-        Token = token;
-    }
-
-    public int Id { get; set; }
-    public string Token { get; set; }
+    public int Id { get; set; } = id;
+    public string Token { get; set; } = token;
 }

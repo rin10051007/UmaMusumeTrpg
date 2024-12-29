@@ -1,6 +1,6 @@
 ﻿using UmaMusumeTrpg.Models.Base.Edit;
 
-namespace UmaMusumeTrpg.Models.System.Edit;
+namespace UmaMusumeTrpg.Models.System.User.Edit;
 
 public class EditResponse : BaseEditResponse
 {

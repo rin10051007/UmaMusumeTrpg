@@ -1,13 +1,11 @@
 ﻿using UmaMusumeTrpg.Models.Base.List;
 
-namespace UmaMusumeTrpg.Models.System.List;
+namespace UmaMusumeTrpg.Models.System.User.List;
 
 public class ListResponse : BaseListResponse
 {
-    public ListResponse(List<ListItem> items, int length, ListSearch search) : base(new List<BaseListItem>
-    {
-        new(1)
-    }, length, search)
+    public ListResponse(List<ListItem> items, int length, ListSearch search) : base([new BaseListItem(1)], length,
+        search)
     {
         Search = search;
         Items = items;

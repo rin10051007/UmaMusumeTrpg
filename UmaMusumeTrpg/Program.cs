@@ -48,15 +48,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = jwtSettings.SecurityKey()
         };
     });
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy(MyPolicyName.SysAdminPolicy, policy =>
-        policy.RequireClaim(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString()));
-    options.AddPolicy(MyPolicyName.UmaMusumeGmPlayerPolicy, policy =>
-        policy.RequireClaim(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.GmPlayer.ToString()));
-    options.AddPolicy(MyPolicyName.UmaMusumePlayerPolicy, policy =>
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(MyPolicyName.SysAdminPolicy, policy =>
+        policy.RequireClaim(MyClaimTypes.SysPermission, SysPermission.SysAdmin.ToString()))
+    .AddPolicy(MyPolicyName.UmaMusumeGmPlayerPolicy, policy =>
+        policy.RequireClaim(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.GmPlayer.ToString()))
+    .AddPolicy(MyPolicyName.UmaMusumePlayerPolicy, policy =>
         policy.RequireClaim(MyClaimTypes.UmaMusumeTrpgPermission, UmaMusumeTrpgPermission.Player.ToString()));
-});
 
 
 #region ServicsのDI

@@ -1,13 +1,8 @@
 ﻿using UmaMusumeTrpg.Models.Base.Detail;
 
-namespace UmaMusumeTrpg.Models.System.Detail;
+namespace UmaMusumeTrpg.Models.System.User.Detail;
 
-public class DetailResponse : BaseDetailResponse
+public class DetailResponse(DetailItem detail) : BaseDetailResponse(detail)
 {
-    public DetailResponse(DetailItem detail) : base(detail)
-    {
-        Detail = detail;
-    }
-
-    public new DetailItem Detail { get; set; }
+    public new DetailItem Detail { get; set; } = detail;
 }

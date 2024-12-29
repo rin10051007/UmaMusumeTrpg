@@ -1,11 +1,6 @@
 ﻿namespace UmaMusumeTrpg.Models.Base.Detail;
 
-public class BaseDetailRequest
+public class BaseDetailRequest(BaseDetailSelect select)
 {
-    public BaseDetailRequest(BaseDetailSelect serch)
-    {
-        Select = serch;
-    }
-
-    public BaseDetailSelect Select { get; set; }
+    public BaseDetailSelect Select { get; set; } = select;
 }

@@ -2,7 +2,7 @@
 
 public class BaseDetailItem
 {
-    public BaseDetailItem(int id, string name, string token, DateTime updateTime)
+    protected BaseDetailItem(int id, string name, string token, DateTime updateTime)
     {
         Id = id;
         Name = name;
@@ -10,7 +10,7 @@ public class BaseDetailItem
         UpdateTime = updateTime;
     }
 
-    public BaseDetailItem()
+    protected BaseDetailItem()
     {
     }
 

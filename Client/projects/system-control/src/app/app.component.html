@@ -1,2 +1,16 @@
 <header-menu></header-menu>
+<mat-tab-group
+  [selectedIndex]="selectedTabIndex"
+  (selectedIndexChange)="onTabChange($event)">
+  <mat-tab>
+    <ng-template matTabLabel>
+      <i class="bi bi-person"></i> ユーザー
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template matTabLabel>
+      <i class="bi bi-chat-right-text"></i> 掲示板
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
 <router-outlet></router-outlet>

@@ -16,6 +16,7 @@ import {
 } from 'Common';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {MatTab, MatTabGroup, MatTabLabel} from "@angular/material/tabs";
 
 registerLocaleData(localeJa);
 
@@ -29,7 +30,10 @@ registerLocaleData(localeJa);
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    HeaderMenuModule
+    HeaderMenuModule,
+    MatTabGroup,
+    MatTab,
+    MatTabLabel
   ],
   providers: [
     BaseApiService,

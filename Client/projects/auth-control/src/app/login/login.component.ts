@@ -30,10 +30,10 @@ export class LoginComponent {
   login() {
     this.apiService.logIn(this.loginUser.getValues() as LoginUser).subscribe((r: { loginItem: unknown; }) => {
       this.lsService.setToken(r.loginItem as unknown as LocalStorageToken);
-      var viewProject = this.lsService.getViewProject();
+      const viewProject = this.lsService.getViewProject();
       if (this.lsService.getToken()) {
         if (!this.conveniencesService.isEmpty(viewProject)) {
-         // window.location.href = environment.baseUrl + viewProject;
+          window.location.href = environment.baseUrl + viewProject;
         }
         concat(
           this.authorityConfApiService.isSysPermissionToAdmin(),

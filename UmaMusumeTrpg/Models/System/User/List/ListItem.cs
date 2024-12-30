@@ -3,7 +3,7 @@ using UmaMusumeTrpg.Models.Base.List;
 
 namespace UmaMusumeTrpg.Models.System.User.List;
 
-public class ListItem(Entitys.User user) : BaseListItem(user.Id)
+public class ListItem(Entities.User user) : BaseListItem(user.Id)
 {
     public string LoginId { get; set; } = user.LoginId;
     public string Name { get; set; } = user.Name;

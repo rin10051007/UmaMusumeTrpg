@@ -1,4 +1,4 @@
-﻿using UmaMusumeTrpg.Entitys;
+﻿using UmaMusumeTrpg.Entities;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.System.User.Delete;

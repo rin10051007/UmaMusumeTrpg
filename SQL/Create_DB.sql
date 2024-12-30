@@ -107,8 +107,56 @@ VALUES (
     , 0
     , 'AQAAAAIAAYagAAAAEEZnddUTENT1PhKH/ujDMswyw2z55jymkx2WEiwpyQJFG7uemFADoKhSgNx6/6qWYA=='
     , '9b00e4c1562f43739152a0cfce084955'
-    , '2024-12-04 10:06:49.489808 +00:00'
-    , '2024-12-04 10:06:49.489808 +00:00'
+    , '2024-12-04 10:06:49.489808+09:00'
+    , '2024-12-04 10:06:49.489808+09:00'
+    , null
+    , false
+) 
+, ( 
+    2
+    , 'user001'
+    , 'ユーザー001'
+    , 1
+    , 2
+    , 'hoge@hoge.hoge'
+    , 0
+    , 0
+    , 'AQAAAAIAAYagAAAAENdfLLPepNcxPmFD9ZguR0/aotuJg1EgyalsRr6vzHLyySjq9fvEOZnHE6ipA0oPKQ=='
+    , '56cddebd2dcd4cd28da1ce0e2560a5b7'
+    , '2024-12-29 12:06:49.489808+09:00'
+    , '2024-12-29 12:06:49.489808+09:00'
+    , null
+    , false
+) 
+, ( 
+    3
+    , 'user002'
+    , 'ユーザー002'
+    , 1
+    , 3
+    , 'hoge@hoge.hoge'
+    , 0
+    , 0
+    , 'AQAAAAIAAYagAAAAEAWhZhq5kghOF6lhlx0jjlTFn2E54EXHJ5V2dz9xpSy2JVnIsMUVSH44MO2YaVSNBw=='
+    , '56cddebd2dcd4cd28da1ce0e2560a5b7'
+    , '2024-12-29 12:06:49.489808+09:00'
+    , '2024-12-29 12:06:49.489808+09:00'
+    , null
+    , false
+) 
+, ( 
+    4
+    , 'user003'
+    , 'ユーザー003'
+    , 2
+    , 1
+    , 'hoge@hoge.hoge'
+    , 0
+    , 0
+    , 'AQAAAAIAAYagAAAAECJvJe7zhjvMuciZOp3khmzVOZTzWnl6o8/1uC/+LkcNSuGGfAz1mehC7kY1zYG3IQ=='
+    , '56cddebd2dcd4cd28da1ce0e2560a5b7'
+    , '2024-12-29 12:06:49.489808+09:00'
+    , '2024-12-29 12:06:49.489808+09:00'
     , null
     , false
 ); 
@@ -117,6 +165,7 @@ VALUES (
 create table public."Threads" ( 
     "Id" serial not null
     , "CreateUserId" integer not null
+    , "Title" character varying (64) not null
     , "ResCount" integer default 0 not null
     , "Token" character varying (32) not null
     , "CreateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
@@ -138,6 +187,9 @@ comment
 
 comment 
     on column public."Threads"."CreateUserId" is '作成者ID'; 
+
+comment 
+    on column public."Threads"."Title" is 'スレッドタイトル'; 
 
 comment 
     on column public."Threads"."ResCount" is 'レス数'; 
@@ -164,7 +216,7 @@ create table public."Res" (
     , "CreateUserId" integer not null
     , "CreateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , "ThreadResNo" integer not null
-    , "Text" text not null
+    , "Content" text not null
     , FOREIGN KEY ("CreateUserId") references public."Users" ("Id")
     , FOREIGN KEY ("ThreadId") references public."Threads" ("Id")
 ); 
@@ -192,5 +244,5 @@ comment
     on column public."Res"."ThreadResNo" is 'レスNo'; 
 
 comment 
-    on column public."Res"."Text" is 'レス内容';
+    on column public."Res"."Content" is 'レス内容';
 

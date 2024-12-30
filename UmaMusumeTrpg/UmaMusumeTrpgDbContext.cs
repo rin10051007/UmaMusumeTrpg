@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UmaMusumeTrpg.Entitys;
+using UmaMusumeTrpg.Entities;
+using Thread = UmaMusumeTrpg.Entities.Thread;
 
 namespace UmaMusumeTrpg;
 
@@ -25,6 +26,45 @@ public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOp
             _ = entity.Property(e => e.UpdateTime);
             _ = entity.Property(e => e.DeleteTime);
             _ = entity.Property(e => e.IsDeleted);
+
+            _ = entity.HasMany(e => e.Threads)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.CreateUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            _ = entity.HasMany(e => e.Res)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.CreateUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        _ = modelBuilder.Entity<Thread>(entity =>
+        {
+            _ = entity.HasKey(e => e.Id);
+            _ = entity.Property(e => e.Id);
+            _ = entity.Property(e => e.CreateUserId);
+            _ = entity.Property(e => e.Title).HasMaxLength(64);
+            _ = entity.Property(e => e.ResCount);
+            _ = entity.Property(e => e.Token).HasMaxLength(32);
+            _ = entity.Property(e => e.CreateTime);
+            _ = entity.Property(e => e.UpdateTime);
+            _ = entity.Property(e => e.DeleteTime);
+            _ = entity.Property(e => e.IsDeleted);
+
+            _ = entity.HasMany(e => e.Res)
+                .WithOne(t => t.Thread)
+                .HasForeignKey(t => t.ThreadId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        _ = modelBuilder.Entity<Res>(entity =>
+        {
+            _ = entity.HasKey(e => e.Id);
+            _ = entity.Property(e => e.Id);
+            _ = entity.Property(e => e.CreateUserId);
+            _ = entity.Property(e => e.CreateTime);
+            _ = entity.Property(e => e.ThreadId);
+            _ = entity.Property(e => e.Content);
         });
     }
 }

@@ -5,7 +5,7 @@ namespace UmaMusumeTrpg.Models.System.User.Detail;
 
 public class DetailItem : BaseDetailItem
 {
-    public DetailItem(Entitys.User user) : base(user.Id, user.Name, user.Token, user.UpdateTime)
+    public DetailItem(Entities.User user) : base(user.Id, user.Name, user.Token, user.UpdateTime)
     {
         LoginId = user.LoginId;
         SysPermission = user.SysPermission;

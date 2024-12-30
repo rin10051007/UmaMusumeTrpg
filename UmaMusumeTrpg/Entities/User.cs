@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using UmaMusumeTrpg.Enums;
 
-namespace UmaMusumeTrpg.Entitys;
+namespace UmaMusumeTrpg.Entities;
 
 public class User : PasswordHasher<User>
 {
@@ -10,9 +10,22 @@ public class User : PasswordHasher<User>
     /// </summary>
     public User()
     {
+        Id = 0;
+        LoginId = "";
         Name = "";
+        SysPermission = SysPermission.None;
+        UmaMusumeTrpgPermission = UmaMusumeTrpgPermission.None;
         Email = "";
+        CreationThreadCount = 0;
+        TotalResCount = 0;
         Password = "";
+        Token = "";
+        CreateTime = DateTime.Now;
+        UpdateTime = DateTime.Now;
+        DeleteTime = null;
+        IsDeleted = false;
+        Threads = new List<Thread>();
+        Res = new List<Res>();
     }
 
     /// <summary>
@@ -86,6 +99,10 @@ public class User : PasswordHasher<User>
     ///     削除フラグ
     /// </summary>
     public bool IsDeleted { get; set; }
+
+    public ICollection<Thread> Threads { get; set; }
+
+    public ICollection<Res> Res { get; set; }
 
 
     public void PasswordHash()

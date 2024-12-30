@@ -7,9 +7,10 @@ import {Item} from './models/item.model';
 import {ApiService} from './services/api.service';
 
 @Component({
-  selector: 'SystemControl-delete',
-  templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.css']
+    selector: 'SystemControl-delete',
+    templateUrl: './delete.component.html',
+    styleUrls: ['./delete.component.css'],
+    standalone: false
 })
 export class DeleteComponent {
 

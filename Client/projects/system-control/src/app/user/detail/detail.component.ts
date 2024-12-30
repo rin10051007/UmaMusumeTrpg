@@ -5,9 +5,10 @@ import {Item} from "./models/item.model";
 import {ApiService} from './services/api.service';
 
 @Component({
-  selector: 'SystemControl-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.css']
+    selector: 'SystemControl-detail',
+    templateUrl: './detail.component.html',
+    styleUrls: ['./detail.component.css'],
+    standalone: false
 })
 export class DetailComponent implements OnInit {
   detail: Item = this.initializingItem();

@@ -16,9 +16,10 @@ import {SearchItem} from './models/search-item.model';
 import {ApiService} from './services/api.service';
 
 @Component({
-  selector: 'SystemControl-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+    selector: 'SystemControl-list',
+    templateUrl: './list.component.html',
+    styleUrls: ['./list.component.css'],
+    standalone: false
 })
 export class ListComponent implements OnInit {
   list: Item[] = [];

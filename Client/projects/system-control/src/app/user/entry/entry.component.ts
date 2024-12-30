@@ -7,9 +7,10 @@ import {Item} from "./models/item.model";
 import {ApiService} from './services/api.service';
 
 @Component({
-  selector: 'SystemControl-entry',
-  templateUrl: './entry.component.html',
-  styleUrls: ['./entry.component.css']
+    selector: 'SystemControl-entry',
+    templateUrl: './entry.component.html',
+    styleUrls: ['./entry.component.css'],
+    standalone: false
 })
 export class EntryComponent implements OnInit {
 

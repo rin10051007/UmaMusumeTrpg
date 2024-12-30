@@ -35,5 +35,9 @@
   "dependencies": {
     "tslib": "^2.8.1"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "glob": "^11.0.0",
+    "rimraf": "^6.0.1"
+  }
 }

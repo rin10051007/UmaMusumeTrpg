@@ -1,7 +1,7 @@
 cd C:\App\UmaMusumeTrpg\Client
 cls
+npm rum build:Common
 npm install ./dist/common
-npm rum build:All
 npm rum watch
 
 cd C:\App\UmaMusumeTrpg\UmaMusumeTrpg
@@ -20,6 +20,7 @@ cls
 cd C:\App\UmaMusumeTrpg\Client\projects\common
 npm cache verify
 npm cache clean --force
+npm install
 cd C:\App\UmaMusumeTrpg\Client
 npm cache verify
 npm cache clean --force
@@ -28,7 +29,6 @@ npm install
 cd C:\App\UmaMusumeTrpg\Client
 npm rum build:Common
 npm install ./dist/common
-npm rum build:All
 npm rum watch
 
 

@@ -20,7 +20,6 @@ cls
 cd C:\App\UmaMusumeTrpg\Client\projects\common
 npm cache verify
 npm cache clean --force
-npm install
 cd C:\App\UmaMusumeTrpg\Client
 npm cache verify
 npm cache clean --force

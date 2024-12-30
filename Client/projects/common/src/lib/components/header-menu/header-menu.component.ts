@@ -4,9 +4,10 @@ import {LocalStorageToken} from '../../models/public-model';
 import {AuthApiService, LocalStorageService} from '../../services/public-service';
 
 @Component({
-  selector: 'header-menu',
-  templateUrl: './header-menu.component.html',
-  styleUrls: ['./header-menu.component.css']
+    selector: 'header-menu',
+    templateUrl: './header-menu.component.html',
+    styleUrls: ['./header-menu.component.css'],
+    standalone: false
 })
 export class HeaderMenuComponent {
   systemUrl!: string;

@@ -14,7 +14,6 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatTableModule} from "@angular/material/table";
 import {SortDirectionPipe, SysPermissionPipe, UmaMusumeTrpgPermissionPipe} from "Common";
 import {Search} from "./forms/search.form";
-
 import {ListRoutingModule} from './list-routing.module';
 import {ListComponent} from './list.component';
 import {ApiService} from './services/api.service';

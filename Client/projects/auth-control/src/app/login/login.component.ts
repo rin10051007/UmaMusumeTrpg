@@ -13,9 +13,10 @@ import {concat, first} from 'rxjs';
 import {LoginUserForm} from '../forms/login-user.form';
 
 @Component({
-  selector: 'AuthControl-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'AuthControl-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    standalone: false
 })
 export class LoginComponent {
 

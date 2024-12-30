@@ -8,6 +8,11 @@ const routes: Routes = [
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
     canActivate: [IsSysPermissionToAdminGuard]
   },
+  {
+    path: 'thread',
+    loadChildren: () => import('./thread/thread.module').then(m => m.ThreadModule),
+    canActivate: [IsSysPermissionToAdminGuard]
+  },
   {path: '**', redirectTo: 'user', pathMatch: 'full'}
 ];
 

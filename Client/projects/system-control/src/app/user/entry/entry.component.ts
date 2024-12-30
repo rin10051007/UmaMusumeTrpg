@@ -1,4 +1,4 @@
-import {HttpStatusCode} from "@angular/common/http";
+import { HttpStatusCode } from "@angular/common/http";
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {SysPermission, UmaMusumeTrpgPermission} from 'Common';
@@ -7,9 +7,10 @@ import {Item} from "./models/item.model";
 import {ApiService} from './services/api.service';
 
 @Component({
-  selector: 'SystemControl-entry',
-  templateUrl: './entry.component.html',
-  styleUrls: ['./entry.component.css']
+    selector: 'SystemControl-entry',
+    templateUrl: './entry.component.html',
+    styleUrls: ['./entry.component.css'],
+    standalone: false
 })
 export class EntryComponent implements OnInit {
 

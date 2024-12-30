@@ -1,4 +1,4 @@
-import {HttpStatusCode} from "@angular/common/http";
+import { HttpStatusCode } from "@angular/common/http";
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SysPermission, UmaMusumeTrpgPermission} from "Common";
@@ -7,9 +7,10 @@ import {Item} from './models/item.model';
 import {ApiService} from './services/api.service';
 
 @Component({
-  selector: 'SystemControl-delete',
-  templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.css']
+    selector: 'SystemControl-delete',
+    templateUrl: './delete.component.html',
+    styleUrls: ['./delete.component.css'],
+    standalone: false
 })
 export class DeleteComponent {
 

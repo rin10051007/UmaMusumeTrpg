@@ -1,7 +1,7 @@
 cd C:\App\UmaMusumeTrpg\Client
 cls
+npm rum build:Common
 npm install ./dist/common
-npm rum build:All
 npm rum watch
 
 cd C:\App\UmaMusumeTrpg\UmaMusumeTrpg
@@ -29,12 +29,15 @@ npm install
 cd C:\App\UmaMusumeTrpg\Client
 npm rum build:Common
 npm install ./dist/common
-npm rum build:All
 npm rum watch
 
 
 ng generate pipe pipes/sort-direction/sort-direction --project=Common
-ng generate class list/forms/search  --type=form --project=SystemControl
-ng generate m list/forms/search  --type=form --project=SystemControl
-ng g m user  --routing  --project=SystemControl
 
+
+ng g c thread --project=SystemControl
+ng g m thread  --routing  --project=SystemControl
+ng g c thread/list --project=SystemControl
+ng g m thread/list  --routing  --project=SystemControl
+ng g s thread/list/services/api    --project=SystemControl
+ng g c thread/list/forms/search  --type=form   --project=SystemControl

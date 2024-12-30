@@ -3,9 +3,10 @@ import {SystemRoute,SystemRouteMap,environment, LocalStorageService} from 'Commo
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'SystemControl-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'SystemControl-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
   protected readonly systemRouteMap=SystemRouteMap;

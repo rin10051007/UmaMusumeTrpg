@@ -1,4 +1,4 @@
-import {HttpStatusCode} from "@angular/common/http";
+import { HttpStatusCode } from "@angular/common/http";
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SysPermission, UmaMusumeTrpgPermission} from "Common";
@@ -8,9 +8,10 @@ import {Item} from './models/item.model';
 import {ApiService} from './services/api.service';
 
 @Component({
-  selector: 'SystemControl-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+    selector: 'SystemControl-edit',
+    templateUrl: './edit.component.html',
+    styleUrls: ['./edit.component.css'],
+    standalone: false
 })
 export class EditComponent implements OnInit {
   editForm: Edit;

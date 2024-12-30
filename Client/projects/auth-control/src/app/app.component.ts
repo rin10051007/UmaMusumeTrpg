@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {environment} from 'Common';
 
 @Component({
-  selector: 'AuthControl-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'AuthControl-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
   baseUrl!: string;

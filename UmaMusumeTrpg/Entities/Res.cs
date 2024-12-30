@@ -10,9 +10,9 @@ public class Res
         Id = 0;
         ThreadId = 0;
         CreateUserId = 0;
-        CreateTime = DateTime.Now;
-        ThreadId = 0;
+        ThreadResNo = 0;
         Content = "";
+        CreateTime = DateTime.Now;
         User = new User();
         Thread = new Thread();
     }
@@ -33,11 +33,6 @@ public class Res
     public int CreateUserId { get; set; }
 
     /// <summary>
-    ///     作成日
-    /// </summary>
-    public DateTime CreateTime { get; set; }
-
-    /// <summary>
     ///     レス数
     /// </summary>
     public int ThreadResNo { get; set; }
@@ -46,6 +41,11 @@ public class Res
     ///     コンテンツ
     /// </summary>
     public string Content { get; set; }
+
+    /// <summary>
+    ///     作成日
+    /// </summary>
+    public DateTime CreateTime { get; set; }
 
     public User User { get; set; }
     public Thread Thread { get; set; }

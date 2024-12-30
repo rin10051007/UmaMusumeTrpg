@@ -93,8 +93,6 @@ INTO public."Users" (
     , "Token"
     , "CreateTime"
     , "UpdateTime"
-    , "DeleteTime"
-    , "IsDeleted"
 ) 
 VALUES ( 
     1
@@ -103,14 +101,12 @@ VALUES (
     , 2
     , 3
     , 'admin@example.com'
-    , 0
-    , 0
+    , 2
+    , 2
     , 'AQAAAAIAAYagAAAAEEZnddUTENT1PhKH/ujDMswyw2z55jymkx2WEiwpyQJFG7uemFADoKhSgNx6/6qWYA=='
     , '9b00e4c1562f43739152a0cfce084955'
     , '2024-12-04 10:06:49.489808+09:00'
     , '2024-12-04 10:06:49.489808+09:00'
-    , null
-    , false
 ) 
 , ( 
     2
@@ -120,13 +116,11 @@ VALUES (
     , 2
     , 'hoge@hoge.hoge'
     , 0
-    , 0
+    , 1
     , 'AQAAAAIAAYagAAAAENdfLLPepNcxPmFD9ZguR0/aotuJg1EgyalsRr6vzHLyySjq9fvEOZnHE6ipA0oPKQ=='
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
     , '2024-12-29 12:06:49.489808+09:00'
-    , null
-    , false
 ) 
 , ( 
     3
@@ -141,8 +135,6 @@ VALUES (
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
     , '2024-12-29 12:06:49.489808+09:00'
-    , null
-    , false
 ) 
 , ( 
     4
@@ -157,8 +149,6 @@ VALUES (
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
     , '2024-12-29 12:06:49.489808+09:00'
-    , null
-    , false
 ); 
 
 -- スレッドテーブルの作成
@@ -209,14 +199,30 @@ comment
 comment 
     on column public."Threads"."IsDeleted" is '削除フラグ'; 
 
+INSERT 
+INTO public."Threads" ( 
+    "Id"
+    , "CreateUserId"
+    , "Title"
+    , "ResCount"
+    , "Token"
+    , "CreateTime"
+    , "UpdateTime"
+) 
+VALUES (
+1,1,'スレッド1',1,'fdsmlvfjsdnfvsozmcj','2024-12-30 12:06:49.489808+09:00','2024-12-30 12:06:49.489808+09:00'
+),(
+2,1,'スレッド2',1,'dfsvzfrgbsargbsdgbsgb','2024-12-31 12:06:49.489808+09:00','2024-12-31 12:06:49.489808+09:00'
+); 
+
 --レステーブルの作成
 create table public."Res" ( 
     "Id" serial not null
     , "ThreadId" integer not null
     , "CreateUserId" integer not null
-    , "CreateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , "ThreadResNo" integer not null
-    , "Content" text not null
+    , "Content" character varying (512) not null
+    , "CreateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , FOREIGN KEY ("CreateUserId") references public."Users" ("Id")
     , FOREIGN KEY ("ThreadId") references public."Threads" ("Id")
 ); 
@@ -238,11 +244,26 @@ comment
     on column public."Res"."CreateUserId" is '作成者ID'; 
 
 comment 
-    on column public."Res"."CreateTime" is '作成日'; 
-
-comment 
     on column public."Res"."ThreadResNo" is 'レスNo'; 
 
 comment 
     on column public."Res"."Content" is 'レス内容';
 
+comment 
+    on column public."Res"."CreateTime" is '作成日'; 
+INSERT 
+INTO public."Res" ( 
+    "Id"
+    , "ThreadId"
+    , "CreateUserId"
+    , "ThreadResNo"
+    , "Content"
+    , "CreateTime"
+) 
+VALUES (
+1,1,1,1,'スレ内容001','2024-12-30 12:06:49.489808+09:00'
+),(
+2,2,1,1,'スレ内容002<br>改行タグテスト\r\n改行コードテスト','2024-12-31 12:06:49.489808+09:00'
+),(
+3,2,2,2,'スレ内容003','2024-12-31 13:06:49.489808+09:00'
+); 

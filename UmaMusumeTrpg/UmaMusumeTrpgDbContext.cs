@@ -61,10 +61,11 @@ public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOp
         {
             _ = entity.HasKey(e => e.Id);
             _ = entity.Property(e => e.Id);
-            _ = entity.Property(e => e.CreateUserId);
-            _ = entity.Property(e => e.CreateTime);
             _ = entity.Property(e => e.ThreadId);
-            _ = entity.Property(e => e.Content);
+            _ = entity.Property(e => e.CreateUserId);
+            _ = entity.Property(e => e.ThreadResNo);
+            _ = entity.Property(e => e.Content).HasMaxLength(512);
+            _ = entity.Property(e => e.CreateTime);
         });
     }
 }

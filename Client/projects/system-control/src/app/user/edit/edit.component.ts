@@ -1,4 +1,4 @@
-import {HttpStatusCode} from "@angular/common/http";
+import { HttpStatusCode } from "@angular/common/http";
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SysPermission, UmaMusumeTrpgPermission} from "Common";

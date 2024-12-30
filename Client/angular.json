@@ -44,11 +44,12 @@
       "prefix": "SystemControl",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "../UmaMusumeTrpg/wwwroot/SystemControl",
+            "outputPath": {
+              "base": "../UmaMusumeTrpg/wwwroot/SystemControl"
+            },
             "index": "projects/system-control/src/index.html",
-            "main": "projects/system-control/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -60,7 +61,8 @@
             "styles": [
               "projects/system-control/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/system-control/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -79,9 +81,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
@@ -141,11 +141,12 @@
       "prefix": "UmaMusumeControl",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "../UmaMusumeTrpg/wwwroot/UmaMusumeControl",
+            "outputPath": {
+              "base": "../UmaMusumeTrpg/wwwroot/UmaMusumeControl"
+            },
             "index": "projects/uma-musume-control/src/index.html",
-            "main": "projects/uma-musume-control/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -157,7 +158,8 @@
             "styles": [
               "projects/uma-musume-control/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/uma-musume-control/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -176,9 +178,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
@@ -238,11 +238,12 @@
       "prefix": "AuthControl",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "../UmaMusumeTrpg/wwwroot/AuthControl",
+            "outputPath": {
+              "base": "../UmaMusumeTrpg/wwwroot/AuthControl"
+            },
             "index": "projects/auth-control/src/index.html",
-            "main": "projects/auth-control/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -255,7 +256,8 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/auth-control/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/auth-control/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -274,9 +276,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,

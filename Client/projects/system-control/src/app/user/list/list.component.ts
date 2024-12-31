@@ -32,11 +32,11 @@ export class ListComponent implements OnInit {
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
     isUndeleted: true,
     isDeleted: false,
-    creationTimeStart: null,
+    creationTimeBeginning: null,
     creationTimeEnd: null,
-    updateTimeStart: null,
+    updateTimeBeginning: null,
     updateTimeEnd: null,
-    deletingTimeStart: null,
+    deletingTimeBeginning: null,
     deletingTimeEnd: null,
     sortItem: SystemSortItem.none,
     sortDirection: SortDirection.none,
@@ -61,24 +61,24 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let isFirst = false;
+    let isFirst = true;
     this.activatedRoute.queryParams.subscribe(
       params => {
         const item = params as SearchItem;
-        if (!isFirst) {
-          isFirst = true;
-          if (!(Object.keys(item).length === 0)) {
+        if (isFirst) {
+          isFirst = false;
+          if ((Object.keys(item).length >0)) {
             this.isDetailSearch =
               (item.loginId?.length ?? 0) > 0 ||
               (item.name?.length ?? 0) > 0 ||
               (item.email?.length ?? 0) > 0 ||
-              !item.isUndeleted ||
-              item.isDeleted ||
-              item.creationTimeStart != null ||
+              Boolean((item.isUndeleted || 'true').toString() == 'false') ||
+              Boolean((item.isDeleted || 'false').toString() == 'true') ||
+              item.creationTimeBeginning != null ||
               item.creationTimeEnd != null ||
-              item.updateTimeStart != null ||
+              item.updateTimeBeginning != null ||
               item.updateTimeEnd != null ||
-              item.deletingTimeStart != null ||
+              item.deletingTimeBeginning != null ||
               item.deletingTimeEnd != null;
           }
         }
@@ -89,13 +89,13 @@ export class ListComponent implements OnInit {
           email: item.email,
           sysPermission: Number(item.sysPermission || 0),
           umaMusumeTrpgPermission: Number(item.umaMusumeTrpgPermission || 0),
-          isUndeleted: Boolean(item.isUndeleted || true),
-          isDeleted: Boolean(item.isDeleted || false),
-          creationTimeStart: item.creationTimeStart || null,
+          isUndeleted: Boolean((item.isUndeleted || 'true').toString() == 'true'),
+          isDeleted: Boolean((item.isDeleted || 'false').toString() == 'true'),
+          creationTimeBeginning: item.creationTimeBeginning || null,
           creationTimeEnd: item.creationTimeEnd || null,
-          updateTimeStart: item.updateTimeStart || null,
+          updateTimeBeginning: item.updateTimeBeginning || null,
           updateTimeEnd: item.updateTimeEnd || null,
-          deletingTimeStart: item.deletingTimeStart || null,
+          deletingTimeBeginning: item.deletingTimeBeginning || null,
           deletingTimeEnd: item.deletingTimeEnd || null,
           sortItem: Number(item.sortItem || 0),
           sortDirection: Number(item.sortDirection || 0),
@@ -105,15 +105,16 @@ export class ListComponent implements OnInit {
           this.list = r.items;
           this.searchItem = r.search;
           this.length = r.length;
+          console.log(item);
           this.searchForm.setValues(item);
         });
       }
     );
     this.searchForm.getForm('isUndeleted').valueChanges.subscribe(c => {
-      this.searchForm.getForm('isUndeleted').setValue(c ? 1 : 0, {emitEvent: false});
+      this.searchForm.getForm('isUndeleted').setValue(c, {emitEvent: false});
     });
     this.searchForm.getForm('isDeleted').valueChanges.subscribe(c => {
-      this.searchForm.getForm('isDeleted').setValue(c ? 1 : 0, {emitEvent: false});
+      this.searchForm.getForm('isDeleted').setValue(c, {emitEvent: false});
     });
   }
 
@@ -125,6 +126,10 @@ export class ListComponent implements OnInit {
   }
 
   searchClick() {
+    console.log(this.searchForm.getValue('isUndeleted'));
+    console.log(Boolean(this.searchForm.getValue('isUndeleted')));
+    console.log(this.searchForm.getValue('isDeleted'));
+    console.log(Boolean(this.searchForm.getValue('isDeleted')));
     this.addQueryParam([
       'integration',
       'loginId',
@@ -134,11 +139,11 @@ export class ListComponent implements OnInit {
       'umaMusumeTrpgPermission',
       'isUndeleted',
       'isDeleted',
-      'creationTimeStart',
+      'creationTimeBeginning',
       'creationTimeEnd',
-      'updateTimeStart',
+      'updateTimeBeginning',
       'updateTimeEnd',
-      'deletingTimeStart',
+      'deletingTimeBeginning',
       'deletingTimeEnd'
     ], [
       this.searchForm.getValue('integration') ?? '',
@@ -147,13 +152,13 @@ export class ListComponent implements OnInit {
       this.searchForm.getValue('email') ?? '',
       Number(this.searchForm.getValue('sysPermission') || 0),
       Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
-      Boolean(this.searchForm.getValue('isUndeleted') || false),
-      Boolean(this.searchForm.getValue('isDeleted') || false),
-      this.datePipe.transform(this.searchForm.getValue('creationTimeStart'), 'YYYY-MM-dd'),
+      Boolean(this.searchForm.getValue('isUndeleted')),
+      Boolean(this.searchForm.getValue('isDeleted')),
+      this.datePipe.transform(this.searchForm.getValue('creationTimeBeginning'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('creationTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updateTimeStart'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updateTimeBeginning'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('updateTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deletingTimeStart'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'YYYY-MM-dd'),
     ]);
   }
@@ -170,11 +175,11 @@ export class ListComponent implements OnInit {
         umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
         isUndeleted: true,
         isDeleted: false,
-        creationTimeStart: '',
+        creationTimeBeginning: '',
         creationTimeEnd: '',
-        updateTimeStart: '',
+        updateTimeBeginning: '',
         updateTimeEnd: '',
-        deletingTimeStart: '',
+        deletingTimeBeginning: '',
         deletingTimeEnd: '',
         sortItem: SystemSortItem.none,
         sortDirection: SortDirection.none,

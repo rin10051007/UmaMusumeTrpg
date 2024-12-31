@@ -16,12 +16,16 @@ public class ListSearch : BaseListSearch
 
     public int ThreadId { get; set; }
     public int CreatingUserId { get; set; }
-    public string Title { get; set; } = "";
-    public int ResCount { get; set; }
+    public string Content { get; set; } = "";
+    public int ThreadResNo { get; set; }
 
     public ResponseSortItem SortItem { get; set; }
 }
 
 public class ListSearchForThread : ListSearch
+{
+}
+
+public class ListSearchForUser : ListSearch
 {
 }

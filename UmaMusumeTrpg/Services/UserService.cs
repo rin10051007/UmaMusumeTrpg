@@ -41,34 +41,34 @@ public class UserService(
             list = (IOrderedQueryable<User>)list.Where(x =>
                 x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
 
-        if (search.CreationTimeStart.HasValue)
+        if (search.CreationTimeBeginning.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x =>
-                DateTime.Compare(x.CreationTime.Date, search.CreationTimeStart.Value) >= 0);
+                DateTime.Compare(x.CreationTime.Date, search.CreationTimeBeginning.Value) >= 0);
 
         if (search.CreationTimeEnd.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x => x.CreationTime.Date <= search.CreationTimeEnd.Value);
 
-        if (search.UpdateTimeStart.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date >= search.UpdateTimeStart);
+        if (search.UpdateTimeBeginning.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date >= search.UpdateTimeBeginning);
 
         if (search.UpdateTimeEnd.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date <= search.UpdateTimeEnd);
 
         if (search.IsDeleted)
         {
-            if (search.DeletedTimeStart.HasValue)
+            if (search.DeletedTimeBeginning.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
-                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date >= search.DeletedTimeStart);
+                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date >= search.DeletedTimeBeginning);
 
             if (search.DeletedTimeEnd.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
                     x.DeletingTime.HasValue && x.DeletingTime.Value.Date <= search.DeletedTimeEnd);
         }
 
-        if (search.IsUndeleted)
-            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == false);
-        if (search.IsDeleted)
+        if (!search.IsUndeleted)
             list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == true);
+        if (!search.IsDeleted)
+            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == false);
 
         switch (search.SortDirection)
         {

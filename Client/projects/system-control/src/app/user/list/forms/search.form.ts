@@ -34,8 +34,8 @@ export class Search extends BaseForm {
     this.setValue('email', search?.email || '');
     this.setValue('sysPermission', Number(search?.sysPermission || 0));
     this.setValue('umaMusumeTrpgPermission', Number(search?.umaMusumeTrpgPermission || 0));
-    this.setValue('isUndeleted', Number(search?.isUndeleted || 1) == 1);
-    this.setValue('isDeleted', Number(search?.isDeleted || 0) == 1);
+    this.setValue('isUndeleted', Boolean(search?.isUndeleted||false));
+    this.setValue('isDeleted', Number(search?.isDeleted||false));
     this.setValue('creationTimeStart', search?.creationTimeStart || '');
     this.setValue('creationTimeEnd', search?.creationTimeEnd || '');
     this.setValue('updateTimeStart', search?.updateTimeStart || '');

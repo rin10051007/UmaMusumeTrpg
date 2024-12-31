@@ -54,7 +54,7 @@ public class UserService(
         if (search.UpdateTimeEnd.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date <= search.UpdateTimeEnd);
 
-        if (search.IsDeleted > 0)
+        if (search.IsDeleted)
         {
             if (search.DeletedTimeStart.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
@@ -65,10 +65,10 @@ public class UserService(
                     x.DeletingTime.HasValue && x.DeletingTime.Value.Date <= search.DeletedTimeEnd);
         }
 
-        if (!(search.IsUndeleted > 0))
-            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == true);
-        if (!(search.IsDeleted > 0))
+        if (search.IsUndeleted)
             list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == false);
+        if (search.IsDeleted)
+            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == true);
 
         switch (search.SortDirection)
         {
@@ -76,38 +76,38 @@ public class UserService(
                 switch (search.SortItem)
                 {
                     default:
-                    case SystemSortItem.None:
-                    case SystemSortItem.Id:
+                    case UserSortItem.None:
+                    case UserSortItem.Id:
                         list = list.OrderBy(x => x.Id);
                         break;
-                    case SystemSortItem.LoginId:
+                    case UserSortItem.LoginId:
                         list = list.OrderBy(x => x.LoginId);
                         break;
-                    case SystemSortItem.Name:
+                    case UserSortItem.Name:
                         list = list.OrderBy(x => x.Name);
                         break;
-                    case SystemSortItem.SysPermission:
+                    case UserSortItem.SysPermission:
                         list = list.OrderBy(x => x.SysPermission);
                         break;
-                    case SystemSortItem.UmaMusumeTrpgPermission:
+                    case UserSortItem.UmaMusumeTrpgPermission:
                         list = list.OrderBy(x => x.UmaMusumeTrpgPermission);
                         break;
-                    case SystemSortItem.Email:
+                    case UserSortItem.Email:
                         list = list.OrderBy(x => x.Email);
                         break;
-                    case SystemSortItem.CreationThreadCount:
+                    case UserSortItem.CreationThreadCount:
                         list = list.OrderBy(x => x.CreationThreadCount);
                         break;
-                    case SystemSortItem.TotalResCount:
+                    case UserSortItem.TotalResCount:
                         list = list.OrderBy(x => x.TotalResCount);
                         break;
-                    case SystemSortItem.CreationTime:
+                    case UserSortItem.CreationTime:
                         list = list.OrderBy(x => x.CreationTime);
                         break;
-                    case SystemSortItem.UpdateTime:
+                    case UserSortItem.UpdateTime:
                         list = list.OrderBy(x => x.UpdateTime);
                         break;
-                    case SystemSortItem.DeletingTime:
+                    case UserSortItem.DeletingTime:
                         list = list.OrderBy(x => x.DeletingTime);
                         break;
                 }
@@ -117,40 +117,40 @@ public class UserService(
                 switch (search.SortItem)
                 {
                     default:
-                    case SystemSortItem.None:
+                    case UserSortItem.None:
                         list = list.OrderBy(x => x.Id);
                         break;
-                    case SystemSortItem.Id:
+                    case UserSortItem.Id:
                         list = list.OrderByDescending(x => x.Id);
                         break;
-                    case SystemSortItem.LoginId:
+                    case UserSortItem.LoginId:
                         list = list.OrderByDescending(x => x.LoginId);
                         break;
-                    case SystemSortItem.Name:
+                    case UserSortItem.Name:
                         list = list.OrderByDescending(x => x.Name);
                         break;
-                    case SystemSortItem.SysPermission:
+                    case UserSortItem.SysPermission:
                         list = list.OrderByDescending(x => x.SysPermission);
                         break;
-                    case SystemSortItem.UmaMusumeTrpgPermission:
+                    case UserSortItem.UmaMusumeTrpgPermission:
                         list = list.OrderByDescending(x => x.UmaMusumeTrpgPermission);
                         break;
-                    case SystemSortItem.Email:
+                    case UserSortItem.Email:
                         list = list.OrderByDescending(x => x.Email);
                         break;
-                    case SystemSortItem.CreationThreadCount:
+                    case UserSortItem.CreationThreadCount:
                         list = list.OrderByDescending(x => x.CreationThreadCount);
                         break;
-                    case SystemSortItem.TotalResCount:
+                    case UserSortItem.TotalResCount:
                         list = list.OrderByDescending(x => x.TotalResCount);
                         break;
-                    case SystemSortItem.CreationTime:
+                    case UserSortItem.CreationTime:
                         list = list.OrderByDescending(x => x.CreationTime);
                         break;
-                    case SystemSortItem.UpdateTime:
+                    case UserSortItem.UpdateTime:
                         list = list.OrderByDescending(x => x.UpdateTime);
                         break;
-                    case SystemSortItem.DeletingTime:
+                    case UserSortItem.DeletingTime:
                         list = list.OrderByDescending(x => x.DeletingTime);
                         break;
                 }

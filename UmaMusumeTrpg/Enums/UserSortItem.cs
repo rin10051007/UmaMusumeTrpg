@@ -1,6 +1,6 @@
 ﻿namespace UmaMusumeTrpg.Enums;
 
-public enum SystemSortItem
+public enum UserSortItem
 {
     None,
     Id,

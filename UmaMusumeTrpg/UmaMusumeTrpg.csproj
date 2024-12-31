@@ -7,12 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Models\Thread\Delete\"/>
-        <Folder Include="Models\Thread\Detail\"/>
-        <Folder Include="Models\Thread\Entry\"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0"/>
         <PackageReference Include="Microsoft.AspNetCore.Cryptography.Internal" Version="9.0.0"/>
         <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="9.0.0"/>

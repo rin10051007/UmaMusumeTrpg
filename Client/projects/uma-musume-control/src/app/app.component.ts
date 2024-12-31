@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {AuthApiService, environment, LocalStorageService, LocalStorageToken} from 'Common';
 
 @Component({
-    selector: 'UmaMusumeControl-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    standalone: false
+  selector: 'UmaMusumeControl-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  standalone: false
 })
 export class AppComponent {
   baseUrl!: string;

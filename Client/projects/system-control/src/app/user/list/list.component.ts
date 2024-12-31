@@ -16,10 +16,10 @@ import {SearchItem} from './models/search-item.model';
 import {ApiService} from './services/api.service';
 
 @Component({
-    selector: 'SystemControl-list',
-    templateUrl: './list.component.html',
-    styleUrls: ['./list.component.css'],
-    standalone: false
+  selector: 'SystemControl-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
+  standalone: false
 })
 export class ListComponent implements OnInit {
   list: Item[] = [];
@@ -30,8 +30,8 @@ export class ListComponent implements OnInit {
     email: '',
     sysPermission: SysPermission.None,
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
-    isUndeleted: 1,
-    isDeleted: 0,
+    isUndeleted: true,
+    isDeleted: false,
     creationTimeStart: null,
     creationTimeEnd: null,
     updateTimeStart: null,
@@ -69,11 +69,11 @@ export class ListComponent implements OnInit {
           isFirst = true;
           if (!(Object.keys(item).length === 0)) {
             this.isDetailSearch =
-              (item.loginId?.length??0) > 0 ||
-              (item.name?.length??0) > 0 ||
-              (item.email?.length??0) > 0 ||
-              item.isUndeleted == 0 ||
-              item.isDeleted == 1 ||
+              (item.loginId?.length ?? 0) > 0 ||
+              (item.name?.length ?? 0) > 0 ||
+              (item.email?.length ?? 0) > 0 ||
+              !item.isUndeleted ||
+              item.isDeleted ||
               item.creationTimeStart != null ||
               item.creationTimeEnd != null ||
               item.updateTimeStart != null ||
@@ -89,8 +89,8 @@ export class ListComponent implements OnInit {
           email: item.email,
           sysPermission: Number(item.sysPermission || 0),
           umaMusumeTrpgPermission: Number(item.umaMusumeTrpgPermission || 0),
-          isUndeleted: Number(item.isUndeleted || 1),
-          isDeleted: Number(item.isDeleted || 0),
+          isUndeleted: Boolean(item.isUndeleted || true),
+          isDeleted: Boolean(item.isDeleted || false),
           creationTimeStart: item.creationTimeStart || null,
           creationTimeEnd: item.creationTimeEnd || null,
           updateTimeStart: item.updateTimeStart || null,
@@ -147,8 +147,8 @@ export class ListComponent implements OnInit {
       this.searchForm.getValue('email') ?? '',
       Number(this.searchForm.getValue('sysPermission') || 0),
       Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
-      Number(this.searchForm.getValue('isUndeleted') || 0),
-      Number(this.searchForm.getValue('isDeleted') || 0),
+      Boolean(this.searchForm.getValue('isUndeleted') || false),
+      Boolean(this.searchForm.getValue('isDeleted') || false),
       this.datePipe.transform(this.searchForm.getValue('creationTimeStart'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('creationTimeEnd'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('updateTimeStart'), 'YYYY-MM-dd'),
@@ -168,8 +168,8 @@ export class ListComponent implements OnInit {
         email: '',
         sysPermission: SysPermission.None,
         umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
-        isUndeleted: 1,
-        isDeleted: 0,
+        isUndeleted: true,
+        isDeleted: false,
         creationTimeStart: '',
         creationTimeEnd: '',
         updateTimeStart: '',

@@ -36,7 +36,7 @@
         <mat-list-item>
           <mat-grid-list cols="10">
             <mat-grid-tile colspan="2">作成日時</mat-grid-tile>
-            <mat-grid-tile colspan="8">{{ item.createTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</mat-grid-tile>
+            <mat-grid-tile colspan="8">{{ item.creationTime | date:"yyyy年MM月dd日 HH:mm.ss" }}</mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>
         <mat-divider></mat-divider>
@@ -50,7 +50,7 @@
         <mat-list-item *ngIf="item.isDeleted">
           <mat-grid-list cols="10">
             <mat-grid-tile colspan="2">削除日時</mat-grid-tile>
-            <mat-grid-tile colspan="8">{{ item.deleteTime ? item.deleteTime : 0 | date: "yyyy年MM月dd日 HH:mm.ss" }}
+            <mat-grid-tile colspan="8">{{ item.deletingTime ? item.deletingTime : 0 | date: "yyyy年MM月dd日 HH:mm.ss" }}
             </mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>

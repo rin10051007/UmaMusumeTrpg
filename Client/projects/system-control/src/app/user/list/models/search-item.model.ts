@@ -7,13 +7,13 @@ export interface SearchItem extends BaseListSearch {
   email: string;
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
-  isUndeleted: 1 | 0;
-  isDeleted: 1 | 0;
-  createTimeStart: Date | null;
-  createTimeEnd: Date | null;
-  updateTimeStart: Date | null;
+  isUndeleted: boolean;
+  isDeleted: boolean;
+  creationTimeBeginning: Date | null;
+  creationTimeEnd: Date | null;
+  updateTimeBeginning: Date | null;
   updateTimeEnd: Date | null;
-  deleteTimeStart: Date | null;
-  deleteTimeEnd: Date | null;
+  deletingTimeBeginning: Date | null;
+  deletingTimeEnd: Date | null;
   sortItem: SystemSortItem;
 }

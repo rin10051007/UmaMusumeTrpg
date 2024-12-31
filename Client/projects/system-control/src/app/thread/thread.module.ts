@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ThreadRoutingModule } from './thread-routing.module';
+import {ThreadRoutingModule} from './thread-routing.module';
 
 
 @NgModule({
@@ -11,4 +11,5 @@ import { ThreadRoutingModule } from './thread-routing.module';
     ThreadRoutingModule
   ]
 })
-export class ThreadModule { }
+export class ThreadModule {
+}

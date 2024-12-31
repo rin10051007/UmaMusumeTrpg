@@ -4,10 +4,5 @@ namespace UmaMusumeTrpg.Models.Base.Public;
 
 public class PublicBaseResponse
 {
-    protected PublicBaseResponse()
-    {
-        HttpStatusCode = HttpStatusCode.OK;
-    }
-
-    public HttpStatusCode HttpStatusCode { get; set; }
+    public HttpStatusCode HttpStatusCode { get; set; } = HttpStatusCode.OK;
 }

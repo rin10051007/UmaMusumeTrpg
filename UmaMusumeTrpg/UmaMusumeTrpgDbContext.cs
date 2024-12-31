@@ -1,70 +1,79 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UmaMusumeTrpg.Entities;
+using UmaMusumeTrpg.Enums;
 using Thread = UmaMusumeTrpg.Entities.Thread;
 
 namespace UmaMusumeTrpg;
 
 public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOptions)
 {
-    public DbSet<User> Users { get; set; }
+    public virtual DbSet<Response> Responses { get; set; }
 
+    public virtual DbSet<Thread> Threads { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        _ = modelBuilder.Entity<User>(entity =>
+        modelBuilder.Entity<User>(entity =>
         {
-            _ = entity.HasKey(e => e.Id);
-            _ = entity.Property(e => e.Id);
-            _ = entity.Property(e => e.LoginId).HasMaxLength(64);
-            _ = entity.Property(e => e.Name).HasMaxLength(64);
-            _ = entity.Property(e => e.SysPermission);
-            _ = entity.Property(e => e.UmaMusumeTrpgPermission);
-            _ = entity.Property(e => e.Email).HasMaxLength(128);
-            _ = entity.Property(e => e.Password).HasMaxLength(256);
-            _ = entity.Property(e => e.Token).HasMaxLength(32);
-            _ = entity.Property(e => e.CreateTime);
-            _ = entity.Property(e => e.UpdateTime);
-            _ = entity.Property(e => e.DeleteTime);
-            _ = entity.Property(e => e.IsDeleted);
-
-            _ = entity.HasMany(e => e.Threads)
-                .WithOne(t => t.User)
-                .HasForeignKey(t => t.CreateUserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            _ = entity.HasMany(e => e.Res)
-                .WithOne(t => t.User)
-                .HasForeignKey(t => t.CreateUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+            entity.ToTable(tb => tb.HasComment("管理者、利用者DB"));
+            entity.HasKey(e => e.Id).HasName("UsersIdD");
+            entity.Property(e => e.Id).HasComment("ID");
+            entity.Property(e => e.LoginId).IsRequired().HasMaxLength(64).HasComment("LoginId");
+            entity.HasIndex(e => e.LoginId, "Users_LoginId_key").IsUnique();
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(64).HasComment("名前");
+            entity.Property(e => e.SysPermission).HasDefaultValue(SysPermission.None)
+                .HasComment("管理者権限\r\nNone = 0\r\nNoQualification = 1,\r\nSysAdmin = 2");
+            entity.Property(e => e.UmaMusumeTrpgPermission).HasDefaultValue(UmaMusumeTrpgPermission.None)
+                .HasComment("ウマ娘TRPG権限\r\nNone = 0\r\nNoQualification = 1,\r\nPlayer = 2,\r\nGmPlayer = 3");
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(128).HasComment("メールアドレス");
+            entity.Property(e => e.CreationThreadCount).HasDefaultValue(0).HasComment("作成スレッド数");
+            entity.Property(e => e.TotalResCount).HasDefaultValue(0).HasComment("総レス数");
+            entity.Property(e => e.Password).IsRequired().HasMaxLength(256).HasComment("パスワード");
+            entity.Property(e => e.Token).IsRequired().HasMaxLength(32).HasComment("トークン");
+            entity.Property(e => e.CreationTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日時");
+            entity.Property(e => e.UpdateTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("更新日時");
+            entity.Property(e => e.DeletingTime).HasComment("削除日時");
+            entity.Property(e => e.IsDeleted).HasDefaultValue(false).HasComment("削除フラグ");
         });
 
-        _ = modelBuilder.Entity<Thread>(entity =>
+        modelBuilder.Entity<Thread>(entity =>
         {
-            _ = entity.HasKey(e => e.Id);
-            _ = entity.Property(e => e.Id);
-            _ = entity.Property(e => e.CreateUserId);
-            _ = entity.Property(e => e.Title).HasMaxLength(64);
-            _ = entity.Property(e => e.ResCount);
-            _ = entity.Property(e => e.Token).HasMaxLength(32);
-            _ = entity.Property(e => e.CreateTime);
-            _ = entity.Property(e => e.UpdateTime);
-            _ = entity.Property(e => e.DeleteTime);
-            _ = entity.Property(e => e.IsDeleted);
+            entity.ToTable(tb => tb.HasComment("スレッドDB"));
+            entity.HasKey(e => e.Id).HasName("ThreadsId");
+            entity.Property(e => e.Id).HasComment("ID");
+            entity.Property(e => e.CreatingUserId).HasComment("作成者ID");
+            entity.Property(e => e.Title).IsRequired().HasMaxLength(64).HasComment("スレッドタイトル");
+            entity.Property(e => e.ResCount).HasDefaultValue(0).HasComment("レス数");
+            entity.Property(e => e.Token).IsRequired().HasMaxLength(32).HasComment("トークン");
+            entity.Property(e => e.CreationTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日");
+            entity.Property(e => e.UpdateTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("更新日");
+            entity.Property(e => e.DeletingTime).HasComment("削除日");
+            entity.Property(e => e.IsDeleted).HasDefaultValue(false).HasComment("削除フラグ");
 
-            _ = entity.HasMany(e => e.Res)
-                .WithOne(t => t.Thread)
-                .HasForeignKey(t => t.ThreadId)
-                .OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(d => d.CreatingUser).WithMany(p => p.Threads).HasForeignKey(d => d.CreatingUserId)
+                .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("Threads_CreatingUserId_fkey");
         });
 
-        _ = modelBuilder.Entity<Res>(entity =>
+        modelBuilder.Entity<Response>(entity =>
         {
-            _ = entity.HasKey(e => e.Id);
-            _ = entity.Property(e => e.Id);
-            _ = entity.Property(e => e.CreateUserId);
-            _ = entity.Property(e => e.CreateTime);
-            _ = entity.Property(e => e.ThreadId);
-            _ = entity.Property(e => e.Content);
+            entity.ToTable(tb => tb.HasComment("レスDB"));
+            entity.HasKey(e => e.Id).HasName("ResponsesId");
+
+
+            entity.Property(e => e.Id).HasComment("ID");
+            entity.Property(e => e.ThreadId).HasComment("スレッドID");
+            entity.Property(e => e.CreatingUserId).HasComment("作成者ID");
+            entity.Property(e => e.ThreadResNo).HasComment("レスNo");
+            entity.Property(e => e.Content).IsRequired().HasMaxLength(512).HasComment("レス内容");
+            entity.Property(e => e.CreationTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日");
+
+            entity.HasOne(d => d.CreatingUser).WithMany(p => p.Responses).HasForeignKey(d => d.CreatingUserId)
+                .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("Responses_CreatingUserId_fkey");
+
+            entity.HasOne(d => d.Thread).WithMany(p => p.Responses).HasForeignKey(d => d.ThreadId)
+                .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("Responses_ThreadId_fkey");
         });
     }
 }

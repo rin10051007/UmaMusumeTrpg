@@ -1,7 +1,13 @@
-cd C:\App\UmaMusumeTrpg\Client
 cls
-npm rum build:Common
-npm install ./dist/common
+cd C:\App\UmaMusumeTrpg\Client\projects\common
+npm cache verify
+npm cache clean --force
+npm install
+cd C:\App\UmaMusumeTrpg\Client
+npm cache verify
+npm cache clean --force
+npm install
+cd C:\App\UmaMusumeTrpg\Client
 npm rum watch
 
 cd C:\App\UmaMusumeTrpg\UmaMusumeTrpg
@@ -16,20 +22,9 @@ ng generate application SystemControl --prefix=SystemControl --skip-install
 ng generate application UmaMusumeControl --prefix=UmaMusumeControl --skip-install
 ng generate application AuthControl --prefix=AuthControl --skip-install
 
-cls
-cd C:\App\UmaMusumeTrpg\Client\projects\common
-npm cache verify
-npm cache clean --force
-npm install
-cd C:\App\UmaMusumeTrpg\Client
-npm cache verify
-npm cache clean --force
-npm install
 
-cd C:\App\UmaMusumeTrpg\Client
-npm rum build:Common
-npm install ./dist/common
-npm rum watch
+dotnet ef dbcontext scaffold "Host=localhost;Port=5432;Database=postgres;User Id=postgres;Password=rin--10051007" Npgsql.EntityFrameworkCore.PostgreSQL  --context-dir ./ --context UmaMusumeTrpgDbContext  --output-dir ./Entities
+
 
 
 ng generate pipe pipes/sort-direction/sort-direction --project=Common

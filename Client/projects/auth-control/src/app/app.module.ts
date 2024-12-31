@@ -1,5 +1,5 @@
 import {registerLocaleData} from "@angular/common";
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import localeJa from '@angular/common/locales/ja';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -11,17 +11,19 @@ import {AppComponent} from './app.component';
 
 registerLocaleData(localeJa);
 
-@NgModule({ declarations: [
-        AppComponent
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule], providers: [
-        TokenInterceptorProvider,
-        ErrorInterceptorProvider,
-        { provide: LOCALE_ID, useValue: 'ja-JP' },
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  bootstrap: [AppComponent], imports: [BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule], providers: [
+    TokenInterceptorProvider,
+    ErrorInterceptorProvider,
+    {provide: LOCALE_ID, useValue: 'ja-JP'},
+    provideHttpClient(withInterceptorsFromDi())
+  ]
+})
 export class AppModule {
 }

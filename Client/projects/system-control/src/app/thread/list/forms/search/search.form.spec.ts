@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SearchForm } from './search.form';
+import {SearchForm} from './search.form';
 
 describe('SearchForm', () => {
   let component: SearchForm;
@@ -10,8 +10,8 @@ describe('SearchForm', () => {
     await TestBed.configureTestingModule({
       imports: [SearchForm]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SearchForm);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -8,7 +8,7 @@ export enum SystemSortItem {
   email,
   creationThreadCount,
   totalResCount,
-  createTime,
+  creationTime,
   updateTime,
-  deleteTime
+  deletingTime
 }

@@ -5,7 +5,7 @@ export interface Item extends BaseDetailItem {
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   email: string;
-  createTime: Date;
-  deleteTime: Date | null;
+  creationTime: Date;
+  deletingTime: Date | null;
   isDeleted: boolean;
 }

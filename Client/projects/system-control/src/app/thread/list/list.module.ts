@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ListRoutingModule } from './list-routing.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ListRoutingModule} from './list-routing.module';
 import {ListComponent} from "./list.component";
 
 
@@ -13,4 +13,5 @@ import {ListComponent} from "./list.component";
     ListRoutingModule
   ]
 })
-export class ListModule { }
+export class ListModule {
+}

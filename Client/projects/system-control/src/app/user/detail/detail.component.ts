@@ -5,10 +5,10 @@ import {Item} from "./models/item.model";
 import {ApiService} from './services/api.service';
 
 @Component({
-    selector: 'SystemControl-detail',
-    templateUrl: './detail.component.html',
-    styleUrls: ['./detail.component.css'],
-    standalone: false
+  selector: 'SystemControl-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.css'],
+  standalone: false
 })
 export class DetailComponent implements OnInit {
   detail: Item = this.initializingItem();
@@ -39,9 +39,9 @@ export class DetailComponent implements OnInit {
       sysPermission: SysPermission.None,
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
       email: '',
-      createTime: now,
+      creationTime: now,
       updateTime: now,
-      deleteTime: null,
+      deletingTime: null,
       isDeleted: false,
       token: ''
     } as Item;

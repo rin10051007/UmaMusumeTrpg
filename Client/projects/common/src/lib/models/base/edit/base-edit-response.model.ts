@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "@angular/common/http";
+import {HttpStatusCode} from "@angular/common/http";
 
 export interface BaseEditResponse {
   id: number;

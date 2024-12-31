@@ -16,10 +16,10 @@ import {SearchItem} from './models/search-item.model';
 import {ApiService} from './services/api.service';
 
 @Component({
-    selector: 'SystemControl-list',
-    templateUrl: './list.component.html',
-    styleUrls: ['./list.component.css'],
-    standalone: false
+  selector: 'SystemControl-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
+  standalone: false
 })
 export class ListComponent implements OnInit {
   list: Item[] = [];
@@ -30,14 +30,14 @@ export class ListComponent implements OnInit {
     email: '',
     sysPermission: SysPermission.None,
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
-    isUndeleted: 1,
-    isDeleted: 0,
-    createTimeStart: null,
-    createTimeEnd: null,
-    updateTimeStart: null,
+    isUndeleted: true,
+    isDeleted: false,
+    creationTimeBeginning: null,
+    creationTimeEnd: null,
+    updateTimeBeginning: null,
     updateTimeEnd: null,
-    deleteTimeStart: null,
-    deleteTimeEnd: null,
+    deletingTimeBeginning: null,
+    deletingTimeEnd: null,
     sortItem: SystemSortItem.none,
     sortDirection: SortDirection.none,
     pageIndex: 1,
@@ -61,25 +61,25 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let isFirst = false;
+    let isFirst = true;
     this.activatedRoute.queryParams.subscribe(
       params => {
         const item = params as SearchItem;
-        if (!isFirst) {
-          isFirst = true;
-          if (!(Object.keys(item).length === 0)) {
+        if (isFirst) {
+          isFirst = false;
+          if ((Object.keys(item).length >0)) {
             this.isDetailSearch =
-              (item.loginId?.length??0) > 0 ||
-              (item.name?.length??0) > 0 ||
-              (item.email?.length??0) > 0 ||
-              item.isUndeleted == 0 ||
-              item.isDeleted == 1 ||
-              item.createTimeStart != null ||
-              item.createTimeEnd != null ||
-              item.updateTimeStart != null ||
+              (item.loginId?.length ?? 0) > 0 ||
+              (item.name?.length ?? 0) > 0 ||
+              (item.email?.length ?? 0) > 0 ||
+              Boolean((item.isUndeleted || 'true').toString() == 'false') ||
+              Boolean((item.isDeleted || 'false').toString() == 'true') ||
+              item.creationTimeBeginning != null ||
+              item.creationTimeEnd != null ||
+              item.updateTimeBeginning != null ||
               item.updateTimeEnd != null ||
-              item.deleteTimeStart != null ||
-              item.deleteTimeEnd != null;
+              item.deletingTimeBeginning != null ||
+              item.deletingTimeEnd != null;
           }
         }
         this.apiService.getList({
@@ -89,14 +89,14 @@ export class ListComponent implements OnInit {
           email: item.email,
           sysPermission: Number(item.sysPermission || 0),
           umaMusumeTrpgPermission: Number(item.umaMusumeTrpgPermission || 0),
-          isUndeleted: Number(item.isUndeleted || 1),
-          isDeleted: Number(item.isDeleted || 0),
-          createTimeStart: item.createTimeStart || null,
-          createTimeEnd: item.createTimeEnd || null,
-          updateTimeStart: item.updateTimeStart || null,
+          isUndeleted: Boolean((item.isUndeleted || 'true').toString() == 'true'),
+          isDeleted: Boolean((item.isDeleted || 'false').toString() == 'true'),
+          creationTimeBeginning: item.creationTimeBeginning || null,
+          creationTimeEnd: item.creationTimeEnd || null,
+          updateTimeBeginning: item.updateTimeBeginning || null,
           updateTimeEnd: item.updateTimeEnd || null,
-          deleteTimeStart: item.deleteTimeStart || null,
-          deleteTimeEnd: item.deleteTimeEnd || null,
+          deletingTimeBeginning: item.deletingTimeBeginning || null,
+          deletingTimeEnd: item.deletingTimeEnd || null,
           sortItem: Number(item.sortItem || 0),
           sortDirection: Number(item.sortDirection || 0),
           pageIndex: Number(item.pageIndex || 0),
@@ -105,15 +105,16 @@ export class ListComponent implements OnInit {
           this.list = r.items;
           this.searchItem = r.search;
           this.length = r.length;
+          console.log(item);
           this.searchForm.setValues(item);
         });
       }
     );
     this.searchForm.getForm('isUndeleted').valueChanges.subscribe(c => {
-      this.searchForm.getForm('isUndeleted').setValue(c ? 1 : 0, {emitEvent: false});
+      this.searchForm.getForm('isUndeleted').setValue(c, {emitEvent: false});
     });
     this.searchForm.getForm('isDeleted').valueChanges.subscribe(c => {
-      this.searchForm.getForm('isDeleted').setValue(c ? 1 : 0, {emitEvent: false});
+      this.searchForm.getForm('isDeleted').setValue(c, {emitEvent: false});
     });
   }
 
@@ -125,6 +126,10 @@ export class ListComponent implements OnInit {
   }
 
   searchClick() {
+    console.log(this.searchForm.getValue('isUndeleted'));
+    console.log(Boolean(this.searchForm.getValue('isUndeleted')));
+    console.log(this.searchForm.getValue('isDeleted'));
+    console.log(Boolean(this.searchForm.getValue('isDeleted')));
     this.addQueryParam([
       'integration',
       'loginId',
@@ -134,12 +139,12 @@ export class ListComponent implements OnInit {
       'umaMusumeTrpgPermission',
       'isUndeleted',
       'isDeleted',
-      'createTimeStart',
-      'createTimeEnd',
-      'updateTimeStart',
+      'creationTimeBeginning',
+      'creationTimeEnd',
+      'updateTimeBeginning',
       'updateTimeEnd',
-      'deleteTimeStart',
-      'deleteTimeEnd'
+      'deletingTimeBeginning',
+      'deletingTimeEnd'
     ], [
       this.searchForm.getValue('integration') ?? '',
       this.searchForm.getValue('loginId') ?? '',
@@ -147,14 +152,14 @@ export class ListComponent implements OnInit {
       this.searchForm.getValue('email') ?? '',
       Number(this.searchForm.getValue('sysPermission') || 0),
       Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
-      Number(this.searchForm.getValue('isUndeleted') || 0),
-      Number(this.searchForm.getValue('isDeleted') || 0),
-      this.datePipe.transform(this.searchForm.getValue('createTimeStart'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('createTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updateTimeStart'), 'YYYY-MM-dd'),
+      Boolean(this.searchForm.getValue('isUndeleted')),
+      Boolean(this.searchForm.getValue('isDeleted')),
+      this.datePipe.transform(this.searchForm.getValue('creationTimeBeginning'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creationTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updateTimeBeginning'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('updateTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deleteTimeStart'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deleteTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'YYYY-MM-dd'),
     ]);
   }
 
@@ -168,19 +173,20 @@ export class ListComponent implements OnInit {
         email: '',
         sysPermission: SysPermission.None,
         umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
-        isUndeleted: 1,
-        isDeleted: 0,
-        createTimeStart: '',
-        createTimeEnd: '',
-        updateTimeStart: '',
+        isUndeleted: true,
+        isDeleted: false,
+        creationTimeBeginning: '',
+        creationTimeEnd: '',
+        updateTimeBeginning: '',
         updateTimeEnd: '',
-        deleteTimeStart: '',
-        deleteTimeEnd: '',
+        deletingTimeBeginning: '',
+        deletingTimeEnd: '',
         sortItem: SystemSortItem.none,
         sortDirection: SortDirection.none,
         pageIndex: 0,
         pageSize: PageSizeOptions[0]
       }
+    }).then(r => {
     });
   }
 
@@ -189,7 +195,8 @@ export class ListComponent implements OnInit {
     key.forEach((key, index) => {
       queryParams[key] = values[index];
     });
-    this.router.navigate([], {queryParams: queryParams, queryParamsHandling: 'merge'});
+    this.router.navigate([], {queryParams: queryParams, queryParamsHandling: 'merge'}).then(r => {
+    });
   }
 
   handlePageEvent(e: PageEvent) {

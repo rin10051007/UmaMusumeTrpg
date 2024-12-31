@@ -1,1 +1,1 @@
-﻿export const SystemRoute=['user','thread'];
+﻿export const SystemRoute = ['user', 'thread'];

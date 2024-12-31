@@ -15,4 +15,5 @@ public interface IUserService
     public (int, string) Edit(EditItem item);
     public (int, DateTime?) Delete(DeleteItem item);
     public bool IsLoginIdDuplicate(IsLoginIdDuplicateItem item);
+    public bool PasswordReset(int id, string password);
 }

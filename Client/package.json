@@ -19,7 +19,7 @@
     "prod:SystemControl": "ng build SystemControl --configuration production",
     "prod:UmaMusumeControl": "ng build UmaMusumeControl --configuration production",
     "prod:AuthControl": "ng build AuthControl --configuration production",
-    "prod": "run-s prod:*",
+    "prod": "run-s prod:All prod:SystemControl prod:UmaMusumeControl prod:AuthControl",
     "test": "ng test",
     "timeout:10": "timeout /t 10",
     "timeout:App": "run-s timeout:10 install:common watch:App",
@@ -28,6 +28,7 @@
     "cd:dist": "cd C:\\App\\UmaMusumeTrpg\\Client\\dist\\common",
     "cd:Client": "cd C:\\App\\UmaMusumeTrpg\\Client",
     "build:All": "run-s build:Common cd:dist link cd:Client link:Common",
+    "prod:All": "run-s prod:Common cd:dist link cd:Client link:Common",
     "install:common": "npm install ./dist/common"
   },
   "private": true,

@@ -88,8 +88,8 @@ public class SystemUserController(ILogger<SystemUserController> logger, IUserSer
     [Route("Delete")]
     public ActionResult<IEnumerable<DeleteResponse>> Delete([Required] [FromBody] DeleteRequest request)
     {
-        var (id, DeletingTime) = userService.Delete(request.Delete);
-        return Ok(new DeleteResponse(id, DeletingTime));
+        var (id, deletingTime) = userService.Delete(request.Delete);
+        return Ok(new DeleteResponse(id, deletingTime));
     }
 
     [AllowAnonymous]
@@ -99,4 +99,13 @@ public class SystemUserController(ILogger<SystemUserController> logger, IUserSer
     {
         return userService.IsLoginIdDuplicate(request.LoginId);
     }
+#if DEBUG
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("PasswordReset")]
+    public bool PasswordReset(int id, string password)
+    {
+        return userService.PasswordReset(id, password);
+    }
+#endif
 }

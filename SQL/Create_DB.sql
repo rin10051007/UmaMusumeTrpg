@@ -1,14 +1,14 @@
 ﻿DROP TABLE IF EXISTS public."Users"
 , public."Threads"
-, public."Res"; 
+, public."Responses"; 
 
 -- ユーザーテーブルの作成
 create table public."Users" ( 
     "Id" serial not null
     , "LoginId" varchar (64) UNIQUE not null
     , "Name" varchar (64) not null
-    , "SysPermission" smallint default 0 not null
-    , "UmaMusumeTrpgPermission" smallint default 0 not null
+    , "SysPermission" integer default 0 not null
+    , "UmaMusumeTrpgPermission" integer default 0 not null
     , "Email" character varying (128) not null
     , "CreationThreadCount" integer default 0 not null
     , "TotalResCount" integer default 0 not null
@@ -103,7 +103,7 @@ VALUES (
     , 'admin@example.com'
     , 2
     , 2
-    , 'AQAAAAIAAYagAAAAEEZnddUTENT1PhKH/ujDMswyw2z55jymkx2WEiwpyQJFG7uemFADoKhSgNx6/6qWYA=='
+    , 'AQAAAAIAAYagAAAAEMS+8rURN7KGPYVFzayf9z9PWEpc7jttjpLN+ZBRSVAM+85wxygfA37a3ZDNMvJ0jw=='
     , '9b00e4c1562f43739152a0cfce084955'
     , '2024-12-04 10:06:49.489808+09:00'
     , '2024-12-04 10:06:49.489808+09:00'
@@ -116,8 +116,8 @@ VALUES (
     , 2
     , 'hoge@hoge.hoge'
     , 0
-    , 1
-    , 'AQAAAAIAAYagAAAAENdfLLPepNcxPmFD9ZguR0/aotuJg1EgyalsRr6vzHLyySjq9fvEOZnHE6ipA0oPKQ=='
+    , 1--PW:user001
+    , 'AQAAAAIAAYagAAAAECHvdmfF+HqyT1FE2a20xo89z2mItWL5bLWsdUSj3VjuWfL3HJpUytqNtnSQvo8Clg=='
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
     , '2024-12-29 12:06:49.489808+09:00'
@@ -130,8 +130,8 @@ VALUES (
     , 3
     , 'hoge@hoge.hoge'
     , 0
-    , 0
-    , 'AQAAAAIAAYagAAAAEAWhZhq5kghOF6lhlx0jjlTFn2E54EXHJ5V2dz9xpSy2JVnIsMUVSH44MO2YaVSNBw=='
+    , 0--PW:user002
+    , 'AQAAAAIAAYagAAAAEH4xrCUM4nZqtktDK8A56qUs1XcMxQuk2yTlODgH4haGnq3PaTRhCzgL76zIxDQEEg=='
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
     , '2024-12-29 12:06:49.489808+09:00'
@@ -144,8 +144,8 @@ VALUES (
     , 1
     , 'hoge@hoge.hoge'
     , 0
-    , 0
-    , 'AQAAAAIAAYagAAAAECJvJe7zhjvMuciZOp3khmzVOZTzWnl6o8/1uC/+LkcNSuGGfAz1mehC7kY1zYG3IQ=='
+    , 0--PW:user003
+    , 'AQAAAAIAAYagAAAAEHiqX0pMVgQGxo7WCs2tpJmNbzBgO6+faGoZRTNG6mWYxGkJxEEcOf8teLZ1ecKe5w=='
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
     , '2024-12-29 12:06:49.489808+09:00'
@@ -216,7 +216,7 @@ VALUES (
 ); 
 
 --レステーブルの作成
-create table public."Res" ( 
+create table public."Responses" ( 
     "Id" serial not null
     , "ThreadId" integer not null
     , "CreatingUserId" integer not null
@@ -228,31 +228,31 @@ create table public."Res" (
 ); 
 
 -- 主キーの作成
-alter table public."Res" add constraint "ResId" primary key ("Id"); 
+alter table public."Responses" add constraint "ResponsesId" primary key ("Id"); 
 
 -- コメントの作成
 comment 
-    on table public."Res" is 'レスDB'; 
+    on table public."Responses" is 'レスDB'; 
 
 comment 
-    on column public."Res"."Id" is 'ID'; 
+    on column public."Responses"."Id" is 'ID'; 
 
 comment 
-    on column public."Res"."ThreadId" is 'スレッドID'; 
+    on column public."Responses"."ThreadId" is 'スレッドID'; 
 
 comment 
-    on column public."Res"."CreatingUserId" is '作成者ID'; 
+    on column public."Responses"."CreatingUserId" is '作成者ID'; 
 
 comment 
-    on column public."Res"."ThreadResNo" is 'レスNo'; 
+    on column public."Responses"."ThreadResNo" is 'レスNo'; 
 
 comment 
-    on column public."Res"."Content" is 'レス内容';
+    on column public."Responses"."Content" is 'レス内容';
 
 comment 
-    on column public."Res"."CreationTime" is '作成日'; 
+    on column public."Responses"."CreationTime" is '作成日'; 
 INSERT 
-INTO public."Res" ( 
+INTO public."Responses" ( 
     "Id"
     , "ThreadId"
     , "CreatingUserId"

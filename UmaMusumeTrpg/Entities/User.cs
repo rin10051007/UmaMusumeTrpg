@@ -3,92 +3,77 @@ using UmaMusumeTrpg.Enums;
 
 namespace UmaMusumeTrpg.Entities;
 
+/// <summary>
+///     管理者、利用者DB
+/// </summary>
 public class User : PasswordHasher<User>
 {
     /// <summary>
-    ///     管理者、利用者DB
-    /// </summary>
-    public User()
-    {
-        Id = 0;
-        LoginId = "";
-        Name = "";
-        SysPermission = SysPermission.None;
-        UmaMusumeTrpgPermission = UmaMusumeTrpgPermission.None;
-        Email = "";
-        CreationThreadCount = 0;
-        TotalResCount = 0;
-        Password = "";
-        Token = "";
-        CreationTime = DateTime.Now;
-        UpdateTime = DateTime.Now;
-        DeletingTime = null;
-        IsDeleted = false;
-        Threads = new List<Thread>();
-        Res = new List<Res>();
-    }
-
-    /// <summary>
     ///     ID
     /// </summary>
-    public int Id { get; init; }
+    public int Id { get; set; }
 
     /// <summary>
-    ///     ログインID
+    ///     LoginId
     /// </summary>
-    public string LoginId { get; set; }
+    public string LoginId { get; set; } = "";
 
     /// <summary>
     ///     名前
     /// </summary>
-    public string Name { get; set; }
+    public string Name { get; set; } = "";
 
     /// <summary>
     ///     管理者権限
+    ///     None = 0
+    ///     NoQualification = 1,
+    ///     SysAdmin = 2
     /// </summary>
-    public SysPermission SysPermission { get; set; }
+    public SysPermission SysPermission { get; set; } = SysPermission.None;
 
     /// <summary>
     ///     ウマ娘TRPG権限
+    ///     None = 0
+    ///     NoQualification = 1,
+    ///     Player = 2,
+    ///     GmPlayer = 3
     /// </summary>
-    public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }
+    public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; } = UmaMusumeTrpgPermission.None;
 
     /// <summary>
     ///     メールアドレス
     /// </summary>
-    public string Email { get; set; }
+    public string Email { get; set; } = "";
 
     /// <summary>
     ///     作成スレッド数
     /// </summary>
-
     public int CreationThreadCount { get; set; }
 
     /// <summary>
     ///     総レス数
     /// </summary>
-
     public int TotalResCount { get; set; }
 
     /// <summary>
     ///     パスワード
     /// </summary>
-    public string Password { get; set; }
+    public string Password { get; set; } = "";
 
     /// <summary>
     ///     トークン
     /// </summary>
-    public string Token { get; set; }
+    public string Token { get; set; } = "";
 
     /// <summary>
     ///     作成日時
     /// </summary>
-    public DateTime CreationTime { get; init; }
+    public DateTime CreationTime { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     更新日時
     /// </summary>
-    public DateTime UpdateTime { get; set; }
+    public DateTime UpdateTime { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     削除日時
@@ -100,10 +85,9 @@ public class User : PasswordHasher<User>
     /// </summary>
     public bool IsDeleted { get; set; }
 
-    public ICollection<Thread> Threads { get; set; }
+    public virtual ICollection<Response> Responses { get; set; } = new List<Response>();
 
-    public ICollection<Res> Res { get; set; }
-
+    public virtual ICollection<Thread> Threads { get; set; } = new List<Thread>();
 
     public void PasswordHash()
     {

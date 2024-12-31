@@ -11,7 +11,7 @@ public class ListSearch : BaseListSearch
 
     public ListSearch(string integration, string loginId, string name, string email, SysPermission sysPermission,
         UmaMusumeTrpgPermission umaMusumeTrpgPermission, SystemSortItem sortItem, int isUndeleted, int isDeleted,
-        DateTime CreationTimeStart, DateTime CreationTimeEnd, DateTime updateTimeStart, DateTime updateTimeEnd,
+        DateTime creationTimeStart, DateTime creationTimeEnd, DateTime updateTimeStart, DateTime updateTimeEnd,
         DateTime deletedTimeStart, DateTime deletedTimeEnd, SortDirection sortDirection, int pageIndexIndex,
         int pageSize) : base(sortDirection, pageIndexIndex, pageSize)
     {
@@ -24,8 +24,8 @@ public class ListSearch : BaseListSearch
         UmaMusumeTrpgPermission = umaMusumeTrpgPermission;
         IsUndeleted = isUndeleted;
         IsDeleted = isDeleted;
-        CreationTimeStart = CreationTimeStart;
-        CreationTimeEnd = CreationTimeEnd;
+        CreationTimeStart = creationTimeStart;
+        CreationTimeEnd = creationTimeEnd;
         UpdateTimeStart = updateTimeStart;
         UpdateTimeEnd = updateTimeEnd;
         DeletedTimeStart = deletedTimeStart;

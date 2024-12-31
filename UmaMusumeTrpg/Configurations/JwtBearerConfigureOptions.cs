@@ -5,14 +5,9 @@ using UmaMusumeTrpg.Models.Settings;
 
 namespace UmaMusumeTrpg.Configurations;
 
-public class JwtBearerConfigureOptions : IConfigureNamedOptions<JwtBearerOptions>
+public class JwtBearerConfigureOptions(IOptions<JwtSettings> jwtSettings) : IConfigureNamedOptions<JwtBearerOptions>
 {
-    private readonly JwtSettings _jwtSettings;
-
-    public JwtBearerConfigureOptions(IOptions<JwtSettings> jwtSettings)
-    {
-        _jwtSettings = jwtSettings.Value;
-    }
+    private readonly JwtSettings _jwtSettings = jwtSettings.Value;
 
     public void Configure(string name, JwtBearerOptions options)
     {

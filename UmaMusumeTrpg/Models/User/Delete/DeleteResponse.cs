@@ -2,4 +2,4 @@
 
 namespace UmaMusumeTrpg.Models.User.Delete;
 
-public class DeleteResponse(int id, DateTime? DeletingTime) : BaseDeleteResponse(id, DeletingTime);
+public class DeleteResponse(int id, DateTime? deletingTime) : BaseDeleteResponse(id, deletingTime);

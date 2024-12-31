@@ -235,4 +235,13 @@ public class UserService(
     {
         return dbContext.Users.Any(x => x.LoginId.Equals(item.LoginId) && !x.Id.Equals(item.Id) && !x.IsDeleted);
     }
+
+    public bool PasswordReset(int id, string password)
+    {
+        var user = dbContext.Users.FirstOrDefault(x => x.Id == id);
+        if (user == null) return false;
+        user.PasswordHash(password);
+        _ = dbContext.SaveChanges();
+        return true;
+    }
 }

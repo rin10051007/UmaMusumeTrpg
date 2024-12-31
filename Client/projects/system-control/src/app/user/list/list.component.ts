@@ -181,6 +181,7 @@ export class ListComponent implements OnInit {
         pageIndex: 0,
         pageSize: PageSizeOptions[0]
       }
+    }).then(r => {
     });
   }
 
@@ -189,7 +190,8 @@ export class ListComponent implements OnInit {
     key.forEach((key, index) => {
       queryParams[key] = values[index];
     });
-    this.router.navigate([], {queryParams: queryParams, queryParamsHandling: 'merge'});
+    this.router.navigate([], {queryParams: queryParams, queryParamsHandling: 'merge'}).then(r => {
+    });
   }
 
   handlePageEvent(e: PageEvent) {

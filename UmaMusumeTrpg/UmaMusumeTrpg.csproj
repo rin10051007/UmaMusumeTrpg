@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot\"/>
+        <Folder Include="Models\Thread\Delete\"/>
+        <Folder Include="Models\Thread\Detail\"/>
+        <Folder Include="Models\Thread\Entry\"/>
     </ItemGroup>
 
     <ItemGroup>

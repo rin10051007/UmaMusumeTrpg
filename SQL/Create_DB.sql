@@ -14,9 +14,9 @@ create table public."Users" (
     , "TotalResCount" integer default 0 not null
     , "Password" character varying (256) not null
     , "Token" character varying (32) not null
-    , "CreateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
+    , "CreationTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , "UpdateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
-    , "DeleteTime" timestamp with time zone default null
+    , "DeletingTime" timestamp with time zone default null
     , "IsDeleted" boolean default false not null
 ); 
 
@@ -67,13 +67,13 @@ comment
     on column public."Users"."Token" is 'トークン'; 
 
 comment 
-    on column public."Users"."CreateTime" is '作成日時'; 
+    on column public."Users"."CreationTime" is '作成日時'; 
 
 comment 
     on column public."Users"."UpdateTime" is '更新日時'; 
 
 comment 
-    on column public."Users"."DeleteTime" is '削除日時'; 
+    on column public."Users"."DeletingTime" is '削除日時'; 
 
 comment 
     on column public."Users"."IsDeleted" is '削除フラグ'; 
@@ -91,7 +91,7 @@ INTO public."Users" (
     , "TotalResCount"
     , "Password"
     , "Token"
-    , "CreateTime"
+    , "CreationTime"
     , "UpdateTime"
 ) 
 VALUES ( 
@@ -154,15 +154,15 @@ VALUES (
 -- スレッドテーブルの作成
 create table public."Threads" ( 
     "Id" serial not null
-    , "CreateUserId" integer not null
+    , "CreatingUserId" integer not null
     , "Title" character varying (64) not null
     , "ResCount" integer default 0 not null
     , "Token" character varying (32) not null
-    , "CreateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
+    , "CreationTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , "UpdateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
-    , "DeleteTime" timestamp with time zone default null
+    , "DeletingTime" timestamp with time zone default null
     , "IsDeleted" boolean default false not null
-    , FOREIGN KEY ("CreateUserId") references public."Users" ("Id")
+    , FOREIGN KEY ("CreatingUserId") references public."Users" ("Id")
 ); 
 
 -- 主キーの作成
@@ -176,7 +176,7 @@ comment
     on column public."Threads"."Id" is 'ID'; 
 
 comment 
-    on column public."Threads"."CreateUserId" is '作成者ID'; 
+    on column public."Threads"."CreatingUserId" is '作成者ID'; 
 
 comment 
     on column public."Threads"."Title" is 'スレッドタイトル'; 
@@ -188,13 +188,13 @@ comment
     on column public."Threads"."Token" is 'トークン'; 
 
 comment 
-    on column public."Threads"."CreateTime" is '作成日'; 
+    on column public."Threads"."CreationTime" is '作成日'; 
 
 comment 
     on column public."Threads"."UpdateTime" is '更新日'; 
 
 comment 
-    on column public."Threads"."DeleteTime" is '削除日'; 
+    on column public."Threads"."DeletingTime" is '削除日'; 
 
 comment 
     on column public."Threads"."IsDeleted" is '削除フラグ'; 
@@ -202,11 +202,11 @@ comment
 INSERT 
 INTO public."Threads" ( 
     "Id"
-    , "CreateUserId"
+    , "CreatingUserId"
     , "Title"
     , "ResCount"
     , "Token"
-    , "CreateTime"
+    , "CreationTime"
     , "UpdateTime"
 ) 
 VALUES (
@@ -219,11 +219,11 @@ VALUES (
 create table public."Res" ( 
     "Id" serial not null
     , "ThreadId" integer not null
-    , "CreateUserId" integer not null
+    , "CreatingUserId" integer not null
     , "ThreadResNo" integer not null
     , "Content" character varying (512) not null
-    , "CreateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
-    , FOREIGN KEY ("CreateUserId") references public."Users" ("Id")
+    , "CreationTime" timestamp with time zone default CURRENT_TIMESTAMP not null
+    , FOREIGN KEY ("CreatingUserId") references public."Users" ("Id")
     , FOREIGN KEY ("ThreadId") references public."Threads" ("Id")
 ); 
 
@@ -241,7 +241,7 @@ comment
     on column public."Res"."ThreadId" is 'スレッドID'; 
 
 comment 
-    on column public."Res"."CreateUserId" is '作成者ID'; 
+    on column public."Res"."CreatingUserId" is '作成者ID'; 
 
 comment 
     on column public."Res"."ThreadResNo" is 'レスNo'; 
@@ -250,15 +250,15 @@ comment
     on column public."Res"."Content" is 'レス内容';
 
 comment 
-    on column public."Res"."CreateTime" is '作成日'; 
+    on column public."Res"."CreationTime" is '作成日'; 
 INSERT 
 INTO public."Res" ( 
     "Id"
     , "ThreadId"
-    , "CreateUserId"
+    , "CreatingUserId"
     , "ThreadResNo"
     , "Content"
-    , "CreateTime"
+    , "CreationTime"
 ) 
 VALUES (
 1,1,1,1,'スレ内容001','2024-12-30 12:06:49.489808+09:00'

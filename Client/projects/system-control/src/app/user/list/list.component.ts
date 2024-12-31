@@ -32,12 +32,12 @@ export class ListComponent implements OnInit {
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
     isUndeleted: 1,
     isDeleted: 0,
-    createTimeStart: null,
-    createTimeEnd: null,
+    creationTimeStart: null,
+    creationTimeEnd: null,
     updateTimeStart: null,
     updateTimeEnd: null,
-    deleteTimeStart: null,
-    deleteTimeEnd: null,
+    deletingTimeStart: null,
+    deletingTimeEnd: null,
     sortItem: SystemSortItem.none,
     sortDirection: SortDirection.none,
     pageIndex: 1,
@@ -74,12 +74,12 @@ export class ListComponent implements OnInit {
               (item.email?.length??0) > 0 ||
               item.isUndeleted == 0 ||
               item.isDeleted == 1 ||
-              item.createTimeStart != null ||
-              item.createTimeEnd != null ||
+              item.creationTimeStart != null ||
+              item.creationTimeEnd != null ||
               item.updateTimeStart != null ||
               item.updateTimeEnd != null ||
-              item.deleteTimeStart != null ||
-              item.deleteTimeEnd != null;
+              item.deletingTimeStart != null ||
+              item.deletingTimeEnd != null;
           }
         }
         this.apiService.getList({
@@ -91,12 +91,12 @@ export class ListComponent implements OnInit {
           umaMusumeTrpgPermission: Number(item.umaMusumeTrpgPermission || 0),
           isUndeleted: Number(item.isUndeleted || 1),
           isDeleted: Number(item.isDeleted || 0),
-          createTimeStart: item.createTimeStart || null,
-          createTimeEnd: item.createTimeEnd || null,
+          creationTimeStart: item.creationTimeStart || null,
+          creationTimeEnd: item.creationTimeEnd || null,
           updateTimeStart: item.updateTimeStart || null,
           updateTimeEnd: item.updateTimeEnd || null,
-          deleteTimeStart: item.deleteTimeStart || null,
-          deleteTimeEnd: item.deleteTimeEnd || null,
+          deletingTimeStart: item.deletingTimeStart || null,
+          deletingTimeEnd: item.deletingTimeEnd || null,
           sortItem: Number(item.sortItem || 0),
           sortDirection: Number(item.sortDirection || 0),
           pageIndex: Number(item.pageIndex || 0),
@@ -134,12 +134,12 @@ export class ListComponent implements OnInit {
       'umaMusumeTrpgPermission',
       'isUndeleted',
       'isDeleted',
-      'createTimeStart',
-      'createTimeEnd',
+      'creationTimeStart',
+      'creationTimeEnd',
       'updateTimeStart',
       'updateTimeEnd',
-      'deleteTimeStart',
-      'deleteTimeEnd'
+      'deletingTimeStart',
+      'deletingTimeEnd'
     ], [
       this.searchForm.getValue('integration') ?? '',
       this.searchForm.getValue('loginId') ?? '',
@@ -149,12 +149,12 @@ export class ListComponent implements OnInit {
       Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
       Number(this.searchForm.getValue('isUndeleted') || 0),
       Number(this.searchForm.getValue('isDeleted') || 0),
-      this.datePipe.transform(this.searchForm.getValue('createTimeStart'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('createTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creationTimeStart'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creationTimeEnd'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('updateTimeStart'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('updateTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deleteTimeStart'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deleteTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeStart'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'YYYY-MM-dd'),
     ]);
   }
 
@@ -170,12 +170,12 @@ export class ListComponent implements OnInit {
         umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
         isUndeleted: 1,
         isDeleted: 0,
-        createTimeStart: '',
-        createTimeEnd: '',
+        creationTimeStart: '',
+        creationTimeEnd: '',
         updateTimeStart: '',
         updateTimeEnd: '',
-        deleteTimeStart: '',
-        deleteTimeEnd: '',
+        deletingTimeStart: '',
+        deletingTimeEnd: '',
         sortItem: SystemSortItem.none,
         sortDirection: SortDirection.none,
         pageIndex: 0,

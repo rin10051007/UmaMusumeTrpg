@@ -51,9 +51,9 @@ export class DeleteComponent {
       sysPermission: SysPermission.None,
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
       email: '',
-      createTime: now,
+      creationTime: now,
       updateTime: now,
-      deleteTime: null,
+      deletingTime: null,
       isDeleted: false,
       token: ''
     } as Item;

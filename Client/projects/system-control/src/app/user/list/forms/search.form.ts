@@ -19,12 +19,12 @@ export class Search extends BaseForm {
     this.getFormGroup().addControl('umaMusumeTrpgPermission', new FormControl(UmaMusumeTrpgPermission.None));
     this.getFormGroup().addControl('isUndeleted', new FormControl(true));
     this.getFormGroup().addControl('isDeleted', new FormControl(false));
-    this.getFormGroup().addControl('createTimeStart', new FormControl(''));
-    this.getFormGroup().addControl('createTimeEnd', new FormControl(''));
+    this.getFormGroup().addControl('creationTimeStart', new FormControl(''));
+    this.getFormGroup().addControl('creationTimeEnd', new FormControl(''));
     this.getFormGroup().addControl('updateTimeStart', new FormControl(''));
     this.getFormGroup().addControl('updateTimeEnd', new FormControl(''));
-    this.getFormGroup().addControl('deleteTimeStart', new FormControl(''));
-    this.getFormGroup().addControl('deleteTimeEnd', new FormControl(''));
+    this.getFormGroup().addControl('deletingTimeStart', new FormControl(''));
+    this.getFormGroup().addControl('deletingTimeEnd', new FormControl(''));
   }
 
   setValues(search: SearchItem | null) {
@@ -36,11 +36,11 @@ export class Search extends BaseForm {
     this.setValue('umaMusumeTrpgPermission', Number(search?.umaMusumeTrpgPermission || 0));
     this.setValue('isUndeleted', Number(search?.isUndeleted || 1) == 1);
     this.setValue('isDeleted', Number(search?.isDeleted || 0) == 1);
-    this.setValue('createTimeStart', search?.createTimeStart || '');
-    this.setValue('createTimeEnd', search?.createTimeEnd || '');
+    this.setValue('creationTimeStart', search?.creationTimeStart || '');
+    this.setValue('creationTimeEnd', search?.creationTimeEnd || '');
     this.setValue('updateTimeStart', search?.updateTimeStart || '');
     this.setValue('updateTimeEnd', search?.updateTimeEnd || '');
-    this.setValue('deleteTimeStart', search?.deleteTimeStart || '');
-    this.setValue('deleteTimeEnd', search?.deleteTimeEnd || '');
+    this.setValue('deletingTimeStart', search?.deletingTimeStart || '');
+    this.setValue('deletingTimeEnd', search?.deletingTimeEnd || '');
   }
 }

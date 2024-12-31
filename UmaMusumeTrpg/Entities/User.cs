@@ -20,9 +20,9 @@ public class User : PasswordHasher<User>
         TotalResCount = 0;
         Password = "";
         Token = "";
-        CreateTime = DateTime.Now;
+        CreationTime = DateTime.Now;
         UpdateTime = DateTime.Now;
-        DeleteTime = null;
+        DeletingTime = null;
         IsDeleted = false;
         Threads = new List<Thread>();
         Res = new List<Res>();
@@ -83,7 +83,7 @@ public class User : PasswordHasher<User>
     /// <summary>
     ///     作成日時
     /// </summary>
-    public DateTime CreateTime { get; init; }
+    public DateTime CreationTime { get; init; }
 
     /// <summary>
     ///     更新日時
@@ -93,7 +93,7 @@ public class User : PasswordHasher<User>
     /// <summary>
     ///     削除日時
     /// </summary>
-    public DateTime? DeleteTime { get; set; }
+    public DateTime? DeletingTime { get; set; }
 
     /// <summary>
     ///     削除フラグ

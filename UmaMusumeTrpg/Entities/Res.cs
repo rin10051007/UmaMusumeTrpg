@@ -9,10 +9,10 @@ public class Res
     {
         Id = 0;
         ThreadId = 0;
-        CreateUserId = 0;
+        CreatingUserId = 0;
         ThreadResNo = 0;
         Content = "";
-        CreateTime = DateTime.Now;
+        CreationTime = DateTime.Now;
         User = new User();
         Thread = new Thread();
     }
@@ -30,7 +30,7 @@ public class Res
     /// <summary>
     ///     作成者ID
     /// </summary>
-    public int CreateUserId { get; set; }
+    public int CreatingUserId { get; set; }
 
     /// <summary>
     ///     レス数
@@ -45,7 +45,7 @@ public class Res
     /// <summary>
     ///     作成日
     /// </summary>
-    public DateTime CreateTime { get; set; }
+    public DateTime CreationTime { get; set; }
 
     public User User { get; set; }
     public Thread Thread { get; set; }

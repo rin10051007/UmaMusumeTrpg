@@ -9,11 +9,11 @@ export interface SearchItem extends BaseListSearch {
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   isUndeleted: 1 | 0;
   isDeleted: 1 | 0;
-  createTimeStart: Date | null;
-  createTimeEnd: Date | null;
+  creationTimeStart: Date | null;
+  creationTimeEnd: Date | null;
   updateTimeStart: Date | null;
   updateTimeEnd: Date | null;
-  deleteTimeStart: Date | null;
-  deleteTimeEnd: Date | null;
+  deletingTimeStart: Date | null;
+  deletingTimeEnd: Date | null;
   sortItem: SystemSortItem;
 }

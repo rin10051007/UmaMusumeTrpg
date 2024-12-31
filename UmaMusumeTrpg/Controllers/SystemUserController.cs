@@ -88,8 +88,8 @@ public class SystemUserController(ILogger<SystemUserController> logger, IUserSer
     [Route("Delete")]
     public ActionResult<IEnumerable<DeleteResponse>> Delete([Required] [FromBody] DeleteRequest request)
     {
-        var (id, deleteTime) = userService.Delete(request.Delete);
-        return Ok(new DeleteResponse(id, deleteTime));
+        var (id, DeletingTime) = userService.Delete(request.Delete);
+        return Ok(new DeleteResponse(id, DeletingTime));
     }
 
     [AllowAnonymous]

@@ -8,13 +8,13 @@ public class Thread
     public Thread()
     {
         Id = 0;
-        CreateUserId = 0;
+        CreatingUserId = 0;
         Title = "";
         ResCount = 0;
         Token = "";
-        CreateTime = DateTime.Now;
+        CreationTime = DateTime.Now;
         UpdateTime = DateTime.Now;
-        DeleteTime = null;
+        DeletingTime = null;
         IsDeleted = false;
         User = new User();
         Res = new List<Res>();
@@ -28,7 +28,7 @@ public class Thread
     /// <summary>
     ///     作成者ID
     /// </summary>
-    public int CreateUserId { get; set; }
+    public int CreatingUserId { get; set; }
 
     /// <summary>
     ///     スレッドタイトル
@@ -48,7 +48,7 @@ public class Thread
     /// <summary>
     ///     作成日時
     /// </summary>
-    public DateTime CreateTime { get; init; }
+    public DateTime CreationTime { get; init; }
 
     /// <summary>
     ///     更新日時
@@ -58,7 +58,7 @@ public class Thread
     /// <summary>
     ///     削除日時
     /// </summary>
-    public DateTime? DeleteTime { get; set; }
+    public DateTime? DeletingTime { get; set; }
 
     /// <summary>
     ///     削除フラグ

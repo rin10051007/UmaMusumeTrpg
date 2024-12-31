@@ -84,21 +84,21 @@
       <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field color="accent">
           <mat-label>作成日</mat-label>
-          <input [formControl]="searchForm.getForm('createTimeStart')" [matDatepicker]="createTimeStart"
-                 id="createTimeStart"
+          <input [formControl]="searchForm.getForm('creationTimeStart')" [matDatepicker]="creationTimeStart"
+                 id="creationTimeStart"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="createTimeStart" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #createTimeStart></mat-datepicker>
+          <mat-datepicker-toggle [for]="creationTimeStart" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #creationTimeStart></mat-datepicker>
         </mat-form-field>
         ～
         <mat-form-field class="spacer" color="accent">
           <mat-label>作成日</mat-label>
-          <input [formControl]="searchForm.getForm('createTimeEnd')" [matDatepicker]="createTimeEnd" id="createTimeEnd"
+          <input [formControl]="searchForm.getForm('creationTimeEnd')" [matDatepicker]="creationTimeEnd" id="creationTimeEnd"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="createTimeEnd" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #createTimeEnd color="primary"></mat-datepicker>
+          <mat-datepicker-toggle [for]="creationTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #creationTimeEnd color="primary"></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
@@ -125,22 +125,22 @@
         <ng-container *ngIf="searchForm.getValue('isDeleted')">
           <mat-form-field color="accent">
             <mat-label>削除日</mat-label>
-            <input [formControl]="searchForm.getForm('deleteTimeStart')" [matDatepicker]="deleteTimeStart"
-                   id="deleteTimeStart"
+            <input [formControl]="searchForm.getForm('deletingTimeStart')" [matDatepicker]="deletingTimeStart"
+                   id="deletingTimeStart"
                    matInput/>
             <mat-hint>YYYY/MM/DD</mat-hint>
-            <mat-datepicker-toggle [for]="deleteTimeStart" matIconSuffix></mat-datepicker-toggle>
-            <mat-datepicker #deleteTimeStart></mat-datepicker>
+            <mat-datepicker-toggle [for]="deletingTimeStart" matIconSuffix></mat-datepicker-toggle>
+            <mat-datepicker #deletingTimeStart></mat-datepicker>
           </mat-form-field>
           ～
           <mat-form-field color="accent">
             <mat-label>削除日</mat-label>
-            <input [formControl]="searchForm.getForm('deleteTimeEnd')" [matDatepicker]="deleteTimeEnd"
-                   id="deleteTimeEnd"
+            <input [formControl]="searchForm.getForm('deletingTimeEnd')" [matDatepicker]="deletingTimeEnd"
+                   id="deletingTimeEnd"
                    matInput/>
             <mat-hint>YYYY/MM/DD</mat-hint>
-            <mat-datepicker-toggle [for]="deleteTimeEnd" matIconSuffix></mat-datepicker-toggle>
-            <mat-datepicker #deleteTimeEnd color="primary"></mat-datepicker>
+            <mat-datepicker-toggle [for]="deletingTimeEnd" matIconSuffix></mat-datepicker-toggle>
+            <mat-datepicker #deletingTimeEnd color="primary"></mat-datepicker>
           </mat-form-field>
         </ng-container>
       </mat-grid-tile>
@@ -244,15 +244,15 @@
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.totalResCount | number }}</td>
   </ng-container>
-  <ng-container matColumnDef="createTime">
+  <ng-container matColumnDef="creationTime">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.createTime)" class="active">
+      <a (click)="sortItemSet(SystemSortItem.creationTime)" class="active">
         作成日時
-        <span *ngIf="searchItem.sortItem==SystemSortItem.createTime"
+        <span *ngIf="searchItem.sortItem==SystemSortItem.creationTime"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.createTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.creationTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
   <ng-container matColumnDef="updateTime">
     <th *matHeaderCellDef mat-header-cell>
@@ -264,15 +264,15 @@
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
-  <ng-container matColumnDef="deleteTime">
+  <ng-container matColumnDef="deletingTime">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.deleteTime)" class="active">
+      <a (click)="sortItemSet(SystemSortItem.deletingTime)" class="active">
         削除日時
-        <span *ngIf="searchItem.sortItem==SystemSortItem.deleteTime"
+        <span *ngIf="searchItem.sortItem==SystemSortItem.deletingTime"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.deleteTime ? (item.deleteTime | date:"yyyy/MM/dd HH:mm.ss") : '' }}
+    <td *matCellDef="let item" mat-cell> {{ item.deletingTime ? (item.deletingTime | date:"yyyy/MM/dd HH:mm.ss") : '' }}
     </td>
   </ng-container>
   <ng-container matColumnDef="buttons">

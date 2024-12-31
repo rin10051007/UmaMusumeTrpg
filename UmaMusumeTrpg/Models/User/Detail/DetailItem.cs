@@ -11,8 +11,8 @@ public class DetailItem : BaseDetailItem
         SysPermission = user.SysPermission;
         UmaMusumeTrpgPermission = user.UmaMusumeTrpgPermission;
         Email = user.Email;
-        CreateTime = user.CreateTime;
-        DeleteTime = user.DeleteTime;
+        CreationTime = user.CreationTime;
+        DeletingTime = user.DeletingTime;
         IsDeleted = user.IsDeleted;
     }
 
@@ -24,7 +24,7 @@ public class DetailItem : BaseDetailItem
     public SysPermission SysPermission { get; set; }
     public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }
     public string Email { get; set; }
-    public DateTime CreateTime { get; set; }
-    public DateTime? DeleteTime { get; set; }
+    public DateTime CreationTime { get; set; }
+    public DateTime? DeletingTime { get; set; }
     public bool IsDeleted { get; set; }
 }

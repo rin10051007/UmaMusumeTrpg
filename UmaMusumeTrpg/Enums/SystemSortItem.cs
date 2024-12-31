@@ -11,7 +11,7 @@ public enum SystemSortItem
     Email,
     CreationThreadCount,
     TotalResCount,
-    CreateTime,
+    CreationTime,
     UpdateTime,
-    DeleteTime
+    DeletingTime
 }

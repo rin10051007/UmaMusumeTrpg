@@ -41,12 +41,12 @@ public class UserService(
             list = (IOrderedQueryable<User>)list.Where(x =>
                 x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
 
-        if (search.CreateTimeStart.HasValue)
+        if (search.CreationTimeStart.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x =>
-                DateTime.Compare(x.CreateTime.Date, search.CreateTimeStart.Value) >= 0);
+                DateTime.Compare(x.CreationTime.Date, search.CreationTimeStart.Value) >= 0);
 
-        if (search.CreateTimeEnd.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x => x.CreateTime.Date <= search.CreateTimeEnd.Value);
+        if (search.CreationTimeEnd.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.CreationTime.Date <= search.CreationTimeEnd.Value);
 
         if (search.UpdateTimeStart.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date >= search.UpdateTimeStart);
@@ -58,11 +58,11 @@ public class UserService(
         {
             if (search.DeletedTimeStart.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
-                    x.DeleteTime.HasValue && x.DeleteTime.Value.Date >= search.DeletedTimeStart);
+                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date >= search.DeletedTimeStart);
 
             if (search.DeletedTimeEnd.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
-                    x.DeleteTime.HasValue && x.DeleteTime.Value.Date <= search.DeletedTimeEnd);
+                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date <= search.DeletedTimeEnd);
         }
 
         if (!(search.IsUndeleted > 0))
@@ -101,14 +101,14 @@ public class UserService(
                     case SystemSortItem.TotalResCount:
                         list = list.OrderBy(x => x.TotalResCount);
                         break;
-                    case SystemSortItem.CreateTime:
-                        list = list.OrderBy(x => x.CreateTime);
+                    case SystemSortItem.CreationTime:
+                        list = list.OrderBy(x => x.CreationTime);
                         break;
                     case SystemSortItem.UpdateTime:
                         list = list.OrderBy(x => x.UpdateTime);
                         break;
-                    case SystemSortItem.DeleteTime:
-                        list = list.OrderBy(x => x.DeleteTime);
+                    case SystemSortItem.DeletingTime:
+                        list = list.OrderBy(x => x.DeletingTime);
                         break;
                 }
 
@@ -144,14 +144,14 @@ public class UserService(
                     case SystemSortItem.TotalResCount:
                         list = list.OrderByDescending(x => x.TotalResCount);
                         break;
-                    case SystemSortItem.CreateTime:
-                        list = list.OrderByDescending(x => x.CreateTime);
+                    case SystemSortItem.CreationTime:
+                        list = list.OrderByDescending(x => x.CreationTime);
                         break;
                     case SystemSortItem.UpdateTime:
                         list = list.OrderByDescending(x => x.UpdateTime);
                         break;
-                    case SystemSortItem.DeleteTime:
-                        list = list.OrderByDescending(x => x.DeleteTime);
+                    case SystemSortItem.DeletingTime:
+                        list = list.OrderByDescending(x => x.DeletingTime);
                         break;
                 }
 
@@ -186,7 +186,7 @@ public class UserService(
             Email = item.Email,
             Password = item.Password,
             Token = guidService.NewGuid(),
-            CreateTime = timeService.NowTime(),
+            CreationTime = timeService.NowTime(),
             UpdateTime = timeService.NowTime()
         };
         user.PasswordHash();
@@ -224,11 +224,11 @@ public class UserService(
         var user = dbContext.Users
             .FirstOrDefault(x => x.Id == item.Id && x.Token.Equals(item.Token));
         if (user == null) return (0, timeService.NowTime());
-        user.DeleteTime = timeService.NowTime();
+        user.DeletingTime = timeService.NowTime();
         user.IsDeleted = true;
         user.Token = guidService.NewGuid();
         _ = dbContext.SaveChanges();
-        return (user.Id, user.DeleteTime);
+        return (user.Id, user.DeletingTime);
     }
 
     public bool IsLoginIdDuplicate(IsLoginIdDuplicateItem item)

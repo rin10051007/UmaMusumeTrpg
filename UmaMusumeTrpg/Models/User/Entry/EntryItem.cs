@@ -2,7 +2,7 @@
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.Models.Base.Entry;
 
-namespace UmaMusumeTrpg.Models.System.User.Entry;
+namespace UmaMusumeTrpg.Models.User.Entry;
 
 public class EntryItem(
     string loginId,

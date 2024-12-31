@@ -1,7 +1,7 @@
 ﻿using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.Models.Base.List;
 
-namespace UmaMusumeTrpg.Models.System.User.List;
+namespace UmaMusumeTrpg.Models.User.List;
 
 public class ListSearch : BaseListSearch
 {

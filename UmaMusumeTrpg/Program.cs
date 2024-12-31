@@ -63,7 +63,7 @@ builder.Services.AddScoped<IGuidService, GuidService>();
 builder.Services.AddScoped<ITimeService, TimeService>();
 builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<ISystemUserService, SystemUserService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 #endregion
 

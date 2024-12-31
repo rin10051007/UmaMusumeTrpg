@@ -1,4 +1,4 @@
-﻿namespace UmaMusumeTrpg.Models.System.User.IsLoginIdDuplicate;
+﻿namespace UmaMusumeTrpg.Models.User.IsLoginIdDuplicate;
 
 public class IsLoginIdDuplicateItem(string loginId, int id = 0)
 {

@@ -2,16 +2,9 @@
 
 namespace UmaMusumeTrpg.Models.Base.List;
 
-public class BaseListResponse : PublicBaseResponse
+public class BaseListResponse(List<BaseListItem> items, int length, BaseListSearch search) : PublicBaseResponse
 {
-    protected BaseListResponse(List<BaseListItem> items, int length, BaseListSearch search)
-    {
-        Search = search;
-        Items = items;
-        Length = length;
-    }
-
-    public BaseListSearch Search { get; set; }
-    public List<BaseListItem> Items { get; set; }
-    public int Length { get; set; }
+    public BaseListSearch Search { get; set; } = search;
+    public List<BaseListItem> Items { get; set; } = items;
+    public int Length { get; set; } = length;
 }

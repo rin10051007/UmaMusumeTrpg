@@ -4,19 +4,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
-using UmaMusumeTrpg.Models.System.User.Delete;
-using UmaMusumeTrpg.Models.System.User.Detail;
-using UmaMusumeTrpg.Models.System.User.Edit;
-using UmaMusumeTrpg.Models.System.User.Entry;
-using UmaMusumeTrpg.Models.System.User.IsLoginIdDuplicate;
-using UmaMusumeTrpg.Models.System.User.List;
+using UmaMusumeTrpg.Models.User.Delete;
+using UmaMusumeTrpg.Models.User.Detail;
+using UmaMusumeTrpg.Models.User.Edit;
+using UmaMusumeTrpg.Models.User.Entry;
+using UmaMusumeTrpg.Models.User.IsLoginIdDuplicate;
+using UmaMusumeTrpg.Models.User.List;
 
 namespace UmaMusumeTrpg.Controllers;
 
 [Route("Api/System/User")]
 [Authorize(Policy = MyPolicyName.SysAdminPolicy)]
 [ApiController]
-public class SystemUserController(ILogger<SystemUserController> logger, ISystemUserService systemUserService)
+public class SystemUserController(ILogger<SystemUserController> logger, IUserService userService)
     : ControllerBase
 {
     private readonly ILogger<SystemUserController> _logger = logger;
@@ -26,7 +26,7 @@ public class SystemUserController(ILogger<SystemUserController> logger, ISystemU
     [Route("GetList")]
     public ActionResult<IEnumerable<ListResponse>> GetList([Required] [FromBody] ListRequest request)
     {
-        var (items, length) = systemUserService.GetList(request.Search);
+        var (items, length) = userService.GetList(request.Search);
         return Ok(new ListResponse(items, length, request.Search));
     }
 
@@ -36,7 +36,7 @@ public class SystemUserController(ILogger<SystemUserController> logger, ISystemU
     {
         try
         {
-            var (id, token) = systemUserService.Entry(request.Entry);
+            var (id, token) = userService.Entry(request.Entry);
             return Ok(new EntryResponse(id, token));
         }
         catch (Exception)
@@ -54,7 +54,7 @@ public class SystemUserController(ILogger<SystemUserController> logger, ISystemU
     {
         try
         {
-            return Ok(new DetailResponse(systemUserService.Detail(request.Select)));
+            return Ok(new DetailResponse(userService.Detail(request.Select)));
         }
         catch (Exception)
         {
@@ -71,7 +71,7 @@ public class SystemUserController(ILogger<SystemUserController> logger, ISystemU
     {
         try
         {
-            var (id, token) = systemUserService.Edit(request.Edit);
+            var (id, token) = userService.Edit(request.Edit);
             if (id == 0) throw new Exception();
             return Ok(new EditResponse(id, token));
         }
@@ -88,7 +88,7 @@ public class SystemUserController(ILogger<SystemUserController> logger, ISystemU
     [Route("Delete")]
     public ActionResult<IEnumerable<DeleteResponse>> Delete([Required] [FromBody] DeleteRequest request)
     {
-        var (id, deleteTime) = systemUserService.Delete(request.Delete);
+        var (id, deleteTime) = userService.Delete(request.Delete);
         return Ok(new DeleteResponse(id, deleteTime));
     }
 
@@ -97,6 +97,6 @@ public class SystemUserController(ILogger<SystemUserController> logger, ISystemU
     [Route("IsLoginIdDuplicate")]
     public bool IsLoginIdDuplicate([Required] [FromBody] IsLoginIdDuplicateRequest request)
     {
-        return systemUserService.IsLoginIdDuplicate(request.LoginId);
+        return userService.IsLoginIdDuplicate(request.LoginId);
     }
 }

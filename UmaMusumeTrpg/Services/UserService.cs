@@ -1,20 +1,20 @@
 ﻿using UmaMusumeTrpg.Entities;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
-using UmaMusumeTrpg.Models.System.User.Delete;
-using UmaMusumeTrpg.Models.System.User.Detail;
-using UmaMusumeTrpg.Models.System.User.Edit;
-using UmaMusumeTrpg.Models.System.User.Entry;
-using UmaMusumeTrpg.Models.System.User.IsLoginIdDuplicate;
-using UmaMusumeTrpg.Models.System.User.List;
+using UmaMusumeTrpg.Models.User.Delete;
+using UmaMusumeTrpg.Models.User.Detail;
+using UmaMusumeTrpg.Models.User.Edit;
+using UmaMusumeTrpg.Models.User.Entry;
+using UmaMusumeTrpg.Models.User.IsLoginIdDuplicate;
+using UmaMusumeTrpg.Models.User.List;
 
 namespace UmaMusumeTrpg.Services;
 
-public class SystemUserService(
+public class UserService(
     UmaMusumeTrpgDbContext dbContext,
     IGuidService guidService,
     ITimeService timeService)
-    : ISystemUserService
+    : IUserService
 {
     public (List<ListItem>, int) GetList(ListSearch search)
     {

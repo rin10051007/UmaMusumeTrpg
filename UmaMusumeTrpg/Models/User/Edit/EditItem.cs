@@ -1,7 +1,7 @@
 ﻿using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.Models.Base.Edit;
 
-namespace UmaMusumeTrpg.Models.System.User.Edit;
+namespace UmaMusumeTrpg.Models.User.Edit;
 
 public class EditItem : BaseEditItem
 {

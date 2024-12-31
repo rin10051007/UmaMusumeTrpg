@@ -1,13 +1,13 @@
-﻿using UmaMusumeTrpg.Models.System.User.Delete;
-using UmaMusumeTrpg.Models.System.User.Detail;
-using UmaMusumeTrpg.Models.System.User.Edit;
-using UmaMusumeTrpg.Models.System.User.Entry;
-using UmaMusumeTrpg.Models.System.User.IsLoginIdDuplicate;
-using UmaMusumeTrpg.Models.System.User.List;
+﻿using UmaMusumeTrpg.Models.User.Delete;
+using UmaMusumeTrpg.Models.User.Detail;
+using UmaMusumeTrpg.Models.User.Edit;
+using UmaMusumeTrpg.Models.User.Entry;
+using UmaMusumeTrpg.Models.User.IsLoginIdDuplicate;
+using UmaMusumeTrpg.Models.User.List;
 
 namespace UmaMusumeTrpg.IServices;
 
-public interface ISystemUserService
+public interface IUserService
 {
     public (List<ListItem>, int) GetList(ListSearch search);
     public (int, string) Entry(EntryItem item);

@@ -41,4 +41,73 @@
         <PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\chunk-NQV2XD2C.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\chunk-NQV2XD2C.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\favicon.ico"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\index.html"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\login.component.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\login.module-JDOMZD5Y.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\login.module-JDOMZD5Y.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\main.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\main.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\polyfills.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\polyfills.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\styles.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\browser\styles.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\AuthControl\prerendered-routes.json"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-2NJVH6Y4.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-2NJVH6Y4.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-3ODMII6B.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-3ODMII6B.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-BHW35MJE.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-BHW35MJE.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-G6CEM3TA.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-G6CEM3TA.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-IKJ7SWW3.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-IKJ7SWW3.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-NJPVPCF7.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-NJPVPCF7.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-RYKERMQS.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\chunk-RYKERMQS.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\delete.module-CF6JQ7HI.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\delete.module-CF6JQ7HI.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\detail.module-T6IIGJKJ.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\detail.module-T6IIGJKJ.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\edit.component.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\edit.module-3YE5X2ZX.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\edit.module-3YE5X2ZX.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\entry.component.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\entry.module-KCXITVKA.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\entry.module-KCXITVKA.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\favicon.ico"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\index.html"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\list.component.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\list.module-K4IG4H2S.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\list.module-K4IG4H2S.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\list.module-UCOFC7UW.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\list.module-UCOFC7UW.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\main.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\main.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\media\bootstrap-icons.woff"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\media\bootstrap-icons.woff2"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\polyfills.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\polyfills.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\styles.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\styles.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\thread.module-5QUQJ4CI.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\thread.module-5QUQJ4CI.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\user.module-ON33DGDC.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\browser\user.module-ON33DGDC.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\SystemControl\prerendered-routes.json"/>
+        <_ContentIncludedByDefault Remove="wwwroot\UmaMusumeControl\browser\index.html"/>
+        <_ContentIncludedByDefault Remove="wwwroot\UmaMusumeControl\browser\main.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\UmaMusumeControl\browser\main.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\UmaMusumeControl\browser\polyfills.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\UmaMusumeControl\browser\polyfills.js.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\UmaMusumeControl\browser\styles.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\UmaMusumeControl\browser\styles.css.map"/>
+        <_ContentIncludedByDefault Remove="wwwroot\UmaMusumeControl\prerendered-routes.json"/>
+    </ItemGroup>
+
 </Project>

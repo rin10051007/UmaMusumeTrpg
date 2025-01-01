@@ -10,14 +10,20 @@ public class ListItem(Entities.Thread thread) : BaseListItem(thread.Id)
     public DateTime UpdateTime { get; set; } = thread.UpdateTime;
 }
 
-public class ListItemInUser(Entities.Thread thread) : ListItem(thread)
+public class ListItemForThread(Entities.Thread thread) : ListItem(thread)
+{
+    public int CreationUserId { get; set; } = thread.CreatingUserId;
+    public string CreationUserName { get; set; } = thread.CreatingUser.Name;
+}
+
+public class ListItemForSystemThread(Entities.Thread thread) : ListItemForThread(thread)
 {
     public DateTime? DeletingTime { get; set; } = thread.DeletingTime;
     public bool IsDeleted { get; set; } = thread.IsDeleted;
 }
 
-public class ListItemForThread(Entities.Thread thread) : ListItem(thread)
+public class ListItemForUser(Entities.Thread thread) : ListItem(thread)
 {
-    public int CreationUserId { get; set; } = thread.CreatingUserId;
-    public string CreationUserName { get; set; } = thread.CreatingUser.Name;
+    public DateTime? DeletingTime { get; set; } = thread.DeletingTime;
+    public bool IsDeleted { get; set; } = thread.IsDeleted;
 }

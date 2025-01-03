@@ -26,14 +26,14 @@ public class Response
     public int ThreadResNo { get; set; }
 
     /// <summary>
-    ///     トークン
-    /// </summary>
-    public string Token { get; set; } = "";
-
-    /// <summary>
     ///     レス内容
     /// </summary>
     public string Content { get; set; } = "";
+
+    /// <summary>
+    ///     トークン
+    /// </summary>
+    public string Token { get; set; } = "";
 
     /// <summary>
     ///     作成日

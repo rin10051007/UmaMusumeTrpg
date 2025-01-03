@@ -16,10 +16,10 @@ namespace UmaMusumeTrpg.Controllers;
 [Route("Api/System/User")]
 [Authorize(Policy = MyPolicyName.SysAdminPolicy)]
 [ApiController]
-public class SystemUserController(ILogger<SystemUserController> logger, IUserService userService)
+public class UserController(ILogger<UserController> logger, IUserService userService)
     : ControllerBase
 {
-    private readonly ILogger<SystemUserController> _logger = logger;
+    private readonly ILogger<UserController> _logger = logger;
 
 
     [HttpPost]

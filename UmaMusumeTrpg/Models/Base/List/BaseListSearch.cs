@@ -8,10 +8,10 @@ public class BaseListSearch
     {
     }
 
-    protected BaseListSearch(SortDirection sortDirection, int pageIndexIndex, int pageSize)
+    protected BaseListSearch(SortDirection sortDirection, int pageIndex, int pageSize)
     {
         SortDirection = sortDirection;
-        PageIndex = pageIndexIndex;
+        PageIndex = pageIndex;
         PageSize = pageSize;
     }
 

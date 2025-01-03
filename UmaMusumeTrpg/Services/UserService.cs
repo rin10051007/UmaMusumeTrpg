@@ -10,10 +10,7 @@ using UmaMusumeTrpg.Models.User.List;
 
 namespace UmaMusumeTrpg.Services;
 
-public class UserService(
-    UmaMusumeTrpgDbContext dbContext,
-    IGuidService guidService,
-    ITimeService timeService)
+public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidService, ITimeService timeService)
     : IUserService
 {
     public (List<ListItem>, int) GetList(ListSearch search)
@@ -42,8 +39,7 @@ public class UserService(
                 x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
 
         if (search.CreationTimeBeginning.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x =>
-                DateTime.Compare(x.CreationTime.Date, search.CreationTimeBeginning.Value) >= 0);
+            list = (IOrderedQueryable<User>)list.Where(x => x.CreationTime.Date >= search.CreationTimeBeginning.Value);
 
         if (search.CreationTimeEnd.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x => x.CreationTime.Date <= search.CreationTimeEnd.Value);

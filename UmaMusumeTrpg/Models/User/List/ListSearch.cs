@@ -12,8 +12,8 @@ public class ListSearch : BaseListSearch
     public ListSearch(string integration, string loginId, string name, string email, SysPermission sysPermission,
         UmaMusumeTrpgPermission umaMusumeTrpgPermission, UserSortItem sortItem, bool isUndeleted, bool isDeleted,
         DateTime creationTimeBeginning, DateTime creationTimeEnd, DateTime updateTimeBeginning, DateTime updateTimeEnd,
-        DateTime deletedTimeBeginning, DateTime deletedTimeEnd, SortDirection sortDirection, int pageIndexIndex,
-        int pageSize) : base(sortDirection, pageIndexIndex, pageSize)
+        DateTime deletedTimeBeginning, DateTime deletedTimeEnd, SortDirection sortDirection, int pageIndex,
+        int pageSize) : base(sortDirection, pageIndex, pageSize)
     {
         Integration = integration;
         LoginId = loginId;

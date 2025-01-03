@@ -64,6 +64,8 @@ builder.Services.AddScoped<ITimeService, TimeService>();
 builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IThreadCrevice, ThreadCrevice>();
+builder.Services.AddScoped<IResponseService, ResponseService>();
 
 #endregion
 

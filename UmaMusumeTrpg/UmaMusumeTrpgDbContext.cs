@@ -7,11 +7,10 @@ namespace UmaMusumeTrpg;
 
 public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOptions)
 {
-    public virtual DbSet<Response> Responses { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Thread> Threads { get; set; }
-
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Response> Responses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -67,6 +66,7 @@ public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOp
             entity.Property(e => e.CreatingUserId).HasComment("作成者ID");
             entity.Property(e => e.ThreadResNo).HasComment("レスNo");
             entity.Property(e => e.Content).IsRequired().HasMaxLength(512).HasComment("レス内容");
+            entity.Property(e => e.Token).IsRequired().HasMaxLength(32).HasComment("トークン");
             entity.Property(e => e.CreationTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日");
 
             entity.HasOne(d => d.CreatingUser).WithMany(p => p.Responses).HasForeignKey(d => d.CreatingUserId)

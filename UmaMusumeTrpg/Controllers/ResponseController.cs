@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
+using UmaMusumeTrpg.Models.Response.Entry;
 using UmaMusumeTrpg.Models.Response.List;
 
 namespace UmaMusumeTrpg.Controllers;
@@ -36,5 +38,23 @@ public class ResponseController(ILogger<ResponseController> logger, IResponseSer
     {
         var (items, length) = responseService.GetList(request.Search);
         return Ok(new ListResponseForUser(items, length, request.Search));
+    }
+
+    [HttpPost]
+    [Route("Entry")]
+    public ActionResult<IEnumerable<EntryResponse>> Entry([Required] [FromBody] EntryRequest request)
+    {
+        try
+        {
+            var (id, token) = responseService.Entry(request.Entry);
+            return Ok(new EntryResponse(id, token));
+        }
+        catch (Exception)
+        {
+            return BadRequest(new EntryResponse(0, "")
+            {
+                HttpStatusCode = HttpStatusCode.BadRequest
+            });
+        }
     }
 }

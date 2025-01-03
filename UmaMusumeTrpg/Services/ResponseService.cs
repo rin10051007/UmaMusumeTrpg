@@ -2,11 +2,13 @@ using UmaMusumeTrpg.Entities;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Base.List;
+using UmaMusumeTrpg.Models.Response.Entry;
 using UmaMusumeTrpg.Models.Response.List;
 
 namespace UmaMusumeTrpg.Services;
 
-public class ResponseService(UmaMusumeTrpgDbContext dbContext, ITimeService timeService) : IResponseService
+public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guidService, ITimeService timeService)
+    : IResponseService
 {
     public (List<ListItem>, int) GetList(ListSearch search)
     {
@@ -43,6 +45,27 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, ITimeService time
 
         (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
         return (list.Select(x => new ListItemForUser(x)).ToList(), length);
+    }
+
+    public (int, string) Entry(EntryItem item)
+    {
+        var response = new Response
+        {
+            ThreadId = item.ThreadId,
+            CreatingUserId = item.CreationUserId,
+            ThreadResNo = GetThreadResNo(item.ThreadId),
+            Content = item.Content,
+            Token = guidService.NewGuid(),
+            CreationTime = timeService.NowTime()
+        };
+        _ = dbContext.Add(response);
+        _ = dbContext.SaveChanges();
+        return (response.Id, response.Token);
+    }
+
+    private int GetThreadResNo(int threadId)
+    {
+        return dbContext.Responses.Count(x => x.ThreadId == threadId) + 1;
     }
 
     private IOrderedQueryable<Response> SearchList(IOrderedQueryable<Response> list, ListSearch search)

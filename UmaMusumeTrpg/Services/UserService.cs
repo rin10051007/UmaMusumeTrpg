@@ -173,7 +173,7 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
 
     public (int, string) Entry(EntryItem item)
     {
-        User user = new()
+        var user = new User
         {
             LoginId = item.LoginId,
             Name = item.Name,

@@ -2,6 +2,6 @@ using UmaMusumeTrpg.IServices;
 
 namespace UmaMusumeTrpg.Services;
 
-public class ThreadCrevice : IThreadCrevice
+public class ThreadService : IThreadService
 {
 }

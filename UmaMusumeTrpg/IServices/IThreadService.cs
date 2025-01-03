@@ -1,5 +1,5 @@
 namespace UmaMusumeTrpg.IServices;
 
-public interface IThreadCrevice
+public interface IThreadService
 {
 }

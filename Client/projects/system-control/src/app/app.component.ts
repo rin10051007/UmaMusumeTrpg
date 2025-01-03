@@ -15,8 +15,7 @@ export class AppComponent {
 
   constructor(private route: ActivatedRoute, private router: Router, private lsService: LocalStorageService) {
     this.lsService.setViewProject({viewProject: environment.systemUrl});
-    const currentRoute = window.location.href.split('/')[4]
-    this.selectedTabIndex = this.systemRouteMap[currentRoute] || 0;
+    this.selectedTabIndex = this.systemRouteMap[window.location.href.split('/')[5]] || 0;
   }
 
   onTabChange(index: number) {

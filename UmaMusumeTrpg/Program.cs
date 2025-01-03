@@ -93,9 +93,9 @@ app.MapControllerRoute(
 
 
 // クライアントを呼んだとき
-app.MapFallbackToFile("/AuthControl/{*path:nonfile}", "AuthControl/browser/index.html");
-app.MapFallbackToFile("/SystemControl/{*path:nonfile}", "SystemControl/browser/index.html");
-app.MapFallbackToFile("/UmaMusumeControl/{*path:nonfile}", "UmaMusumeControl/browser/index.html");
-app.MapFallbackToFile("AuthControl/browser/index.html");
+app.MapFallbackToFile("/AuthControl/{*path:nonfile}", "AuthControl/index.html");
+app.MapFallbackToFile("/SystemControl/{*path:nonfile}", "SystemControl/index.html");
+app.MapFallbackToFile("/UmaMusumeControl/{*path:nonfile}", "UmaMusumeControl/index.html");
+app.MapFallbackToFile("AuthControl/index.html");
 
 app.Run();

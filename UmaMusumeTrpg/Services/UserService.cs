@@ -62,9 +62,9 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
         }
 
         if (!search.IsUndeleted)
-            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == true);
+            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted);
         if (!search.IsDeleted)
-            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == false);
+            list = (IOrderedQueryable<User>)list.Where(x => !x.IsDeleted);
 
         switch (search.SortDirection)
         {

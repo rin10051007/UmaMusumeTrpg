@@ -58,15 +58,12 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
             CreationTime = timeService.NowTime()
         };
         response.Thread.ResCount += 1;
+        response.ThreadResNo = response.Thread.ResCount;
         response.CreatingUser.TotalResCount += 1;
+        if (response.Thread.IsDeleted || !response.Thread.Token.Equals(entry.ThreadToken)) return (0, "");
         _ = dbContext.Add(response);
         _ = dbContext.SaveChanges();
         return (response.Id, response.Token);
-    }
-
-    private int GetThreadResNo(int threadId)
-    {
-        return dbContext.Responses.Count(x => x.ThreadId == threadId) + 1;
     }
 
     private IOrderedQueryable<Response> SearchList(IOrderedQueryable<Response> list, ListSearch search)

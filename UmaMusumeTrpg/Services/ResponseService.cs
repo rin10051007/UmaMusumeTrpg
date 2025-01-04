@@ -58,6 +58,8 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
             Token = guidService.NewGuid(),
             CreationTime = timeService.NowTime()
         };
+        response.Thread.ResCount += 1;
+        response.CreatingUser.TotalResCount += 1;
         _ = dbContext.Add(response);
         _ = dbContext.SaveChanges();
         return (response.Id, response.Token);

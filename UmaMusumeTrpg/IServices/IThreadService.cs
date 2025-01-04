@@ -1,3 +1,4 @@
+using UmaMusumeTrpg.Models.Thread.Entry;
 using UmaMusumeTrpg.Models.Thread.List;
 
 namespace UmaMusumeTrpg.IServices;
@@ -8,4 +9,5 @@ public interface IThreadService
     public (List<ListItemForThread>, int) GetList(ListSearchForThread search);
     public (List<ListItemForSystemThread>, int) GetList(ListSearchForSystemThread search);
     public (List<ListItemForUser>, int) GetList(ListSearchForUser search);
+    public (int, string) Entry(EntryItem entry);
 }

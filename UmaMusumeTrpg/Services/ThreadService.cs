@@ -1,6 +1,7 @@
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Base.List;
+using UmaMusumeTrpg.Models.Thread.Entry;
 using UmaMusumeTrpg.Models.Thread.List;
 using Thread = UmaMusumeTrpg.Entities.Thread;
 
@@ -50,6 +51,21 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
 
         return (list.Select(x => new ListItemForUser(x)).ToList(), length);
+    }
+
+    public (int, string) Entry(EntryItem entry)
+    {
+        var thread = new Thread
+        {
+            CreatingUserId = entry.CreatingUserId,
+            Title = entry.Title,
+            Token = guidService.NewGuid(),
+            CreationTime = timeService.NowTime(),
+            UpdateTime = timeService.NowTime()
+        };
+        _ = dbContext.Add(thread);
+        _ = dbContext.SaveChanges();
+        return (thread.Id, thread.Token);
     }
 
     private IOrderedQueryable<Thread> SearchListForThread(IOrderedQueryable<Thread> list, ListSearchForThread search)

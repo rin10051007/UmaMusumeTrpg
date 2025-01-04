@@ -1,6 +1,7 @@
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Base.List;
+using UmaMusumeTrpg.Models.Thread.Delete;
 using UmaMusumeTrpg.Models.Thread.Entry;
 using UmaMusumeTrpg.Models.Thread.List;
 using Thread = UmaMusumeTrpg.Entities.Thread;
@@ -66,6 +67,17 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         _ = dbContext.Add(thread);
         _ = dbContext.SaveChanges();
         return (thread.Id, thread.Token);
+    }
+
+    public (int, DateTime?) Delete(DeleteItem delete)
+    {
+        var thread = dbContext.Threads.FirstOrDefault(x => x.Id == delete.Id && x.Token.Equals(delete.Token));
+        if (thread == null) return (0, timeService.NowTime());
+        thread.DeletingTime = timeService.NowTime();
+        thread.IsDeleted = true;
+        thread.Token = guidService.NewGuid();
+        _ = dbContext.SaveChanges();
+        return (thread.Id, thread.DeletingTime);
     }
 
     private IOrderedQueryable<Thread> SearchListForThread(IOrderedQueryable<Thread> list, ListSearchForThread search)

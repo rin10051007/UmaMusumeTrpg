@@ -64,6 +64,8 @@ builder.Services.AddScoped<ITimeService, TimeService>();
 builder.Services.AddScoped<IDisplayCountService, DisplayCountService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IThreadService, ThreadService>();
+builder.Services.AddScoped<IResponseService, ResponseService>();
 
 #endregion
 
@@ -93,9 +95,9 @@ app.MapControllerRoute(
 
 
 // クライアントを呼んだとき
-app.MapFallbackToFile("/AuthControl/{*path:nonfile}", "AuthControl/browser/index.html");
-app.MapFallbackToFile("/SystemControl/{*path:nonfile}", "SystemControl/browser/index.html");
-app.MapFallbackToFile("/UmaMusumeControl/{*path:nonfile}", "UmaMusumeControl/browser/index.html");
-app.MapFallbackToFile("AuthControl/browser/index.html");
+app.MapFallbackToFile("/AuthControl/{*path:nonfile}", "AuthControl/index.html");
+app.MapFallbackToFile("/SystemControl/{*path:nonfile}", "SystemControl/index.html");
+app.MapFallbackToFile("/UmaMusumeControl/{*path:nonfile}", "UmaMusumeControl/index.html");
+app.MapFallbackToFile("AuthControl/index.html");
 
 app.Run();

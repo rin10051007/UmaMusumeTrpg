@@ -9,6 +9,7 @@ using UmaMusumeTrpg.Models.Auth.Permission;
 namespace UmaMusumeTrpg.Controllers;
 
 [Route("Api/Auth")]
+[Authorize]
 [ApiController]
 public class AuthController(ILogger<AuthController> logger, IAuthService authService) : ControllerBase
 {
@@ -26,7 +27,6 @@ public class AuthController(ILogger<AuthController> logger, IAuthService authSer
     }
 
 
-    [Authorize]
     [HttpPost]
     [Route("TokenUpdate")]
     public ActionResult<LoginResponse> TokenUpdate()
@@ -38,7 +38,6 @@ public class AuthController(ILogger<AuthController> logger, IAuthService authSer
         });
     }
 
-    [Authorize]
     [HttpGet]
     [Route("isSysPermissionToAdmin")]
     public ActionResult<PermissionResponse> IsSysPermissionToAdmin()
@@ -50,7 +49,6 @@ public class AuthController(ILogger<AuthController> logger, IAuthService authSer
         });
     }
 
-    [Authorize]
     [HttpGet]
     [Route("isUmaMusumeGmPlayer")]
     public ActionResult<PermissionResponse> IsUmaMusumeGmPlayer()
@@ -62,7 +60,6 @@ public class AuthController(ILogger<AuthController> logger, IAuthService authSer
         });
     }
 
-    [Authorize]
     [HttpGet]
     [Route("isUmaMusumePlayer")]
     public ActionResult<PermissionResponse> IsUmaMusumePlayer()

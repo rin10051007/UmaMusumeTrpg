@@ -10,10 +10,7 @@ using UmaMusumeTrpg.Models.User.List;
 
 namespace UmaMusumeTrpg.Services;
 
-public class UserService(
-    UmaMusumeTrpgDbContext dbContext,
-    IGuidService guidService,
-    ITimeService timeService)
+public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidService, ITimeService timeService)
     : IUserService
 {
     public (List<ListItem>, int) GetList(ListSearch search)
@@ -42,8 +39,7 @@ public class UserService(
                 x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
 
         if (search.CreationTimeBeginning.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x =>
-                DateTime.Compare(x.CreationTime.Date, search.CreationTimeBeginning.Value) >= 0);
+            list = (IOrderedQueryable<User>)list.Where(x => x.CreationTime.Date >= search.CreationTimeBeginning.Value);
 
         if (search.CreationTimeEnd.HasValue)
             list = (IOrderedQueryable<User>)list.Where(x => x.CreationTime.Date <= search.CreationTimeEnd.Value);
@@ -66,9 +62,9 @@ public class UserService(
         }
 
         if (!search.IsUndeleted)
-            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == true);
+            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted);
         if (!search.IsDeleted)
-            list = (IOrderedQueryable<User>)list.Where(x => x.IsDeleted == false);
+            list = (IOrderedQueryable<User>)list.Where(x => !x.IsDeleted);
 
         switch (search.SortDirection)
         {
@@ -177,7 +173,7 @@ public class UserService(
 
     public (int, string) Entry(EntryItem item)
     {
-        User user = new()
+        var user = new User
         {
             LoginId = item.LoginId,
             Name = item.Name,
@@ -219,10 +215,10 @@ public class UserService(
         return (user.Id, user.Token);
     }
 
-    public (int, DateTime?) Delete(DeleteItem item)
+    public (int, DateTime?) Delete(DeleteItem delete)
     {
         var user = dbContext.Users
-            .FirstOrDefault(x => x.Id == item.Id && x.Token.Equals(item.Token));
+            .FirstOrDefault(x => x.Id == delete.Id && x.Token.Equals(delete.Token));
         if (user == null) return (0, timeService.NowTime());
         user.DeletingTime = timeService.NowTime();
         user.IsDeleted = true;

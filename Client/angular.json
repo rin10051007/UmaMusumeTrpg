@@ -47,7 +47,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "../UmaMusumeTrpg/wwwroot/SystemControl"
+              "base": "../UmaMusumeTrpg/wwwroot/SystemControl",
+              "browser": ""
             },
             "index": "projects/system-control/src/index.html",
             "polyfills": [
@@ -144,7 +145,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "../UmaMusumeTrpg/wwwroot/UmaMusumeControl"
+              "base": "../UmaMusumeTrpg/wwwroot/UmaMusumeControl",
+              "browser": ""
             },
             "index": "projects/uma-musume-control/src/index.html",
             "polyfills": [
@@ -241,7 +243,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "../UmaMusumeTrpg/wwwroot/AuthControl"
+              "base": "../UmaMusumeTrpg/wwwroot/AuthControl",
+              "browser": ""
             },
             "index": "projects/auth-control/src/index.html",
             "polyfills": [

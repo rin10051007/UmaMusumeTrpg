@@ -1,4 +1,4 @@
-﻿DROP TABLE IF EXISTS public."Users"
+DROP TABLE IF EXISTS public."Users"
 , public."Threads"
 , public."Responses"; 
 
@@ -222,6 +222,7 @@ create table public."Responses" (
     , "CreatingUserId" integer not null
     , "ThreadResNo" integer not null
     , "Content" character varying (512) not null
+    , "Token" character varying (32) not null
     , "CreationTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , FOREIGN KEY ("CreatingUserId") references public."Users" ("Id")
     , FOREIGN KEY ("ThreadId") references public."Threads" ("Id")
@@ -250,6 +251,9 @@ comment
     on column public."Responses"."Content" is 'レス内容';
 
 comment 
+    on column public."Threads"."Token" is 'トークン'; 
+
+comment 
     on column public."Responses"."CreationTime" is '作成日'; 
 INSERT 
 INTO public."Responses" ( 
@@ -258,12 +262,13 @@ INTO public."Responses" (
     , "CreatingUserId"
     , "ThreadResNo"
     , "Content"
+    ,"Token"
     , "CreationTime"
 ) 
 VALUES (
-1,1,1,1,'スレ内容001','2024-12-30 12:06:49.489808+09:00'
+1,1,1,1,'スレ内容001','abergeasn,kiu','2024-12-30 12:06:49.489808+09:00'
 ),(
-2,2,1,1,'スレ内容002<br>改行タグテスト\r\n改行コードテスト','2024-12-31 12:06:49.489808+09:00'
+2,2,1,1,'スレ内容002<br>改行タグテスト\r\n改行コードテスト','oiplasfgbhnjmk,.oit,of','2024-12-31 12:06:49.489808+09:00'
 ),(
-3,2,2,2,'スレ内容003','2024-12-31 13:06:49.489808+09:00'
+3,2,2,2,'スレ内容003','s,ilues;lf,vcjaew;:pf','2024-12-31 13:06:49.489808+09:00'
 ); 

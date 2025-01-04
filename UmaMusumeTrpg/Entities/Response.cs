@@ -31,6 +31,11 @@ public class Response
     public string Content { get; set; } = "";
 
     /// <summary>
+    ///     トークン
+    /// </summary>
+    public string Token { get; set; } = "";
+
+    /// <summary>
     ///     作成日
     /// </summary>
     public DateTime CreationTime { get; set; } = DateTime.Now;

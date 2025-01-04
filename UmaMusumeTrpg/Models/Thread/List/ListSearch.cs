@@ -10,8 +10,8 @@ public class ListSearch : BaseListSearch
     }
 
     public ListSearch(string title, int resCountMin, int resCountMax, bool isDeleted, bool isUndeleted,
-        ThreadSortItem sortItem, SortDirection sortDirection, int pageIndexIndex, int pageSize) : base(sortDirection,
-        pageIndexIndex, pageSize)
+        ThreadSortItem sortItem, SortDirection sortDirection, int pageIndex, int pageSize) : base(sortDirection,
+        pageIndex, pageSize)
     {
         Title = title;
         ResCountMin = resCountMin;
@@ -38,8 +38,8 @@ public class ListSearchForThread : ListSearch
     public ListSearchForThread(DateTime creationTimeBeginning, DateTime creationTimeEnd, DateTime updateTimeBeginning,
         DateTime updateTimeEnd, DateTime deleteTimeBeginning, DateTime deleteTimeEnd, string title, int resCountMin,
         int resCountMax, bool isDeleted, bool isUndeleted, ThreadSortItem sortItem, SortDirection sortDirection,
-        int pageIndexIndex, int pageSize) : base(title, resCountMin, resCountMax, isDeleted, isUndeleted, sortItem,
-        sortDirection, pageIndexIndex, pageSize)
+        int pageIndex, int pageSize) : base(title, resCountMin, resCountMax, isDeleted, isUndeleted, sortItem,
+        sortDirection, pageIndex, pageSize)
     {
         CreationTimeBeginning = creationTimeBeginning;
         CreationTimeEnd = creationTimeEnd;
@@ -66,9 +66,9 @@ public class ListSearchForSystemThread : ListSearchForThread
     public ListSearchForSystemThread(int creationUserId, DateTime creationTimeBeginning, DateTime creationTimeEnd,
         DateTime updateTimeBeginning, DateTime updateTimeEnd, DateTime deleteTimeBeginning, DateTime deleteTimeEnd,
         string title, int resCountMin, int resCountMax, bool isDeleted, bool isUndeleted, ThreadSortItem sortItem,
-        SortDirection sortDirection, int pageIndexIndex, int pageSize) : base(creationTimeBeginning, creationTimeEnd,
+        SortDirection sortDirection, int pageIndex, int pageSize) : base(creationTimeBeginning, creationTimeEnd,
         updateTimeBeginning, updateTimeEnd, deleteTimeBeginning, deleteTimeEnd, title, resCountMin, resCountMax,
-        isDeleted, isUndeleted, sortItem, sortDirection, pageIndexIndex, pageSize)
+        isDeleted, isUndeleted, sortItem, sortDirection, pageIndex, pageSize)
     {
         CreationUserId = creationUserId;
     }
@@ -83,9 +83,9 @@ public class ListSearchForUser : ListSearch
     }
 
     public ListSearchForUser(int creationUserId, string title, int resCountMin, int resCountMax, bool isDeleted,
-        bool isUndeleted, ThreadSortItem sortItem, SortDirection sortDirection, int pageIndexIndex,
+        bool isUndeleted, ThreadSortItem sortItem, SortDirection sortDirection, int pageIndex,
         int pageSize) : base(title, resCountMin, resCountMax, isDeleted, isUndeleted, sortItem, sortDirection,
-        pageIndexIndex, pageSize)
+        pageIndex, pageSize)
     {
         CreationUserId = creationUserId;
     }

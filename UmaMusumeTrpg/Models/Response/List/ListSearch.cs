@@ -10,8 +10,8 @@ public class ListSearch : BaseListSearch
     }
 
     public ListSearch(string content, DateTime creationTimeBeginning, DateTime creationTimeEnd,
-        ResponseSortItem sortItem, SortDirection sortDirection, int pageIndexIndex, int pageSize) : base(sortDirection,
-        pageIndexIndex, pageSize)
+        ResponseSortItem sortItem, SortDirection sortDirection, int pageIndex, int pageSize) : base(sortDirection,
+        pageIndex, pageSize)
     {
         Content = content;
         CreationTimeBeginning = creationTimeBeginning;
@@ -33,8 +33,8 @@ public class ListSearchForThread : ListSearch
 
     public ListSearchForThread(int threadId, int threadResNoBeginning, int threadResNoEnd, string content,
         DateTime creationTimeBeginning, DateTime creationTimeEnd, ResponseSortItem sortItem,
-        SortDirection sortDirection, int pageIndexIndex, int pageSize) : base(content, creationTimeBeginning,
-        creationTimeEnd, sortItem, sortDirection, pageIndexIndex, pageSize)
+        SortDirection sortDirection, int pageIndex, int pageSize) : base(content, creationTimeBeginning,
+        creationTimeEnd, sortItem, sortDirection, pageIndex, pageSize)
     {
         ThreadId = threadId;
         ThreadResNoBeginning = threadResNoBeginning;
@@ -53,8 +53,8 @@ public class ListSearchForUser : ListSearch
     }
 
     public ListSearchForUser(int creatingUserId, string content, DateTime creationTimeBeginning,
-        DateTime creationTimeEnd, ResponseSortItem sortItem, SortDirection sortDirection, int pageIndexIndex,
-        int pageSize) : base(content, creationTimeBeginning, creationTimeEnd, sortItem, sortDirection, pageIndexIndex,
+        DateTime creationTimeEnd, ResponseSortItem sortItem, SortDirection sortDirection, int pageIndex,
+        int pageSize) : base(content, creationTimeBeginning, creationTimeEnd, sortItem, sortDirection, pageIndex,
         pageSize)
     {
         CreatingUserId = creatingUserId;

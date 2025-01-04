@@ -16,10 +16,10 @@ namespace UmaMusumeTrpg.Controllers;
 [Route("Api/System/User")]
 [Authorize(Policy = MyPolicyName.SysAdminPolicy)]
 [ApiController]
-public class SystemUserController(ILogger<SystemUserController> logger, IUserService userService)
+public class UserController(ILogger<UserController> logger, IUserService userService)
     : ControllerBase
 {
-    private readonly ILogger<SystemUserController> _logger = logger;
+    private readonly ILogger<UserController> _logger = logger;
 
 
     [HttpPost]
@@ -92,16 +92,16 @@ public class SystemUserController(ILogger<SystemUserController> logger, IUserSer
         return Ok(new DeleteResponse(id, deletingTime));
     }
 
-    [AllowAnonymous]
     [HttpPost]
+    [AllowAnonymous]
     [Route("IsLoginIdDuplicate")]
     public bool IsLoginIdDuplicate([Required] [FromBody] IsLoginIdDuplicateRequest request)
     {
         return userService.IsLoginIdDuplicate(request.LoginId);
     }
 #if DEBUG
-    [AllowAnonymous]
     [HttpGet]
+    [AllowAnonymous]
     [Route("PasswordReset")]
     public bool PasswordReset(int id, string password)
     {

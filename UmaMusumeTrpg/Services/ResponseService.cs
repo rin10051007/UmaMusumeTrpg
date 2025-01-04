@@ -49,21 +49,32 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
 
     public (int, string) Entry(EntryItem entry)
     {
-        var response = new Response
+        using var transaction = dbContext.Database.BeginTransaction();
+        try
         {
-            ThreadId = entry.ThreadId,
-            CreatingUserId = entry.CreationUserId,
-            Content = entry.Content,
-            Token = guidService.NewGuid(),
-            CreationTime = timeService.NowTime()
-        };
-        response.Thread.ResCount += 1;
-        response.ThreadResNo = response.Thread.ResCount;
-        response.CreatingUser.TotalResCount += 1;
-        if (response.Thread.IsDeleted || !response.Thread.Token.Equals(entry.ThreadToken)) return (0, "");
-        _ = dbContext.Add(response);
-        _ = dbContext.SaveChanges();
-        return (response.Id, response.Token);
+            var response = new Response
+            {
+                ThreadId = entry.ThreadId,
+                CreatingUserId = entry.CreationUserId,
+                Content = entry.Content,
+                Token = guidService.NewGuid(),
+                CreationTime = timeService.NowTime()
+            };
+            response.Thread.ResCount += 1;
+            response.ThreadResNo = response.Thread.ResCount;
+            response.CreatingUser.TotalResCount += 1;
+            if (response.Thread.IsDeleted || !response.Thread.Token.Equals(entry.ThreadToken))
+                throw new Exception();
+            _ = dbContext.Add(response);
+            _ = dbContext.SaveChanges();
+            transaction.Commit();
+            return (response.Id, response.Token);
+        }
+        catch
+        {
+            transaction.Rollback();
+            return (0, "");
+        }
     }
 
     private IOrderedQueryable<Response> SearchList(IOrderedQueryable<Response> list, ListSearch search)

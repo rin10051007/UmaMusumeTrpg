@@ -8,7 +8,6 @@ namespace UmaMusumeTrpg;
 public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOptions)
 {
     public virtual DbSet<User> Users { get; set; }
-
     public virtual DbSet<Thread> Threads { get; set; }
     public virtual DbSet<Response> Responses { get; set; }
 

@@ -56,17 +56,27 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
 
     public (int, string) Entry(EntryItem entry)
     {
-        var thread = new Thread
+        using var transaction = dbContext.Database.BeginTransaction();
+        try
         {
-            CreatingUserId = entry.CreatingUserId,
-            Title = entry.Title,
-            Token = guidService.NewGuid(),
-            CreationTime = timeService.NowTime(),
-            UpdateTime = timeService.NowTime()
-        };
-        _ = dbContext.Add(thread);
-        _ = dbContext.SaveChanges();
-        return (thread.Id, thread.Token);
+            var thread = new Thread
+            {
+                CreatingUserId = entry.CreatingUserId,
+                Title = entry.Title,
+                Token = guidService.NewGuid(),
+                CreationTime = timeService.NowTime(),
+                UpdateTime = timeService.NowTime()
+            };
+            thread.CreatingUser.CreationThreadCount += 1;
+            _ = dbContext.Add(thread);
+            _ = dbContext.SaveChanges();
+            return (thread.Id, thread.Token);
+        }
+        catch
+        {
+            transaction.Rollback();
+            return (0, "");
+        }
     }
 
     public (int, DateTime?) Delete(DeleteItem delete)

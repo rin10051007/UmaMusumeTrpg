@@ -12,6 +12,6 @@ export class ApiService extends BaseApiService {
     const request: Request = {
       select: select
     }
-    return this.getHttp().post<Response>(this.getApiUrl().sysUrls.detail, request, {headers: this.getHeader()});
+    return this.getHttp().post<Response>(this.getApiUrl().sysUrls.user.detail, request, {headers: this.getHeader()});
   }
 }

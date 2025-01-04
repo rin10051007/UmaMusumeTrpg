@@ -12,6 +12,6 @@ export class IsLoginIdDuplicateApiService extends BaseApiService {
         id: id
       },
     }
-    return this.getHttp().post<boolean>(this.getApiUrl().sysUrls.isLoginIdDuplicate, request, {headers: this.getHeader()});
+    return this.getHttp().post<boolean>(this.getApiUrl().sysUrls.user.isLoginIdDuplicate, request, {headers: this.getHeader()});
   }
 }

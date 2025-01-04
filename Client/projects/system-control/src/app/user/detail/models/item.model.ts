@@ -5,6 +5,8 @@ export interface Item extends BaseDetailItem {
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   email: string;
+  creationThreadCount:number;
+  totalResCount:number;
   creationTime: Date;
   deletingTime: Date | null;
   isDeleted: boolean;

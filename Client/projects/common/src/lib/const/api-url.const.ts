@@ -7,11 +7,18 @@ export const apiUrls = {
     isUmaMusumePlayer: '/Api/Auth/isUmaMusumePlayer',
   },
   sysUrls: {
-    getList: '/Api/System/User/GetList',
-    entry: '/Api/System/User/Entry',
-    detail: '/Api/System/User/Detail',
-    edit: '/Api/System/User/Edit',
-    delete: '/Api/System/User/Delete',
-    isLoginIdDuplicate: '/Api/System/User/IsLoginIdDuplicate',
+    user: {
+      getList: '/Api/System/User/GetList',
+      entry: '/Api/System/User/Entry',
+      detail: '/Api/System/User/Detail',
+      edit: '/Api/System/User/Edit',
+      delete: '/Api/System/User/Delete',
+      isLoginIdDuplicate: '/Api/System/User/IsLoginIdDuplicate',
+    },
+    thread:{
+      getListForSystemThread: '/Api/System/Thread/GetListForSystemThread',
+      detail: '/Api/System/Thread/Detail',
+      delete: '/Api/System/Thread/Delete',
+    }
   }
 };

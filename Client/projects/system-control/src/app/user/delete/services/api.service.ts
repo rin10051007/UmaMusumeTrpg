@@ -12,6 +12,6 @@ export class ApiService extends BaseApiService {
     const request: Request = {
       delete: item
     }
-    return this.getHttp().post<Response>(this.getApiUrl().sysUrls.delete, request, {headers: this.getHeader()});
+    return this.getHttp().post<Response>(this.getApiUrl().sysUrls.user.delete, request, {headers: this.getHeader()});
   }
 }

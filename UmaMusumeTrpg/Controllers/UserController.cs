@@ -92,16 +92,16 @@ public class UserController(ILogger<UserController> logger, IUserService userSer
         return Ok(new DeleteResponse(id, deletingTime));
     }
 
-    [AllowAnonymous]
     [HttpPost]
+    [AllowAnonymous]
     [Route("IsLoginIdDuplicate")]
     public bool IsLoginIdDuplicate([Required] [FromBody] IsLoginIdDuplicateRequest request)
     {
         return userService.IsLoginIdDuplicate(request.LoginId);
     }
 #if DEBUG
-    [AllowAnonymous]
     [HttpGet]
+    [AllowAnonymous]
     [Route("PasswordReset")]
     public bool PasswordReset(int id, string password)
     {

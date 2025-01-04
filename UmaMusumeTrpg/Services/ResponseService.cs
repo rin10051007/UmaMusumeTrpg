@@ -47,14 +47,13 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
         return (list.Select(x => new ListItemForUser(x)).ToList(), length);
     }
 
-    public (int, string) Entry(EntryItem item)
+    public (int, string) Entry(EntryItem entry)
     {
         var response = new Response
         {
-            ThreadId = item.ThreadId,
-            CreatingUserId = item.CreationUserId,
-            ThreadResNo = GetThreadResNo(item.ThreadId),
-            Content = item.Content,
+            ThreadId = entry.ThreadId,
+            CreatingUserId = entry.CreationUserId,
+            Content = entry.Content,
             Token = guidService.NewGuid(),
             CreationTime = timeService.NowTime()
         };

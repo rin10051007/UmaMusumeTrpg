@@ -215,10 +215,10 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
         return (user.Id, user.Token);
     }
 
-    public (int, DateTime?) Delete(DeleteItem item)
+    public (int, DateTime?) Delete(DeleteItem delete)
     {
         var user = dbContext.Users
-            .FirstOrDefault(x => x.Id == item.Id && x.Token.Equals(item.Token));
+            .FirstOrDefault(x => x.Id == delete.Id && x.Token.Equals(delete.Token));
         if (user == null) return (0, timeService.NowTime());
         user.DeletingTime = timeService.NowTime();
         user.IsDeleted = true;

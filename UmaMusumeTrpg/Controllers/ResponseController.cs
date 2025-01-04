@@ -10,7 +10,6 @@ using UmaMusumeTrpg.Models.Response.List;
 namespace UmaMusumeTrpg.Controllers;
 
 [Route("Api/System/Response")]
-[Authorize(Policy = MyPolicyName.SysAdminPolicy)]
 [ApiController]
 public class ResponseController(ILogger<ResponseController> logger, IResponseService responseService) : ControllerBase
 {
@@ -33,6 +32,7 @@ public class ResponseController(ILogger<ResponseController> logger, IResponseSer
     }
 
     [HttpPost]
+    [Authorize(Policy = MyPolicyName.SysAdminPolicy)]
     [Route("GetListForUser")]
     public ActionResult<IEnumerable<ListResponseForThread>> GetList([Required] [FromBody] ListRequestForUser request)
     {
@@ -49,7 +49,7 @@ public class ResponseController(ILogger<ResponseController> logger, IResponseSer
             var (id, token) = responseService.Entry(request.Entry);
             return Ok(new EntryResponse(id, token));
         }
-        catch (Exception)
+        catch
         {
             return BadRequest(new EntryResponse(0, "")
             {

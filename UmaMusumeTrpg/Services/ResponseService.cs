@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using UmaMusumeTrpg.Entities;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
@@ -33,7 +34,7 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
             list = (IOrderedQueryable<Response>)list.Where(x => x.ThreadResNo <= search.ThreadResNoEnd);
 
         (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
-        return (list.Select(x => new ListItemForThread(x)).ToList(), length);
+        return (list.Include(x => x.CreatingUser).Select(x => new ListItemForThread(x)).ToList(), length);
     }
 
     public (List<ListItemForUser>, int) GetList(ListSearchForUser search)
@@ -44,7 +45,7 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
             list = (IOrderedQueryable<Response>)list.Where(x => x.CreatingUserId == search.CreatingUserId);
 
         (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
-        return (list.Select(x => new ListItemForUser(x)).ToList(), length);
+        return (list.Include(x => x.Thread).Select(x => new ListItemForUser(x)).ToList(), length);
     }
 
     public (int, string) Entry(EntryItem entry)

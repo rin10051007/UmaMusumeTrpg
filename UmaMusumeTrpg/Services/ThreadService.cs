@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Base.List;
@@ -18,7 +19,7 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
             ListWithPageByGet(
                 SortList(SearchList((IOrderedQueryable<Thread>)dbContext.Threads.Where(x => true), search), search),
                 search);
-        return (list.Select(x => new ListItem(x)).ToList(), length);
+        return (list.Include(x => x.CreatingUser).Select(x => new ListItem(x)).ToList(), length);
     }
 
     public (List<ListItemForThread>, int) GetList(ListSearchForThread search)
@@ -27,7 +28,7 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
             ListWithPageByGet(
                 SortList(SearchListForThread((IOrderedQueryable<Thread>)dbContext.Threads.Where(x => true), search),
                     search), search);
-        return (list.Select(x => new ListItemForThread(x)).ToList(), length);
+        return (list.Include(x => x.CreatingUser).Select(x => new ListItemForThread(x)).ToList(), length);
     }
 
     public (List<ListItemForSystemThread>, int) GetList(ListSearchForSystemThread search)
@@ -40,7 +41,7 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         (list, var length) =
             ListWithPageByGet(SortList(SearchList(SearchListForThread(list, search), search), search), search);
 
-        return (list.Select(x => new ListItemForSystemThread(x)).ToList(), length);
+        return (list.Include(x => x.CreatingUser).Select(x => new ListItemForSystemThread(x)).ToList(), length);
     }
 
     public (List<ListItemForUser>, int) GetList(ListSearchForUser search)
@@ -52,7 +53,7 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
 
         (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
 
-        return (list.Select(x => new ListItemForUser(x)).ToList(), length);
+        return (list.Include(x => x.CreatingUser).Select(x => new ListItemForUser(x)).ToList(), length);
     }
 
     public (int, string) Entry(EntryItem entry)
@@ -114,11 +115,11 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
 
         if (search.IsDeleted)
         {
-            if (search.DeletedTimeBeginning.HasValue)
-                list = (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime >= search.DeletedTimeBeginning);
+            if (search.DeletingTimeBeginning.HasValue)
+                list = (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime >= search.DeletingTimeBeginning);
 
-            if (search.DeletedTimeEnd.HasValue)
-                list = (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime <= search.DeletedTimeEnd);
+            if (search.DeletingTimeEnd.HasValue)
+                list = (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime <= search.DeletingTimeEnd);
         }
 
         return list;

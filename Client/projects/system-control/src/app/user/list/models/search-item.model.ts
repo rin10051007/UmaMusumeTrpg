@@ -1,4 +1,4 @@
-import {BaseListSearch, SysPermission, UserSortItem, UmaMusumeTrpgPermission} from 'Common';
+import {BaseListSearch, SysPermission, UmaMusumeTrpgPermission, UserSortItem} from 'Common';
 
 export interface SearchItem extends BaseListSearch {
   integration: string;

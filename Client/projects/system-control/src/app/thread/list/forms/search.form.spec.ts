@@ -1,4 +1,4 @@
-import { Search } from './search.form';
+import {Search} from './search.form';
 
 describe('Search', () => {
   it('should create an instance', () => {

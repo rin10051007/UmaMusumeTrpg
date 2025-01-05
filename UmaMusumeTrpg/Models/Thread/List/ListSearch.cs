@@ -36,7 +36,7 @@ public class ListSearchForThread : ListSearch
     }
 
     public ListSearchForThread(DateTime creationTimeBeginning, DateTime creationTimeEnd, DateTime updateTimeBeginning,
-        DateTime updateTimeEnd, DateTime deleteTimeBeginning, DateTime deleteTimeEnd, string title, int resCountMin,
+        DateTime updateTimeEnd, DateTime deletingTimeBeginning, DateTime deletingTimeEnd, string title, int resCountMin,
         int resCountMax, bool isDeleted, bool isUndeleted, ThreadSortItem sortItem, SortDirection sortDirection,
         int pageIndex, int pageSize) : base(title, resCountMin, resCountMax, isDeleted, isUndeleted, sortItem,
         sortDirection, pageIndex, pageSize)
@@ -45,16 +45,16 @@ public class ListSearchForThread : ListSearch
         CreationTimeEnd = creationTimeEnd;
         UpdateTimeBeginning = updateTimeBeginning;
         UpdateTimeEnd = updateTimeEnd;
-        DeletedTimeBeginning = deleteTimeBeginning;
-        DeletedTimeEnd = deleteTimeEnd;
+        DeletingTimeBeginning = deletingTimeBeginning;
+        DeletingTimeEnd = deletingTimeEnd;
     }
 
     public DateTime? CreationTimeBeginning { get; set; }
     public DateTime? CreationTimeEnd { get; set; }
     public DateTime? UpdateTimeBeginning { get; set; }
     public DateTime? UpdateTimeEnd { get; set; }
-    public DateTime? DeletedTimeBeginning { get; set; }
-    public DateTime? DeletedTimeEnd { get; set; }
+    public DateTime? DeletingTimeBeginning { get; set; }
+    public DateTime? DeletingTimeEnd { get; set; }
 }
 
 public class ListSearchForSystemThread : ListSearchForThread
@@ -64,10 +64,10 @@ public class ListSearchForSystemThread : ListSearchForThread
     }
 
     public ListSearchForSystemThread(int creationUserId, DateTime creationTimeBeginning, DateTime creationTimeEnd,
-        DateTime updateTimeBeginning, DateTime updateTimeEnd, DateTime deleteTimeBeginning, DateTime deleteTimeEnd,
+        DateTime updateTimeBeginning, DateTime updateTimeEnd, DateTime deletingTimeBeginning, DateTime deletingTimeEnd,
         string title, int resCountMin, int resCountMax, bool isDeleted, bool isUndeleted, ThreadSortItem sortItem,
         SortDirection sortDirection, int pageIndex, int pageSize) : base(creationTimeBeginning, creationTimeEnd,
-        updateTimeBeginning, updateTimeEnd, deleteTimeBeginning, deleteTimeEnd, title, resCountMin, resCountMax,
+        updateTimeBeginning, updateTimeEnd, deletingTimeBeginning, deletingTimeEnd, title, resCountMin, resCountMax,
         isDeleted, isUndeleted, sortItem, sortDirection, pageIndex, pageSize)
     {
         CreationUserId = creationUserId;

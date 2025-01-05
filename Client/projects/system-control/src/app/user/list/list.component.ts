@@ -5,10 +5,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {
   PageSizeOptions,
   SortDirection,
-  SysListColumnsToDisplay,
+  UserListColumnsToDisplay,
   SysPermission,
-  UserSortItem,
-  UmaMusumeTrpgPermission
+  UmaMusumeTrpgPermission,
+  UserSortItem
 } from 'Common';
 import {Search} from "./forms/search.form";
 import {Item} from './models/item.model';
@@ -48,7 +48,7 @@ export class ListComponent implements OnInit {
   isDetailSearch: boolean = false;
   protected readonly UserSortItem = UserSortItem;
   protected readonly PageSizeOptions = PageSizeOptions;
-  protected readonly ColumnsToDisplay = SysListColumnsToDisplay;
+  protected readonly ColumnsToDisplay = UserListColumnsToDisplay;
   protected readonly UmaMusumeTrpgPermission = UmaMusumeTrpgPermission;
   protected readonly SysPermission = SysPermission;
 
@@ -67,7 +67,7 @@ export class ListComponent implements OnInit {
         const item = params as SearchItem;
         if (isFirst) {
           isFirst = false;
-          if ((Object.keys(item).length >0)) {
+          if ((Object.keys(item).length > 0)) {
             this.isDetailSearch =
               (item.loginId?.length ?? 0) > 0 ||
               (item.name?.length ?? 0) > 0 ||
@@ -100,16 +100,14 @@ export class ListComponent implements OnInit {
           sortItem: Number(item.sortItem || 0),
           sortDirection: Number(item.sortDirection || 0),
           pageIndex: Number(item.pageIndex || 0),
-          pageSize: Number(item.pageSize || PageSizeOptions[1]),
-        } as SearchItem).subscribe(r => {
+          pageSize: Number(item.pageSize || PageSizeOptions[1])
+        }).subscribe(r => {
           this.list = r.items;
           this.searchItem = r.search;
           this.length = r.length;
-          console.log(item);
           this.searchForm.setValues(item);
         });
-      }
-    );
+      });
     this.searchForm.getForm('isUndeleted').valueChanges.subscribe(c => {
       this.searchForm.getForm('isUndeleted').setValue(c, {emitEvent: false});
     });
@@ -126,10 +124,6 @@ export class ListComponent implements OnInit {
   }
 
   searchClick() {
-    console.log(this.searchForm.getValue('isUndeleted'));
-    console.log(Boolean(this.searchForm.getValue('isUndeleted')));
-    console.log(this.searchForm.getValue('isDeleted'));
-    console.log(Boolean(this.searchForm.getValue('isDeleted')));
     this.addQueryParam([
       'integration',
       'loginId',

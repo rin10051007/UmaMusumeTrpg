@@ -52,13 +52,13 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
 
         if (search.IsDeleted)
         {
-            if (search.DeletedTimeBeginning.HasValue)
+            if (search.DeletingTimeBeginning.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
-                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date >= search.DeletedTimeBeginning);
+                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date >= search.DeletingTimeBeginning);
 
-            if (search.DeletedTimeEnd.HasValue)
+            if (search.DeletingTimeEnd.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
-                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date <= search.DeletedTimeEnd);
+                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date <= search.DeletingTimeEnd);
         }
 
         if (!search.IsUndeleted)

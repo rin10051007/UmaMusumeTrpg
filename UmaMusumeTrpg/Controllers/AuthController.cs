@@ -17,6 +17,7 @@ public class AuthController(ILogger<AuthController> logger, IAuthService authSer
 
 
     [HttpPost]
+    [AllowAnonymous]
     [Route("Login")]
     public ActionResult<LoginResponse> Login([Required] [FromBody] LoginRequest loginRequest)
     {

@@ -1,4 +1,4 @@
-import {BaseListSearch, SysPermission, SystemSortItem, UmaMusumeTrpgPermission} from 'Common';
+import {BaseListSearch, SysPermission, UserSortItem, UmaMusumeTrpgPermission} from 'Common';
 
 export interface SearchItem extends BaseListSearch {
   integration: string;
@@ -15,5 +15,5 @@ export interface SearchItem extends BaseListSearch {
   updateTimeEnd: Date | null;
   deletingTimeBeginning: Date | null;
   deletingTimeEnd: Date | null;
-  sortItem: SystemSortItem;
+  sortItem: UserSortItem;
 }

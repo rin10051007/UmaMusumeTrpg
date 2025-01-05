@@ -7,7 +7,7 @@ import {
   SortDirection,
   SysListColumnsToDisplay,
   SysPermission,
-  SystemSortItem,
+  UserSortItem,
   UmaMusumeTrpgPermission
 } from 'Common';
 import {Search} from "./forms/search.form";
@@ -38,7 +38,7 @@ export class ListComponent implements OnInit {
     updateTimeEnd: null,
     deletingTimeBeginning: null,
     deletingTimeEnd: null,
-    sortItem: SystemSortItem.none,
+    sortItem: UserSortItem.none,
     sortDirection: SortDirection.none,
     pageIndex: 1,
     pageSize: PageSizeOptions[1]
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
   searchForm: Search;
   length = 0;
   isDetailSearch: boolean = false;
-  protected readonly SystemSortItem = SystemSortItem;
+  protected readonly UserSortItem = UserSortItem;
   protected readonly PageSizeOptions = PageSizeOptions;
   protected readonly ColumnsToDisplay = SysListColumnsToDisplay;
   protected readonly UmaMusumeTrpgPermission = UmaMusumeTrpgPermission;
@@ -118,7 +118,7 @@ export class ListComponent implements OnInit {
     });
   }
 
-  sortItemSet(sortItem: SystemSortItem) {
+  sortItemSet(sortItem: UserSortItem) {
     if (sortItem !== this.searchItem.sortItem) {
       this.searchItem.sortDirection = SortDirection.none;
     }
@@ -181,7 +181,7 @@ export class ListComponent implements OnInit {
         updateTimeEnd: '',
         deletingTimeBeginning: '',
         deletingTimeEnd: '',
-        sortItem: SystemSortItem.none,
+        sortItem: UserSortItem.none,
         sortDirection: SortDirection.none,
         pageIndex: 0,
         pageSize: PageSizeOptions[0]

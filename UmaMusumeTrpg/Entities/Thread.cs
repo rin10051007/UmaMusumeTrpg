@@ -8,7 +8,7 @@ public class Thread
     /// <summary>
     ///     ID
     /// </summary>
-    public int Id { get; set; } 
+    public int Id { get; set; }
 
     /// <summary>
     ///     作成者ID
@@ -23,7 +23,7 @@ public class Thread
     /// <summary>
     ///     レス数
     /// </summary>
-    public int ResCount { get; set; } 
+    public int ResCount { get; set; }
 
     /// <summary>
     ///     トークン
@@ -43,12 +43,12 @@ public class Thread
     /// <summary>
     ///     削除日
     /// </summary>
-    public DateTime? DeletingTime { get; set; } 
+    public DateTime? DeletingTime { get; set; }
 
     /// <summary>
     ///     削除フラグ
     /// </summary>
-    public bool IsDeleted { get; set; } 
+    public bool IsDeleted { get; set; }
 
     public virtual User CreatingUser { get; set; }
 

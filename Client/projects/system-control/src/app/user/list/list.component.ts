@@ -5,9 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {
   PageSizeOptions,
   SortDirection,
-  UserListColumnsToDisplay,
   SysPermission,
   UmaMusumeTrpgPermission,
+  UserListColumnsToDisplay,
   UserSortItem
 } from 'Common';
 import {Search} from "./forms/search.form";

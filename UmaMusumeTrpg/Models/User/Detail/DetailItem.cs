@@ -5,9 +5,14 @@ namespace UmaMusumeTrpg.Models.User.Detail;
 
 public class DetailItem : BaseDetailItem
 {
-    public DetailItem(Entities.User user) : base(user.Id, user.Name, user.Token, user.UpdateTime)
+    public DetailItem()
+    {
+    }
+
+    public DetailItem(Entities.User user) : base(user.Id, user.Token, user.UpdateTime)
     {
         LoginId = user.LoginId;
+        Name = user.Name;
         SysPermission = user.SysPermission;
         UmaMusumeTrpgPermission = user.UmaMusumeTrpgPermission;
         Email = user.Email;
@@ -18,11 +23,8 @@ public class DetailItem : BaseDetailItem
         IsDeleted = user.IsDeleted;
     }
 
-    public DetailItem()
-    {
-    }
-
     public string LoginId { get; set; }
+    public string Name { get; set; }
     public SysPermission SysPermission { get; set; }
     public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }
     public string Email { get; set; }

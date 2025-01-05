@@ -2,6 +2,7 @@ using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Base.List;
 using UmaMusumeTrpg.Models.Thread.Delete;
+using UmaMusumeTrpg.Models.Thread.Detail;
 using UmaMusumeTrpg.Models.Thread.Entry;
 using UmaMusumeTrpg.Models.Thread.List;
 using Thread = UmaMusumeTrpg.Entities.Thread;
@@ -88,6 +89,13 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         thread.Token = guidService.NewGuid();
         _ = dbContext.SaveChanges();
         return (thread.Id, thread.DeletingTime);
+    }
+
+    public DetailItem Detail(DetailSelect select)
+    {
+        return new DetailItem(dbContext.Threads.FirstOrDefault(x =>
+            x.Id == select.Id && (string.IsNullOrEmpty(select.Token) ||
+                                  (!string.IsNullOrEmpty(select.Token) && select.Token.Equals(x.Token)))));
     }
 
     private IOrderedQueryable<Thread> SearchListForThread(IOrderedQueryable<Thread> list, ListSearchForThread search)

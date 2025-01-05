@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.Thread.Delete;
+using UmaMusumeTrpg.Models.Thread.Detail;
 using UmaMusumeTrpg.Models.Thread.Entry;
 using UmaMusumeTrpg.Models.Thread.List;
 
@@ -54,6 +55,23 @@ public class ThreadController(ILogger<ThreadController> logger, IThreadService t
         catch
         {
             return BadRequest(new EntryResponse(0, "")
+            {
+                HttpStatusCode = HttpStatusCode.BadRequest
+            });
+        }
+    }
+
+    [HttpPost]
+    [Route("Detail")]
+    public ActionResult<IEnumerable<DetailResponse>> Detail([Required] [FromBody] DetailRequest request)
+    {
+        try
+        {
+            return Ok(new DetailResponse(threadService.Detail(request.Select)));
+        }
+        catch (Exception)
+        {
+            return BadRequest(new DetailResponse(new DetailItem())
             {
                 HttpStatusCode = HttpStatusCode.BadRequest
             });

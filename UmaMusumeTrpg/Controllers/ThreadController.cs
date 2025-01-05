@@ -11,7 +11,7 @@ using UmaMusumeTrpg.Models.Thread.List;
 
 namespace UmaMusumeTrpg.Controllers;
 
-[Route("Api/System/Thread")]
+[Route("Api/Thread")]
 [Authorize]
 [ApiController]
 public class ThreadController(ILogger<ThreadController> logger, IThreadService threadService) : ControllerBase

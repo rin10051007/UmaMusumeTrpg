@@ -13,7 +13,7 @@ using UmaMusumeTrpg.Models.User.List;
 
 namespace UmaMusumeTrpg.Controllers;
 
-[Route("Api/System/User")]
+[Route("Api/User")]
 [Authorize(Policy = MyPolicyName.SysAdminPolicy)]
 [ApiController]
 public class UserController(ILogger<UserController> logger, IUserService userService)

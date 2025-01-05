@@ -193,10 +193,9 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
 
     public DetailItem Detail(DetailSelect select)
     {
-        return new DetailItem(dbContext.Users
-            .FirstOrDefault(x => x.Id == select.Id && (string.IsNullOrEmpty(select.Token) ||
-                                                       (!string.IsNullOrEmpty(select.Token) &&
-                                                        select.Token.Equals(x.Token)))));
+        return new DetailItem(dbContext.Users.FirstOrDefault(x =>
+            x.Id == select.Id && (string.IsNullOrEmpty(select.Token) ||
+                                  (!string.IsNullOrEmpty(select.Token) && select.Token.Equals(x.Token)))));
     }
 
     public (int, string) Edit(EditItem item)

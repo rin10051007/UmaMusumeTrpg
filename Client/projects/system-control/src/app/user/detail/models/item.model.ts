@@ -2,6 +2,7 @@ import {BaseDetailItem, SysPermission, UmaMusumeTrpgPermission} from 'Common';
 
 export interface Item extends BaseDetailItem {
   loginId: string;
+  name: string;
   sysPermission: SysPermission;
   umaMusumeTrpgPermission: UmaMusumeTrpgPermission;
   email: string;

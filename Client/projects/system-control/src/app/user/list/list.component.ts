@@ -32,10 +32,10 @@ export class ListComponent implements OnInit {
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
     isUndeleted: true,
     isDeleted: false,
-    creationTimeBeginning: null,
-    creationTimeEnd: null,
-    updateTimeBeginning: null,
-    updateTimeEnd: null,
+    creatingTimeBeginning: null,
+    creatingTimeEnd: null,
+    updatingTimeBeginning: null,
+    updatingTimeEnd: null,
     deletingTimeBeginning: null,
     deletingTimeEnd: null,
     sortItem: UserSortItem.none,
@@ -74,10 +74,10 @@ export class ListComponent implements OnInit {
               (item.email?.length ?? 0) > 0 ||
               Boolean((item.isUndeleted || 'true').toString() == 'false') ||
               Boolean((item.isDeleted || 'false').toString() == 'true') ||
-              item.creationTimeBeginning != null ||
-              item.creationTimeEnd != null ||
-              item.updateTimeBeginning != null ||
-              item.updateTimeEnd != null ||
+              item.creatingTimeBeginning != null ||
+              item.creatingTimeEnd != null ||
+              item.updatingTimeBeginning != null ||
+              item.updatingTimeEnd != null ||
               item.deletingTimeBeginning != null ||
               item.deletingTimeEnd != null;
           }
@@ -91,10 +91,10 @@ export class ListComponent implements OnInit {
           umaMusumeTrpgPermission: Number(item.umaMusumeTrpgPermission || 0),
           isUndeleted: Boolean((item.isUndeleted || 'true').toString() == 'true'),
           isDeleted: Boolean((item.isDeleted || 'false').toString() == 'true'),
-          creationTimeBeginning: item.creationTimeBeginning || null,
-          creationTimeEnd: item.creationTimeEnd || null,
-          updateTimeBeginning: item.updateTimeBeginning || null,
-          updateTimeEnd: item.updateTimeEnd || null,
+          creatingTimeBeginning: item.creatingTimeBeginning || null,
+          creatingTimeEnd: item.creatingTimeEnd || null,
+          updatingTimeBeginning: item.updatingTimeBeginning || null,
+          updatingTimeEnd: item.updatingTimeEnd || null,
           deletingTimeBeginning: item.deletingTimeBeginning || null,
           deletingTimeEnd: item.deletingTimeEnd || null,
           sortItem: Number(item.sortItem || 0),
@@ -133,10 +133,10 @@ export class ListComponent implements OnInit {
       'umaMusumeTrpgPermission',
       'isUndeleted',
       'isDeleted',
-      'creationTimeBeginning',
-      'creationTimeEnd',
-      'updateTimeBeginning',
-      'updateTimeEnd',
+      'creatingTimeBeginning',
+      'creatingTimeEnd',
+      'updatingTimeBeginning',
+      'updatingTimeEnd',
       'deletingTimeBeginning',
       'deletingTimeEnd'
     ], [
@@ -148,10 +148,10 @@ export class ListComponent implements OnInit {
       Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
       Boolean(this.searchForm.getValue('isUndeleted')),
       Boolean(this.searchForm.getValue('isDeleted')),
-      this.datePipe.transform(this.searchForm.getValue('creationTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('creationTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updateTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updateTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeBeginning'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeBeginning'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeEnd'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'YYYY-MM-dd'),
     ]);
@@ -169,10 +169,10 @@ export class ListComponent implements OnInit {
         umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
         isUndeleted: true,
         isDeleted: false,
-        creationTimeBeginning: '',
-        creationTimeEnd: '',
-        updateTimeBeginning: '',
-        updateTimeEnd: '',
+        creatingTimeBeginning: '',
+        creatingTimeEnd: '',
+        updatingTimeBeginning: '',
+        updatingTimeEnd: '',
         deletingTimeBeginning: '',
         deletingTimeEnd: '',
         sortItem: UserSortItem.none,

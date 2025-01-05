@@ -19,10 +19,10 @@ export class Search extends BaseForm {
     this.getFormGroup().addControl('umaMusumeTrpgPermission', new FormControl(UmaMusumeTrpgPermission.None));
     this.getFormGroup().addControl('isUndeleted', new FormControl(true));
     this.getFormGroup().addControl('isDeleted', new FormControl(false));
-    this.getFormGroup().addControl('creationTimeBeginning', new FormControl(''));
-    this.getFormGroup().addControl('creationTimeEnd', new FormControl(''));
-    this.getFormGroup().addControl('updateTimeBeginning', new FormControl(''));
-    this.getFormGroup().addControl('updateTimeEnd', new FormControl(''));
+    this.getFormGroup().addControl('creatingTimeBeginning', new FormControl(''));
+    this.getFormGroup().addControl('creatingTimeEnd', new FormControl(''));
+    this.getFormGroup().addControl('updatingTimeBeginning', new FormControl(''));
+    this.getFormGroup().addControl('updatingTimeEnd', new FormControl(''));
     this.getFormGroup().addControl('deletingTimeBeginning', new FormControl(''));
     this.getFormGroup().addControl('deletingTimeEnd', new FormControl(''));
   }
@@ -36,10 +36,10 @@ export class Search extends BaseForm {
     this.setValue('umaMusumeTrpgPermission', Number(search?.umaMusumeTrpgPermission || UmaMusumeTrpgPermission.None));
     this.setValue('isUndeleted', Boolean((search?.isUndeleted || 'true').toString() == 'true'));
     this.setValue('isDeleted', Boolean((search?.isDeleted || 'false').toString() == 'true'));
-    this.setValue('creationTimeBeginning', search?.creationTimeBeginning || '');
-    this.setValue('creationTimeEnd', search?.creationTimeEnd || '');
-    this.setValue('updateTimeBeginning', search?.updateTimeBeginning || '');
-    this.setValue('updateTimeEnd', search?.updateTimeEnd || '');
+    this.setValue('creatingTimeBeginning', search?.creatingTimeBeginning || '');
+    this.setValue('creatingTimeEnd', search?.creatingTimeEnd || '');
+    this.setValue('updatingTimeBeginning', search?.updatingTimeBeginning || '');
+    this.setValue('updatingTimeEnd', search?.updatingTimeEnd || '');
     this.setValue('deletingTimeBeginning', search?.deletingTimeBeginning || '');
     this.setValue('deletingTimeEnd', search?.deletingTimeEnd || '');
   }

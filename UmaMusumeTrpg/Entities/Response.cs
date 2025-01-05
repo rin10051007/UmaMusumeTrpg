@@ -38,7 +38,7 @@ public class Response
     /// <summary>
     ///     作成日
     /// </summary>
-    public DateTime CreationTime { get; set; } = DateTime.Now;
+    public DateTime CreatingTime { get; set; } = DateTime.Now;
 
     public virtual User CreatingUser { get; set; } = new();
 

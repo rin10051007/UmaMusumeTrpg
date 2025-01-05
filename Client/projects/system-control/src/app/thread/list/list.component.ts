@@ -17,16 +17,16 @@ import {ApiService} from "./services/api.service";
 export class ListComponent implements OnInit {
   list: Item[] = [];
   searchItem: SearchItem = {
-    creationUserId: 0,
+    creatingUserId: 0,
     title: '',
     resCountMin: 0,
     resCountMax: 0,
     isUndeleted: true,
     isDeleted: false,
-    creationTimeBeginning: null,
-    creationTimeEnd: null,
-    updateTimeBeginning: null,
-    updateTimeEnd: null,
+    creatingTimeBeginning: null,
+    creatingTimeEnd: null,
+    updatingTimeBeginning: null,
+    updatingTimeEnd: null,
     deletingTimeBeginning: null,
     deletingTimeEnd: null,
     sortItem: ThreadSortItem.none,
@@ -45,7 +45,6 @@ export class ListComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private router: Router, search: Search,
               public datePipe: DatePipe) {
-    console.log(search);
     this.searchForm = search;
     this.searchForm.createForm();
   }
@@ -58,16 +57,16 @@ export class ListComponent implements OnInit {
         isFirst = false;
       }
       this.apiService.getList({
-        creationUserId: Number(item.creationUserId || 0),
+        creatingUserId: Number(item.creatingUserId || 0),
         title: item.title,
         resCountMin: Number(item.resCountMin || 0),
         resCountMax: Number(item.resCountMax || 0),
         isUndeleted: Boolean((item.isUndeleted || 'true').toString() == 'true'),
         isDeleted: Boolean((item.isDeleted || 'false').toString() == 'true'),
-        creationTimeBeginning: item.creationTimeBeginning || null,
-        creationTimeEnd: item.creationTimeEnd || null,
-        updateTimeBeginning: item.updateTimeBeginning || null,
-        updateTimeEnd: item.updateTimeEnd || null,
+        creatingTimeBeginning: item.creatingTimeBeginning || null,
+        creatingTimeEnd: item.creatingTimeEnd || null,
+        updatingTimeBeginning: item.updatingTimeBeginning || null,
+        updatingTimeEnd: item.updatingTimeEnd || null,
         deletingTimeBeginning: item.deletingTimeBeginning || null,
         deletingTimeEnd: item.deletingTimeEnd || null,
         sortItem: Number(item.sortItem || 0),
@@ -98,29 +97,29 @@ export class ListComponent implements OnInit {
 
   searchClick() {
     this.addQueryParam([
-      'creationUserId',
+      'creatingUserId',
       'title',
       'resCountMin',
       'resCountMax',
       'isUndeleted',
       'isDeleted',
-      'creationTimeBeginning',
-      'creationTimeEnd',
-      'updateTimeBeginning',
-      'updateTimeEnd',
+      'creatingTimeBeginning',
+      'creatingTimeEnd',
+      'updatingTimeBeginning',
+      'updatingTimeEnd',
       'deletingTimeBeginning',
       'deletingTimeEnd',
     ], [
-      Number(this.searchForm.getValue('creationUserId') || 0),
+      Number(this.searchForm.getValue('creatingUserId') || 0),
       this.searchForm.getValue('title') ?? '',
       Number(this.searchForm.getValue('resCountMin') || 0),
       Number(this.searchForm.getValue('resCountMax') || 0),
       Boolean(this.searchForm.getValue('isUndeleted')),
       Boolean(this.searchForm.getValue('isDeleted')),
-      this.datePipe.transform(this.searchForm.getValue('creationTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('creationTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updateTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updateTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeBeginning'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeBeginning'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeEnd'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'YYYY-MM-dd'),
       this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'YYYY-MM-dd'),
     ])
@@ -130,16 +129,16 @@ export class ListComponent implements OnInit {
     this.searchForm.createForm();
     this.router.navigate([], {
       queryParams: {
-        creationUserId: 0,
+        creatingUserId: 0,
         title: '',
         resCountMin: 0,
         resCountMax: 0,
         isUndeleted: true,
         isDeleted: false,
-        creationTimeBeginning: null,
-        creationTimeEnd: null,
-        updateTimeBeginning: null,
-        updateTimeEnd: null,
+        creatingTimeBeginning: null,
+        creatingTimeEnd: null,
+        updatingTimeBeginning: null,
+        updatingTimeEnd: null,
         deletingTimeBeginning: null,
         deletingTimeEnd: null,
         sortItem: ThreadSortItem.none,

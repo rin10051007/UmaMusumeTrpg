@@ -1,9 +1,10 @@
 export enum ThreadSortItem {
   none,
   id,
-  creatingUserId,
+  creatingUserName,
   title,
   resCount,
-  creationTime,
-  updateTime
+  creatingTime,
+  updatingTime,
+  deletingTime
 }

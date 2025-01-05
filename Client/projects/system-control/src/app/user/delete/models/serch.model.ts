@@ -6,7 +6,7 @@ export interface Item extends BaseDeleteItem {
   sysPermission: SysPermission;
   umaMusumeTrpgPermossion: UmaMusumeTrpgPermission;
   email: string;
-  creationTime: Date;
+  creatingTime: Date;
   deletingTime?: Date;
   isDeleted: boolean;
 }

@@ -7,8 +7,8 @@ export const UserListColumnsToDisplay = [
   'email',
   'creationThreadCount',
   'totalResCount',
-  'creationTime',
-  'updateTime',
+  'creatingTime',
+  'updatingTime',
   'deletingTime',
   'buttons'
 ]

@@ -30,8 +30,8 @@ public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOp
             entity.Property(e => e.TotalResCount).HasDefaultValue(0).HasComment("総レス数");
             entity.Property(e => e.Password).IsRequired().HasMaxLength(256).HasComment("パスワード");
             entity.Property(e => e.Token).IsRequired().HasMaxLength(32).HasComment("トークン");
-            entity.Property(e => e.CreationTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日時");
-            entity.Property(e => e.UpdateTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("更新日時");
+            entity.Property(e => e.CreatingTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日時");
+            entity.Property(e => e.UpdatingTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("更新日時");
             entity.Property(e => e.DeletingTime).HasComment("削除日時");
             entity.Property(e => e.IsDeleted).HasDefaultValue(false).HasComment("削除フラグ");
         });
@@ -45,8 +45,8 @@ public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOp
             entity.Property(e => e.Title).IsRequired().HasMaxLength(64).HasComment("スレッドタイトル");
             entity.Property(e => e.ResCount).HasDefaultValue(0).HasComment("レス数");
             entity.Property(e => e.Token).IsRequired().HasMaxLength(32).HasComment("トークン");
-            entity.Property(e => e.CreationTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日");
-            entity.Property(e => e.UpdateTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("更新日");
+            entity.Property(e => e.CreatingTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日");
+            entity.Property(e => e.UpdatingTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("更新日");
             entity.Property(e => e.DeletingTime).HasComment("削除日");
             entity.Property(e => e.IsDeleted).HasDefaultValue(false).HasComment("削除フラグ");
 
@@ -66,7 +66,7 @@ public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOp
             entity.Property(e => e.ThreadResNo).HasComment("レスNo");
             entity.Property(e => e.Content).IsRequired().HasMaxLength(512).HasComment("レス内容");
             entity.Property(e => e.Token).IsRequired().HasMaxLength(32).HasComment("トークン");
-            entity.Property(e => e.CreationTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日");
+            entity.Property(e => e.CreatingTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日");
 
             entity.HasOne(d => d.CreatingUser).WithMany(p => p.Responses).HasForeignKey(d => d.CreatingUserId)
                 .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("Responses_CreatingUserId_fkey");

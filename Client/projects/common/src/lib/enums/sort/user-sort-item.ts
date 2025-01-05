@@ -8,7 +8,7 @@ export enum UserSortItem {
   email,
   creationThreadCount,
   totalResCount,
-  creationTime,
-  updateTime,
+  creatingTime,
+  updatingTime,
   deletingTime
 }

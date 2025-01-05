@@ -8,7 +8,7 @@ public class DetailItem : BaseDetailItem
     {
     }
 
-    public DetailItem(Entities.Thread thread) : base(thread.Id, thread.Token, thread.UpdateTime)
+    public DetailItem(Entities.Thread thread) : base(thread.Id, thread.Token, thread.UpdatingTime)
     {
         CreatingUserId = thread.CreatingUserId;
         CreatingUserName = thread.CreatingUser.Name;

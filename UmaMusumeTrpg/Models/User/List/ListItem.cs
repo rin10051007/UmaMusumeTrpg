@@ -12,8 +12,8 @@ public class ListItem(Entities.User user) : BaseListItem(user.Id)
     public string Email { get; set; } = user.Email;
     public int CreationThreadCount { get; set; } = user.CreationThreadCount;
     public int TotalResCount { get; set; } = user.TotalResCount;
-    public DateTime CreationTime { get; set; } = user.CreationTime;
-    public DateTime UpdateTime { get; set; } = user.UpdateTime;
+    public DateTime CreatingTime { get; set; } = user.CreatingTime;
+    public DateTime UpdatingTime { get; set; } = user.UpdatingTime;
     public DateTime? DeletingTime { get; set; } = user.DeletingTime;
     public bool IsDeleted { get; set; } = user.IsDeleted;
 }

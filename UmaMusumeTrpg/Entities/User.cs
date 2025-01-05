@@ -68,12 +68,12 @@ public class User : PasswordHasher<User>
     /// <summary>
     ///     作成日時
     /// </summary>
-    public DateTime CreationTime { get; set; } = DateTime.Now;
+    public DateTime CreatingTime { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     更新日時
     /// </summary>
-    public DateTime UpdateTime { get; set; } = DateTime.Now;
+    public DateTime UpdatingTime { get; set; } = DateTime.Now;
 
     /// <summary>
     ///     削除日時

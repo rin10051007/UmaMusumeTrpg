@@ -4,9 +4,10 @@ public enum ThreadSortItem
 {
     None,
     Id,
-    CreatingUserId,
+    CreatingUserName,
     Title,
     ResCount,
-    CreationTime,
-    UpdateTime
+    CreatingTime,
+    UpdatingTime,
+    DeletingTime
 }

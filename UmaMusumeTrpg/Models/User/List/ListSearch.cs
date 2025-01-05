@@ -11,7 +11,8 @@ public class ListSearch : BaseListSearch
 
     public ListSearch(string integration, string loginId, string name, string email, SysPermission sysPermission,
         UmaMusumeTrpgPermission umaMusumeTrpgPermission, UserSortItem sortItem, bool isUndeleted, bool isDeleted,
-        DateTime creationTimeBeginning, DateTime creationTimeEnd, DateTime updateTimeBeginning, DateTime updateTimeEnd,
+        DateTime creatingTimeBeginning, DateTime creatingTimeEnd, DateTime updatingTimeBeginning,
+        DateTime updatingTimeEnd,
         DateTime deletingTimeBeginning, DateTime deletingTimeEnd, SortDirection sortDirection, int pageIndex,
         int pageSize) : base(sortDirection, pageIndex, pageSize)
     {
@@ -23,10 +24,10 @@ public class ListSearch : BaseListSearch
         UmaMusumeTrpgPermission = umaMusumeTrpgPermission;
         IsUndeleted = isUndeleted;
         IsDeleted = isDeleted;
-        CreationTimeBeginning = creationTimeBeginning;
-        CreationTimeEnd = creationTimeEnd;
-        UpdateTimeBeginning = updateTimeBeginning;
-        UpdateTimeEnd = updateTimeEnd;
+        CreatingTimeBeginning = creatingTimeBeginning;
+        CreatingTimeEnd = creatingTimeEnd;
+        UpdatingTimeBeginning = updatingTimeBeginning;
+        UpdatingTimeEnd = updatingTimeEnd;
         DeletingTimeBeginning = deletingTimeBeginning;
         DeletingTimeEnd = deletingTimeEnd;
         SortItem = sortItem;
@@ -40,10 +41,10 @@ public class ListSearch : BaseListSearch
     public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }
     public bool IsUndeleted { get; set; }
     public bool IsDeleted { get; set; }
-    public DateTime? CreationTimeBeginning { get; set; }
-    public DateTime? CreationTimeEnd { get; set; }
-    public DateTime? UpdateTimeBeginning { get; set; }
-    public DateTime? UpdateTimeEnd { get; set; }
+    public DateTime? CreatingTimeBeginning { get; set; }
+    public DateTime? CreatingTimeEnd { get; set; }
+    public DateTime? UpdatingTimeBeginning { get; set; }
+    public DateTime? UpdatingTimeEnd { get; set; }
     public DateTime? DeletingTimeBeginning { get; set; }
     public DateTime? DeletingTimeEnd { get; set; }
     public UserSortItem SortItem { get; set; }

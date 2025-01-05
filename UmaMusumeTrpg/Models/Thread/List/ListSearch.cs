@@ -35,24 +35,25 @@ public class ListSearchForThread : ListSearch
     {
     }
 
-    public ListSearchForThread(DateTime creationTimeBeginning, DateTime creationTimeEnd, DateTime updateTimeBeginning,
-        DateTime updateTimeEnd, DateTime deletingTimeBeginning, DateTime deletingTimeEnd, string title, int resCountMin,
+    public ListSearchForThread(DateTime creatingTimeBeginning, DateTime creatingTimeEnd, DateTime updatingTimeBeginning,
+        DateTime updatingTimeEnd, DateTime deletingTimeBeginning, DateTime deletingTimeEnd, string title,
+        int resCountMin,
         int resCountMax, bool isDeleted, bool isUndeleted, ThreadSortItem sortItem, SortDirection sortDirection,
         int pageIndex, int pageSize) : base(title, resCountMin, resCountMax, isDeleted, isUndeleted, sortItem,
         sortDirection, pageIndex, pageSize)
     {
-        CreationTimeBeginning = creationTimeBeginning;
-        CreationTimeEnd = creationTimeEnd;
-        UpdateTimeBeginning = updateTimeBeginning;
-        UpdateTimeEnd = updateTimeEnd;
+        CreatingTimeBeginning = creatingTimeBeginning;
+        CreatingTimeEnd = creatingTimeEnd;
+        UpdatingTimeBeginning = updatingTimeBeginning;
+        UpdatingTimeEnd = updatingTimeEnd;
         DeletingTimeBeginning = deletingTimeBeginning;
         DeletingTimeEnd = deletingTimeEnd;
     }
 
-    public DateTime? CreationTimeBeginning { get; set; }
-    public DateTime? CreationTimeEnd { get; set; }
-    public DateTime? UpdateTimeBeginning { get; set; }
-    public DateTime? UpdateTimeEnd { get; set; }
+    public DateTime? CreatingTimeBeginning { get; set; }
+    public DateTime? CreatingTimeEnd { get; set; }
+    public DateTime? UpdatingTimeBeginning { get; set; }
+    public DateTime? UpdatingTimeEnd { get; set; }
     public DateTime? DeletingTimeBeginning { get; set; }
     public DateTime? DeletingTimeEnd { get; set; }
 }
@@ -63,17 +64,18 @@ public class ListSearchForSystemThread : ListSearchForThread
     {
     }
 
-    public ListSearchForSystemThread(int creationUserId, DateTime creationTimeBeginning, DateTime creationTimeEnd,
-        DateTime updateTimeBeginning, DateTime updateTimeEnd, DateTime deletingTimeBeginning, DateTime deletingTimeEnd,
+    public ListSearchForSystemThread(int creatingUserId, DateTime creatingTimeBeginning, DateTime creatingTimeEnd,
+        DateTime updatingTimeBeginning, DateTime updatingTimeEnd, DateTime deletingTimeBeginning,
+        DateTime deletingTimeEnd,
         string title, int resCountMin, int resCountMax, bool isDeleted, bool isUndeleted, ThreadSortItem sortItem,
-        SortDirection sortDirection, int pageIndex, int pageSize) : base(creationTimeBeginning, creationTimeEnd,
-        updateTimeBeginning, updateTimeEnd, deletingTimeBeginning, deletingTimeEnd, title, resCountMin, resCountMax,
+        SortDirection sortDirection, int pageIndex, int pageSize) : base(creatingTimeBeginning, creatingTimeEnd,
+        updatingTimeBeginning, updatingTimeEnd, deletingTimeBeginning, deletingTimeEnd, title, resCountMin, resCountMax,
         isDeleted, isUndeleted, sortItem, sortDirection, pageIndex, pageSize)
     {
-        CreationUserId = creationUserId;
+        CreatingUserId = creatingUserId;
     }
 
-    public int CreationUserId { get; set; }
+    public int CreatingUserId { get; set; }
 }
 
 public class ListSearchForUser : ListSearch
@@ -82,13 +84,13 @@ public class ListSearchForUser : ListSearch
     {
     }
 
-    public ListSearchForUser(int creationUserId, string title, int resCountMin, int resCountMax, bool isDeleted,
+    public ListSearchForUser(int creatingUserId, string title, int resCountMin, int resCountMax, bool isDeleted,
         bool isUndeleted, ThreadSortItem sortItem, SortDirection sortDirection, int pageIndex,
         int pageSize) : base(title, resCountMin, resCountMax, isDeleted, isUndeleted, sortItem, sortDirection,
         pageIndex, pageSize)
     {
-        CreationUserId = creationUserId;
+        CreatingUserId = creatingUserId;
     }
 
-    public int CreationUserId { get; set; }
+    public int CreatingUserId { get; set; }
 }

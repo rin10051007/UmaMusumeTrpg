@@ -8,7 +8,7 @@ export interface Item extends BaseDetailItem {
   email: string;
   creationThreadCount: number;
   totalResCount: number;
-  creationTime: Date;
+  creatingTime: Date;
   deletingTime: Date | null;
   isDeleted: boolean;
 }

@@ -1,1 +1,93 @@
-<p>list works!</p>
+<table [dataSource]="list" class="mat-elevation-z8" mat-table>
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(ThreadSortItem.id)" class="active">
+        Id
+        <span *ngIf="searchItem.sortItem==ThreadSortItem.id"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell>{{ item.id }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(ThreadSortItem.title)" class="active">
+        タイトル
+        <span *ngIf="searchItem.sortItem==ThreadSortItem.title"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.title }}</td>
+  </ng-container>
+  <ng-container matColumnDef="creatingUserName">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(ThreadSortItem.creatingUserName)" class="active">
+        作成者名
+        <span *ngIf="searchItem.sortItem==ThreadSortItem.creatingUserName"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.creatingUserName }}</td>
+  </ng-container>
+  <ng-container matColumnDef="resCount">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(ThreadSortItem.resCount)" class="active">
+        レス数
+        <span *ngIf="searchItem.sortItem==ThreadSortItem.resCount"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.resCount }}</td>
+  </ng-container>
+  <ng-container matColumnDef="creatingTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(ThreadSortItem.creatingTime)" class="active">
+        作成日時
+        <span *ngIf="searchItem.sortItem==ThreadSortItem.creatingTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.creatingTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
+  </ng-container>
+  <ng-container matColumnDef="updatingTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(ThreadSortItem.updatingTime)" class="active">
+        更新日時
+        <span *ngIf="searchItem.sortItem==ThreadSortItem.updatingTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.updatingTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
+  </ng-container>
+  <ng-container matColumnDef="deletingTime">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(ThreadSortItem.deletingTime)" class="active">
+        削除日時
+        <span *ngIf="searchItem.sortItem==ThreadSortItem.deletingTime"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.deletingTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
+  </ng-container>
+  <ng-container matColumnDef="buttons">
+    <th *matHeaderCellDef mat-header-cell>
+    </th>
+    <td *matCellDef="let item" mat-cell>
+      <button color="accent" mat-raised-button routerLink="/thread/detail/{{item.id}}"><i class="bi bi-book"></i>詳細
+      </button>
+    </td>
+  </ng-container>
+  <tr *matHeaderRowDef="ColumnsToDisplay" mat-header-row></tr>
+  <tr *matRowDef="let myRowData; columns: ColumnsToDisplay" mat-row></tr>
+</table>
+<mat-paginator
+  #paginator
+  (page)="handlePageEvent($event)"
+  [length]="length"
+  [pageIndex]="searchItem.pageIndex"
+  [pageSizeOptions]="PageSizeOptions"
+  [pageSize]="searchItem.pageSize"
+  [showFirstLastButtons]="true"
+  class="demo-paginator"
+></mat-paginator>

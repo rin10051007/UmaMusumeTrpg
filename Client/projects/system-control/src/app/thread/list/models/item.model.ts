@@ -2,11 +2,11 @@ import {BaseListItem} from 'Common';
 
 export interface Item extends BaseListItem {
   title: string;
-  creationUserId: number;
-  creationUserName: string;
+  creatingUserId: number;
+  creatingUserName: string;
   resCount: number;
-  creationTime: Date;
-  updateTime: Date;
+  creatingTime: Date;
+  updatingTime: Date;
   deletingTime: Date | null;
   isDeleted: boolean;
 }

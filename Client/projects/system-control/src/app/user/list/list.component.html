@@ -84,42 +84,43 @@
       <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field color="accent">
           <mat-label>作成日</mat-label>
-          <input [formControl]="searchForm.getForm('creationTimeBeginning')" [matDatepicker]="creationTimeBeginning"
-                 id="creationTimeBeginning"
+          <input [formControl]="searchForm.getForm('creatingTimeBeginning')" [matDatepicker]="creatingTimeBeginning"
+                 id="creatingTimeBeginning"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="creationTimeBeginning" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #creationTimeBeginning></mat-datepicker>
+          <mat-datepicker-toggle [for]="creatingTimeBeginning" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #creatingTimeBeginning></mat-datepicker>
         </mat-form-field>
         ～
         <mat-form-field class="spacer" color="accent">
           <mat-label>作成日</mat-label>
-          <input [formControl]="searchForm.getForm('creationTimeEnd')" [matDatepicker]="creationTimeEnd"
-                 id="creationTimeEnd"
+          <input [formControl]="searchForm.getForm('creatingTimeEnd')" [matDatepicker]="creatingTimeEnd"
+                 id="creatingTimeEnd"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="creationTimeEnd" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #creationTimeEnd color="primary"></mat-datepicker>
+          <mat-datepicker-toggle [for]="creatingTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #creatingTimeEnd color="primary"></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field color="accent">
           <mat-label>更新日</mat-label>
-          <input [formControl]="searchForm.getForm('updateTimeBeginning')" [matDatepicker]="updateTimeBeginning"
-                 id="updateTimeBeginning"
+          <input [formControl]="searchForm.getForm('updatingTimeBeginning')" [matDatepicker]="updatingTimeBeginning"
+                 id="updatingTimeBeginning"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="updateTimeBeginning" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #updateTimeBeginning></mat-datepicker>
+          <mat-datepicker-toggle [for]="updatingTimeBeginning" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updatingTimeBeginning></mat-datepicker>
         </mat-form-field>
         ～
         <mat-form-field class="spacer" color="accent">
           <mat-label>更新日</mat-label>
-          <input [formControl]="searchForm.getForm('updateTimeEnd')" [matDatepicker]="updateTimeEnd" id="updateTimeEnd"
+          <input [formControl]="searchForm.getForm('updatingTimeEnd')" [matDatepicker]="updatingTimeEnd"
+                 id="updatingTimeEnd"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="updateTimeEnd" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #updateTimeEnd color="primary"></mat-datepicker>
+          <mat-datepicker-toggle [for]="updatingTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updatingTimeEnd color="primary"></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
@@ -246,25 +247,25 @@
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.totalResCount | number }}</td>
   </ng-container>
-  <ng-container matColumnDef="creationTime">
+  <ng-container matColumnDef="creatingTime">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(UserSortItem.creationTime)" class="active">
+      <a (click)="sortItemSet(UserSortItem.creatingTime)" class="active">
         作成日時
-        <span *ngIf="searchItem.sortItem==UserSortItem.creationTime"
+        <span *ngIf="searchItem.sortItem==UserSortItem.creatingTime"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.creationTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.creatingTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
-  <ng-container matColumnDef="updateTime">
+  <ng-container matColumnDef="updatingTime">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(UserSortItem.updateTime)" class="active">
+      <a (click)="sortItemSet(UserSortItem.updatingTime)" class="active">
         更新日時
-        <span *ngIf="searchItem.sortItem==UserSortItem.updateTime"
+        <span *ngIf="searchItem.sortItem==UserSortItem.updatingTime"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.updatingTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
   <ng-container matColumnDef="deletingTime">
     <th *matHeaderCellDef mat-header-cell>

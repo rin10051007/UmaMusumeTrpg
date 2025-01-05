@@ -38,17 +38,17 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
             list = (IOrderedQueryable<User>)list.Where(x =>
                 x.UmaMusumeTrpgPermission == search.UmaMusumeTrpgPermission);
 
-        if (search.CreationTimeBeginning.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x => x.CreationTime.Date >= search.CreationTimeBeginning.Value);
+        if (search.CreatingTimeBeginning.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.CreatingTime.Date >= search.CreatingTimeBeginning.Value);
 
-        if (search.CreationTimeEnd.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x => x.CreationTime.Date <= search.CreationTimeEnd.Value);
+        if (search.CreatingTimeEnd.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.CreatingTime.Date <= search.CreatingTimeEnd.Value);
 
-        if (search.UpdateTimeBeginning.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date >= search.UpdateTimeBeginning);
+        if (search.UpdatingTimeBeginning.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.UpdatingTime.Date >= search.UpdatingTimeBeginning);
 
-        if (search.UpdateTimeEnd.HasValue)
-            list = (IOrderedQueryable<User>)list.Where(x => x.UpdateTime.Date <= search.UpdateTimeEnd);
+        if (search.UpdatingTimeEnd.HasValue)
+            list = (IOrderedQueryable<User>)list.Where(x => x.UpdatingTime.Date <= search.UpdatingTimeEnd);
 
         if (search.IsDeleted)
         {
@@ -97,11 +97,11 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
                     case UserSortItem.TotalResCount:
                         list = list.OrderBy(x => x.TotalResCount);
                         break;
-                    case UserSortItem.CreationTime:
-                        list = list.OrderBy(x => x.CreationTime);
+                    case UserSortItem.CreatingTime:
+                        list = list.OrderBy(x => x.CreatingTime);
                         break;
-                    case UserSortItem.UpdateTime:
-                        list = list.OrderBy(x => x.UpdateTime);
+                    case UserSortItem.UpdatingTime:
+                        list = list.OrderBy(x => x.UpdatingTime);
                         break;
                     case UserSortItem.DeletingTime:
                         list = list.OrderBy(x => x.DeletingTime);
@@ -140,11 +140,11 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
                     case UserSortItem.TotalResCount:
                         list = list.OrderByDescending(x => x.TotalResCount);
                         break;
-                    case UserSortItem.CreationTime:
-                        list = list.OrderByDescending(x => x.CreationTime);
+                    case UserSortItem.CreatingTime:
+                        list = list.OrderByDescending(x => x.CreatingTime);
                         break;
-                    case UserSortItem.UpdateTime:
-                        list = list.OrderByDescending(x => x.UpdateTime);
+                    case UserSortItem.UpdatingTime:
+                        list = list.OrderByDescending(x => x.UpdatingTime);
                         break;
                     case UserSortItem.DeletingTime:
                         list = list.OrderByDescending(x => x.DeletingTime);
@@ -182,8 +182,8 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
             Email = item.Email,
             Password = item.Password,
             Token = guidService.NewGuid(),
-            CreationTime = timeService.NowTime(),
-            UpdateTime = timeService.NowTime()
+            CreatingTime = timeService.NowTime(),
+            UpdatingTime = timeService.NowTime()
         };
         user.PasswordHash();
         _ = dbContext.Add(user);
@@ -208,7 +208,7 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
         user.UmaMusumeTrpgPermission = item.UmaMusumeTrpgPermission;
         user.Email = item.Email;
         user.Token = guidService.NewGuid();
-        user.UpdateTime = timeService.NowTime();
+        user.UpdatingTime = timeService.NowTime();
         if (!string.IsNullOrEmpty(item.Password)) user.PasswordHash(item.Password);
         _ = dbContext.SaveChanges();
         return (user.Id, user.Token);

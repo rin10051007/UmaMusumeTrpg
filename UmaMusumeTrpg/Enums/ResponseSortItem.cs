@@ -5,7 +5,7 @@ public enum ResponseSortItem
     None,
     Id,
     ThreadId,
-    CreationUserId,
+    CreatingUserId,
     ThreadResNo,
-    CreationTime
+    CreatingTime
 }

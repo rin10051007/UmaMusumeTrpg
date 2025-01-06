@@ -2,12 +2,11 @@
 
 public class BaseDetailItem
 {
-    protected BaseDetailItem(int id, string name, string token, DateTime updateTime)
+    protected BaseDetailItem(int id, string token, DateTime updatingTime)
     {
         Id = id;
-        Name = name;
         Token = token;
-        UpdateTime = updateTime;
+        UpdatingTime = updatingTime;
     }
 
     protected BaseDetailItem()
@@ -15,7 +14,6 @@ public class BaseDetailItem
     }
 
     public int Id { get; set; }
-    public string Name { get; set; }
     public string Token { get; set; }
-    public DateTime UpdateTime { get; set; }
+    public DateTime UpdatingTime { get; set; }
 }

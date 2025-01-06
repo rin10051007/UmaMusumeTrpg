@@ -35,4 +35,4 @@ ng g m thread  --routing  --project=SystemControl
 ng g c thread/list --project=SystemControl
 ng g m thread/list  --routing  --project=SystemControl
 ng g s thread/list/services/api    --project=SystemControl
-ng g c thread/list/forms/search  --type=form   --project=SystemControl
+ng g class thread/list/forms/search  --type=form   --project=SystemControl

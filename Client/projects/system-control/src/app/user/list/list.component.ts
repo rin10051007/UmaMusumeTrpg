@@ -5,10 +5,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {
   PageSizeOptions,
   SortDirection,
-  SysListColumnsToDisplay,
   SysPermission,
-  SystemSortItem,
-  UmaMusumeTrpgPermission
+  UmaMusumeTrpgPermission,
+  UserListColumnsToDisplay,
+  UserSortItem
 } from 'Common';
 import {Search} from "./forms/search.form";
 import {Item} from './models/item.model';
@@ -32,13 +32,13 @@ export class ListComponent implements OnInit {
     umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
     isUndeleted: true,
     isDeleted: false,
-    creationTimeBeginning: null,
-    creationTimeEnd: null,
-    updateTimeBeginning: null,
-    updateTimeEnd: null,
+    creatingTimeBeginning: null,
+    creatingTimeEnd: null,
+    updatingTimeBeginning: null,
+    updatingTimeEnd: null,
     deletingTimeBeginning: null,
     deletingTimeEnd: null,
-    sortItem: SystemSortItem.none,
+    sortItem: UserSortItem.none,
     sortDirection: SortDirection.none,
     pageIndex: 1,
     pageSize: PageSizeOptions[1]
@@ -46,9 +46,9 @@ export class ListComponent implements OnInit {
   searchForm: Search;
   length = 0;
   isDetailSearch: boolean = false;
-  protected readonly SystemSortItem = SystemSortItem;
+  protected readonly UserSortItem = UserSortItem;
   protected readonly PageSizeOptions = PageSizeOptions;
-  protected readonly ColumnsToDisplay = SysListColumnsToDisplay;
+  protected readonly ColumnsToDisplay = UserListColumnsToDisplay;
   protected readonly UmaMusumeTrpgPermission = UmaMusumeTrpgPermission;
   protected readonly SysPermission = SysPermission;
 
@@ -67,17 +67,17 @@ export class ListComponent implements OnInit {
         const item = params as SearchItem;
         if (isFirst) {
           isFirst = false;
-          if ((Object.keys(item).length >0)) {
+          if ((Object.keys(item).length > 0)) {
             this.isDetailSearch =
               (item.loginId?.length ?? 0) > 0 ||
               (item.name?.length ?? 0) > 0 ||
               (item.email?.length ?? 0) > 0 ||
               Boolean((item.isUndeleted || 'true').toString() == 'false') ||
               Boolean((item.isDeleted || 'false').toString() == 'true') ||
-              item.creationTimeBeginning != null ||
-              item.creationTimeEnd != null ||
-              item.updateTimeBeginning != null ||
-              item.updateTimeEnd != null ||
+              item.creatingTimeBeginning != null ||
+              item.creatingTimeEnd != null ||
+              item.updatingTimeBeginning != null ||
+              item.updatingTimeEnd != null ||
               item.deletingTimeBeginning != null ||
               item.deletingTimeEnd != null;
           }
@@ -91,25 +91,23 @@ export class ListComponent implements OnInit {
           umaMusumeTrpgPermission: Number(item.umaMusumeTrpgPermission || 0),
           isUndeleted: Boolean((item.isUndeleted || 'true').toString() == 'true'),
           isDeleted: Boolean((item.isDeleted || 'false').toString() == 'true'),
-          creationTimeBeginning: item.creationTimeBeginning || null,
-          creationTimeEnd: item.creationTimeEnd || null,
-          updateTimeBeginning: item.updateTimeBeginning || null,
-          updateTimeEnd: item.updateTimeEnd || null,
+          creatingTimeBeginning: item.creatingTimeBeginning || null,
+          creatingTimeEnd: item.creatingTimeEnd || null,
+          updatingTimeBeginning: item.updatingTimeBeginning || null,
+          updatingTimeEnd: item.updatingTimeEnd || null,
           deletingTimeBeginning: item.deletingTimeBeginning || null,
           deletingTimeEnd: item.deletingTimeEnd || null,
           sortItem: Number(item.sortItem || 0),
           sortDirection: Number(item.sortDirection || 0),
           pageIndex: Number(item.pageIndex || 0),
-          pageSize: Number(item.pageSize || PageSizeOptions[1]),
-        } as SearchItem).subscribe(r => {
+          pageSize: Number(item.pageSize || PageSizeOptions[1])
+        }).subscribe(r => {
           this.list = r.items;
           this.searchItem = r.search;
           this.length = r.length;
-          console.log(item);
           this.searchForm.setValues(item);
         });
-      }
-    );
+      });
     this.searchForm.getForm('isUndeleted').valueChanges.subscribe(c => {
       this.searchForm.getForm('isUndeleted').setValue(c, {emitEvent: false});
     });
@@ -118,7 +116,7 @@ export class ListComponent implements OnInit {
     });
   }
 
-  sortItemSet(sortItem: SystemSortItem) {
+  sortItemSet(sortItem: UserSortItem) {
     if (sortItem !== this.searchItem.sortItem) {
       this.searchItem.sortDirection = SortDirection.none;
     }
@@ -126,10 +124,6 @@ export class ListComponent implements OnInit {
   }
 
   searchClick() {
-    console.log(this.searchForm.getValue('isUndeleted'));
-    console.log(Boolean(this.searchForm.getValue('isUndeleted')));
-    console.log(this.searchForm.getValue('isDeleted'));
-    console.log(Boolean(this.searchForm.getValue('isDeleted')));
     this.addQueryParam([
       'integration',
       'loginId',
@@ -139,10 +133,10 @@ export class ListComponent implements OnInit {
       'umaMusumeTrpgPermission',
       'isUndeleted',
       'isDeleted',
-      'creationTimeBeginning',
-      'creationTimeEnd',
-      'updateTimeBeginning',
-      'updateTimeEnd',
+      'creatingTimeBeginning',
+      'creatingTimeEnd',
+      'updatingTimeBeginning',
+      'updatingTimeEnd',
       'deletingTimeBeginning',
       'deletingTimeEnd'
     ], [
@@ -154,12 +148,12 @@ export class ListComponent implements OnInit {
       Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
       Boolean(this.searchForm.getValue('isUndeleted')),
       Boolean(this.searchForm.getValue('isDeleted')),
-      this.datePipe.transform(this.searchForm.getValue('creationTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('creationTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updateTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updateTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeEnd'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeEnd'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'yyyy-MM-dd'),
     ]);
   }
 
@@ -175,13 +169,13 @@ export class ListComponent implements OnInit {
         umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
         isUndeleted: true,
         isDeleted: false,
-        creationTimeBeginning: '',
-        creationTimeEnd: '',
-        updateTimeBeginning: '',
-        updateTimeEnd: '',
+        creatingTimeBeginning: '',
+        creatingTimeEnd: '',
+        updatingTimeBeginning: '',
+        updatingTimeEnd: '',
         deletingTimeBeginning: '',
         deletingTimeEnd: '',
-        sortItem: SystemSortItem.none,
+        sortItem: UserSortItem.none,
         sortDirection: SortDirection.none,
         pageIndex: 0,
         pageSize: PageSizeOptions[0]

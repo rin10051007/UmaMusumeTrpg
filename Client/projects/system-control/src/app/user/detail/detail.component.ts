@@ -39,8 +39,8 @@ export class DetailComponent implements OnInit {
       sysPermission: SysPermission.None,
       umaMusumeTrpgPermission: UmaMusumeTrpgPermission.None,
       email: '',
-      creationTime: now,
-      updateTime: now,
+      creatingTime: now,
+      updatingTime: now,
       deletingTime: null,
       isDeleted: false,
       token: ''

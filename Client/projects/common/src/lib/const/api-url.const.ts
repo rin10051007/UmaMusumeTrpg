@@ -6,12 +6,19 @@ export const apiUrls = {
     isUmaMusumeGmPlayer: '/Api/Auth/isUmaMusumeGmPlayer',
     isUmaMusumePlayer: '/Api/Auth/isUmaMusumePlayer',
   },
-  sysUrls: {
-    getList: '/Api/System/User/GetList',
-    entry: '/Api/System/User/Entry',
-    detail: '/Api/System/User/Detail',
-    edit: '/Api/System/User/Edit',
-    delete: '/Api/System/User/Delete',
-    isLoginIdDuplicate: '/Api/System/User/IsLoginIdDuplicate',
-  }
+  userUrls: {
+    getList: '/Api/User/GetList',
+    entry: '/Api/User/Entry',
+    detail: '/Api/User/Detail',
+    edit: '/Api/User/Edit',
+    delete: '/Api/User/Delete',
+    isLoginIdDuplicate: '/Api/User/IsLoginIdDuplicate',
+    getNameList: '/Api/User/GetNameList',
+  },
+  threadUrls: {
+    getListForSystemThread: '/Api/Thread/GetListForSystemThread',
+    detail: '/Api/Thread/Detail',
+    delete: '/Api/Thread/Delete',
+  },
+  responseUrls: {}
 };

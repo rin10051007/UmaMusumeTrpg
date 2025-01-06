@@ -6,14 +6,14 @@ public class ListItem(Entities.Thread thread) : BaseListItem(thread.Id)
 {
     public string Title { get; set; } = thread.Title;
     public int ResCount { get; set; } = thread.ResCount;
-    public DateTime CreationTime { get; set; } = thread.CreationTime;
-    public DateTime UpdateTime { get; set; } = thread.UpdateTime;
+    public DateTime CreatingTime { get; set; } = thread.CreatingTime;
+    public DateTime UpdatingTime { get; set; } = thread.UpdatingTime;
 }
 
 public class ListItemForThread(Entities.Thread thread) : ListItem(thread)
 {
-    public int CreationUserId { get; set; } = thread.CreatingUserId;
-    public string CreationUserName { get; set; } = thread.CreatingUser.Name;
+    public int CreatingUserId { get; set; } = thread.CreatingUserId;
+    public string CreatingUserName { get; set; } = thread.CreatingUser.Name;
 }
 
 public class ListItemForSystemThread(Entities.Thread thread) : ListItemForThread(thread)

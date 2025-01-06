@@ -14,8 +14,8 @@ create table public."Users" (
     , "TotalResCount" integer default 0 not null
     , "Password" character varying (256) not null
     , "Token" character varying (32) not null
-    , "CreationTime" timestamp with time zone default CURRENT_TIMESTAMP not null
-    , "UpdateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
+    , "CreatingTime" timestamp with time zone default CURRENT_TIMESTAMP not null
+    , "UpdatingTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , "DeletingTime" timestamp with time zone default null
     , "IsDeleted" boolean default false not null
 ); 
@@ -67,10 +67,10 @@ comment
     on column public."Users"."Token" is 'トークン'; 
 
 comment 
-    on column public."Users"."CreationTime" is '作成日時'; 
+    on column public."Users"."CreatingTime" is '作成日時'; 
 
 comment 
-    on column public."Users"."UpdateTime" is '更新日時'; 
+    on column public."Users"."UpdatingTime" is '更新日時'; 
 
 comment 
     on column public."Users"."DeletingTime" is '削除日時'; 
@@ -91,8 +91,8 @@ INTO public."Users" (
     , "TotalResCount"
     , "Password"
     , "Token"
-    , "CreationTime"
-    , "UpdateTime"
+    , "CreatingTime"
+    , "UpdatingTime"
 ) 
 VALUES ( 
     1
@@ -116,7 +116,7 @@ VALUES (
     , 2
     , 'hoge@hoge.hoge'
     , 0
-    , 1--PW:user001
+    , 1                                         --PW:user001
     , 'AQAAAAIAAYagAAAAECHvdmfF+HqyT1FE2a20xo89z2mItWL5bLWsdUSj3VjuWfL3HJpUytqNtnSQvo8Clg=='
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
@@ -130,7 +130,7 @@ VALUES (
     , 3
     , 'hoge@hoge.hoge'
     , 0
-    , 0--PW:user002
+    , 0                                         --PW:user002
     , 'AQAAAAIAAYagAAAAEH4xrCUM4nZqtktDK8A56qUs1XcMxQuk2yTlODgH4haGnq3PaTRhCzgL76zIxDQEEg=='
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
@@ -144,7 +144,7 @@ VALUES (
     , 1
     , 'hoge@hoge.hoge'
     , 0
-    , 0--PW:user003
+    , 0                                         --PW:user003
     , 'AQAAAAIAAYagAAAAEHiqX0pMVgQGxo7WCs2tpJmNbzBgO6+faGoZRTNG6mWYxGkJxEEcOf8teLZ1ecKe5w=='
     , '56cddebd2dcd4cd28da1ce0e2560a5b7'
     , '2024-12-29 12:06:49.489808+09:00'
@@ -158,8 +158,8 @@ create table public."Threads" (
     , "Title" character varying (64) not null
     , "ResCount" integer default 0 not null
     , "Token" character varying (32) not null
-    , "CreationTime" timestamp with time zone default CURRENT_TIMESTAMP not null
-    , "UpdateTime" timestamp with time zone default CURRENT_TIMESTAMP not null
+    , "CreatingTime" timestamp with time zone default CURRENT_TIMESTAMP not null
+    , "UpdatingTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , "DeletingTime" timestamp with time zone default null
     , "IsDeleted" boolean default false not null
     , FOREIGN KEY ("CreatingUserId") references public."Users" ("Id")
@@ -188,10 +188,10 @@ comment
     on column public."Threads"."Token" is 'トークン'; 
 
 comment 
-    on column public."Threads"."CreationTime" is '作成日'; 
+    on column public."Threads"."CreatingTime" is '作成日'; 
 
 comment 
-    on column public."Threads"."UpdateTime" is '更新日'; 
+    on column public."Threads"."UpdatingTime" is '更新日'; 
 
 comment 
     on column public."Threads"."DeletingTime" is '削除日'; 
@@ -206,13 +206,26 @@ INTO public."Threads" (
     , "Title"
     , "ResCount"
     , "Token"
-    , "CreationTime"
-    , "UpdateTime"
+    , "CreatingTime"
+    , "UpdatingTime"
 ) 
-VALUES (
-1,1,'スレッド1',1,'fdsmlvfjsdnfvsozmcj','2024-12-30 12:06:49.489808+09:00','2024-12-30 12:06:49.489808+09:00'
-),(
-2,1,'スレッド2',1,'dfsvzfrgbsargbsdgbsgb','2024-12-31 12:06:49.489808+09:00','2024-12-31 12:06:49.489808+09:00'
+VALUES ( 
+    1
+    , 1
+    , 'スレッド1'
+    , 1
+    , 'fdsmlvfjsdnfvsozmcj'
+    , '2024-12-30 12:06:49.489808+09:00'
+    , '2024-12-30 12:06:49.489808+09:00'
+) 
+, ( 
+    2
+    , 1
+    , 'スレッド2'
+    , 2
+    , 'dfsvzfrgbsargbsdgbsgb'
+    , '2024-12-31 12:06:49.489808+09:00'
+    , '2024-12-31 12:06:49.489808+09:00'
 ); 
 
 --レステーブルの作成
@@ -223,7 +236,7 @@ create table public."Responses" (
     , "ThreadResNo" integer not null
     , "Content" character varying (512) not null
     , "Token" character varying (32) not null
-    , "CreationTime" timestamp with time zone default CURRENT_TIMESTAMP not null
+    , "CreatingTime" timestamp with time zone default CURRENT_TIMESTAMP not null
     , FOREIGN KEY ("CreatingUserId") references public."Users" ("Id")
     , FOREIGN KEY ("ThreadId") references public."Threads" ("Id")
 ); 
@@ -248,13 +261,14 @@ comment
     on column public."Responses"."ThreadResNo" is 'レスNo'; 
 
 comment 
-    on column public."Responses"."Content" is 'レス内容';
+    on column public."Responses"."Content" is 'レス内容'; 
 
 comment 
     on column public."Threads"."Token" is 'トークン'; 
 
 comment 
-    on column public."Responses"."CreationTime" is '作成日'; 
+    on column public."Responses"."CreatingTime" is '作成日'; 
+
 INSERT 
 INTO public."Responses" ( 
     "Id"
@@ -262,13 +276,33 @@ INTO public."Responses" (
     , "CreatingUserId"
     , "ThreadResNo"
     , "Content"
-    ,"Token"
-    , "CreationTime"
+    , "Token"
+    , "CreatingTime"
 ) 
-VALUES (
-1,1,1,1,'スレ内容001','abergeasn,kiu','2024-12-30 12:06:49.489808+09:00'
-),(
-2,2,1,1,'スレ内容002<br>改行タグテスト\r\n改行コードテスト','oiplasfgbhnjmk,.oit,of','2024-12-31 12:06:49.489808+09:00'
-),(
-3,2,2,2,'スレ内容003','s,ilues;lf,vcjaew;:pf','2024-12-31 13:06:49.489808+09:00'
-); 
+VALUES ( 
+    1
+    , 1
+    , 1
+    , 1
+    , 'スレ内容001'
+    , 'abergeasn,kiu'
+    , '2024-12-30 12:06:49.489808+09:00'
+) 
+, ( 
+    2
+    , 2
+    , 1
+    , 1
+    , 'スレ内容002<br>改行タグテスト\r\n改行コードテスト'
+    , 'oiplasfgbhnjmk,.oit,of'
+    , '2024-12-31 12:06:49.489808+09:00'
+) 
+, ( 
+    3
+    , 2
+    , 2
+    , 2
+    , 'スレ内容003'
+    , 's,ilues;lf,vcjaew;:pf'
+    , '2024-12-31 13:06:49.489808+09:00'
+);

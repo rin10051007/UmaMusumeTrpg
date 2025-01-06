@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
+import {BaseForm} from "common";
 import {FormControl, FormGroup} from "@angular/forms";
-import {BaseForm, SysPermission, UmaMusumeTrpgPermission} from "Common";
 import {SearchItem} from "../models/search-item.model";
+import {Injectable} from "@angular/core";
 
 @Injectable()
 export class Search extends BaseForm {
@@ -11,12 +11,10 @@ export class Search extends BaseForm {
   }
 
   createForm() {
-    this.getFormGroup().addControl('integration', new FormControl(''));
-    this.getFormGroup().addControl('loginId', new FormControl(''));
-    this.getFormGroup().addControl('name', new FormControl(''));
-    this.getFormGroup().addControl('email', new FormControl(''));
-    this.getFormGroup().addControl('sysPermission', new FormControl(SysPermission.None));
-    this.getFormGroup().addControl('umaMusumeTrpgPermission', new FormControl(UmaMusumeTrpgPermission.None));
+    this.getFormGroup().addControl('creatingUserId', new FormControl(0));
+    this.getFormGroup().addControl('title', new FormControl(''));
+    this.getFormGroup().addControl('resCountMin', new FormControl(0));
+    this.getFormGroup().addControl('resCountMax', new FormControl(0));
     this.getFormGroup().addControl('isUndeleted', new FormControl(true));
     this.getFormGroup().addControl('isDeleted', new FormControl(false));
     this.getFormGroup().addControl('creatingTimeBeginning', new FormControl(''));
@@ -28,12 +26,10 @@ export class Search extends BaseForm {
   }
 
   setValues(search: SearchItem | null) {
-    this.setValue('integration', search?.integration || '');
-    this.setValue('loginId', search?.loginId || '');
-    this.setValue('name', search?.name || '');
-    this.setValue('email', search?.email || '');
-    this.setValue('sysPermission', Number(search?.sysPermission || SysPermission.None));
-    this.setValue('umaMusumeTrpgPermission', Number(search?.umaMusumeTrpgPermission || UmaMusumeTrpgPermission.None));
+    this.setValue('creatingUserId', Number(search?.creatingUserId || 0));
+    this.setValue('title', search?.title || '');
+    this.setValue('resCountMin', Number(search?.resCountMin || 0));
+    this.setValue('resCountMax', Number(search?.resCountMax || 0));
     this.setValue('isUndeleted', Boolean((search?.isUndeleted || 'true').toString() == 'true'));
     this.setValue('isDeleted', Boolean((search?.isDeleted || 'false').toString() == 'true'));
     this.setValue('creatingTimeBeginning', search?.creatingTimeBeginning || '');

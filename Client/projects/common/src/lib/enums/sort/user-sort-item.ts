@@ -1,4 +1,4 @@
-export enum SystemSortItem {
+export enum UserSortItem {
   none,
   id,
   loginId,
@@ -8,7 +8,7 @@ export enum SystemSortItem {
   email,
   creationThreadCount,
   totalResCount,
-  creationTime,
-  updateTime,
+  creatingTime,
+  updatingTime,
   deletingTime
 }

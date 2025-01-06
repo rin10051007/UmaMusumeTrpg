@@ -11,7 +11,7 @@ public enum UserSortItem
     Email,
     CreationThreadCount,
     TotalResCount,
-    CreationTime,
-    UpdateTime,
+    CreatingTime,
+    UpdatingTime,
     DeletingTime
 }

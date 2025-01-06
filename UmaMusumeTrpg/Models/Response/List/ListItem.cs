@@ -6,7 +6,7 @@ public class ListItem(Entities.Response response) : BaseListItem(response.Id)
 {
     public int ThreadResNo { get; set; } = response.ThreadResNo;
     public string Content { get; set; } = response.Content;
-    public DateTime CreationTime { get; set; } = response.CreationTime;
+    public DateTime CreatingTime { get; set; } = response.CreatingTime;
 }
 
 public class ListItemForThread(Entities.Response response) : ListItem(response)

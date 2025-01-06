@@ -84,42 +84,43 @@
       <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field color="accent">
           <mat-label>作成日</mat-label>
-          <input [formControl]="searchForm.getForm('creationTimeBeginning')" [matDatepicker]="creationTimeBeginning"
-                 id="creationTimeBeginning"
+          <input [formControl]="searchForm.getForm('creatingTimeBeginning')" [matDatepicker]="creatingTimeBeginning"
+                 id="creatingTimeBeginning"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="creationTimeBeginning" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #creationTimeBeginning></mat-datepicker>
+          <mat-datepicker-toggle [for]="creatingTimeBeginning" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #creatingTimeBeginning></mat-datepicker>
         </mat-form-field>
         ～
         <mat-form-field class="spacer" color="accent">
           <mat-label>作成日</mat-label>
-          <input [formControl]="searchForm.getForm('creationTimeEnd')" [matDatepicker]="creationTimeEnd"
-                 id="creationTimeEnd"
+          <input [formControl]="searchForm.getForm('creatingTimeEnd')" [matDatepicker]="creatingTimeEnd"
+                 id="creatingTimeEnd"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="creationTimeEnd" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #creationTimeEnd color="primary"></mat-datepicker>
+          <mat-datepicker-toggle [for]="creatingTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #creatingTimeEnd color="primary"></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
         <mat-form-field color="accent">
           <mat-label>更新日</mat-label>
-          <input [formControl]="searchForm.getForm('updateTimeBeginning')" [matDatepicker]="updateTimeBeginning"
-                 id="updateTimeBeginning"
+          <input [formControl]="searchForm.getForm('updatingTimeBeginning')" [matDatepicker]="updatingTimeBeginning"
+                 id="updatingTimeBeginning"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="updateTimeBeginning" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #updateTimeBeginning></mat-datepicker>
+          <mat-datepicker-toggle [for]="updatingTimeBeginning" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updatingTimeBeginning></mat-datepicker>
         </mat-form-field>
         ～
         <mat-form-field class="spacer" color="accent">
           <mat-label>更新日</mat-label>
-          <input [formControl]="searchForm.getForm('updateTimeEnd')" [matDatepicker]="updateTimeEnd" id="updateTimeEnd"
+          <input [formControl]="searchForm.getForm('updatingTimeEnd')" [matDatepicker]="updatingTimeEnd"
+                 id="updatingTimeEnd"
                  matInput/>
           <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle [for]="updateTimeEnd" matIconSuffix></mat-datepicker-toggle>
-          <mat-datepicker #updateTimeEnd color="primary"></mat-datepicker>
+          <mat-datepicker-toggle [for]="updatingTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updatingTimeEnd color="primary"></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
@@ -167,9 +168,9 @@
 <table [dataSource]="list" class="mat-elevation-z8" mat-table>
   <ng-container matColumnDef="id">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.id)" class="active">
+      <a (click)="sortItemSet(UserSortItem.id)" class="active">
         Id
-        <span *ngIf="searchItem.sortItem==SystemSortItem.id"
+        <span *ngIf="searchItem.sortItem==UserSortItem.id"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
@@ -178,9 +179,9 @@
   </ng-container>
   <ng-container matColumnDef="loginId">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.loginId)" class="active">
+      <a (click)="sortItemSet(UserSortItem.loginId)" class="active">
         LoginId
-        <span *ngIf="searchItem.sortItem==SystemSortItem.loginId"
+        <span *ngIf="searchItem.sortItem==UserSortItem.loginId"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
@@ -188,9 +189,9 @@
   </ng-container>
   <ng-container matColumnDef="name">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.name)" class="active">
+      <a (click)="sortItemSet(UserSortItem.name)" class="active">
         Name
-        <span *ngIf="searchItem.sortItem==SystemSortItem.name"
+        <span *ngIf="searchItem.sortItem==UserSortItem.name"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
@@ -198,9 +199,9 @@
   </ng-container>
   <ng-container matColumnDef="sysPermission">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.sysPermission)" class="active">
+      <a (click)="sortItemSet(UserSortItem.sysPermission)" class="active">
         システム管理権限
-        <span *ngIf="searchItem.sortItem==SystemSortItem.sysPermission"
+        <span *ngIf="searchItem.sortItem==UserSortItem.sysPermission"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
@@ -208,9 +209,9 @@
   </ng-container>
   <ng-container matColumnDef="umaMusumeTrpgPermission">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.umaMusumeTrpgPermission)" class="active">
+      <a (click)="sortItemSet(UserSortItem.umaMusumeTrpgPermission)" class="active">
         ウマ娘TRPG権限
-        <span *ngIf="searchItem.sortItem==SystemSortItem.umaMusumeTrpgPermission"
+        <span *ngIf="searchItem.sortItem==UserSortItem.umaMusumeTrpgPermission"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
@@ -218,9 +219,9 @@
   </ng-container>
   <ng-container matColumnDef="email">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.email)" class="active">
+      <a (click)="sortItemSet(UserSortItem.email)" class="active">
         Email
-        <span *ngIf="searchItem.sortItem==SystemSortItem.email"
+        <span *ngIf="searchItem.sortItem==UserSortItem.email"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
@@ -228,9 +229,9 @@
   </ng-container>
   <ng-container matColumnDef="creationThreadCount">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.creationThreadCount)" class="active">
+      <a (click)="sortItemSet(UserSortItem.creationThreadCount)" class="active">
         作成スレ数
-        <span *ngIf="searchItem.sortItem==SystemSortItem.creationThreadCount"
+        <span *ngIf="searchItem.sortItem==UserSortItem.creationThreadCount"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
@@ -238,39 +239,39 @@
   </ng-container>
   <ng-container matColumnDef="totalResCount">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.totalResCount)" class="active">
+      <a (click)="sortItemSet(UserSortItem.totalResCount)" class="active">
         総レス数
-        <span *ngIf="searchItem.sortItem==SystemSortItem.totalResCount"
+        <span *ngIf="searchItem.sortItem==UserSortItem.totalResCount"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
     <td *matCellDef="let item" mat-cell> {{ item.totalResCount | number }}</td>
   </ng-container>
-  <ng-container matColumnDef="creationTime">
+  <ng-container matColumnDef="creatingTime">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.creationTime)" class="active">
+      <a (click)="sortItemSet(UserSortItem.creatingTime)" class="active">
         作成日時
-        <span *ngIf="searchItem.sortItem==SystemSortItem.creationTime"
+        <span *ngIf="searchItem.sortItem==UserSortItem.creatingTime"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.creationTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.creatingTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
-  <ng-container matColumnDef="updateTime">
+  <ng-container matColumnDef="updatingTime">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.updateTime)" class="active">
+      <a (click)="sortItemSet(UserSortItem.updatingTime)" class="active">
         更新日時
-        <span *ngIf="searchItem.sortItem==SystemSortItem.updateTime"
+        <span *ngIf="searchItem.sortItem==UserSortItem.updatingTime"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.updateTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.updatingTime | date:"yyyy/MM/dd HH:mm.ss" }}</td>
   </ng-container>
   <ng-container matColumnDef="deletingTime">
     <th *matHeaderCellDef mat-header-cell>
-      <a (click)="sortItemSet(SystemSortItem.deletingTime)" class="active">
+      <a (click)="sortItemSet(UserSortItem.deletingTime)" class="active">
         削除日時
-        <span *ngIf="searchItem.sortItem==SystemSortItem.deletingTime"
+        <span *ngIf="searchItem.sortItem==UserSortItem.deletingTime"
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>

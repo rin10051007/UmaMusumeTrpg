@@ -9,7 +9,7 @@ using UmaMusumeTrpg.Models.Response.List;
 
 namespace UmaMusumeTrpg.Controllers;
 
-[Route("Api/System/Response")]
+[Route("Api/Response")]
 [ApiController]
 public class ResponseController(ILogger<ResponseController> logger, IResponseService responseService) : ControllerBase
 {

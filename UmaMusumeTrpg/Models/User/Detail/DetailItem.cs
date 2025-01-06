@@ -5,26 +5,32 @@ namespace UmaMusumeTrpg.Models.User.Detail;
 
 public class DetailItem : BaseDetailItem
 {
-    public DetailItem(Entities.User user) : base(user.Id, user.Name, user.Token, user.UpdateTime)
-    {
-        LoginId = user.LoginId;
-        SysPermission = user.SysPermission;
-        UmaMusumeTrpgPermission = user.UmaMusumeTrpgPermission;
-        Email = user.Email;
-        CreationTime = user.CreationTime;
-        DeletingTime = user.DeletingTime;
-        IsDeleted = user.IsDeleted;
-    }
-
     public DetailItem()
     {
     }
 
+    public DetailItem(Entities.User user) : base(user.Id, user.Token, user.UpdatingTime)
+    {
+        LoginId = user.LoginId;
+        Name = user.Name;
+        SysPermission = user.SysPermission;
+        UmaMusumeTrpgPermission = user.UmaMusumeTrpgPermission;
+        Email = user.Email;
+        CreationThreadCount = user.CreationThreadCount;
+        TotalResCount = user.TotalResCount;
+        CreatingTime = user.CreatingTime;
+        DeletingTime = user.DeletingTime;
+        IsDeleted = user.IsDeleted;
+    }
+
     public string LoginId { get; set; }
+    public string Name { get; set; }
     public SysPermission SysPermission { get; set; }
     public UmaMusumeTrpgPermission UmaMusumeTrpgPermission { get; set; }
     public string Email { get; set; }
-    public DateTime CreationTime { get; set; }
+    public int CreationThreadCount { get; set; }
+    public int TotalResCount { get; set; }
+    public DateTime CreatingTime { get; set; }
     public DateTime? DeletingTime { get; set; }
     public bool IsDeleted { get; set; }
 }

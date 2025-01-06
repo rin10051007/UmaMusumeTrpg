@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using UmaMusumeTrpg.Entities;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
@@ -33,7 +34,7 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
             list = (IOrderedQueryable<Response>)list.Where(x => x.ThreadResNo <= search.ThreadResNoEnd);
 
         (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
-        return (list.Select(x => new ListItemForThread(x)).ToList(), length);
+        return (list.Include(x => x.CreatingUser).Select(x => new ListItemForThread(x)).ToList(), length);
     }
 
     public (List<ListItemForUser>, int) GetList(ListSearchForUser search)
@@ -44,7 +45,7 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
             list = (IOrderedQueryable<Response>)list.Where(x => x.CreatingUserId == search.CreatingUserId);
 
         (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
-        return (list.Select(x => new ListItemForUser(x)).ToList(), length);
+        return (list.Include(x => x.Thread).Select(x => new ListItemForUser(x)).ToList(), length);
     }
 
     public (int, string) Entry(EntryItem entry)
@@ -55,13 +56,13 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
             var response = new Response
             {
                 ThreadId = entry.ThreadId,
-                CreatingUserId = entry.CreationUserId,
+                CreatingUserId = entry.CreatingUserId,
                 Content = entry.Content,
                 Token = guidService.NewGuid(),
-                CreationTime = timeService.NowTime()
+                CreatingTime = timeService.NowTime()
             };
             response.Thread.ResCount += 1;
-            response.Thread.UpdateTime = timeService.NowTime();
+            response.Thread.UpdatingTime = timeService.NowTime();
             response.ThreadResNo = response.Thread.ResCount;
             response.CreatingUser.TotalResCount += 1;
             if (response.Thread.IsDeleted || !response.Thread.Token.Equals(entry.ThreadToken))
@@ -83,12 +84,12 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
         if (!string.IsNullOrWhiteSpace(search.Content))
             list = (IOrderedQueryable<Response>)list.Where(x => x.Content.Contains(search.Content));
 
-        if (search.CreationTimeBeginning.HasValue)
+        if (search.CreatingTimeBeginning.HasValue)
             list = (IOrderedQueryable<Response>)list.Where(x =>
-                x.CreationTime.Date >= search.CreationTimeBeginning.Value);
+                x.CreatingTime.Date >= search.CreatingTimeBeginning.Value);
 
-        if (search.CreationTimeEnd.HasValue)
-            list = (IOrderedQueryable<Response>)list.Where(x => x.CreationTime.Date <= search.CreationTimeEnd.Value);
+        if (search.CreatingTimeEnd.HasValue)
+            list = (IOrderedQueryable<Response>)list.Where(x => x.CreatingTime.Date <= search.CreatingTimeEnd.Value);
 
         return list;
     }
@@ -108,14 +109,14 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
                     case ResponseSortItem.ThreadId:
                         list = list.OrderBy(x => x.ThreadId);
                         break;
-                    case ResponseSortItem.CreationUserId:
+                    case ResponseSortItem.CreatingUserId:
                         list = list.OrderBy(x => x.CreatingUserId);
                         break;
                     case ResponseSortItem.ThreadResNo:
                         list = list.OrderBy(x => x.ThreadResNo);
                         break;
-                    case ResponseSortItem.CreationTime:
-                        list = list.OrderBy(x => x.CreationTime);
+                    case ResponseSortItem.CreatingTime:
+                        list = list.OrderBy(x => x.CreatingTime);
                         break;
                 }
 
@@ -133,14 +134,14 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
                     case ResponseSortItem.ThreadId:
                         list = list.OrderByDescending(x => x.ThreadId);
                         break;
-                    case ResponseSortItem.CreationUserId:
+                    case ResponseSortItem.CreatingUserId:
                         list = list.OrderByDescending(x => x.CreatingUserId);
                         break;
                     case ResponseSortItem.ThreadResNo:
                         list = list.OrderByDescending(x => x.ThreadResNo);
                         break;
-                    case ResponseSortItem.CreationTime:
-                        list = list.OrderByDescending(x => x.CreationTime);
+                    case ResponseSortItem.CreatingTime:
+                        list = list.OrderByDescending(x => x.CreatingTime);
                         break;
                 }
 

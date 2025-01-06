@@ -14,7 +14,7 @@ export class ApiService extends BaseApiService {
     return this.getHttp().post<Response>(this.getApiUrl().threadUrls.getListForSystemThread, request, {headers: this.getHeader()});
   }
 
-  getNameList():Observable<NameListResponse> {
+  getNameList(): Observable<NameListResponse> {
     return this.getHttp().post<NameListResponse>(this.getApiUrl().userUrls.getNameList, {headers: this.getHeader()});
   }
 }

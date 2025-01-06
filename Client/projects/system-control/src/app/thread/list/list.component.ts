@@ -98,7 +98,7 @@ export class ListComponent implements OnInit {
     this.searchForm.getForm('isDeleted').valueChanges.subscribe(c => {
       this.searchForm.getForm('isDeleted').setValue(c, {emitEvent: false});
     });
-    this.apiService.getNameList().subscribe(r=>this.nameList=r.items);
+    this.apiService.getNameList().subscribe(r => this.nameList = r.items);
   }
 
   sortItemSet(sortItem: ThreadSortItem) {

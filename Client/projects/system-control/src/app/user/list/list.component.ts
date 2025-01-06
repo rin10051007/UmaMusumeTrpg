@@ -148,12 +148,12 @@ export class ListComponent implements OnInit {
       Number(this.searchForm.getValue('umaMusumeTrpgPermission') || 0),
       Boolean(this.searchForm.getValue('isUndeleted')),
       Boolean(this.searchForm.getValue('isDeleted')),
-      this.datePipe.transform(this.searchForm.getValue('creatingTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('creatingTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updatingTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updatingTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeEnd'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeEnd'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'yyyy-MM-dd'),
     ]);
   }
 

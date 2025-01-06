@@ -103,24 +103,25 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         ListSearchForThread search)
     {
         if (search.CreatingTimeBeginning.HasValue)
-            list = (IOrderedQueryable<Thread>)list.Where(x => x.CreatingTime >= search.CreatingTimeBeginning);
+            list = (IOrderedQueryable<Thread>)list.Where(x => x.CreatingTime.Date >= search.CreatingTimeBeginning);
 
         if (search.CreatingTimeEnd.HasValue)
-            list = (IOrderedQueryable<Thread>)list.Where(x => x.CreatingTime <= search.CreatingTimeEnd);
+            list = (IOrderedQueryable<Thread>)list.Where(x => x.CreatingTime.Date <= search.CreatingTimeEnd);
 
         if (search.UpdatingTimeBeginning.HasValue)
-            list = (IOrderedQueryable<Thread>)list.Where(x => x.UpdatingTime >= search.UpdatingTimeBeginning);
+            list = (IOrderedQueryable<Thread>)list.Where(x => x.UpdatingTime.Date >= search.UpdatingTimeBeginning);
 
         if (search.UpdatingTimeEnd.HasValue)
-            list = (IOrderedQueryable<Thread>)list.Where(x => x.UpdatingTime <= search.UpdatingTimeEnd);
+            list = (IOrderedQueryable<Thread>)list.Where(x => x.UpdatingTime.Date <= search.UpdatingTimeEnd);
 
         if (!search.IsDeleted) return list;
 
         if (search.DeletingTimeBeginning.HasValue)
-            list = (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime >= search.DeletingTimeBeginning);
+            list = (IOrderedQueryable<Thread>)list.Where(
+                x => x.DeletingTime!.Value.Date >= search.DeletingTimeBeginning);
 
         if (search.DeletingTimeEnd.HasValue)
-            list = (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime <= search.DeletingTimeEnd);
+            list = (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime!.Value.Date <= search.DeletingTimeEnd);
 
 
         return list;

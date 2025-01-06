@@ -26,10 +26,10 @@ export class Search extends BaseForm {
   }
 
   setValues(search: SearchItem | null) {
-    this.setValue('creatingUserId', search?.creatingUserId || 0);
+    this.setValue('creatingUserId', Number(search?.creatingUserId || 0));
     this.setValue('title', search?.title || '');
-    this.setValue('resCountMin', search?.resCountMin || 0);
-    this.setValue('resCountMax', search?.resCountMax || 0);
+    this.setValue('resCountMin', Number(search?.resCountMin || 0));
+    this.setValue('resCountMax', Number(search?.resCountMax || 0));
     this.setValue('isUndeleted', Boolean((search?.isUndeleted || 'true').toString() == 'true'));
     this.setValue('isDeleted', Boolean((search?.isDeleted || 'false').toString() == 'true'));
     this.setValue('creatingTimeBeginning', search?.creatingTimeBeginning || '');

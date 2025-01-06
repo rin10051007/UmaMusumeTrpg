@@ -10,6 +10,7 @@ using UmaMusumeTrpg.Models.User.Edit;
 using UmaMusumeTrpg.Models.User.Entry;
 using UmaMusumeTrpg.Models.User.IsLoginIdDuplicate;
 using UmaMusumeTrpg.Models.User.List;
+using UmaMusumeTrpg.Models.User.NameList;
 
 namespace UmaMusumeTrpg.Controllers;
 
@@ -99,6 +100,14 @@ public class UserController(ILogger<UserController> logger, IUserService userSer
     {
         return userService.IsLoginIdDuplicate(request.LoginId);
     }
+
+    [HttpPost]
+    [Route("GetNameList")]
+    public ActionResult<IEnumerable<NameListResponse>> GetNameList()
+    {
+        return Ok(new NameListResponse(userService.GetNameList()));
+    }
+
 #if DEBUG
     [HttpGet]
     [AllowAnonymous]

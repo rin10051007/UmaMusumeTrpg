@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PageEvent} from "@angular/material/paginator";
-import {Item} from "./models/item.model";
+import {Item, nameListItem} from "./models/item.model";
 import {SearchItem} from "./models/search-item.model";
 import {PageSizeOptions, SortDirection, ThreadListColumnsToDisplay, ThreadSortItem} from 'Common';
 import {Search} from "./forms/search.form";
@@ -16,6 +16,7 @@ import {ApiService} from "./services/api.service";
 })
 export class ListComponent implements OnInit {
   list: Item[] = [];
+  nameList: nameListItem[] = [];
   searchItem: SearchItem = {
     creatingUserId: 0,
     title: '',
@@ -55,6 +56,17 @@ export class ListComponent implements OnInit {
       const item = params as SearchItem;
       if (isFirst) {
         isFirst = false;
+        if ((Object.keys(item).length > 0)) {
+          this.isDetailSearch =
+            Boolean((item.isUndeleted || 'true').toString() == 'false') ||
+            Boolean((item.isDeleted || 'false').toString() == 'true') ||
+            item.creatingTimeBeginning != null ||
+            item.creatingTimeEnd != null ||
+            item.updatingTimeBeginning != null ||
+            item.updatingTimeEnd != null ||
+            item.deletingTimeBeginning != null ||
+            item.deletingTimeEnd != null;
+        }
       }
       this.apiService.getList({
         creatingUserId: Number(item.creatingUserId || 0),
@@ -86,6 +98,7 @@ export class ListComponent implements OnInit {
     this.searchForm.getForm('isDeleted').valueChanges.subscribe(c => {
       this.searchForm.getForm('isDeleted').setValue(c, {emitEvent: false});
     });
+    this.apiService.getNameList().subscribe(r=>this.nameList=r.items);
   }
 
   sortItemSet(sortItem: ThreadSortItem) {
@@ -116,12 +129,12 @@ export class ListComponent implements OnInit {
       Number(this.searchForm.getValue('resCountMax') || 0),
       Boolean(this.searchForm.getValue('isUndeleted')),
       Boolean(this.searchForm.getValue('isDeleted')),
-      this.datePipe.transform(this.searchForm.getValue('creatingTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('creatingTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updatingTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('updatingTimeEnd'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'YYYY-MM-dd'),
-      this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'YYYY-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('creatingTimeEnd'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('updatingTimeEnd'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeBeginning'), 'yyyy-MM-dd'),
+      this.datePipe.transform(this.searchForm.getValue('deletingTimeEnd'), 'yyyy-MM-dd'),
     ])
   }
 

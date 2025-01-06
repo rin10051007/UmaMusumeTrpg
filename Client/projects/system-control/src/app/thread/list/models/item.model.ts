@@ -10,3 +10,8 @@ export interface Item extends BaseListItem {
   deletingTime: Date | null;
   isDeleted: boolean;
 }
+
+export interface nameListItem {
+  id: number;
+  name: string;
+}

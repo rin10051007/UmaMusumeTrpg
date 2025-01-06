@@ -1,3 +1,137 @@
+<mat-card>
+  <mat-card-content>
+    <mat-grid-list cols="16" rowHeight="75px">
+      <mat-grid-tile colspan="4" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>タイトル</mat-label>
+          <input [formControl]="searchForm.getForm('title')" id="title" matInput type="text"/>
+          <button (click)="searchForm.setValue('title','')" *ngIf="searchForm.getValue('title')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>作成者</mat-label>
+          <mat-select [formControl]="searchForm.getForm('creatingUserId')" id="creatingUserId">
+            <mat-option [value]="0">―――</mat-option>
+            <mat-option *ngFor="let i of nameList" [value]="i.id">{{i.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1">
+        <mat-form-field class="center">
+          <mat-label>レス数</mat-label>
+          <input [formControl]="searchForm.getForm('resCountMin')" id="resCountMin" matInput type="number"/>
+          <button (click)="searchForm.setValue('resCountMin',0)" *ngIf="searchForm.getValue('resCountMin')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
+      ～
+        <mat-form-field class="center">
+          <mat-label>レス数</mat-label>
+          <input [formControl]="searchForm.getForm('resCountMax')" id="resCountMax" matInput type="number"/>
+          <button (click)="searchForm.setValue('resCountMax',0)" *ngIf="searchForm.getValue('resCountMax')"
+                  aria-label="Clear" mat-icon-button matSuffix>
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-checkbox [formControl]="searchForm.getForm('isUndeleted')" id="isUndeleted">
+          <mat-label>未削除</mat-label>
+        </mat-checkbox>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-checkbox [formControl]="searchForm.getForm('isDeleted')" id="isDeleted">
+          <mat-label>削除済</mat-label>
+        </mat-checkbox>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
+        <mat-form-field color="accent">
+          <mat-label>作成日</mat-label>
+          <input [formControl]="searchForm.getForm('creatingTimeBeginning')" [matDatepicker]="creatingTimeBeginning"
+                 id="creatingTimeBeginning"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="creatingTimeBeginning" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #creatingTimeBeginning></mat-datepicker>
+        </mat-form-field>
+        ～
+        <mat-form-field class="spacer" color="accent">
+          <mat-label>作成日</mat-label>
+          <input [formControl]="searchForm.getForm('creatingTimeEnd')" [matDatepicker]="creatingTimeEnd"
+                 id="creatingTimeEnd"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="creatingTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #creatingTimeEnd color="primary"></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
+        <mat-form-field color="accent">
+          <mat-label>更新日</mat-label>
+          <input [formControl]="searchForm.getForm('updatingTimeBeginning')" [matDatepicker]="updatingTimeBeginning"
+                 id="updatingTimeBeginning"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="updatingTimeBeginning" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updatingTimeBeginning></mat-datepicker>
+        </mat-form-field>
+        ～
+        <mat-form-field class="spacer" color="accent">
+          <mat-label>更新日</mat-label>
+          <input [formControl]="searchForm.getForm('updatingTimeEnd')" [matDatepicker]="updatingTimeEnd"
+                 id="updatingTimeEnd"
+                 matInput/>
+          <mat-hint>YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle [for]="updatingTimeEnd" matIconSuffix></mat-datepicker-toggle>
+          <mat-datepicker #updatingTimeEnd color="primary"></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="4" rowspan="1">
+        <ng-container *ngIf="searchForm.getValue('isDeleted')">
+          <mat-form-field color="accent">
+            <mat-label>削除日</mat-label>
+            <input [formControl]="searchForm.getForm('deletingTimeBeginning')" [matDatepicker]="deletingTimeBeginning"
+                   id="deletingTimeBeginning"
+                   matInput/>
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle [for]="deletingTimeBeginning" matIconSuffix></mat-datepicker-toggle>
+            <mat-datepicker #deletingTimeBeginning></mat-datepicker>
+          </mat-form-field>
+          ～
+          <mat-form-field color="accent">
+            <mat-label>削除日</mat-label>
+            <input [formControl]="searchForm.getForm('deletingTimeEnd')" [matDatepicker]="deletingTimeEnd"
+                   id="deletingTimeEnd"
+                   matInput/>
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle [for]="deletingTimeEnd" matIconSuffix></mat-datepicker-toggle>
+            <mat-datepicker #deletingTimeEnd color="primary"></mat-datepicker>
+          </mat-form-field>
+        </ng-container>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <mat-slide-toggle [(ngModel)]="isDetailSearch">詳細検索</mat-slide-toggle>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <button (click)="searchResetClick()" color="warn" mat-raised-button><i class="bi bi-x-lg"></i>リセット
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <button (click)="searchClick()" color="accent" mat-raised-button><i class="bi bi-search"></i>検索</button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="14" rowspan="1"></mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <button color="primary" mat-raised-button routerLink="/user/entry"><i class="bi bi-person-add"></i>新規作成
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
 <table [dataSource]="list" class="mat-elevation-z8" mat-table>
   <ng-container matColumnDef="id">
     <th *matHeaderCellDef mat-header-cell>

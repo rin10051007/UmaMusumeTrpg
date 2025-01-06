@@ -13,6 +13,7 @@ export const apiUrls = {
     edit: '/Api/User/Edit',
     delete: '/Api/User/Delete',
     isLoginIdDuplicate: '/Api/User/IsLoginIdDuplicate',
+    getNameList: '/Api/User/GetNameList',
   },
   threadUrls: {
     getListForSystemThread: '/Api/Thread/GetListForSystemThread',

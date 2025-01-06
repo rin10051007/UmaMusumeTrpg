@@ -1,4 +1,5 @@
-﻿using UmaMusumeTrpg.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using UmaMusumeTrpg.Entities;
 using UmaMusumeTrpg.Enums;
 using UmaMusumeTrpg.IServices;
 using UmaMusumeTrpg.Models.User.Delete;
@@ -7,6 +8,7 @@ using UmaMusumeTrpg.Models.User.Edit;
 using UmaMusumeTrpg.Models.User.Entry;
 using UmaMusumeTrpg.Models.User.IsLoginIdDuplicate;
 using UmaMusumeTrpg.Models.User.List;
+using UmaMusumeTrpg.Models.User.NameList;
 
 namespace UmaMusumeTrpg.Services;
 
@@ -54,11 +56,10 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
         {
             if (search.DeletingTimeBeginning.HasValue)
                 list = (IOrderedQueryable<User>)list.Where(x =>
-                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date >= search.DeletingTimeBeginning);
+                    x.DeletingTime!.Value.Date >= search.DeletingTimeBeginning);
 
             if (search.DeletingTimeEnd.HasValue)
-                list = (IOrderedQueryable<User>)list.Where(x =>
-                    x.DeletingTime.HasValue && x.DeletingTime.Value.Date <= search.DeletingTimeEnd);
+                list = (IOrderedQueryable<User>)list.Where(x => x.DeletingTime!.Value.Date <= search.DeletingTimeEnd);
         }
 
         if (!search.IsUndeleted)
@@ -229,6 +230,12 @@ public class UserService(UmaMusumeTrpgDbContext dbContext, IGuidService guidServ
     public bool IsLoginIdDuplicate(IsLoginIdDuplicateItem item)
     {
         return dbContext.Users.Any(x => x.LoginId.Equals(item.LoginId) && !x.Id.Equals(item.Id) && !x.IsDeleted);
+    }
+
+    public List<NameListItem> GetNameList()
+    {
+        return dbContext.Users.Include(x => x.Threads).Where(x => x.Threads.Any(y => !y.IsDeleted)).OrderBy(x => x.Name)
+            .Select(x => new NameListItem(x)).ToList();
     }
 
     public bool PasswordReset(int id, string password)

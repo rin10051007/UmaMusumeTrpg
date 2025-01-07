@@ -20,5 +20,10 @@ export const apiUrls = {
     detail: '/Api/Thread/Detail',
     delete: '/Api/Thread/Delete',
   },
-  responseUrls: {}
+  responseUrls: {
+    getList:'/Api/Response/GetList',
+    getListForThread:'/Api/Response/GetListForThread',
+    getListForUser:'/Api/Response/GetListForUser',
+    entry:'/Api/Response/Entry',
+  }
 };

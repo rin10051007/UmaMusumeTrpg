@@ -13,13 +13,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.lsService.getToken();
-    const newRequest = req.clone({
-      headers: req.headers.set(
-        'Authorization', `Bearer ${token}`
-      )
-    });
-    return next.handle(newRequest);
+    return next.handle(req.clone({headers: req.headers.set('Authorization', `Bearer ${this.lsService.getToken()}`)}));
   }
 
 }

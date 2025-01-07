@@ -32,7 +32,9 @@ ng generate pipe pipes/sort-direction/sort-direction --project=Common
 
 ng g c thread --project=SystemControl
 ng g m thread  --routing  --project=SystemControl
-ng g c thread/list --project=SystemControl
-ng g m thread/list  --routing  --project=SystemControl
-ng g s thread/list/services/api    --project=SystemControl
-ng g class thread/list/forms/search  --type=form   --project=SystemControl
+ng g c thread/detail --project=SystemControl
+ng g m thread/detail  --routing  --project=SystemControl
+ng g s thread/detail/services/api    --project=SystemControl
+
+
+ng g class thread/detail/forms/search  --type=form   --project=SystemControl

@@ -9,7 +9,7 @@ public class DetailItem : BaseDetailItem
     {
     }
 
-    public DetailItem(Entities.User user) : base(user.Id, user.Token, user.UpdatingTime)
+    public DetailItem(Entities.User user) : base(user.Id, user.Token, user.CreatingTime, user.UpdatingTime)
     {
         LoginId = user.LoginId;
         Name = user.Name;
@@ -18,7 +18,6 @@ public class DetailItem : BaseDetailItem
         Email = user.Email;
         CreationThreadCount = user.CreationThreadCount;
         TotalResCount = user.TotalResCount;
-        CreatingTime = user.CreatingTime;
         DeletingTime = user.DeletingTime;
         IsDeleted = user.IsDeleted;
     }
@@ -30,7 +29,6 @@ public class DetailItem : BaseDetailItem
     public string Email { get; set; }
     public int CreationThreadCount { get; set; }
     public int TotalResCount { get; set; }
-    public DateTime CreatingTime { get; set; }
     public DateTime? DeletingTime { get; set; }
     public bool IsDeleted { get; set; }
 }

@@ -15,14 +15,15 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
     {
         var (list, length) =
             ListWithPageByGet(
-                SortList(SearchList((IOrderedQueryable<Response>)dbContext.Responses.Where(x => true), search), search),
-                search);
+                SortList(
+                    SearchList((IOrderedQueryable<Response>)dbContext.Responses.Include(x => x.Thread).Where(x => true),
+                        search), search), search);
         return (list.Select(x => new ListItem(x)).ToList(), length);
     }
 
     public (List<ListItemForThread>, int) GetList(ListSearchForThread search)
     {
-        var list = (IOrderedQueryable<Response>)dbContext.Responses.Where(x => true);
+        var list = (IOrderedQueryable<Response>)dbContext.Responses.Include(x => x.Thread).Where(x => true);
 
         if (search.ThreadId > 0)
             list = (IOrderedQueryable<Response>)list.Where(x => x.ThreadId == search.ThreadId);
@@ -39,7 +40,7 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
 
     public (List<ListItemForUser>, int) GetList(ListSearchForUser search)
     {
-        var list = (IOrderedQueryable<Response>)dbContext.Responses.Where(x => true);
+        var list = (IOrderedQueryable<Response>)dbContext.Responses.Include(x => x.Thread).Where(x => true);
 
         if (search.CreatingUserId > 0)
             list = (IOrderedQueryable<Response>)list.Where(x => x.CreatingUserId == search.CreatingUserId);
@@ -109,8 +110,8 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
                     case ResponseSortItem.ThreadId:
                         list = list.OrderBy(x => x.ThreadId);
                         break;
-                    case ResponseSortItem.CreatingUserId:
-                        list = list.OrderBy(x => x.CreatingUserId);
+                    case ResponseSortItem.CreatingUserName:
+                        list = list.OrderBy(x => x.CreatingUser.Name);
                         break;
                     case ResponseSortItem.ThreadResNo:
                         list = list.OrderBy(x => x.ThreadResNo);
@@ -134,8 +135,8 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
                     case ResponseSortItem.ThreadId:
                         list = list.OrderByDescending(x => x.ThreadId);
                         break;
-                    case ResponseSortItem.CreatingUserId:
-                        list = list.OrderByDescending(x => x.CreatingUserId);
+                    case ResponseSortItem.CreatingUserName:
+                        list = list.OrderByDescending(x => x.CreatingUser.Name);
                         break;
                     case ResponseSortItem.ThreadResNo:
                         list = list.OrderByDescending(x => x.ThreadResNo);

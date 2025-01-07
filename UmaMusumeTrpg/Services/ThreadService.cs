@@ -94,7 +94,7 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
 
     public DetailItem Detail(DetailSelect select)
     {
-        return new DetailItem(dbContext.Threads.FirstOrDefault(x =>
+        return new DetailItem(dbContext.Threads.Include(x=>x.CreatingUser).FirstOrDefault(x =>
             x.Id == select.Id && (string.IsNullOrEmpty(select.Token) ||
                                   (!string.IsNullOrEmpty(select.Token) && select.Token.Equals(x.Token)))));
     }

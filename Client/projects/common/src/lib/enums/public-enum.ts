@@ -7,3 +7,4 @@ export * from './permission/uma-musume-trpg-permission';
 export * from './sort/sort-direction';
 export * from './sort/user-sort-item';
 export * from './sort/thread-sort-item';
+export * from './sort/response-sort-item';

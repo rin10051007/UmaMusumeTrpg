@@ -8,7 +8,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import {ApiService} from "./services/api.service";
-import { ResponseApiService } from "Common";
+import {ResponseApiService} from "Common";
 
 
 @NgModule({

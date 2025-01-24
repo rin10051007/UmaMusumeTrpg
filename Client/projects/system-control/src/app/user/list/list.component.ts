@@ -158,7 +158,7 @@ export class ListComponent implements OnInit {
   }
 
   searchResetClick() {
-    this.searchForm.createForm();
+    this.searchForm.toReset();
     this.router.navigate([], {
       queryParams: {
         integration: '',

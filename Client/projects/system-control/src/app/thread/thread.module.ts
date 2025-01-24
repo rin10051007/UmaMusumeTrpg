@@ -5,9 +5,7 @@ import {ThreadRoutingModule} from './thread-routing.module';
 
 
 @NgModule({
-  declarations: [
-
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     ThreadRoutingModule

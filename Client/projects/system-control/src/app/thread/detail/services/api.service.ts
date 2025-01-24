@@ -8,7 +8,7 @@ import {Select} from '../models/select.model';
 @Injectable()
 export class ApiService extends BaseApiService {
 
-    detail(select: Select): Observable<Response> {
+  detail(select: Select): Observable<Response> {
     const request: Request = {
       select: select
     }

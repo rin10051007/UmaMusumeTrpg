@@ -19,12 +19,12 @@ export class Search extends BaseForm {
     this.getFormGroup().addControl('umaMusumeTrpgPermission', new FormControl(UmaMusumeTrpgPermission.None));
     this.getFormGroup().addControl('isUndeleted', new FormControl(true));
     this.getFormGroup().addControl('isDeleted', new FormControl(false));
-    this.getFormGroup().addControl('creatingTimeBeginning', new FormControl(''));
-    this.getFormGroup().addControl('creatingTimeEnd', new FormControl(''));
-    this.getFormGroup().addControl('updatingTimeBeginning', new FormControl(''));
-    this.getFormGroup().addControl('updatingTimeEnd', new FormControl(''));
-    this.getFormGroup().addControl('deletingTimeBeginning', new FormControl(''));
-    this.getFormGroup().addControl('deletingTimeEnd', new FormControl(''));
+    this.getFormGroup().addControl('creatingTimeBeginning', new FormControl(null));
+    this.getFormGroup().addControl('creatingTimeEnd', new FormControl(null));
+    this.getFormGroup().addControl('updatingTimeBeginning', new FormControl(null));
+    this.getFormGroup().addControl('updatingTimeEnd', new FormControl(null));
+    this.getFormGroup().addControl('deletingTimeBeginning', new FormControl(null));
+    this.getFormGroup().addControl('deletingTimeEnd', new FormControl(null));
   }
 
   setValues(search: SearchItem | null) {
@@ -36,11 +36,11 @@ export class Search extends BaseForm {
     this.setValue('umaMusumeTrpgPermission', Number(search?.umaMusumeTrpgPermission || UmaMusumeTrpgPermission.None));
     this.setValue('isUndeleted', Boolean((search?.isUndeleted || 'true').toString() == 'true'));
     this.setValue('isDeleted', Boolean((search?.isDeleted || 'false').toString() == 'true'));
-    this.setValue('creatingTimeBeginning', search?.creatingTimeBeginning || '');
-    this.setValue('creatingTimeEnd', search?.creatingTimeEnd || '');
-    this.setValue('updatingTimeBeginning', search?.updatingTimeBeginning || '');
-    this.setValue('updatingTimeEnd', search?.updatingTimeEnd || '');
-    this.setValue('deletingTimeBeginning', search?.deletingTimeBeginning || '');
-    this.setValue('deletingTimeEnd', search?.deletingTimeEnd || '');
+    this.setValue('creatingTimeBeginning', search?.creatingTimeBeginning || null);
+    this.setValue('creatingTimeEnd', search?.creatingTimeEnd || null);
+    this.setValue('updatingTimeBeginning', search?.updatingTimeBeginning || null);
+    this.setValue('updatingTimeEnd', search?.updatingTimeEnd || null);
+    this.setValue('deletingTimeBeginning', search?.deletingTimeBeginning || null);
+    this.setValue('deletingTimeEnd', search?.deletingTimeEnd || null);
   }
 }

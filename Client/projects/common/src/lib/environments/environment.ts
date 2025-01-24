@@ -3,5 +3,6 @@ export const environment = {
   baseUrl: 'https://localhost:7058/',
   authUrl: 'AuthControl',
   systemUrl: 'SystemControl',
-  umaMusumeUrl: 'UmaMusumeControl'
+  umaMusumeUrl: 'UmaMusumeControl',
+  responseGetInterval: 300000 //1000*60*5
 };

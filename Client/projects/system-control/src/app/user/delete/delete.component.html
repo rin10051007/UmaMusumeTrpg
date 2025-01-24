@@ -1,7 +1,9 @@
 <div class="main-div">
   <mat-card class="center">
     <mat-card-header>
-      <h1>{{ item.name }}</h1>
+      <mat-card-header>
+        <h1><a routerLink="/user/list">一覧</a> / <a  routerLink="/user/detail/{{item.id}}">{{ item.name }}</a> / ユーザー削除</h1>
+      </mat-card-header>
     </mat-card-header>
     <mat-card-content>
       <mat-list>

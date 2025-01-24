@@ -1,7 +1,7 @@
 <div class="main-div">
   <mat-card class="center">
     <mat-card-header>
-      <h1>{{ detail.name }}</h1>
+      <h1><a routerLink="/user/list">一覧</a> / {{ detail.name }}</h1>
     </mat-card-header>
     <mat-card-content>
       <mat-list>
@@ -74,11 +74,11 @@
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item *ngIf="!detail.isDeleted">
-          <mat-grid-list cols="10">
-            <mat-grid-tile colspan="5">
+          <mat-grid-list cols="2">
+            <mat-grid-tile colspan="1">
               <button color="primary" mat-raised-button routerLink="/user/edit/{{detail.id}}">編集</button>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5">
+            <mat-grid-tile colspan="1">
               <button color="warn" mat-raised-button routerLink="/user/delete/{{detail.id}}">削除</button>
             </mat-grid-tile>
           </mat-grid-list>

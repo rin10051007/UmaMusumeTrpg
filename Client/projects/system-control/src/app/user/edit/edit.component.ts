@@ -15,6 +15,7 @@ import {ApiService} from './services/api.service';
 })
 export class EditComponent implements OnInit {
   editForm: Edit;
+  editName: string = '';
   protected readonly SysPermission = SysPermission;
   protected readonly UmaMusumeTrpgPermission = UmaMusumeTrpgPermission;
 
@@ -30,6 +31,7 @@ export class EditComponent implements OnInit {
       this.detailApiService.detail({id: (Number(params['id']) || 0), token: ''})
         .subscribe(r => {
           this.editForm.setValues(r.detail as unknown as Item);
+          this.editName = r.detail.name;
         });
     });
   }

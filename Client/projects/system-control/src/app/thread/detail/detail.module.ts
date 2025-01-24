@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 import {DetailComponent} from "./detail.component";
 import {DetailRoutingModule} from "./detail-routing.module";
 import {MatCardModule} from "@angular/material/card";
@@ -8,7 +8,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import {ApiService} from "./services/api.service";
-import {ResponseApiService} from "Common";
+import {ResponseApiService, Search} from "Common";
 
 
 @NgModule({
@@ -32,6 +32,8 @@ import {ResponseApiService} from "Common";
   providers: [
     ApiService,
     ResponseApiService,
+    Search,
+    DatePipe
   ]
 })
 export class DetailModule {

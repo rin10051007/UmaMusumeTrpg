@@ -2,7 +2,7 @@
 
 export interface Item extends BaseDetailItem {
   creatingUserId: number;
-  creationUserName: string;
+  creatingUserName: string;
   title: string;
   resCount: number;
 }

@@ -21,9 +21,9 @@ export const apiUrls = {
     delete: '/Api/Thread/Delete',
   },
   responseUrls: {
-    getList:'/Api/Response/GetList',
-    getListForThread:'/Api/Response/GetListForThread',
-    getListForUser:'/Api/Response/GetListForUser',
-    entry:'/Api/Response/Entry',
+    getList: '/Api/Response/GetList',
+    getListForThread: '/Api/Response/GetListForThread',
+    getListForUser: '/Api/Response/GetListForUser',
+    entry: '/Api/Response/Entry',
   }
 };

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {LoginRequest, LoginResponse, LoginUser} from '../../models/public-model';
-import { BaseApiService } from '../public-service';
+import {BaseApiService} from '../public-service';
 
 @Injectable()
 export class AuthApiService extends BaseApiService {

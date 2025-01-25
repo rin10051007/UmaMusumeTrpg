@@ -172,7 +172,7 @@
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.resCount }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.resCount | number }}</td>
   </ng-container>
   <ng-container matColumnDef="creatingTime">
     <th *matHeaderCellDef mat-header-cell>

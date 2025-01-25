@@ -28,8 +28,8 @@ builder.Services.AddOptions().Configure<JwtSettings>(config.GetSection("JwtSetti
 builder.Services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerConfigureOptions>();
 
 
-builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(
-    opt => opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
+builder.Services.AddDbContext<UmaMusumeTrpgDbContext>(opt =>
+    opt.UseNpgsql(config.GetConnectionString("PostgreContext")));
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

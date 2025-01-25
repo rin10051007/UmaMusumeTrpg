@@ -1,7 +1,7 @@
 <header-menu></header-menu>
 <mat-tab-group
   (selectedIndexChange)="onTabChange($event)"
-  [selectedIndex]="selectedTabIndex">
+  [selectedIndex]="tabIndexService.getTabIndex()">
   <mat-tab>
     <ng-template matTabLabel>
       <i class="bi bi-person"></i> ユーザー

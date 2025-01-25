@@ -4,5 +4,5 @@ export const environment = {
   authUrl: 'AuthControl',
   systemUrl: 'SystemControl',
   umaMusumeUrl: 'UmaMusumeControl',
-  responseGetInterval: 300000 //1000*60*5
+  responseGetIntervals: [60000, 300000, 600000, 900000, 1800000] //1000*60*[1,5,10,15,30]
 };

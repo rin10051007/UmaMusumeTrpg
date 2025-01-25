@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from "./services/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Item} from "./models/item.model";
@@ -20,9 +20,9 @@ import {DatePipe} from "@angular/common";
   styleUrl: './detail.component.css',
   standalone: false
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
   detail = this.initializingItem();
-  responseListApiId = setInterval(() => this.getResponseList(), environment.responseGetInterval);
+  responseListApiId = setInterval(() => this.getResponseList(), environment.responseGetIntervals[0]);
   responseSearchForm: Search;
   responseSearch: SearchItemForThread = {
     threadId: 0,
@@ -33,14 +33,14 @@ export class DetailComponent implements OnInit {
     creatingTimeEnd: null,
     sortItem: ResponseSortItem.none,
     sortDirection: SortDirection.none,
-    pageIndex: 1,
+    pageIndex: 0,
     pageSize: PageSizeOptions[3]
   }
 
   constructor(private apiService: ApiService, private responseApiService: ResponseApiService,
               private route: ActivatedRoute, private router: Router,
               search: Search, public datePipe: DatePipe) {
-    this.responseSearchForm=search;
+    this.responseSearchForm = search;
     this.responseSearchForm.createForm();
   }
 
@@ -65,6 +65,7 @@ export class DetailComponent implements OnInit {
 
   getResponseList() {
     this.responseApiService.getListForThread(this.responseSearch).subscribe(r => {
+      console.log(r);
     });
   }
 
@@ -73,7 +74,7 @@ export class DetailComponent implements OnInit {
     return {
       id: 0,
       creatingUserId: 0,
-      creationUserName: '',
+      creatingUserName: '',
       title: '',
       resCount: 0,
       token: '',
@@ -94,9 +95,10 @@ export class DetailComponent implements OnInit {
         creatingTimeEnd: null,
         sortItem: ResponseSortItem.none,
         sortDirection: SortDirection.none,
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: PageSizeOptions[3]
-      }}).then(r => {
+      }
+    }).then(r => {
     });
   }
 

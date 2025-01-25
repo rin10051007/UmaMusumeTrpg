@@ -12,7 +12,9 @@ import {ResponseApiService, Search} from "Common";
 
 
 @NgModule({
-  declarations: [DetailComponent],
+  declarations: [
+    DetailComponent
+  ],
   imports: [
     CommonModule,
     DetailRoutingModule,

@@ -17,7 +17,10 @@ export class AppComponent {
   }
 
   onTabChange(index: number) {
-    this.router.navigate([this.systemRoute[index]]).then(() => {
-    });
+    if (index !== this.tabIndexService.getTabIndex()) {
+      this.tabIndexService.setTabIndex(index);
+      this.router.navigate([this.systemRoute[index]]).then(() => {
+      });
+    }
   }
 }

@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class TabIndexService {
-    private tabIndex = 0;
+  private tabIndex = -1;
 
-    constructor() {
-    }
+  constructor() {
+  }
 
-    setTabIndex(index: number) {
-        this.tabIndex = index;
-    }
+  setTabIndex(index: number) {
+    this.tabIndex = index;
+  }
 
-    getTabIndex() {
-        return this.tabIndex;
-    }
+  getTabIndex() {
+    return this.tabIndex;
+  }
 }

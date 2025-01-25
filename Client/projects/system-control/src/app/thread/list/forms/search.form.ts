@@ -15,6 +15,7 @@ export class Search extends BaseForm {
     this.getFormGroup().addControl('title', new FormControl(''));
     this.getFormGroup().addControl('resCountMin', new FormControl(0));
     this.getFormGroup().addControl('resCountMax', new FormControl(0));
+    this.getFormGroup().addControl('isActive', new FormControl(false));
     this.getFormGroup().addControl('isUndeleted', new FormControl(true));
     this.getFormGroup().addControl('isDeleted', new FormControl(false));
     this.getFormGroup().addControl('creatingTimeBeginning', new FormControl(null));
@@ -30,6 +31,7 @@ export class Search extends BaseForm {
     this.setValue('title', search?.title || '');
     this.setValue('resCountMin', Number(search?.resCountMin || 0));
     this.setValue('resCountMax', Number(search?.resCountMax || 0));
+    this.setValue('isActive', Boolean((search?.isActive || 'false').toString() == 'true'));
     this.setValue('isUndeleted', Boolean((search?.isUndeleted || 'true').toString() == 'true'));
     this.setValue('isDeleted', Boolean((search?.isDeleted || 'false').toString() == 'true'));
     this.setValue('creatingTimeBeginning', search?.creatingTimeBeginning || null);

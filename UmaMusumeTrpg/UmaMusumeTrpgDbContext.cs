@@ -44,6 +44,7 @@ public class UmaMusumeTrpgDbContext(DbContextOptions dbOptions) : DbContext(dbOp
             entity.Property(e => e.CreatingUserId).HasComment("作成者ID");
             entity.Property(e => e.Title).IsRequired().HasMaxLength(64).HasComment("スレッドタイトル");
             entity.Property(e => e.ResCount).HasDefaultValue(0).HasComment("レス数");
+            entity.Property(e => e.IsActive).HasDefaultValue(true).HasComment("レスがアクティブか");
             entity.Property(e => e.Token).IsRequired().HasMaxLength(32).HasComment("トークン");
             entity.Property(e => e.CreatingTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("作成日");
             entity.Property(e => e.UpdatingTime).HasDefaultValueSql("CURRENT_TIMESTAMP").HasComment("更新日");

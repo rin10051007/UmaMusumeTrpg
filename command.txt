@@ -34,7 +34,8 @@ ng g c thread --project=SystemControl
 ng g m thread  --routing  --project=SystemControl
 ng g c thread/detail --project=SystemControl
 ng g m thread/detail  --routing  --project=SystemControl
-ng g s services/response-api/response-api    --project=Common
+ng g s services/tab-index/tab-index    --project=SystemControl
 
 
 ng g class thread/detail/forms/search  --type=form   --project=SystemControl
+

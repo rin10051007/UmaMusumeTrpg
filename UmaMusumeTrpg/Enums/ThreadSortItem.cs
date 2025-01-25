@@ -7,6 +7,7 @@ public enum ThreadSortItem
     CreatingUserName,
     Title,
     ResCount,
+    IsActive,
     CreatingTime,
     UpdatingTime,
     DeletingTime

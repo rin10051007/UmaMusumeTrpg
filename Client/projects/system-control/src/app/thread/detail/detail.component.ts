@@ -22,7 +22,7 @@ import {DatePipe} from "@angular/common";
 })
 export class DetailComponent implements OnInit, OnDestroy {
   detail = this.initializingItem();
-  responseListApiId = setInterval(() => this.getResponseList(), environment.responseGetIntervals[0]);
+  responseListApiId;
   responseSearchForm: Search;
   responseSearch: SearchItemForThread = {
     threadId: 0,
@@ -34,14 +34,16 @@ export class DetailComponent implements OnInit, OnDestroy {
     sortItem: ResponseSortItem.none,
     sortDirection: SortDirection.none,
     pageIndex: 0,
-    pageSize: PageSizeOptions[3]
+    pageSize: PageSizeOptions[3],
+    responseGetInterval: environment.responseGetIntervals[0]
   }
 
-  constructor(private apiService: ApiService, private responseApiService: ResponseApiService,
+  constructor(private apiService: ApiService, public responseApiService: ResponseApiService,
               private route: ActivatedRoute, private router: Router,
               search: Search, public datePipe: DatePipe) {
     this.responseSearchForm = search;
     this.responseSearchForm.createForm();
+    this.responseListApiId = setInterval(() => this.getResponseList(), this.responseSearch.responseGetInterval);
   }
 
   ngOnInit() {
@@ -66,6 +68,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   getResponseList() {
     this.responseApiService.getListForThread(this.responseSearch).subscribe(r => {
       console.log(r);
+      this.detail.responses = r.items;
     });
   }
 
@@ -79,7 +82,8 @@ export class DetailComponent implements OnInit, OnDestroy {
       resCount: 0,
       token: '',
       creatingTime: now,
-      updatingTime: now
+      updatingTime: now,
+      responses:[]
     } as Item;
   }
 
@@ -96,7 +100,8 @@ export class DetailComponent implements OnInit, OnDestroy {
         sortItem: ResponseSortItem.none,
         sortDirection: SortDirection.none,
         pageIndex: 0,
-        pageSize: PageSizeOptions[3]
+        pageSize: PageSizeOptions[3],
+        responseGetInterval: environment.responseGetIntervals[0]
       }
     }).then(r => {
     });

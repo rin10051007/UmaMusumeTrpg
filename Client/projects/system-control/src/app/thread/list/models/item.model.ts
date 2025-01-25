@@ -5,6 +5,7 @@ export interface Item extends BaseListItem {
   creatingUserId: number;
   creatingUserName: string;
   resCount: number;
+  isActive: boolean;
   creatingTime: Date;
   updatingTime: Date;
   deletingTime: Date | null;

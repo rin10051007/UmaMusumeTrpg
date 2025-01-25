@@ -22,6 +22,7 @@ export class ListComponent implements OnInit {
     title: '',
     resCountMin: 0,
     resCountMax: 0,
+    isActive: true,
     isUndeleted: true,
     isDeleted: false,
     creatingTimeBeginning: null,
@@ -58,6 +59,7 @@ export class ListComponent implements OnInit {
         isFirst = false;
         if ((Object.keys(item).length > 0)) {
           this.isDetailSearch =
+            Boolean((item.isUndeleted || 'false').toString() == 'true') ||
             Boolean((item.isUndeleted || 'true').toString() == 'false') ||
             Boolean((item.isDeleted || 'false').toString() == 'true') ||
             item.creatingTimeBeginning != null ||
@@ -73,6 +75,7 @@ export class ListComponent implements OnInit {
         title: item.title,
         resCountMin: Number(item.resCountMin || 0),
         resCountMax: Number(item.resCountMax || 0),
+        isActive: Boolean((item.isActive || 'false').toString() == 'true'),
         isUndeleted: Boolean((item.isUndeleted || 'true').toString() == 'true'),
         isDeleted: Boolean((item.isDeleted || 'false').toString() == 'true'),
         creatingTimeBeginning: item.creatingTimeBeginning || null,
@@ -91,6 +94,9 @@ export class ListComponent implements OnInit {
         this.length = r.length;
         this.searchForm.setValues(item);
       });
+    });
+    this.searchForm.getForm('isActive').valueChanges.subscribe(c => {
+      this.searchForm.getForm('isActive').setValue(c, {emitEvent: false});
     });
     this.searchForm.getForm('isUndeleted').valueChanges.subscribe(c => {
       this.searchForm.getForm('isUndeleted').setValue(c, {emitEvent: false});
@@ -114,6 +120,7 @@ export class ListComponent implements OnInit {
       'title',
       'resCountMin',
       'resCountMax',
+      'isActive',
       'isUndeleted',
       'isDeleted',
       'creatingTimeBeginning',
@@ -127,6 +134,7 @@ export class ListComponent implements OnInit {
       this.searchForm.getValue('title') ?? '',
       Number(this.searchForm.getValue('resCountMin') || 0),
       Number(this.searchForm.getValue('resCountMax') || 0),
+      Boolean(this.searchForm.getValue('isActive')),
       Boolean(this.searchForm.getValue('isUndeleted')),
       Boolean(this.searchForm.getValue('isDeleted')),
       this.datePipe.transform(this.searchForm.getValue('creatingTimeBeginning'), 'yyyy-MM-dd'),
@@ -146,6 +154,7 @@ export class ListComponent implements OnInit {
         title: '',
         resCountMin: 0,
         resCountMax: 0,
+        isActive: true,
         isUndeleted: true,
         isDeleted: false,
         creatingTimeBeginning: null,

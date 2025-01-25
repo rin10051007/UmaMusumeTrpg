@@ -38,6 +38,8 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         if (search.CreatingUserId > 0)
             list = (IOrderedQueryable<Thread>)list.Where(x => x.CreatingUserId == search.CreatingUserId);
 
+        if (search.IsActive) list = (IOrderedQueryable<Thread>)list.Where(x => x.IsActive);
+
         (list, var length) =
             ListWithPageByGet(SortList(SearchList(SearchListForThread(list, search), search), search), search);
 
@@ -51,7 +53,10 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         if (search.CreatingUserId > 0)
             list = (IOrderedQueryable<Thread>)list.Where(x => x.CreatingUserId == search.CreatingUserId);
 
-        (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
+        (list, var length) =
+            ListWithPageByGet(
+                SortList((IOrderedQueryable<Thread>)SearchList(list, search).Where(x => x.IsActive), search),
+                search);
 
         return (list.Include(x => x.CreatingUser).Select(x => new ListItemForUser(x)).ToList(), length);
     }

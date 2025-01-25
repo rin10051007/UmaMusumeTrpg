@@ -66,7 +66,8 @@ public class ResponseService(UmaMusumeTrpgDbContext dbContext, IGuidService guid
             response.Thread.UpdatingTime = timeService.NowTime();
             response.ThreadResNo = response.Thread.ResCount;
             response.CreatingUser.TotalResCount += 1;
-            if (response.Thread.IsDeleted || !response.Thread.Token.Equals(entry.ThreadToken))
+            if (!response.Thread.IsActive || response.Thread.IsDeleted ||
+                !response.Thread.Token.Equals(entry.ThreadToken))
                 throw new Exception();
             _ = dbContext.Add(response);
             _ = dbContext.SaveChanges();

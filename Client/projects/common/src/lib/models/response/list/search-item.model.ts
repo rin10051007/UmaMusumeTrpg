@@ -6,6 +6,7 @@ export interface SearchItem extends BaseListSearch {
   creatingTimeBeginning: Date | null;
   creatingTimeEnd: Date | null;
   sortItem: ResponseSortItem;
+  responseGetInterval: number;
 }
 
 export interface SearchItemForThread extends SearchItem {

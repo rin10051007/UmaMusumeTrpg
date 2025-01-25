@@ -3,6 +3,7 @@ export const ThreadListColumnsToDisplay = [
   'title',
   'creatingUserName',
   'resCount',
+  'isActive',
   'creatingTime',
   'updatingTime',
   'deletingTime',

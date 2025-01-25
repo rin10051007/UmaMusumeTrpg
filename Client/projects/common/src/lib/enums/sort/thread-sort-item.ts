@@ -4,6 +4,7 @@ export enum ThreadSortItem {
   creatingUserName,
   title,
   resCount,
+  isActive,
   creatingTime,
   updatingTime,
   deletingTime

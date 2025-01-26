@@ -6,10 +6,10 @@
     <mat-card-content>
       <mat-list>
         <mat-list-item>
-          <mat-grid-list cols="4">
-            <mat-grid-tile colspan="1">作成日 : {{ detail.creatingTime | date:"yyyy年MM月dd日 HH:mm.ss" }}
+          <mat-grid-list cols="6">
+            <mat-grid-tile colspan="2">作成日 : {{ detail.creatingTime | date:"yyyy年MM月dd日 HH:mm.ss" }}
             </mat-grid-tile>
-            <mat-grid-tile colspan="1">更新日 : {{ detail.updatingTime | date:"yyyy年MM月dd日 HH:mm.ss" }}
+            <mat-grid-tile colspan="2">更新日 : {{ detail.updatingTime | date:"yyyy年MM月dd日 HH:mm.ss" }}
             </mat-grid-tile>
             <mat-grid-tile colspan="1">作成者 : {{ detail.creatingUserName }}</mat-grid-tile>
             <mat-grid-tile colspan="1">スレッド数 : {{ detail.resCount | number }}レス</mat-grid-tile>

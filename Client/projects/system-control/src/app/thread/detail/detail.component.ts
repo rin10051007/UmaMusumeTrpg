@@ -22,7 +22,7 @@ import {DatePipe} from "@angular/common";
 })
 export class DetailComponent implements OnInit, OnDestroy {
   detail = this.initializingItem();
-  responseListApiId;
+  detailApiId: any;
   responseSearchForm: Search;
   responseSearch: SearchItemForThread = {
     threadId: 0,
@@ -43,31 +43,30 @@ export class DetailComponent implements OnInit, OnDestroy {
               search: Search, public datePipe: DatePipe) {
     this.responseSearchForm = search;
     this.responseSearchForm.createForm();
-    this.responseListApiId = setInterval(() => this.getResponseList(), this.responseSearch.responseGetInterval);
+    this.route.params.subscribe((params) => {
+      this.getDetail(Number(params['id']));
+    });
   }
 
   ngOnInit() {
-    this.getDetail();
+    this.detailApiId = setInterval(() => this.getDetail(this.detail.id), this.responseSearch.responseGetInterval);
   }
 
   ngOnDestroy() {
-    clearTimeout(this.responseListApiId);
+    clearTimeout(this.detailApiId);
   }
 
-  getDetail() {
-    this.route.params.subscribe((params) => {
-      this.apiService.detail({id: (Number(params['id']) || 0), token: ''})
-        .subscribe(r => {
-          this.detail = r.detail as Item;
-          this.responseSearch.threadId = this.detail.id;
-          this.getResponseList()
-        });
-    });
+  getDetail(id: number = 0) {
+    this.apiService.detail({id: (id), token: ''})
+      .subscribe(r => {
+        this.detail = r.detail as Item;
+        this.responseSearch.threadId = this.detail.id;
+        this.getResponseList()
+      });
   }
 
   getResponseList() {
     this.responseApiService.getListForThread(this.responseSearch).subscribe(r => {
-      console.log(r);
       this.detail.responses = r.items;
     });
   }
@@ -83,7 +82,7 @@ export class DetailComponent implements OnInit, OnDestroy {
       token: '',
       creatingTime: now,
       updatingTime: now,
-      responses:[]
+      responses: []
     } as Item;
   }
 

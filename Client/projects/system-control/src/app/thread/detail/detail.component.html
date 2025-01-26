@@ -17,15 +17,54 @@
         </mat-list-item>
       </mat-list>
       <mat-divider></mat-divider>
+      <mat-grid-list cols="6" rowHeight="100px">
+        <mat-grid-tile colspan="1">
+          <mat-form-field>
+            <mat-label>自動更新間隔</mat-label>
+            <mat-select (selectionChange)="changeResponseGetInterval($event)"
+                        [(value)]="responseSearch.responseGetInterval">
+              <mat-option *ngFor="let i of ResponseGetIntervals" [value]="i">{{ i / 60000 }}分</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2"></mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="responseLength"
+                         [pageIndex]="responseSearch.pageIndex" [pageSizeOptions]="PageSizeOptions"
+                         [pageSize]="responseSearch.pageSize" [showFirstLastButtons]="true"
+                         class="demo-paginator"></mat-paginator>
+        </mat-grid-tile>
+      </mat-grid-list>
       <ng-container *ngFor="let response of detail.responses">
-        <mat-card>
-          <mat-card-content>
-            <p>{{ response.threadResNo }} : {{ response.creatingUserName }}[{{ response.creatingTime | date:"yyyy年MM月dd日(EEE) HH:mm.ss" }}]</p>
-            <p [innerHTML]="response.content"></p>
+        <mat-card [id]="response.threadResNo">
+          <mat-card-header>
+            {{ response.threadResNo }} : {{ response.creatingUserName }}
+            [{{ response.creatingTime | date:"yyyy年MM月dd日(EEE) HH:mm.ss" }}]
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content [innerHTML]="response.content">
           </mat-card-content>
         </mat-card>
         <mat-divider></mat-divider>
       </ng-container>
+      <mat-grid-list cols="6" rowHeight="100px">
+        <mat-grid-tile colspan="1">
+          <mat-form-field>
+            <mat-label>自動更新間隔</mat-label>
+            <mat-select (selectionChange)="changeResponseGetInterval($event)"
+                        [(value)]="responseSearch.responseGetInterval">
+              <mat-option *ngFor="let i of ResponseGetIntervals" [value]="i">{{ i / 60000 }}分</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2"></mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="responseLength"
+                         [pageIndex]="responseSearch.pageIndex" [pageSizeOptions]="PageSizeOptions"
+                         [pageSize]="responseSearch.pageSize" [showFirstLastButtons]="true"
+                         class="demo-paginator"></mat-paginator>
+        </mat-grid-tile>
+      </mat-grid-list>
     </mat-card-content>
   </mat-card>
 </div>

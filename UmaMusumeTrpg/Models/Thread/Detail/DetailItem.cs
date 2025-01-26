@@ -14,10 +14,12 @@ public class DetailItem : BaseDetailItem
         CreatingUserName = thread.CreatingUser.Name;
         Title = thread.Title;
         ResCount = thread.ResCount;
+        IsActive = thread.IsActive;
     }
 
     public int CreatingUserId { get; set; }
     public string CreatingUserName { get; set; }
     public string Title { get; set; }
     public int ResCount { get; set; }
+    public bool IsActive { get; set; }
 }

@@ -5,5 +5,6 @@ export interface Item extends BaseDetailItem {
   creatingUserName: string;
   title: string;
   resCount: number;
+  isActive: boolean;
   responses: ItemForThread[];
 }

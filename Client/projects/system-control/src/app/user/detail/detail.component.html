@@ -76,10 +76,10 @@
         <mat-list-item *ngIf="!detail.isDeleted">
           <mat-grid-list cols="2">
             <mat-grid-tile colspan="1">
-              <button color="primary" mat-raised-button routerLink="/user/edit/{{detail.id}}">編集</button>
+              <button color="primary" mat-raised-button routerLink="/user/edit/{{detail.id}}"><i class="bi bi-pen"></i>編集</button>
             </mat-grid-tile>
             <mat-grid-tile colspan="1">
-              <button color="warn" mat-raised-button routerLink="/user/delete/{{detail.id}}">削除</button>
+              <button color="warn" mat-raised-button routerLink="/user/delete/{{detail.id}}"><i class="bi bi-person-dash"></i>削除</button>
             </mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>

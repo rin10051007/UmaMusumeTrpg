@@ -30,7 +30,8 @@ dotnet ef dbcontext scaffold "Host=localhost;Port=5432;Database=postgres;User Id
 ng generate pipe pipes/sort-direction/sort-direction --project=Common
 
 
-ng g p thread --project=Common
+ng generate directive directives/safe-html/safe-html  --project=Common
+ng g p pipes/safe --project=Common
 ng g m thread  --routing  --project=SystemControl
 ng g c thread/detail --project=SystemControl
 ng g m thread/detail  --routing  --project=SystemControl

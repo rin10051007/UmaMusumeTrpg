@@ -12,6 +12,12 @@
       </button>
     </div>
     <div class="p-2 bd-highlight">
+      <button (click)="screenTransitionUser(item.Id)" class="btn btn-sm d-flex" mat-button>
+        {{ item.Name }}
+        <i class="bi bi-person-vcard"></i>
+      </button>
+    </div>
+    <div class="p-2 bd-highlight">
       <button (click)="logOut()" class="btn btn-sm d-flex" mat-button>
         ログアウト
         <i class="bi bi-box-arrow-right"></i>

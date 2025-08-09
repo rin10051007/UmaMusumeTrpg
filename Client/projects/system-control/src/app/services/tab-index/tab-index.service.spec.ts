@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TabIndexService } from './tab-index.service';
+import {TabIndexService} from './tab-index.service';
 
 describe('TabIndexService', () => {
   let service: TabIndexService;

@@ -26,8 +26,6 @@ export class DetailComponent implements OnInit, OnDestroy {
   detailApiId: any;
   responseSearchForm: Search;
   responseLength = 0;
-  protected readonly PageSizeOptions = PageSizeOptions;
-  protected readonly ResponseGetIntervals = environment.responseGetIntervals;
   responseSearch: SearchItemForThread = {
     threadId: 0,
     threadResNoBeginning: 0,
@@ -41,6 +39,8 @@ export class DetailComponent implements OnInit, OnDestroy {
     pageSize: PageSizeOptions[3],
     responseGetInterval: environment.responseGetIntervals[5]
   }
+  protected readonly PageSizeOptions = PageSizeOptions;
+  protected readonly ResponseGetIntervals = environment.responseGetIntervals;
 
   constructor(private apiService: ApiService, public responseApiService: ResponseApiService,
               private route: ActivatedRoute, private router: Router, private activatedRoute: ActivatedRoute,

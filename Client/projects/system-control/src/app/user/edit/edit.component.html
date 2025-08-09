@@ -1,7 +1,8 @@
 <div class="main-div">
   <mat-card class="center">
     <mat-card-header>
-      <mat-card-title>ユーザー編集</mat-card-title>
+      <h1><a routerLink="/user/list">一覧</a> / <a
+        routerLink="/user/detail/{{editForm.getValue('id')}}">{{ editName }}</a> / ユーザー編集</h1>
     </mat-card-header>
     <mat-card-content>
       <form>
@@ -73,9 +74,7 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button (click)="click()" color="primary" mat-raised-button>
-        編集
-      </button>
+      <button (click)="click()" color="primary" mat-raised-button><i class="bi bi-pen"></i>編集</button>
     </mat-card-actions>
   </mat-card>
 </div>

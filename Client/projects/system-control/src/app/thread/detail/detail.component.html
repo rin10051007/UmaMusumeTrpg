@@ -1,0 +1,74 @@
+<div class="main-div">
+  <mat-card class="center">
+    <mat-card-header>
+      <h1><a routerLink="/thread/list">一覧</a> / {{ detail.title }}</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          <mat-grid-list cols="6">
+            <mat-grid-tile colspan="2">作成日 : {{ detail.creatingTime | date:"yyyy年MM月dd日 HH:mm.ss" }}
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2">更新日 : {{ detail.updatingTime | date:"yyyy年MM月dd日 HH:mm.ss" }}
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1">作成者 : {{ detail.creatingUserName }}</mat-grid-tile>
+            <mat-grid-tile colspan="1">スレッド数 : {{ detail.resCount | number }}レス</mat-grid-tile>
+          </mat-grid-list>
+        </mat-list-item>
+      </mat-list>
+      <mat-divider></mat-divider>
+      <mat-grid-list cols="6" rowHeight="100px">
+        <mat-grid-tile *ngIf="detail.isActive" colspan="1">
+          <mat-form-field>
+            <mat-label>自動更新間隔</mat-label>
+            <mat-select (selectionChange)="changeResponseGetInterval($event)"
+                        [(value)]="responseSearch.responseGetInterval">
+              <mat-option *ngFor="let i of ResponseGetIntervals" [value]="i">{{ i / 60000 }}分</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="detail.isActive ? 2 : 3"></mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="responseLength"
+                         [pageIndex]="responseSearch.pageIndex" [pageSizeOptions]="PageSizeOptions"
+                         [pageSize]="responseSearch.pageSize" [showFirstLastButtons]="true"
+                         class="demo-paginator"></mat-paginator>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <ng-container *ngFor="let response of detail.responses">
+        <mat-card [id]="response.threadResNo">
+          <mat-card-header>
+            {{ response.threadResNo }} : {{ response.creatingUserName }}
+            [{{ response.creatingTime | date:"yyyy年MM月dd日(EEE) HH:mm.ss" }}]
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content [innerHTML]="response.content">
+          </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+      </ng-container>
+      <mat-grid-list cols="6" rowHeight="100px">
+        <mat-grid-tile *ngIf="!detail.isActive" colspan="1">
+          <button color="warn" mat-raised-button><i class="bi bi-file-earmark-x"></i>削除
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="detail.isActive" colspan="1">
+          <mat-form-field>
+            <mat-label>自動更新間隔</mat-label>
+            <mat-select (selectionChange)="changeResponseGetInterval($event)"
+                        [(value)]="responseSearch.responseGetInterval">
+              <mat-option *ngFor="let i of ResponseGetIntervals" [value]="i">{{ i / 60000 }}分</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2"></mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="responseLength"
+                         [pageIndex]="responseSearch.pageIndex" [pageSizeOptions]="PageSizeOptions"
+                         [pageSize]="responseSearch.pageSize" [showFirstLastButtons]="true"
+                         class="demo-paginator"></mat-paginator>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</div>

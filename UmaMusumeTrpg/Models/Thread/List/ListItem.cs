@@ -19,6 +19,7 @@ public class ListItemForThread(Entities.Thread thread) : ListItem(thread)
 public class ListItemForSystemThread(Entities.Thread thread) : ListItemForThread(thread)
 {
     public DateTime? DeletingTime { get; set; } = thread.DeletingTime;
+    public bool IsActive { get; set; } = thread.IsActive;
     public bool IsDeleted { get; set; } = thread.IsDeleted;
 }
 

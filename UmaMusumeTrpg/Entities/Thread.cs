@@ -26,6 +26,11 @@ public class Thread
     public int ResCount { get; set; }
 
     /// <summary>
+    ///     レスがアクティブか
+    /// </summary>
+    public bool IsActive { get; set; }
+
+    /// <summary>
     ///     トークン
     /// </summary>
     public string Token { get; set; } = "";

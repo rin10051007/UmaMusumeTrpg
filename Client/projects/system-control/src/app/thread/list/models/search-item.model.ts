@@ -5,6 +5,7 @@ export interface SearchItem extends BaseListSearch {
   title: string;
   resCountMin: number;
   resCountMax: number;
+  isActive: boolean;
   isUndeleted: boolean;
   isDeleted: boolean;
   creatingTimeBeginning: Date | null;

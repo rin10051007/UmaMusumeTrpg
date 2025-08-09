@@ -38,6 +38,8 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         if (search.CreatingUserId > 0)
             list = (IOrderedQueryable<Thread>)list.Where(x => x.CreatingUserId == search.CreatingUserId);
 
+        if (search.IsActive) list = (IOrderedQueryable<Thread>)list.Where(x => x.IsActive);
+
         (list, var length) =
             ListWithPageByGet(SortList(SearchList(SearchListForThread(list, search), search), search), search);
 
@@ -51,7 +53,10 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         if (search.CreatingUserId > 0)
             list = (IOrderedQueryable<Thread>)list.Where(x => x.CreatingUserId == search.CreatingUserId);
 
-        (list, var length) = ListWithPageByGet(SortList(SearchList(list, search), search), search);
+        (list, var length) =
+            ListWithPageByGet(
+                SortList((IOrderedQueryable<Thread>)SearchList(list, search).Where(x => x.IsActive), search),
+                search);
 
         return (list.Include(x => x.CreatingUser).Select(x => new ListItemForUser(x)).ToList(), length);
     }
@@ -94,7 +99,7 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
 
     public DetailItem Detail(DetailSelect select)
     {
-        return new DetailItem(dbContext.Threads.FirstOrDefault(x =>
+        return new DetailItem(dbContext.Threads.Include(x => x.CreatingUser).FirstOrDefault(x =>
             x.Id == select.Id && (string.IsNullOrEmpty(select.Token) ||
                                   (!string.IsNullOrEmpty(select.Token) && select.Token.Equals(x.Token)))));
     }
@@ -117,8 +122,8 @@ public class ThreadService(UmaMusumeTrpgDbContext dbContext, IGuidService guidSe
         if (!search.IsDeleted) return list;
 
         if (search.DeletingTimeBeginning.HasValue)
-            list = (IOrderedQueryable<Thread>)list.Where(
-                x => x.DeletingTime!.Value.Date >= search.DeletingTimeBeginning);
+            list =
+                (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime!.Value.Date >= search.DeletingTimeBeginning);
 
         if (search.DeletingTimeEnd.HasValue)
             list = (IOrderedQueryable<Thread>)list.Where(x => x.DeletingTime!.Value.Date <= search.DeletingTimeEnd);

@@ -1,7 +1,7 @@
 <div class="main-div">
   <mat-card class="center">
     <mat-card-header>
-      <h1>{{ detail.name }}</h1>
+      <h1><a routerLink="/user/list">一覧</a> / {{ detail.name }}</h1>
     </mat-card-header>
     <mat-card-content>
       <mat-list>
@@ -35,8 +35,10 @@
         <mat-divider></mat-divider>
         <mat-list-item>
           <mat-grid-list cols="10">
-            <mat-grid-tile colspan="2">作成スレッド数</mat-grid-tile><!--:todo遷移先をスレッドのユーザーで検索した一覧にする-->
-            <mat-grid-tile colspan="8"><a routerLink="/user/list">{{ detail.creationThreadCount | number }}件</a>
+            <mat-grid-tile colspan="2">作成スレッド数</mat-grid-tile>
+            <mat-grid-tile colspan="8">
+              <a [queryParams]="{creatingUserId : detail.id}"
+                 routerLink="/thread/list">{{ detail.creationThreadCount | number }}件</a>
             </mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>
@@ -72,12 +74,15 @@
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item *ngIf="!detail.isDeleted">
-          <mat-grid-list cols="10">
-            <mat-grid-tile colspan="5">
-              <button color="primary" mat-raised-button routerLink="/user/edit/{{detail.id}}">編集</button>
+          <mat-grid-list cols="2">
+            <mat-grid-tile colspan="1">
+              <button color="primary" mat-raised-button routerLink="/user/edit/{{detail.id}}"><i class="bi bi-pen"></i>編集
+              </button>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5">
-              <button color="warn" mat-raised-button routerLink="/user/delete/{{detail.id}}">削除</button>
+            <mat-grid-tile colspan="1">
+              <button color="warn" mat-raised-button routerLink="/user/delete/{{detail.id}}"><i
+                class="bi bi-person-dash"></i>削除
+              </button>
             </mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>

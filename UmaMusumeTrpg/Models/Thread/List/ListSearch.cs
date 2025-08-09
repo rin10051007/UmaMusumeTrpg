@@ -64,7 +64,8 @@ public class ListSearchForSystemThread : ListSearchForThread
     {
     }
 
-    public ListSearchForSystemThread(int creatingUserId, DateTime creatingTimeBeginning, DateTime creatingTimeEnd,
+    public ListSearchForSystemThread(int creatingUserId, bool isActive, DateTime creatingTimeBeginning,
+        DateTime creatingTimeEnd,
         DateTime updatingTimeBeginning, DateTime updatingTimeEnd, DateTime deletingTimeBeginning,
         DateTime deletingTimeEnd,
         string title, int resCountMin, int resCountMax, bool isDeleted, bool isUndeleted, ThreadSortItem sortItem,
@@ -73,9 +74,11 @@ public class ListSearchForSystemThread : ListSearchForThread
         isDeleted, isUndeleted, sortItem, sortDirection, pageIndex, pageSize)
     {
         CreatingUserId = creatingUserId;
+        IsActive = isActive;
     }
 
     public int CreatingUserId { get; set; }
+    public bool IsActive { get; set; }
 }
 
 public class ListSearchForUser : ListSearch

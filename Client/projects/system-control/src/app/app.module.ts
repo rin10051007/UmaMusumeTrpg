@@ -26,14 +26,18 @@ registerLocaleData(localeJa);
   ],
   bootstrap: [
     AppComponent,
-  ], imports: [BrowserModule,
+  ],
+  imports: [
+    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     HeaderMenuModule,
     MatTabGroup,
     MatTab,
-    MatTabLabel], providers: [
+    MatTabLabel
+  ],
+  providers: [
     BaseApiService,
     AuthApiService,
     LocalStorageService,

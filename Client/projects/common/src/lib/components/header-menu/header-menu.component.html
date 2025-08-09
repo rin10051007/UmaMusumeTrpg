@@ -8,8 +8,13 @@
     </div>
     <div class="p-2 flex-grow-1 bd-highlight">
       <button (click)="screenTransition(umaMusumeUrl)" class="btn btn-lg" mat-button>
-        <i class="bi bi-android2"></i>
-        ウマ娘TRPG
+        <span class="uma-musume-font">すぴかうまむTRPG</span>
+      </button>
+    </div>
+    <div class="p-2 bd-highlight">
+      <button (click)="screenTransitionUser(item.Id)" class="btn btn-sm d-flex" mat-button>
+        {{ item.Name }}
+        <i class="bi bi-person-vcard"></i>
       </button>
     </div>
     <div class="p-2 bd-highlight">

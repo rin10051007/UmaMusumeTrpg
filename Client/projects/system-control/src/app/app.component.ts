@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {environment, LocalStorageService, SystemRoute, SystemRouteMap} from 'Common';
-import {ActivatedRoute, Router} from "@angular/router";
+import {environment, LocalStorageService, SystemRoute} from 'Common';
+import {Router} from "@angular/router";
+import {TabIndexService} from "./services/tab-index/tab-index.service";
 
 @Component({
   selector: 'SystemControl-root',
@@ -9,17 +10,17 @@ import {ActivatedRoute, Router} from "@angular/router";
   standalone: false
 })
 export class AppComponent {
-  selectedTabIndex = 0;
-  protected readonly systemRouteMap = SystemRouteMap;
   protected readonly systemRoute = SystemRoute;
 
-  constructor(private route: ActivatedRoute, private router: Router, private lsService: LocalStorageService) {
+  constructor(private router: Router, private lsService: LocalStorageService, public tabIndexService: TabIndexService) {
     this.lsService.setViewProject({viewProject: environment.systemUrl});
-    this.selectedTabIndex = this.systemRouteMap[window.location.href.split('/')[4] || 0];
   }
 
   onTabChange(index: number) {
-    this.router.navigate([this.systemRoute[index]]).then(() => {
-    });
+    if (index !== this.tabIndexService.getTabIndex()) {
+      this.tabIndexService.setTabIndex(index);
+      this.router.navigate([this.systemRoute[index]]).then(() => {
+      });
+    }
   }
 }

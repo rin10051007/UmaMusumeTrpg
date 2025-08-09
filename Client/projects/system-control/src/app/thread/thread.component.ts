@@ -10,5 +10,4 @@ import {RouterOutlet} from "@angular/router";
   styleUrl: './thread.component.css'
 })
 export class ThreadComponent {
-
 }

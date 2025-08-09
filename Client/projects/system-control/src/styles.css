@@ -3,3 +3,10 @@
 
 @import "bootstrap-icons/font/bootstrap-icons.scss";
 @import "bootstrap/dist/css/bootstrap.min.css";
+
+@font-face {
+  font-family: 'UmaMusumeFont';
+  src: url('assets/UmaMusumeGothic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

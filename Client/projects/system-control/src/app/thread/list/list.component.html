@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-    <mat-grid-list cols="16" rowHeight="75px">
+    <mat-grid-list cols="18" rowHeight="75px">
       <mat-grid-tile colspan="4" rowspan="1">
         <mat-form-field class="center">
           <mat-label>タイトル</mat-label>
@@ -38,6 +38,11 @@
             <i class="bi bi-x-circle"></i>
           </button>
         </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
+        <mat-checkbox [formControl]="searchForm.getForm('isActive')" id="isActive">
+          <mat-label>アクティブ</mat-label>
+        </mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="isDetailSearch" colspan="2" rowspan="1">
         <mat-checkbox [formControl]="searchForm.getForm('isUndeleted')" id="isUndeleted">
@@ -117,17 +122,12 @@
       <mat-grid-tile colspan="2" rowspan="1">
         <mat-slide-toggle [(ngModel)]="isDetailSearch">詳細検索</mat-slide-toggle>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
+      <mat-grid-tile colspan="2" rowspan="1">
         <button (click)="searchResetClick()" color="warn" mat-raised-button><i class="bi bi-x-lg"></i>リセット
         </button>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <button (click)="searchClick()" color="accent" mat-raised-button><i class="bi bi-search"></i>検索</button>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="14" rowspan="1"></mat-grid-tile>
       <mat-grid-tile colspan="2" rowspan="1">
-        <button color="primary" mat-raised-button routerLink="/user/entry"><i class="bi bi-person-add"></i>新規作成
-        </button>
+        <button (click)="searchClick()" color="accent" mat-raised-button><i class="bi bi-search"></i>検索</button>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
@@ -172,7 +172,17 @@
               [innerHTML]="searchItem.sortDirection | sortDirection"></span>
       </a>
     </th>
-    <td *matCellDef="let item" mat-cell> {{ item.resCount }}</td>
+    <td *matCellDef="let item" mat-cell> {{ item.resCount | number }}</td>
+  </ng-container>
+  <ng-container matColumnDef="isActive">
+    <th *matHeaderCellDef mat-header-cell>
+      <a (click)="sortItemSet(ThreadSortItem.isActive)" class="active">
+        書込み可能
+        <span *ngIf="searchItem.sortItem==ThreadSortItem.isActive"
+              [innerHTML]="searchItem.sortDirection | sortDirection"></span>
+      </a>
+    </th>
+    <td *matCellDef="let item" mat-cell> {{ item.isActive }}</td>
   </ng-container>
   <ng-container matColumnDef="creatingTime">
     <th *matHeaderCellDef mat-header-cell>

@@ -1,7 +1,10 @@
 <div class="main-div">
   <mat-card class="center">
     <mat-card-header>
-      <h1>{{ item.name }}</h1>
+      <mat-card-header>
+        <h1><a routerLink="/user/list">一覧</a> / <a routerLink="/user/detail/{{item.id}}">{{ item.name }}</a> / ユーザー削除
+        </h1>
+      </mat-card-header>
     </mat-card-header>
     <mat-card-content>
       <mat-list>
@@ -58,7 +61,7 @@
         <mat-list-item *ngIf="!item.isDeleted">
           <mat-grid-list cols="10">
             <mat-grid-tile colspan="10">
-              <button (click)="delete()" color="warn" mat-raised-button>削除</button>
+              <button (click)="delete()" color="warn" mat-raised-button><i class="bi bi-person-dash"></i>削除</button>
             </mat-grid-tile>
           </mat-grid-list>
         </mat-list-item>
